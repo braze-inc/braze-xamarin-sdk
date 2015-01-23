@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:minWidth="25px"
+    android:minHeight="25px">
+    <Button
+        android:id="@+id/changeUserButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/changeUser" />
+    <Button
+        android:text="@string/setUserProperties"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/userPropertyButton" />
+    <Button
+        android:text="@string/eventsAndPurchases"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/eventsAndPurchasesButton" />
+    <Button
+        android:text="@string/submitFeedback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/submitFeedbackButton" />
+    <Button
+        android:text="@string/trackSocialData"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/trackSocialDataButton" />
+    <Button
+        android:text="@string/launchNewsFeed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/launchNewsFeedButton" />
+    <Button
+        android:text="@string/launchFeedback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/launchFeedbackButton" />
+    <Button
+        android:text="@string/addSlideup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/addSlideupButton" />
+    <Button
+        android:text="@string/dataFlush"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/dataFlushButton" />
+</LinearLayout>

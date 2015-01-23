@@ -1,0 +1,29 @@
+# user specific files
+*.pidb
+*.userprefs
+*.swp
+*.DS_Store
+*.suo
+*.user
+*.pfx
+
+# emacs temporary files
+*~
+
+# generated files
+bin/*
+obj/*
+*/*/bin/*
+*/*/obj/*
+*/*/*/bin/*
+*/*/*/obj/*
+*_ReSharper.*/
+
+# resource files
+*/*/Resource.designer.cs
+*/*/*/Resource.designer.cs
+*/*/*/*/Resource.designer.cs
+
+# nuget and component packges
+AppboySample/packages/
+AppboySample/Components/

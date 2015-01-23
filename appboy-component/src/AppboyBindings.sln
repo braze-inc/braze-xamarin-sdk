@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppboyPlatform.XamarinAndroidBinding", "android\AppboyPlatform.XamarinAndroidBinding.csproj", "{9038A212-68E1-4C7A-B029-94F5C8FE76E9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppboyPlatformXamariniOSBinding", "ios-unified\AppboyPlatformXamariniOSBinding.csproj", "{7D493871-0793-4E34-B983-06053111D5B0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Default|Any CPU = Default|Any CPU
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7D493871-0793-4E34-B983-06053111D5B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D493871-0793-4E34-B983-06053111D5B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D493871-0793-4E34-B983-06053111D5B0}.Default|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D493871-0793-4E34-B983-06053111D5B0}.Default|Any CPU.Build.0 = Debug|Any CPU
+		{7D493871-0793-4E34-B983-06053111D5B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D493871-0793-4E34-B983-06053111D5B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9038A212-68E1-4C7A-B029-94F5C8FE76E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9038A212-68E1-4C7A-B029-94F5C8FE76E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9038A212-68E1-4C7A-B029-94F5C8FE76E9}.Default|Any CPU.ActiveCfg = Debug|Any CPU
+		{9038A212-68E1-4C7A-B029-94F5C8FE76E9}.Default|Any CPU.Build.0 = Debug|Any CPU
+		{9038A212-68E1-4C7A-B029-94F5C8FE76E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9038A212-68E1-4C7A-B029-94F5C8FE76E9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

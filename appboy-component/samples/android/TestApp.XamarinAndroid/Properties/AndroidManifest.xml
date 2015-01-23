@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.appboy.xamarinsample">
+	<uses-sdk android:minSdkVersion="8" />
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.GET_ACCOUNTS" />
+	<uses-permission android:name="android.permission.WAKE_LOCK" />
+	<uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+	<permission android:name="com.appboy.xamarinsample.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+	<uses-permission android:name="com.appboy.xamarinsample.permission.C2D_MESSAGE" />
+	<application android:label="TestApp.XamarinAndroid" android:icon="@drawable/icon">
+		<receiver android:name="com.appboy.AppboyGcmReceiver" android:permission="com.google.android.c2dm.permission.SEND">
+			<intent-filter>
+				<action android:name="com.google.android.c2dm.intent.RECEIVE" />
+				<action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+				<category android:name="com.appboy.xamarinsample" />
+			</intent-filter>
+		</receiver>
+		<receiver android:name=".AppboyBroadcastReceiver" android:exported="false">
+			<intent-filter>
+				<action android:name="com.appboy.xamarinsample.intent.APPBOY_PUSH_RECEIVED" />
+				<action android:name="com.appboy.xamarinsample.intent.APPBOY_NOTIFICATION_OPENED" />
+			</intent-filter>
+		</receiver>
+		<activity android:name="com.appboy.ui.AppboyWebViewActivity"/>
+		<activity android:name="com.appboy.ui.activities.AppboyFeedActivity"/>
+	</application>
+</manifest>

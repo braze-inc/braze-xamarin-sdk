@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
+    <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectGuid>{8A824FB1-35EA-4119-8E01-0382BB264E04}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>TestApp.XamariniOS</RootNamespace>
+    <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
+    <AssemblyName>TestAppXamariniOS</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhoneSimulator\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <MtouchArch>i386</MtouchArch>
+    <MtouchLink>None</MtouchLink>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <MtouchDebug>true</MtouchDebug>
+    <MtouchI18n>
+    </MtouchI18n>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhoneSimulator\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <MtouchArch>i386</MtouchArch>
+    <MtouchLink>None</MtouchLink>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhone\Debug</OutputPath>
+    <DefineConstants>DEBUG; ABK_ENABLE_IDFA_COLLECTION;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <MtouchArch>ARMv7, ARMv7s, ARM64</MtouchArch>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <CodesignKey>iPhone Developer: Wenzhi Lin (LU84W4P9RR)</CodesignKey>
+    <MtouchDebug>true</MtouchDebug>
+    <MtouchI18n>
+    </MtouchI18n>
+    <CodesignProvision>7b2ef5f2-d57a-4cb5-97ca-21ca08f04b00</CodesignProvision>
+    <IpaPackageName>
+    </IpaPackageName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhone\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchArch>ARMv7, ARM64</MtouchArch>
+    <ConsolePause>false</ConsolePause>
+    <CodesignKey>iPhone Developer</CodesignKey>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Ad-Hoc|iPhone' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhone\Ad-Hoc</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <MtouchArch>ARMv7, ARM64</MtouchArch>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <BuildIpa>true</BuildIpa>
+    <CodesignKey>iPhone Distribution: Appboy Inc. (5GLZKGNWQ3)</CodesignKey>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStore|iPhone' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhone\AppStore</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <MtouchArch>ARMv7, ARM64</MtouchArch>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <CodesignProvision>Automatic:AppStore</CodesignProvision>
+    <CodesignKey>iPhone Distribution</CodesignKey>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="Xamarin.iOS" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Contents.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Default-568h%402x.png" />
+    <BundleResource Include="Appboy.bundle\Icons_Read.png" />
+    <BundleResource Include="Appboy.bundle\Icons_Read%402x.png" />
+    <BundleResource Include="Appboy.bundle\Icons_Unread.png" />
+    <BundleResource Include="Appboy.bundle\Icons_Unread%402x.png" />
+    <BundleResource Include="Appboy.bundle\Info.plist" />
+    <BundleResource Include="Appboy.bundle\SlideupArrow.png" />
+    <BundleResource Include="Appboy.bundle\arrow.png" />
+    <BundleResource Include="Appboy.bundle\arrow%402x.png" />
+    <BundleResource Include="Appboy.bundle\btn-app-purchase-disabled.png" />
+    <BundleResource Include="Appboy.bundle\btn-app-purchase-disabled%402x.png" />
+    <BundleResource Include="Appboy.bundle\btn-app-purchase-highlighted.png" />
+    <BundleResource Include="Appboy.bundle\btn-app-purchase-highlighted%402x.png" />
+    <BundleResource Include="Appboy.bundle\btn-app-purchase-normal.png" />
+    <BundleResource Include="Appboy.bundle\btn-app-purchase-normal%402x.png" />
+    <BundleResource Include="Appboy.bundle\btn-app-purchase-plus-disabled.png" />
+    <BundleResource Include="Appboy.bundle\btn-app-purchase-plus-disabled%402x.png" />
+    <BundleResource Include="Appboy.bundle\btn-app-purchase-plus-highlighted.png" />
+    <BundleResource Include="Appboy.bundle\btn-app-purchase-plus-highlighted%402x.png" />
+    <BundleResource Include="Appboy.bundle\btn-app-purchase-plus-normal.png" />
+    <BundleResource Include="Appboy.bundle\btn-app-purchase-plus-normal%402x.png" />
+    <BundleResource Include="Appboy.bundle\btn-email-highlighted.png" />
+    <BundleResource Include="Appboy.bundle\btn-email-highlighted%402x.png" />
+    <BundleResource Include="Appboy.bundle\btn-email-normal.png" />
+    <BundleResource Include="Appboy.bundle\btn-email-normal%402x.png" />
+    <BundleResource Include="Appboy.bundle\btn-facebook-highlighted.png" />
+    <BundleResource Include="Appboy.bundle\btn-facebook-highlighted%402x.png" />
+    <BundleResource Include="Appboy.bundle\btn-facebook-normal.png" />
+    <BundleResource Include="Appboy.bundle\btn-facebook-normal%402x.png" />
+    <BundleResource Include="Appboy.bundle\checkmark-bg.png" />
+    <BundleResource Include="Appboy.bundle\checkmark-bg%402x.png" />
+    <BundleResource Include="Appboy.bundle\checkmark.png" />
+    <BundleResource Include="Appboy.bundle\checkmark%402x.png" />
+    <BundleResource Include="Appboy.bundle\icon-facebook.png" />
+    <BundleResource Include="Appboy.bundle\img-background.png" />
+    <BundleResource Include="Appboy.bundle\img-background%402x.png" />
+    <BundleResource Include="Appboy.bundle\img-disclosure-arrow.png" />
+    <BundleResource Include="Appboy.bundle\img-disclosure-arrow%402x.png" />
+    <BundleResource Include="Appboy.bundle\img-noimage-lrg.png" />
+    <BundleResource Include="Appboy.bundle\img-noimage-lrg%402x.png" />
+    <BundleResource Include="Appboy.bundle\img-noimage-sm.png" />
+    <BundleResource Include="Appboy.bundle\img-noimage-sm%402x.png" />
+    <BundleResource Include="Appboy.bundle\img-recommended-tab.png" />
+    <BundleResource Include="Appboy.bundle\img-recommended-tab%402x.png" />
+    <BundleResource Include="Appboy.bundle\img-star-empty.png" />
+    <BundleResource Include="Appboy.bundle\img-star-empty%402x.png" />
+    <BundleResource Include="Appboy.bundle\img-star-filled.png" />
+    <BundleResource Include="Appboy.bundle\img-star-filled%402x.png" />
+    <BundleResource Include="Appboy.bundle\img-star-half.png" />
+    <BundleResource Include="Appboy.bundle\img-star-half%402x.png" />
+    <BundleResource Include="Appboy.bundle\radio-tower.png" />
+    <BundleResource Include="Appboy.bundle\ABKBannerCardCell.nib\objects-8.0+.nib" />
+    <BundleResource Include="Appboy.bundle\ABKBannerCardCell.nib\objects.nib" />
+    <BundleResource Include="Appboy.bundle\ABKBannerCardCell.nib\runtime.nib" />
+    <BundleResource Include="Appboy.bundle\ABKCaptionedMessageCardCell.nib\objects-8.0+.nib" />
+    <BundleResource Include="Appboy.bundle\ABKCaptionedMessageCardCell.nib\objects.nib" />
+    <BundleResource Include="Appboy.bundle\ABKCaptionedMessageCardCell.nib\runtime.nib" />
+    <BundleResource Include="Appboy.bundle\ABKCrossPromotionCardCell.nib\objects-8.0+.nib" />
+    <BundleResource Include="Appboy.bundle\ABKCrossPromotionCardCell.nib\objects.nib" />
+    <BundleResource Include="Appboy.bundle\ABKCrossPromotionCardCell.nib\runtime.nib" />
+    <BundleResource Include="Appboy.bundle\ABKDefaultSlideupViewController.nib\objects-8.0+.nib" />
+    <BundleResource Include="Appboy.bundle\ABKDefaultSlideupViewController.nib\objects.nib" />
+    <BundleResource Include="Appboy.bundle\ABKDefaultSlideupViewController.nib\runtime.nib" />
+    <BundleResource Include="Appboy.bundle\ABKFeedNoConnectionView.nib\objects-8.0+.nib" />
+    <BundleResource Include="Appboy.bundle\ABKFeedNoConnectionView.nib\objects.nib" />
+    <BundleResource Include="Appboy.bundle\ABKFeedNoConnectionView.nib\runtime.nib" />
+    <BundleResource Include="Appboy.bundle\ABKFeedViewController.nib\objects-8.0+.nib" />
+    <BundleResource Include="Appboy.bundle\ABKFeedViewController.nib\objects.nib" />
+    <BundleResource Include="Appboy.bundle\ABKFeedViewController.nib\runtime.nib" />
+    <BundleResource Include="Appboy.bundle\ABKFeedbackContentView.nib\objects-8.0+.nib" />
+    <BundleResource Include="Appboy.bundle\ABKFeedbackContentView.nib\objects.nib" />
+    <BundleResource Include="Appboy.bundle\ABKFeedbackContentView.nib\runtime.nib" />
+    <BundleResource Include="Appboy.bundle\ABKFeedbackEmailFacebookViewPortrait.nib\objects-8.0+.nib" />
+    <BundleResource Include="Appboy.bundle\ABKFeedbackEmailFacebookViewPortrait.nib\objects.nib" />
+    <BundleResource Include="Appboy.bundle\ABKFeedbackEmailFacebookViewPortrait.nib\runtime.nib" />
+    <BundleResource Include="Appboy.bundle\ABKFeedbackNavBar.nib\objects-8.0+.nib" />
+    <BundleResource Include="Appboy.bundle\ABKFeedbackNavBar.nib\objects.nib" />
+    <BundleResource Include="Appboy.bundle\ABKFeedbackNavBar.nib\runtime.nib" />
+    <BundleResource Include="Appboy.bundle\ABKNewsCardCell.nib\objects-8.0+.nib" />
+    <BundleResource Include="Appboy.bundle\ABKNewsCardCell.nib\objects.nib" />
+    <BundleResource Include="Appboy.bundle\ABKNewsCardCell.nib\runtime.nib" />
+    <BundleResource Include="Appboy.bundle\ABKSpinnerView.nib\objects-8.0+.nib" />
+    <BundleResource Include="Appboy.bundle\ABKSpinnerView.nib\objects.nib" />
+    <BundleResource Include="Appboy.bundle\ABKSpinnerView.nib\runtime.nib" />
+    <BundleResource Include="Appboy.bundle\ABKTextAnnouncementCardCell.nib\objects-8.0+.nib" />
+    <BundleResource Include="Appboy.bundle\ABKTextAnnouncementCardCell.nib\objects.nib" />
+    <BundleResource Include="Appboy.bundle\ABKTextAnnouncementCardCell.nib\runtime.nib" />
+    <BundleResource Include="Appboy.bundle\ABKWebViewController.nib\objects-8.0+.nib" />
+    <BundleResource Include="Appboy.bundle\ABKWebViewController.nib\objects.nib" />
+    <BundleResource Include="Appboy.bundle\ABKWebViewController.nib\runtime.nib" />
+    <BundleResource Include="Appboy.bundle\en.lproj\LocalizedAppboyUIString.strings" />
+    <BundleResource Include="Appboy.bundle\zh-Hans.lproj\LocalizedAppboyUIString.strings" />
+    <BundleResource Include="Appboy.bundle\zh-Hant.lproj\LocalizedAppboyUIString.strings" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Info.plist" />
+    <None Include="Entitlements.plist" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Main.cs" />
+    <Compile Include="AppDelegate.cs" />
+    <Compile Include="AppboySampleViewController.cs" />
+    <Compile Include="AppboySampleViewController.designer.cs">
+      <DependentUpon>AppboySampleViewController.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <InterfaceDefinition Include="MainStoryboard.storyboard" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="Appboy.bundle\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\src\ios-unified\AppboyPlatformXamariniOSBinding.csproj">
+      <Project>{7D493871-0793-4E34-B983-06053111D5B0}</Project>
+      <Name>AppboyPlatformXamariniOSBinding</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>

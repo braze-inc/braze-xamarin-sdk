@@ -1,0 +1,24 @@
+%YAML 1.2
+---
+name: Appboy SDK Bindings
+id: appboy-sdk-bindings
+publisher: Appboy
+license: License.md
+icons: 
+  - appboy-sdk-bindings_128x128.png
+  - appboy-sdk-bindings_512x512.png
+publisher-url: http://appboy.com
+libraries: 
+  ios-unified: ../lib/ios-unified/AppboyPlatformXamariniOSBinding.dll
+  android: ../lib/android/AppboyPlatform.AndroidBinding.dll
+summary: Xamarin bindings for the Appboy SDKs.
+details: Details.md
+getting-started: GettingStarted.md
+version: "1.0"
+source:
+  ../src/AppboyBindings.sln
+samples: 
+  Android Sample: ../samples/android/Android.sln
+  iOS Sample: ../samples/ios-unified/iOS.sln
+packages:
+  android: Xamarin.Android.Support.v4, Version=21.0.3.0

@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4451" systemVersion="13A461" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="42">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733.0"/>
+    </dependencies>
+    <scenes>
+        <!--class Prefix:identifier View Controller-->
+        <scene sceneID="ufC-wZ-h7g">
+            <objects>
+                <viewController id="vXZ-lx-hvc" customClass="AppboySampleViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3"/>
+                        <viewControllerLayoutGuide type="bottom" id="4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="5" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
+                                <rect key="frame" x="92" y="113" width="135" height="30"/>
+                                <state key="normal" title="Set User Properties">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="10" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="88" y="204" width="142" height="30"/>
+                                <state key="normal" title="Feedback Contexts">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue id="110" destination="35" kind="push"/>
+                                </connections>
+                                <constraints>
+                                    <constraint id="241" firstAttribute="width" constant="142"/>
+                                </constraints>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="14" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
+                                <rect key="frame" x="114" y="75" width="92" height="30"/>
+                                <state key="normal" title="Change User">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="16" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
+                                <rect key="frame" x="56" y="157" width="207" height="30"/>
+                                <state key="normal" title="Log Events And Purchases">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="27" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
+                                <rect key="frame" x="28" y="242" width="264" height="30"/>
+                                <state key="normal" title="News Feed Contexts">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue id="535" destination="249" kind="push"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="548" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="114" y="286" width="92" height="30"/>
+                                <state key="normal" title="Add Slideup">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint id="242" constant="88" firstItem="10" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading"/>
+                            <constraint id="243" constant="204" firstItem="10" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="UserPropertyButton" destination="5" id="name-outlet-5"/>
+                        <outlet property="SubmitFeedbackButton1" destination="10" id="name-outlet-10"/>
+                        <outlet property="ChangeUserButton" destination="14" id="name-outlet-14"/>
+                        <outlet property="EventsAndPurchasesButton" destination="16" id="name-outlet-16"/>
+                        <outlet property="NewsFeedButton" destination="27" id="name-outlet-27"/>
+                        <outlet property="AddSlideupButton" destination="548" id="name-outlet-548"/>
+                    </connections>
+                    <navigationItem title="Appboy Sample" id="77" key="navigationItem"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+        <scene sceneID="34">
+            <objects>
+                <viewController id="35" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="32"/>
+                        <viewControllerLayoutGuide type="bottom" id="33"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="36">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="112" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="20" y="97" width="280" height="30"/>
+                                <state key="normal" title="Modal Feedback">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue id="175" destination="117" kind="modal"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="113" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="20" y="161" width="280" height="30"/>
+                                <state key="normal" title="Navigation Feedback">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue id="235" destination="180" kind="push"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="37" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="533" y="-218"/>
+        </scene>
+        <scene sceneID="41">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="42" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="45">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    </navigationBar>
+                    <connections>
+                        <segue id="78" destination="vXZ-lx-hvc" kind="relationship" relationship="rootViewController"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="46" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-383" y="14"/>
+        </scene>
+        <scene sceneID="116">
+            <objects>
+                <viewController id="117" sceneMemberID="viewController" customClass="ABKFeedbackViewControllerModalContext">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="114"/>
+                        <viewControllerLayoutGuide type="bottom" id="115"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="118">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="119" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1007" y="-577"/>
+        </scene>
+        <scene sceneID="179">
+            <objects>
+                <viewController id="180" sceneMemberID="viewController" customClass="ABKFeedbackViewControllerNavigationContext">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="177"/>
+                        <viewControllerLayoutGuide type="bottom" id="178"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="181">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="182" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1374" y="-229"/>
+        </scene>
+        <scene sceneID="248">
+            <objects>
+                <viewController id="249" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="246"/>
+                        <viewControllerLayoutGuide type="bottom" id="247"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="250">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="253" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="20" y="84" width="280" height="30"/>
+                                <state key="normal" title="Modal News Feed">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <constraints>
+                                    <constraint id="273" firstAttribute="width" constant="280"/>
+                                </constraints>
+                                <connections>
+                                    <segue id="338" destination="260" kind="modal"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="255" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
+                                <rect key="frame" x="20" y="136" width="280" height="30"/>
+                                <state key="normal" title="Navigation News Feed">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue id="436" destination="267" kind="push"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="256" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
+                                <rect key="frame" x="20" y="193" width="280" height="30"/>
+                                <state key="normal" title="Generic News Feed">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue id="489" destination="279" kind="push"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint id="274" constant="20" firstItem="250" firstAttribute="trailing" secondItem="253" secondAttribute="trailing"/>
+                            <constraint id="275" constant="84" firstItem="253" firstAttribute="top" secondItem="250" secondAttribute="top"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="251" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="464" y="469"/>
+        </scene>
+        <scene sceneID="259">
+            <objects>
+                <viewController id="260" sceneMemberID="viewController" customClass="ABKFeedViewControllerModalContext">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="257"/>
+                        <viewControllerLayoutGuide type="bottom" id="258"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="261">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="262" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="985" y="280"/>
+        </scene>
+        <scene sceneID="266">
+            <objects>
+                <viewController id="267" sceneMemberID="viewController" customClass="ABKFeedViewControllerNavigationContext">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="264"/>
+                        <viewControllerLayoutGuide type="bottom" id="265"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="268">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="269" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1333" y="501"/>
+        </scene>
+        <scene sceneID="278">
+            <objects>
+                <viewController id="279" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="276"/>
+                        <viewControllerLayoutGuide type="bottom" id="277"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="280">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <containerView contentMode="scaleToFill" id="285" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="0.0" y="106" width="320" height="462"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <connections>
+                                    <segue destination="287" kind="embed" id="286"/>
+                                </connections>
+                            </containerView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="News Feed" lineBreakMode="tailTruncation" minimumFontSize="10" id="292" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" textAlignment="center">
+                                <rect key="frame" x="20" y="71" width="280" height="21"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="281" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1741" y="614"/>
+        </scene>
+        <scene sceneID="288">
+            <objects>
+                <viewController id="287" sceneMemberID="viewController" customClass="ABKFeedViewControllerGenericContext">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="283"/>
+                        <viewControllerLayoutGuide type="bottom" id="284"/>
+                    </layoutGuides>
+                    <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="289">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="462"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <toolbarItems/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="290" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2111" y="100"/>
+        </scene>
+    </scenes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+    <resources>
+        <image name="Default-568h.png" width="640" height="1136"/>
+        <image name="Appboy.bundle/Icons_Read.png" width="30" height="30"/>
+        <image name="Appboy.bundle/Icons_Unread.png" width="30" height="30"/>
+        <image name="Appboy.bundle/SlideupArrow.png" width="30" height="43"/>
+        <image name="Appboy.bundle/btn-email-highlighted.png" width="38" height="28"/>
+        <image name="Appboy.bundle/btn-email-normal.png" width="38" height="28"/>
+        <image name="Appboy.bundle/checkmark-bg.png" width="22" height="22"/>
+        <image name="Appboy.bundle/checkmark.png" width="22" height="22"/>
+        <image name="Appboy.bundle/img-background.png" width="25" height="25"/>
+        <image name="Appboy.bundle/img-noimage-lrg.png" width="93" height="93"/>
+        <image name="Appboy.bundle/radio-tower.png" width="110" height="110"/>
+    </resources>
+</document>
