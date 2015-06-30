@@ -14,6 +14,8 @@ using Android.Widget;
 namespace com.appboy.xamarinsample
 {
   [BroadcastReceiver]
+  [IntentFilter(new string[] { "com.appboy.xamarinsample.intent.APPBOY_PUSH_RECEIVED" })]
+  [IntentFilter(new string[] { "com.appboy.xamarinsample.intent.APPBOY_NOTIFICATION_OPENED" })]
   public class AppboyBroadcastReceiver : BroadcastReceiver
   {
     public const String SOURCE_KEY = "source";

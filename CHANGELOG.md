@@ -1,3 +1,9 @@
+## 1.1
+- Updates the iOS binding to use Appboy SDK version 2.12.0.
+- Updates the Android binding to use Appboy SDK version 1.8.0.
+- Adds a Xamarin Forms sample application with News Feed integrations.
+- Adds AppboyXamarinFormsFeedFragment that inherits from Android.App.Fragment to be compatible with Xamarin Forms.
+
 ## 1.0
 - Adds support for all standard API and UI functionality in the Android SDK and iOS SDKs.
 - iOS functionality not included in this release:  IDFA collection, custom Slideup viewControllers, social data collection.

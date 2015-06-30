@@ -4,6 +4,7 @@ using System.Drawing;
 using ObjCRuntime;
 using Foundation;
 using UIKit;
+using CoreGraphics;
 
 namespace AppboyPlatformXamariniOSBinding
 {
@@ -16,9 +17,9 @@ namespace AppboyPlatformXamariniOSBinding
      [Export ("feedController", ArgumentSemantic.Retain)]
      ABKFeedController FeedController { get; }
 
-    // @property (readonly, retain, nonatomic) ABKSlideupController * slideupController;
-    [Export ("slideupController", ArgumentSemantic.Retain)]
-    ABKSlideupController SlideupController { get; }
+    // @property (readonly, retain, nonatomic) ABKInAppMessageController * inAppMessageController;
+    [Export ("inAppMessageController", ArgumentSemantic.Retain)]
+    ABKInAppMessageController InAppMessageController { get; }
 
     // @property (readonly, retain, nonatomic) ABKUser * user;
     [Export ("user", ArgumentSemantic.Retain)]
@@ -28,14 +29,14 @@ namespace AppboyPlatformXamariniOSBinding
     [Export ("useNUITheming", ArgumentSemantic.UnsafeUnretained)]
     bool UseNUITheming { get; set; }
 
-
     // @property (assign, nonatomic) ABKRequestProcessingPolicy requestProcessingPolicy;
     [Export ("requestProcessingPolicy", ArgumentSemantic.UnsafeUnretained)]
     ABKRequestProcessingPolicy RequestProcessingPolicy { get; set; }
 
     // +(Appboy *)sharedInstance;
-    [Static, Export ("sharedInstance")]
-    Appboy SharedInstance ();
+    [Static]
+    [Export ("sharedInstance")]
+    Appboy SharedInstance { get; }
 
     // +(void)startWithApiKey:(NSString *)apiKey inApplication:(UIApplication *)application withLaunchOptions:(NSDictionary *)launchOptions;
     [Static, Export ("startWithApiKey:inApplication:withLaunchOptions:")]
@@ -44,6 +45,13 @@ namespace AppboyPlatformXamariniOSBinding
     // +(void)startWithApiKey:(NSString *)apiKey inApplication:(UIApplication *)application withLaunchOptions:(NSDictionary *)launchOptions withAppboyOptions:(NSDictionary *)appboyOptions;
     [Static, Export ("startWithApiKey:inApplication:withLaunchOptions:withAppboyOptions:")]
     void StartWithApiKey (string apiKey, UIApplication application, [NullAllowed] NSDictionary launchOptions, NSDictionary appboyOptions);
+
+    [Wrap ("WeakAppboyEndpointDelegate")]
+    ABKAppboyEndpointDelegate AppboyEndpointDelegate { get; set; }
+
+    // @property (retain, nonatomic) id<ABKAppboyEndpointDelegate> appboyEndpointDelegate;
+    [NullAllowed, Export ("appboyEndpointDelegate", ArgumentSemantic.Retain)]
+    NSObject WeakAppboyEndpointDelegate { get; set; }
 
     // -(void)flushDataAndProcessRequestQueue;
     [Export ("flushDataAndProcessRequestQueue")]
@@ -81,13 +89,25 @@ namespace AppboyPlatformXamariniOSBinding
     [Export ("logCustomEvent:")]
     void LogCustomEvent (string eventName);
 
+    // -(void)logCustomEvent:(NSString *)eventName withProperties:(NSDictionary *)properties;
+    [Export ("logCustomEvent:withProperties:")]
+    void LogCustomEvent (string eventName, NSDictionary properties);
+
     // -(void)logPurchase:(NSString *)productIdentifier inCurrency:(NSString *)currencyCode atPrice:(NSDecimalNumber *)price;
     [Export ("logPurchase:inCurrency:atPrice:")]
     void LogPurchase (string productIdentifier, string currencyCode, NSDecimalNumber price);
 
+    // -(void)logPurchase:(NSString *)productIdentifier inCurrency:(NSString *)currencyCode atPrice:(NSDecimalNumber *)price withProperties:(id)properties;
+    [Export ("logPurchase:inCurrency:atPrice:withProperties:")]
+    void LogPurchase (string productIdentifier, string currencyCode, NSDecimalNumber price, NSObject properties);
+
     // -(void)logPurchase:(NSString *)productIdentifier inCurrency:(NSString *)currencyCode atPrice:(NSDecimalNumber *)price withQuantity:(NSUInteger)quantity;
     [Export ("logPurchase:inCurrency:atPrice:withQuantity:")]
     void LogPurchase (string productIdentifier, string currencyCode, NSDecimalNumber price, nuint quantity);
+
+    // -(void)logPurchase:(NSString *)productIdentifier inCurrency:(NSString *)currencyCode atPrice:(NSDecimalNumber *)price withQuantity:(NSUInteger)quantity andProperties:(id)properties;
+    [Export ("logPurchase:inCurrency:atPrice:withQuantity:andProperties:")]
+    void LogPurchase (string productIdentifier, string currencyCode, NSDecimalNumber price, nuint quantity, NSObject properties);
 
     // -(void)logSocialShare:(ABKSocialNetwork)socialNetwork;
     [Export ("logSocialShare:")]
@@ -113,9 +133,25 @@ namespace AppboyPlatformXamariniOSBinding
     [Export ("requestFeedRefresh")]
     void RequestFeedRefresh ();
 
-    // -(void)requestSlideupRefresh;
-    [Export ("requestSlideupRefresh")]
-    void RequestSlideupRefresh ();
+    // -(void)requestInAppMessageRefresh;
+    [Export ("requestInAppMessageRefresh")]
+    void RequestInAppMessageRefresh ();
+  }
+
+  // @protocol ABKAppboyEndpointDelegate <NSObject>
+  [Protocol, Model]
+  [BaseType (typeof(NSObject))]
+  interface ABKAppboyEndpointDelegate
+  {
+    // @required -(NSString *)getApiEndpoint:(NSString *)appboyApiEndpoint;
+    [Abstract]
+    [Export ("getApiEndpoint:")]
+    string GetApiEndpoint (string appboyApiEndpoint);
+
+    // @required -(NSString *)getResourceEndpoint:(NSString *)appboyResourceEndpoint;
+    [Abstract]
+    [Export ("getResourceEndpoint:")]
+    string GetResourceEndpoint (string appboyResourceEndpoint);
   }
 
   // @interface ABKUser : NSObject
@@ -247,133 +283,270 @@ namespace AppboyPlatformXamariniOSBinding
 
   /******************************************************************************************************************************************************
    * 
-   * Slideup API
+   * IAM API
    * 
    ******************************************************************************************************************************************************/
 
-  // @interface ABKSlideup : NSObject
-  [Protocol]
-  [BaseType (typeof (NSObject))]
-  interface ABKSlideup {
-
+  // @interface ABKInAppMessage : NSObject
+  [BaseType (typeof(NSObject))]
+  interface ABKInAppMessage
+  {
     // @property (copy, nonatomic) NSString * message;
     [Export ("message")]
     string Message { get; set; }
-
-    // @property (assign, nonatomic) BOOL hideChevron;
-    [Export ("hideChevron", ArgumentSemantic.UnsafeUnretained)]
-    bool HideChevron { get; set; }
 
     // @property (retain, nonatomic) NSDictionary * extras;
     [Export ("extras", ArgumentSemantic.Retain), NullAllowed]
     NSDictionary Extras { get; set; }
 
-    // @property (assign, nonatomic) ABKSlideupAnchor slideupAnchor;
-    [Export ("slideupAnchor", ArgumentSemantic.UnsafeUnretained)]
-    ABKSlideupAnchor SlideupAnchor { get; set; }
-
     // @property (assign, nonatomic) NSTimeInterval duration;
-    [Export ("duration", ArgumentSemantic.UnsafeUnretained)]
+    [Export ("duration")]
     double Duration { get; set; }
 
-    // @property (assign, nonatomic) ABKSlideupDismissType slideupDismissType;
-    [Export ("slideupDismissType", ArgumentSemantic.UnsafeUnretained)]
-    ABKSlideupDismissType SlideupDismissType { get; set; }
-
-    // @property (readonly, assign, nonatomic) ABKSlideupClickActionType slideupClickActionType;
-    [Export ("slideupClickActionType", ArgumentSemantic.UnsafeUnretained)]
-    ABKSlideupClickActionType SlideupClickActionType { get; }
+    // @property (readonly, assign, nonatomic) ABKInAppMessageClickActionType inAppMessageClickActionType;
+    [Export ("inAppMessageClickActionType", ArgumentSemantic.Assign)]
+    ABKInAppMessageClickActionType InAppMessageClickActionType { get; }
 
     // @property (readonly, copy, nonatomic) NSURL * uri;
     [Export ("uri", ArgumentSemantic.Copy)]
     NSUrl Uri { get; }
 
-    // -(void)logSlideupImpression;
-    [Export ("logSlideupImpression")]
-    void LogSlideupImpression ();
+    // @property (assign, nonatomic) ABKInAppMessageDismissType inAppMessageDismissType;
+    [Export ("inAppMessageDismissType", ArgumentSemantic.Assign)]
+    ABKInAppMessageDismissType InAppMessageDismissType { get; set; }
 
-    // -(void)logSlideupClicked;
-    [Export ("logSlideupClicked")]
-    void LogSlideupClicked ();
+    // @property (retain, nonatomic) UIColor * backgroundColor;
+    [Export ("backgroundColor", ArgumentSemantic.Retain)]
+    UIColor BackgroundColor { get; set; }
 
-    // -(void)setSlideupClickActionToUri:(NSURL *)uri;
-    [Export ("setSlideupClickActionToUri:")]
-    void SetSlideupClickActionToUri (NSUrl uri);
+    // @property (retain, nonatomic) UIColor * textColor;
+    [Export ("textColor", ArgumentSemantic.Retain)]
+    UIColor TextColor { get; set; }
 
-    // -(void)setSlideupClickActionToNewsFeed;
-    [Export ("setSlideupClickActionToNewsFeed")]
-    void SetSlideupClickActionToNewsFeed ();
+    // @property (retain, nonatomic) NSString * icon;
+    [Export ("icon", ArgumentSemantic.Retain)]
+    string Icon { get; set; }
 
-    // -(void)setSlideupClickActionToNone;
-    [Export ("setSlideupClickActionToNone")]
-    void SetSlideupClickActionToNone ();
+    // @property (retain, nonatomic) UIColor * iconColor;
+    [Export ("iconColor", ArgumentSemantic.Retain)]
+    UIColor IconColor { get; set; }
+
+    // @property (retain, nonatomic) UIColor * iconBackgroundColor;
+    [Export ("iconBackgroundColor", ArgumentSemantic.Retain)]
+    UIColor IconBackgroundColor { get; set; }
+
+    // @property (copy, nonatomic) NSURL * imageURI;
+    [Export ("imageURI", ArgumentSemantic.Copy)]
+    NSUrl ImageURI { get; set; }
+
+    // -(void)logInAppMessageImpression;
+    [Export ("logInAppMessageImpression")]
+    void LogInAppMessageImpression ();
+
+    // -(void)logInAppMessageClicked;
+    [Export ("logInAppMessageClicked")]
+    void LogInAppMessageClicked ();
+
+    // -(void)setInAppMessageClickAction:(ABKInAppMessageClickActionType)clickActionType withURI:(NSURL *)uri;
+    [Export ("setInAppMessageClickAction:withURI:")]
+    void SetInAppMessageClickAction (ABKInAppMessageClickActionType clickActionType, NSUrl uri);
 
     // -(NSData *)serializeToData;
     [Export ("serializeToData")]
-    NSData SerializeToData ();
+    NSData SerializeToData { get; }
   }
-    
-  // @protocol ABKSlideupControllerDelegate <NSObject>
+
+  // @interface ABKInAppMessageViewController : UIViewController
+  [BaseType (typeof(UIViewController))]
+  interface ABKInAppMessageViewController
+  {
+    // @property (retain, nonatomic) ABKInAppMessage * inAppMessage;
+    [Export ("inAppMessage", ArgumentSemantic.Retain)]
+    ABKInAppMessage InAppMessage { get; set; }
+
+    // @property (retain, nonatomic) UIImageView * iconImageView;
+    [Export ("iconImageView", ArgumentSemantic.Retain)]
+    UIImageView IconImageView { get; set; }
+
+    // @property (retain, nonatomic) UILabel * iconLabelView;
+    [Export ("iconLabelView", ArgumentSemantic.Retain)]
+    UILabel IconLabelView { get; set; }
+
+    // -(id)initWithInAppMessage:(ABKInAppMessage *)inAppMessage;
+    [Export ("initWithInAppMessage:")]
+    IntPtr Constructor (ABKInAppMessage inAppMessage);
+
+    // -(void)hideInAppMessage:(BOOL)animated;
+    [Export ("hideInAppMessage:")]
+    void HideInAppMessage (bool animated);
+
+    //(void)moveInAppMessageViewOffScreen:(CGRect)inAppMessageWindowFrame;
+    [Export ("moveInAppMessageViewOffScreen:")]
+    void MoveInAppMessageViewOffScreen (CGRect inAppMessageWindowFrame);
+
+    //(void)moveInAppMessageViewOnScreen:(CGRect)inAppMessageWindowFrame;
+    [Export ("moveInAppMessageViewOnScreen:")]
+    void MoveInAppMessageViewOnScreen (CGRect inAppMessageWindowFrame);
+  }
+
+
+  // @interface ABKInAppMessageButton : UIButton
+  [BaseType (typeof(UIButton))]
+  interface ABKInAppMessageButton
+  {
+    // @property (copy, nonatomic) NSString * buttonText;
+    [Export ("buttonText")]
+    string ButtonText { get; set; }
+
+    // @property (retain, nonatomic) UIColor * buttonBackgroundColor;
+    [Export ("buttonBackgroundColor", ArgumentSemantic.Retain)]
+    UIColor ButtonBackgroundColor { get; set; }
+
+    // @property (retain, nonatomic) UIColor * buttonTextColor;
+    [Export ("buttonTextColor", ArgumentSemantic.Retain)]
+    UIColor ButtonTextColor { get; set; }
+
+    // @property (readonly, assign, nonatomic) ABKInAppMessageClickActionType buttonClickActionType;
+    [Export ("buttonClickActionType", ArgumentSemantic.Assign)]
+    ABKInAppMessageClickActionType ButtonClickActionType { get; }
+
+    // @property (readonly, copy, nonatomic) NSURL * buttonClickedURI;
+    [Export ("buttonClickedURI", ArgumentSemantic.Copy)]
+    NSUrl ButtonClickedURI { get; }
+
+    // @property (readonly, assign, nonatomic) NSInteger buttonID;
+    [Export ("buttonID", ArgumentSemantic.Assign)]
+    nint ButtonID { get; }
+
+    // -(void)setButtonClickAction:(ABKInAppMessageClickActionType)clickActionType withURI:(NSURL *)uri;
+    [Export ("setButtonClickAction:withURI:")]
+    void SetButtonClickAction (ABKInAppMessageClickActionType clickActionType, NSUrl uri);
+  }
+
+  // @interface ABKInAppMessageImmersive : ABKInAppMessage
+  [BaseType (typeof(ABKInAppMessage))]
+  interface ABKInAppMessageImmersive
+  {
+    // @property (copy, nonatomic) NSString * header;
+    [Export ("header")]
+    string Header { get; set; }
+
+    // @property (retain, nonatomic) UIColor * headerTextColor;
+    [Export ("headerTextColor", ArgumentSemantic.Retain)]
+    UIColor HeaderTextColor { get; set; }
+
+    // @property (retain, nonatomic) UIColor * closeButtonColor;
+    [Export ("closeButtonColor", ArgumentSemantic.Retain)]
+    UIColor CloseButtonColor { get; set; }
+
+    // @property (readonly, retain, nonatomic) NSArray * buttons;
+    [Export ("buttons", ArgumentSemantic.Retain)]
+    NSObject[] Buttons { get; }
+
+    // -(void)logInAppMessageClickedWithButtonID:(NSInteger)buttonID;
+    [Export ("logInAppMessageClickedWithButtonID:")]
+    void LogInAppMessageClickedWithButtonID (nint buttonID);
+
+    // -(void)setInAppMessageButtons:(NSArray *)buttonArray;
+    [Export ("setInAppMessageButtons:")]
+    void SetInAppMessageButtons (NSObject[] buttonArray);
+  }
+
+  // @protocol ABKInAppMessageControllerDelegate <NSObject>
   [Protocol, Model]
-  [BaseType (typeof (NSObject))]
-  interface ABKSlideupControllerDelegate {
+  [BaseType (typeof(NSObject))]
+  interface ABKInAppMessageControllerDelegate
+  {
+    // @optional -(BOOL)onInAppMessageReceived:(ABKInAppMessage *)inAppMessage;
+    [Export ("onInAppMessageReceived:")]
+    bool OnInAppMessageReceived (ABKInAppMessage inAppMessage);
 
-    // @optional -(BOOL)onSlideupReceived:(ABKSlideup *)slideup;
-    [Export ("onSlideupReceived:")]
-    bool OnSlideupReceived (ABKSlideup slideup);
+    // @optional -(ABKInAppMessageDisplayChoice)beforeInAppMessageDisplayed:(ABKInAppMessage *)inAppMessage withKeyboardIsUp:(BOOL)keyboardIsUp;
+    [Export ("beforeInAppMessageDisplayed:withKeyboardIsUp:")]
+    ABKInAppMessageDisplayChoice BeforeInAppMessageDisplayed (ABKInAppMessage inAppMessage, bool keyboardIsUp);
 
-    // @optional -(ABKSlideupDisplayChoice)beforeSlideupDisplayed:(ABKSlideup *)slideup withKeyboardIsUp:(BOOL)keyboardIsUp;
-    [Export ("beforeSlideupDisplayed:withKeyboardIsUp:")]
-    ABKSlideupDisplayChoice WithKeyboardIsUp (ABKSlideup slideup, bool keyboardIsUp);
+    // @optional -(ABKInAppMessageViewController *)inAppMessageViewControllerWithInAppMessage:(ABKInAppMessage *)inAppMessage;
+    [Export ("inAppMessageViewControllerWithInAppMessage:")]
+    ABKInAppMessageViewController InAppMessageViewControllerWithInAppMessage (ABKInAppMessage inAppMessage);
 
-    // @optional -(void)onSlideupDismissed:(ABKSlideup *)slideup;
-    [Export ("onSlideupDismissed:")]
-    void OnSlideupDismissed (ABKSlideup slideup);
+    // @optional -(void)onInAppMessageDismissed:(ABKInAppMessage *)inAppMessage;
+    [Export ("onInAppMessageDismissed:")]
+    void OnInAppMessageDismissed (ABKInAppMessage inAppMessage);
 
-    // @optional -(BOOL)onSlideupClicked:(ABKSlideup *)slideup;
-    [Export ("onSlideupClicked:")]
-    bool OnSlideupClicked (ABKSlideup slideup);
+    // @optional -(BOOL)onInAppMessageClicked:(ABKInAppMessage *)inAppMessage;
+    [Export ("onInAppMessageClicked:")]
+    bool OnInAppMessageClicked (ABKInAppMessage inAppMessage);
+
+    // @optional -(BOOL)onInAppMessageButtonClicked:(ABKInAppMessageImmersive *)inAppMessage button:(ABKInAppMessageButton *)button;
+    [Export ("onInAppMessageButtonClicked:button:")]
+    bool OnInAppMessageButtonClicked (ABKInAppMessageImmersive inAppMessage, ABKInAppMessageButton button);
   }
 
-  // @interface ABKSlideupController : NSObject
-  [Protocol]
-  [BaseType (typeof (NSObject))]
-  interface ABKSlideupController {
+  // @interface ABKInAppMessageController : NSObject
+  [BaseType (typeof(NSObject))]
+  interface ABKInAppMessageController
+  {
+    [Wrap ("WeakDelegate")]
+    ABKInAppMessageControllerDelegate Delegate { get; set; }
 
-    // @property (retain, nonatomic) id<ABKSlideupControllerDelegate> delegate;
-    [Export ("delegate", ArgumentSemantic.Retain)]
-    [NullAllowed]
+    // @property (retain, nonatomic) id<ABKInAppMessageControllerDelegate> delegate;
+    [NullAllowed, Export ("delegate", ArgumentSemantic.Retain)]
     NSObject WeakDelegate { get; set; }
 
-    // @property (retain, nonatomic) id<ABKSlideupControllerDelegate> delegate;
-    [Wrap ("WeakDelegate")]
-    ABKSlideupControllerDelegate Delegate { get; set; }
-
     // @property (assign, nonatomic) UIInterfaceOrientationMask supportedOrientationMasks;
-    [Export ("supportedOrientationMasks", ArgumentSemantic.UnsafeUnretained)]
+    [Export ("supportedOrientationMasks", ArgumentSemantic.Assign)]
     UIInterfaceOrientationMask SupportedOrientationMasks { get; set; }
 
     // @property (assign, nonatomic) UIInterfaceOrientation supportedOrientations;
-    [Export ("supportedOrientations", ArgumentSemantic.UnsafeUnretained)]
+    [Export ("supportedOrientations", ArgumentSemantic.Assign)]
     UIInterfaceOrientation SupportedOrientations { get; set; }
 
-    // -(void)displayNextSlideupWithDelegate:(id<ABKSlideupControllerDelegate>)delegate;
-    [Export ("displayNextSlideupWithDelegate:")]
-    void DisplayNextSlideupWithDelegate (ABKSlideupControllerDelegate slideupDelegate);
+    // -(void)displayNextInAppMessageWithDelegate:(id<ABKInAppMessageControllerDelegate>)delegate;
+    [Export ("displayNextInAppMessageWithDelegate:")]
+    void DisplayNextInAppMessageWithDelegate (ABKInAppMessageControllerDelegate iamDelegate);
 
-    // -(NSInteger)slideupsRemainingOnStack;
-    [Export ("slideupsRemainingOnStack")]
-    nint SlideupsRemainingOnStack ();
+    // -(NSInteger)inAppMessagesRemainingOnStack;
+    [Export ("inAppMessagesRemainingOnStack")]
+    nint InAppMessagesRemainingOnStack { get; }
 
-    // -(void)addSlideup:(ABKSlideup *)newSlideup;
-    [Export ("addSlideup:")]
-    void AddSlideup (ABKSlideup newSlideup);
+    // -(void)addInAppMessage:(ABKInAppMessage *)newInAppMessage;
+    [Export ("addInAppMessage:")]
+    void AddInAppMessage (ABKInAppMessage newInAppMessage);
 
-    // -(void)hideCurrentSlideup:(BOOL)animated;
-    [Export ("hideCurrentSlideup:")]
-    void HideCurrentSlideup (bool animated);
+    // -(void)hideCurrentInAppMessage:(BOOL)animated;
+    [Export ("hideCurrentInAppMessage:")]
+    void HideCurrentInAppMessage (bool animated);
   }
 
+  // @interface ABKInAppMessageSlideup : ABKInAppMessage
+  [BaseType (typeof(ABKInAppMessage))]
+  interface ABKInAppMessageSlideup
+  {
+    // @property (assign, nonatomic) BOOL hideChevron;
+    [Export ("hideChevron")]
+    bool HideChevron { get; set; }
+
+    // @property (assign, nonatomic) ABKInAppMessageSlideupAnchor inAppMessageSlideupAnchor;
+    [Export ("inAppMessageSlideupAnchor", ArgumentSemantic.Assign)]
+    ABKInAppMessageSlideupAnchor InAppMessageSlideupAnchor { get; set; }
+
+    // @property (retain, nonatomic) UIColor * chevronColor;
+    [Export ("chevronColor", ArgumentSemantic.Retain)]
+    UIColor ChevronColor { get; set; }
+  }
+
+  // @interface ABKInAppMessageModal : ABKInAppMessageImmersive
+  [BaseType (typeof(ABKInAppMessageImmersive))]
+  interface ABKInAppMessageModal
+  {
+  }
+
+  // @interface ABKInAppMessageFull : ABKInAppMessageImmersive
+  [BaseType (typeof(ABKInAppMessageImmersive))]
+  interface ABKInAppMessageFull
+  {
+  }
+    
   /******************************************************************************************************************************************************
    * 
    * News Feed API
@@ -619,6 +792,10 @@ namespace AppboyPlatformXamariniOSBinding
     // -(BOOL)hasSameId:(ABKCard *)card;
     [Export ("hasSameId:")]
     bool HasSameId (ABKCard card);
+
+    // @property (retain, nonatomic) NSDictionary * extras;
+    [Export ("extras", ArgumentSemantic.Retain)]
+    NSDictionary Extras { get; set; }
   }
 
   // @interface ABKBannerCard : ABKCard <NSCoding>

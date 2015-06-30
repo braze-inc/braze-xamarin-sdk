@@ -18,15 +18,15 @@ See [our documentation](https://documentation.appboy.com/) for instructions on h
 First, set up an application in the Appboy dashboard.  Then, to enable tracking of user sessions and the gathering of basic user data, add the following calls to the `onStart()` and `onStop()` lifecycle methods of __every__ Activity class in your app:
 
 ```csharp
-protected override void onStart() {
-    base.onStart();
+protected override void OnStart() {
+    base.OnStart();
     Appboy.GetInstance(this).OpenSession(this);
 }
 ```
 
 ```csharp
-protected override void onStop() {
-    base.onStop();
+protected override void OnStop() {
+    base.OnStop();
     Appboy.GetInstance(this).CloseSession(this);
 }
 ```

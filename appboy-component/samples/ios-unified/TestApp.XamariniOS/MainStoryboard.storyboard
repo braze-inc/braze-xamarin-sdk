@@ -62,6 +62,24 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="566" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="120" y="324" width="80" height="30"/>
+                                <state key="normal" title="Add Modal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="AddModalButton_TouchUpInside:" destination="vXZ-lx-hvc" id="568" eventType="touchUpInside"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="567" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="125" y="362" width="70" height="30"/>
+                                <state key="normal" title="Add Full">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="AddFullButton_TouchUpInside:" destination="vXZ-lx-hvc" id="571" eventType="touchUpInside"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint id="242" constant="88" firstItem="10" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading"/>
@@ -75,11 +93,14 @@
                         <outlet property="EventsAndPurchasesButton" destination="16" id="name-outlet-16"/>
                         <outlet property="NewsFeedButton" destination="27" id="name-outlet-27"/>
                         <outlet property="AddSlideupButton" destination="548" id="name-outlet-548"/>
+                        <outlet property="AddModalButton" destination="566" id="name-outlet-566"/>
+                        <outlet property="AddFullButton" destination="567" id="name-outlet-567"/>
                     </connections>
                     <navigationItem title="Appboy Sample" id="77" key="navigationItem"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="0.0" y="0.0"/>
         </scene>
         <scene sceneID="34">
             <objects>
@@ -322,5 +343,6 @@
         <image name="Appboy.bundle/img-background.png" width="25" height="25"/>
         <image name="Appboy.bundle/img-noimage-lrg.png" width="93" height="93"/>
         <image name="Appboy.bundle/radio-tower.png" width="110" height="110"/>
+        <image name="Appboy.bundle/com_appboy_inapp_close_icon.png" width="20" height="20"/>
     </resources>
 </document>

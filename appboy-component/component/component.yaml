@@ -14,11 +14,12 @@ libraries:
 summary: Xamarin bindings for the Appboy SDKs.
 details: Details.md
 getting-started: GettingStarted.md
-version: "1.0"
+version: "1.1"
 source:
   ../src/AppboyBindings.sln
 samples: 
   Android Sample: ../samples/android/Android.sln
   iOS Sample: ../samples/ios-unified/iOS.sln
+  Forms Sample: ../samples/xamarin-forms/TestAppXamarinForms.sln
 packages:
   android: Xamarin.Android.Support.v4, Version=21.0.3.0

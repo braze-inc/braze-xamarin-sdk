@@ -22,7 +22,7 @@ namespace TestApp.XamariniOS
 
   public override void DidReceiveRemoteNotification (UIApplication application, NSDictionary userInfo, Action<UIBackgroundFetchResult> completionHandler) 
   {
-    Appboy.SharedInstance ().RegisterApplicationWithFetchCompletionHandler(application, userInfo, completionHandler);
+    Appboy.SharedInstance.RegisterApplicationWithFetchCompletionHandler(application, userInfo, completionHandler);
   }
    
     //
@@ -53,7 +53,7 @@ namespace TestApp.XamariniOS
     public override void RegisteredForRemoteNotifications (UIApplication application, NSData deviceToken)
     {
       Console.WriteLine ("Registered For Remote Notifications");
-      Appboy.SharedInstance ().RegisterPushToken (deviceToken.ToString ());
+      Appboy.SharedInstance.RegisterPushToken (deviceToken.ToString ());
     }
   }
 }

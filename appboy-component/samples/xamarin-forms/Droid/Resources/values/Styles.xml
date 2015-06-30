@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<resources>
+  <style name="Appboy.Feed.List">
+    <item name="android:background">#ffffff</item>
+    <item name="android:cacheColorHint">#ffffff</item>
+    <item name="android:divider">@android:color/transparent</item>
+    <item name="android:dividerHeight">16.0dp</item>
+    <item name="android:paddingLeft">12.5dp</item>
+    <item name="android:paddingRight">5.0dp</item>
+    <item name="android:scrollbarStyle">outsideInset</item>
+  </style>
+</resources>

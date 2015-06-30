@@ -3,5 +3,7 @@
   <remove-node path="/api/package[@name='com.appboy.ui.widget']" />
   <remove-node path="/api/package[@name='com.appboy']/class[@name='AppboyAdmReceiver']" />
   <remove-node path="/api/package[@name='com.appboy']/class[@name='AppboyGcmReceiver']" />
-  <remove-node path="/api/package[@name='com.appboy.ui.slideups']/interface[@name='TouchAwareSwipeDismissTouchListener.ITouchListener']" />
+  <remove-node path="/api/package[@name='com.appboy.ui.inappmessage']/interface[@name='TouchAwareSwipeDismissTouchListener.ITouchListener']" />
+  <remove-node path="/api/package[@name='com.appboy.ui.inappmessage']/class[@name='AppboyInAppMessageModalView']" />
+  <remove-node path="/api/package[@name='com.appboy.ui.inappmessage']/class[@name='AppboyInAppMessageSlideupView']" />
 </metadata>

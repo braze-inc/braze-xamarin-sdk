@@ -16,6 +16,14 @@ namespace TestApp.XamariniOS
 	{
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
+		UIButton AddFullButton { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UIButton AddModalButton { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
 		UIButton AddSlideupButton { get; set; }
 
 		[Outlet]
@@ -38,8 +46,24 @@ namespace TestApp.XamariniOS
 		[GeneratedCode ("iOS Designer", "1.0")]
 		UIButton UserPropertyButton { get; set; }
 
+		[Action ("AddFullButton_TouchUpInside:")]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		partial void AddFullButton_TouchUpInside (UIButton sender);
+
+		[Action ("AddModalButton_TouchUpInside:")]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		partial void AddModalButton_TouchUpInside (UIButton sender);
+
 		void ReleaseDesignerOutlets ()
 		{
+			if (AddFullButton != null) {
+				AddFullButton.Dispose ();
+				AddFullButton = null;
+			}
+			if (AddModalButton != null) {
+				AddModalButton.Dispose ();
+				AddModalButton = null;
+			}
 			if (AddSlideupButton != null) {
 				AddSlideupButton.Dispose ();
 				AddSlideupButton = null;

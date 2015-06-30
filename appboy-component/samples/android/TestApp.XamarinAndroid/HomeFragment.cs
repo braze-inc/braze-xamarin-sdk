@@ -11,11 +11,11 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using Com.Appboy;
-using Com.Appboy.UI.Slideups;
+using Com.Appboy.UI.Inappmessage;
 using Com.Appboy.UI;
 using Com.Appboy.Models;
 using Com.Appboy.Enums;
-using Com.Appboy.Enums.Slideup;
+using Com.Appboy.Enums.Inappmessage;
 using Com.Appboy.Models.Outgoing;
 
 namespace com.appboy.xamarinsample
@@ -101,7 +101,7 @@ namespace com.appboy.xamarinsample
           String profileImageUrl
         )
         **/
-        TwitterUser twitterUser = new TwitterUser(6253282, "Test", "User", "Tester",  new Java.Lang.Integer(100), new Java.Lang.Integer(100), 
+        TwitterUser twitterUser = new TwitterUser(new Java.Lang.Integer(6253282), "Test", "User", "Tester",  new Java.Lang.Integer(100), new Java.Lang.Integer(100), 
           new Java.Lang.Integer(100), "https://si0.twimg.com/profile_images/2685532587/fa47382ad67a0135acc62d4c6b49dbdc_bigger.jpeg");
         Appboy.GetInstance(Activity).CurrentUser.SetTwitterData(twitterUser);
       };
@@ -127,9 +127,10 @@ namespace com.appboy.xamarinsample
 
       // Slideup
       view.FindViewById<Button> (Resource.Id.addSlideupButton).Click += delegate {
-        Slideup slideup = Slideup.CreateSlideup("This is the message", SlideFrom.Top, DismissType.AutoDismiss, 1000);
-        slideup.SetClickActionToUri(Android.Net.Uri.Parse("http://appboy.com"));
-        AppboySlideupManager.Instance.AddSlideup(slideup);
+        InAppMessageSlideup slideup = new InAppMessageSlideup();
+        slideup.Message = "This is the message";
+        slideup.SetClickAction(ClickAction.Uri, Android.Net.Uri.Parse("http://appboy.com"));
+        AppboyInAppMessageManager.Instance.AddInAppMessage(slideup);
       };
 
       // Request Data Flush
