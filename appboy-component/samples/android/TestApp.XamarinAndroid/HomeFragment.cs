@@ -33,7 +33,9 @@ namespace com.appboy.xamarinsample
 
       // Change User
       view.FindViewById<Button> (Resource.Id.changeUserButton).Click += delegate {
-        Appboy.GetInstance(Activity).ChangeUser("myUser" + (new Random().Next()));
+        String userId = "myUser" + (new Random().Next());
+        Appboy.GetInstance(Activity).ChangeUser(userId);
+        view.FindViewById<TextView> (Resource.Id.userId).Text = "UserId: " + userId;
       };
 
       // Set User Properties
@@ -49,13 +51,13 @@ namespace com.appboy.xamarinsample
         Appboy.GetInstance(Activity).CurrentUser.SetCustomUserAttribute("customAttributeKey", true);
         Appboy.GetInstance(Activity).CurrentUser.SetEmailNotificationSubscriptionType(NotificationSubscriptionType.OptedIn);
         Appboy.GetInstance(Activity).CurrentUser.SetGender(Gender.Male);
+        Appboy.GetInstance(Activity).CurrentUser.SetAttributionData(new AttributionData("a", "b", "c", "d"));
       };
 
       // Events and purchases
       view.FindViewById<Button> (Resource.Id.eventsAndPurchasesButton).Click += delegate {
         Appboy.GetInstance(Activity).LogCustomEvent("myCustomEvent");
         Appboy.GetInstance(Activity).LogPurchase("myProduct", 100);
-        Appboy.GetInstance(Activity).LogShare(SocialNetwork.Facebook);
       };
 
       // Feedback
@@ -125,8 +127,8 @@ namespace com.appboy.xamarinsample
         fragmentTransaction.Commit();     
       };
 
-      // Slideup
-      view.FindViewById<Button> (Resource.Id.addSlideupButton).Click += delegate {
+      // In-App Message
+      view.FindViewById<Button> (Resource.Id.addInAppMessageButton).Click += delegate {
         InAppMessageSlideup slideup = new InAppMessageSlideup();
         slideup.Message = "This is the message";
         slideup.SetClickAction(ClickAction.Uri, Android.Net.Uri.Parse("http://appboy.com"));
@@ -148,9 +150,13 @@ namespace com.appboy.xamarinsample
         mFragmentManager = supportFragmentManager;
       }
 
-      public void OnFeedbackFinished () {
+      public void OnFeedbackFinished (Com.Appboy.UI.AppboyFeedbackFragment.FeedbackResult feedbackResult) {
         Console.WriteLine ("Feedback finished");
         mFragmentManager.PopBackStack ();
+      }
+
+      public string BeforeFeedbackSubmitted(string feedback) {
+        return feedback;
       }
     }
   }

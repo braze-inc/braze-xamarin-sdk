@@ -1,3 +1,7 @@
+## 1.2
+- Updates the iOS binding to use Appboy SDK version 2.17.1.
+- Updates the Android binding to use Appboy SDK version 1.11.0.
+
 ## 1.1
 - Updates the iOS binding to use Appboy SDK version 2.12.0.
 - Updates the Android binding to use Appboy SDK version 1.8.0.

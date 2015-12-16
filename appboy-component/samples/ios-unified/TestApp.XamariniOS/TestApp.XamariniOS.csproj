@@ -125,14 +125,6 @@
     <BundleResource Include="Appboy.bundle\btn-app-purchase-plus-highlighted%402x.png" />
     <BundleResource Include="Appboy.bundle\btn-app-purchase-plus-normal.png" />
     <BundleResource Include="Appboy.bundle\btn-app-purchase-plus-normal%402x.png" />
-    <BundleResource Include="Appboy.bundle\btn-email-highlighted.png" />
-    <BundleResource Include="Appboy.bundle\btn-email-highlighted%402x.png" />
-    <BundleResource Include="Appboy.bundle\btn-email-normal.png" />
-    <BundleResource Include="Appboy.bundle\btn-email-normal%402x.png" />
-    <BundleResource Include="Appboy.bundle\btn-facebook-highlighted.png" />
-    <BundleResource Include="Appboy.bundle\btn-facebook-highlighted%402x.png" />
-    <BundleResource Include="Appboy.bundle\btn-facebook-normal.png" />
-    <BundleResource Include="Appboy.bundle\btn-facebook-normal%402x.png" />
     <BundleResource Include="Appboy.bundle\checkmark-bg.png" />
     <BundleResource Include="Appboy.bundle\checkmark-bg%402x.png" />
     <BundleResource Include="Appboy.bundle\checkmark.png" />
@@ -140,7 +132,6 @@
     <BundleResource Include="Appboy.bundle\com_appboy_inapp_close_icon.png" />
     <BundleResource Include="Appboy.bundle\com_appboy_inapp_close_icon%402x.png" />
     <BundleResource Include="Appboy.bundle\com_appboy_inapp_close_icon%403x.png" />
-    <BundleResource Include="Appboy.bundle\icon-facebook.png" />
     <BundleResource Include="Appboy.bundle\img-background.png" />
     <BundleResource Include="Appboy.bundle\img-background%402x.png" />
     <BundleResource Include="Appboy.bundle\img-disclosure-arrow.png" />
@@ -158,58 +149,42 @@
     <BundleResource Include="Appboy.bundle\img-star-half.png" />
     <BundleResource Include="Appboy.bundle\img-star-half%402x.png" />
     <BundleResource Include="Appboy.bundle\radio-tower.png" />
-    <BundleResource Include="Appboy.bundle\ABKBannerCardCell.nib\objects-8.0+.nib" />
     <BundleResource Include="Appboy.bundle\ABKBannerCardCell.nib\objects.nib" />
     <BundleResource Include="Appboy.bundle\ABKBannerCardCell.nib\runtime.nib" />
-    <BundleResource Include="Appboy.bundle\ABKCaptionedMessageCardCell.nib\objects-8.0+.nib" />
     <BundleResource Include="Appboy.bundle\ABKCaptionedMessageCardCell.nib\objects.nib" />
     <BundleResource Include="Appboy.bundle\ABKCaptionedMessageCardCell.nib\runtime.nib" />
-    <BundleResource Include="Appboy.bundle\ABKCrossPromotionCardCell.nib\objects-8.0+.nib" />
     <BundleResource Include="Appboy.bundle\ABKCrossPromotionCardCell.nib\objects.nib" />
     <BundleResource Include="Appboy.bundle\ABKCrossPromotionCardCell.nib\runtime.nib" />
-    <BundleResource Include="Appboy.bundle\ABKFeedNoConnectionView.nib\objects-8.0+.nib" />
     <BundleResource Include="Appboy.bundle\ABKFeedNoConnectionView.nib\objects.nib" />
     <BundleResource Include="Appboy.bundle\ABKFeedNoConnectionView.nib\runtime.nib" />
-    <BundleResource Include="Appboy.bundle\ABKFeedViewController.nib\objects-8.0+.nib" />
     <BundleResource Include="Appboy.bundle\ABKFeedViewController.nib\objects.nib" />
     <BundleResource Include="Appboy.bundle\ABKFeedViewController.nib\runtime.nib" />
-    <BundleResource Include="Appboy.bundle\ABKFeedbackContentView.nib\objects-8.0+.nib" />
     <BundleResource Include="Appboy.bundle\ABKFeedbackContentView.nib\objects.nib" />
     <BundleResource Include="Appboy.bundle\ABKFeedbackContentView.nib\runtime.nib" />
-    <BundleResource Include="Appboy.bundle\ABKFeedbackEmailFacebookViewPortrait.nib\objects-8.0+.nib" />
-    <BundleResource Include="Appboy.bundle\ABKFeedbackEmailFacebookViewPortrait.nib\objects.nib" />
-    <BundleResource Include="Appboy.bundle\ABKFeedbackEmailFacebookViewPortrait.nib\runtime.nib" />
-    <BundleResource Include="Appboy.bundle\ABKFeedbackNavBar.nib\objects-8.0+.nib" />
+    <BundleResource Include="Appboy.bundle\ABKFeedbackEmailViewPortrait.nib\objects.nib" />
+    <BundleResource Include="Appboy.bundle\ABKFeedbackEmailViewPortrait.nib\runtime.nib" />
     <BundleResource Include="Appboy.bundle\ABKFeedbackNavBar.nib\objects.nib" />
     <BundleResource Include="Appboy.bundle\ABKFeedbackNavBar.nib\runtime.nib" />
-    <BundleResource Include="Appboy.bundle\ABKInAppMessageFullViewController.nib\objects-8.0+.nib" />
     <BundleResource Include="Appboy.bundle\ABKInAppMessageFullViewController.nib\objects.nib" />
     <BundleResource Include="Appboy.bundle\ABKInAppMessageFullViewController.nib\runtime.nib" />
-    <BundleResource Include="Appboy.bundle\ABKInAppMessageFullViewController_iPad.nib\objects-8.0+.nib" />
     <BundleResource Include="Appboy.bundle\ABKInAppMessageFullViewController_iPad.nib\objects.nib" />
     <BundleResource Include="Appboy.bundle\ABKInAppMessageFullViewController_iPad.nib\runtime.nib" />
-    <BundleResource Include="Appboy.bundle\ABKInAppMessageModalViewController.nib\objects-8.0+.nib" />
+    <BundleResource Include="Appboy.bundle\ABKInAppMessageHTMLFullViewController.nib\objects.nib" />
+    <BundleResource Include="Appboy.bundle\ABKInAppMessageHTMLFullViewController.nib\runtime.nib" />
     <BundleResource Include="Appboy.bundle\ABKInAppMessageModalViewController.nib\objects.nib" />
     <BundleResource Include="Appboy.bundle\ABKInAppMessageModalViewController.nib\runtime.nib" />
-    <BundleResource Include="Appboy.bundle\ABKInAppMessageModalViewController_iPad.nib\objects-8.0+.nib" />
     <BundleResource Include="Appboy.bundle\ABKInAppMessageModalViewController_iPad.nib\objects.nib" />
     <BundleResource Include="Appboy.bundle\ABKInAppMessageModalViewController_iPad.nib\runtime.nib" />
-    <BundleResource Include="Appboy.bundle\ABKInAppMessageSlideupViewController.nib\objects-8.0+.nib" />
     <BundleResource Include="Appboy.bundle\ABKInAppMessageSlideupViewController.nib\objects.nib" />
     <BundleResource Include="Appboy.bundle\ABKInAppMessageSlideupViewController.nib\runtime.nib" />
-    <BundleResource Include="Appboy.bundle\ABKInAppMessageSlideupViewController_iPad.nib\objects-8.0+.nib" />
     <BundleResource Include="Appboy.bundle\ABKInAppMessageSlideupViewController_iPad.nib\objects.nib" />
     <BundleResource Include="Appboy.bundle\ABKInAppMessageSlideupViewController_iPad.nib\runtime.nib" />
-    <BundleResource Include="Appboy.bundle\ABKNewsCardCell.nib\objects-8.0+.nib" />
     <BundleResource Include="Appboy.bundle\ABKNewsCardCell.nib\objects.nib" />
     <BundleResource Include="Appboy.bundle\ABKNewsCardCell.nib\runtime.nib" />
-    <BundleResource Include="Appboy.bundle\ABKSpinnerView.nib\objects-8.0+.nib" />
     <BundleResource Include="Appboy.bundle\ABKSpinnerView.nib\objects.nib" />
     <BundleResource Include="Appboy.bundle\ABKSpinnerView.nib\runtime.nib" />
-    <BundleResource Include="Appboy.bundle\ABKTextAnnouncementCardCell.nib\objects-8.0+.nib" />
     <BundleResource Include="Appboy.bundle\ABKTextAnnouncementCardCell.nib\objects.nib" />
     <BundleResource Include="Appboy.bundle\ABKTextAnnouncementCardCell.nib\runtime.nib" />
-    <BundleResource Include="Appboy.bundle\ABKWebViewController.nib\objects-8.0+.nib" />
     <BundleResource Include="Appboy.bundle\ABKWebViewController.nib\objects.nib" />
     <BundleResource Include="Appboy.bundle\ABKWebViewController.nib\runtime.nib" />
     <BundleResource Include="Appboy.bundle\ar.lproj\LocalizedAppboyUIString.strings" />
@@ -241,8 +216,11 @@
     <BundleResource Include="Appboy.bundle\sv.lproj\LocalizedAppboyUIString.strings" />
     <BundleResource Include="Appboy.bundle\th.lproj\LocalizedAppboyUIString.strings" />
     <BundleResource Include="Appboy.bundle\vi.lproj\LocalizedAppboyUIString.strings" />
+    <BundleResource Include="Appboy.bundle\zh-HK.lproj\LocalizedAppboyUIString.strings" />
     <BundleResource Include="Appboy.bundle\zh-Hans.lproj\LocalizedAppboyUIString.strings" />
     <BundleResource Include="Appboy.bundle\zh-Hant.lproj\LocalizedAppboyUIString.strings" />
+    <BundleResource Include="Appboy.bundle\zh-TW.lproj\LocalizedAppboyUIString.strings" />
+    <BundleResource Include="Appboy.bundle\zh.lproj\LocalizedAppboyUIString.strings" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -260,9 +238,6 @@
     <InterfaceDefinition Include="MainStoryboard.storyboard" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
-  <ItemGroup>
-    <Folder Include="Appboy.bundle\" />
-  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\src\ios-unified\AppboyPlatformXamariniOSBinding.csproj">
       <Project>{7D493871-0793-4E34-B983-06053111D5B0}</Project>

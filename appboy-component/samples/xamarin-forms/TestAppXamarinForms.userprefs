@@ -1,9 +1,8 @@
-﻿<Properties StartupItem="iOS/TestAppXamarinForms.iOS.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release|iPhoneSimulator" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.IPhone4s.8.3" />
+﻿<Properties StartupItem="Droid/TestAppXamarinForms.Droid.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.Xamarin_Android_API_15" />
   <MonoDevelop.Ide.Workbench ActiveDocument="iOS/AppDelegate.cs">
     <Files>
       <File FileName="TestAppXamarinForms.cs" Line="1" Column="1" />
-      <File FileName="obj/Debug/Page1.xaml.g.cs" Line="1" Column="1" />
       <File FileName="packages.config" Line="1" Column="1" />
       <File FileName="Droid/Properties/AndroidManifest.xml" Line="1" Column="1" />
       <File FileName="Droid/Resources/values/Styles.xml" Line="1" Column="1" />
@@ -15,6 +14,17 @@
       <File FileName="iOS/AppboyNewsFeedPageRenderer.cs" Line="1" Column="1" />
       <File FileName="Droid/AppboyNewsFeedPageRenderer.cs" Line="1" Column="1" />
     </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="TestAppXamarinForms" expanded="True">
+            <Node name="AppboyPlatformXamariniOSBinding" expanded="True" />
+            <Node name="TestAppXamarinForms.Droid" selected="True" />
+            <Node name="TestAppXamarinForms.iOS" expanded="True" />
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>

@@ -5,6 +5,11 @@
     android:layout_height="fill_parent"
     android:minWidth="25px"
     android:minHeight="25px">
+    <TextView
+        android:id="@+id/userId"
+        android:text="@string/userId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
     <Button
         android:id="@+id/changeUserButton"
         android:layout_width="fill_parent"
@@ -41,10 +46,10 @@
         android:layout_height="wrap_content"
         android:id="@+id/launchFeedbackButton" />
     <Button
-        android:text="@string/addSlideup"
+        android:text="@string/addNewInAppMessage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/addSlideupButton" />
+        android:id="@+id/addInAppMessageButton" />
     <Button
         android:text="@string/dataFlush"
         android:layout_width="match_parent"

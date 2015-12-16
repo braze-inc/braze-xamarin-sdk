@@ -35,7 +35,6 @@ namespace TestApp.XamariniOS
 
     private void UserPropertyButtonHandler (object sender, EventArgs e)
     {
-      Appboy.SharedInstance.User.Bio = "My bio";
       Appboy.SharedInstance.User.Country = "USA";
       Appboy.SharedInstance.User.DateOfBirth = NSDate.Now;
       Appboy.SharedInstance.User.Email = "test@appboy.com";
@@ -46,13 +45,13 @@ namespace TestApp.XamariniOS
       Appboy.SharedInstance.User.SetCustomAttributeWithKey ("customAttributeKey", true);
       Appboy.SharedInstance.User.SetEmailNotificationSubscriptionType (ABKNotificationSubscriptionType.ABKOptedIn);
       Appboy.SharedInstance.User.SetGender (ABKUserGenderType.Male);
+      Appboy.SharedInstance.User.AttributionData = new ABKAttributionData ("n1", "c1", "a1", "cr1");
     }
 
     private void EventsAndPurchasesButtonHandler (object sender, EventArgs e)
     {
       Appboy.SharedInstance.LogCustomEvent ("myCustomEvent");
       Appboy.SharedInstance.LogPurchase ("myProduct", "USD", new NSDecimalNumber("10"));
-      Appboy.SharedInstance.LogSocialShare (ABKSocialNetwork.Facebook);
     }
 
     private void AddSlideupButtonHandler (object sender, EventArgs e)

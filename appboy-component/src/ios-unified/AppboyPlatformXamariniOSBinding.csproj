@@ -10,6 +10,8 @@
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
     <AssemblyName>AppboyPlatformXamariniOSBinding</AssemblyName>
     <TargetFrameworkIdentifier>Xamarin.iOS</TargetFrameworkIdentifier>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -44,17 +46,17 @@
   <ItemGroup>
     <ObjcBindingCoreSource Include="StructsAndEnums.cs" />
   </ItemGroup>
-  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Xamarin.ObjcBinding.CSharp.targets" />
   <ItemGroup>
-    <ObjcBindingNativeLibrary Include="libAppboyKit.a" />
     <ObjcBindingNativeLibrary Include="libSDWebImage.a" />
+    <ObjcBindingNativeLibrary Include="libAppboyKitLibrary.a" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="libAppboyKit.linkwith.cs">
-      <DependentUpon>libAppboyKit.a</DependentUpon>
-    </Compile>
     <Compile Include="libSDWebImage.linkwith.cs">
       <DependentUpon>libSDWebImage.a</DependentUpon>
     </Compile>
+    <Compile Include="libAppboyKitLibrary.linkwith.cs">
+      <DependentUpon>libAppboyKitLibrary.a</DependentUpon>
+    </Compile>
   </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.ObjCBinding.CSharp.targets" />
 </Project>

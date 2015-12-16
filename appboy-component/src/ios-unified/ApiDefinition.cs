@@ -25,6 +25,10 @@ namespace AppboyPlatformXamariniOSBinding
     [Export ("user", ArgumentSemantic.Retain)]
     ABKUser User { get; }
 
+    // @property (readonly, nonatomic) ABKLocationManager * locationManager;
+    [Export ("locationManager")]
+    ABKLocationManager LocationManager { get; }
+
     // @property (assign, nonatomic) BOOL useNUITheming;
     [Export ("useNUITheming", ArgumentSemantic.UnsafeUnretained)]
     bool UseNUITheming { get; set; }
@@ -109,14 +113,6 @@ namespace AppboyPlatformXamariniOSBinding
     [Export ("logPurchase:inCurrency:atPrice:withQuantity:andProperties:")]
     void LogPurchase (string productIdentifier, string currencyCode, NSDecimalNumber price, nuint quantity, NSObject properties);
 
-    // -(void)logSocialShare:(ABKSocialNetwork)socialNetwork;
-    [Export ("logSocialShare:")]
-    void LogSocialShare (ABKSocialNetwork socialNetwork);
-
-    // -(void)promptUserForAccessToSocialNetwork:(ABKSocialNetwork)socialNetwork;
-    [Export ("promptUserForAccessToSocialNetwork:")]
-    void PromptUserForAccessToSocialNetwork (ABKSocialNetwork socialNetwork);
-
     // -(BOOL)submitFeedback:(NSString *)replyToEmail message:(NSString *)message isReportingABug:(BOOL)isReportingABug;
     [Export ("submitFeedback:message:isReportingABug:")]
     bool SubmitFeedback (string replyToEmail, string message, bool isReportingABug);
@@ -154,6 +150,90 @@ namespace AppboyPlatformXamariniOSBinding
     string GetResourceEndpoint (string appboyResourceEndpoint);
   }
 
+  // @interface ABKAttributionData : NSObject
+  [BaseType (typeof(NSObject))]
+  interface ABKAttributionData
+  {
+    // -(id)initWithNetwork:(NSString *)network campaign:(NSString *)campaign adGroup:(NSString *)adGroup creative:(NSString *)creative;
+    [Export ("initWithNetwork:campaign:adGroup:creative:")]
+    IntPtr Constructor (string network, string campaign, string adGroup, string creative);
+
+    // @property (readonly, nonatomic) NSString * network;
+    [Export ("network")]
+    string Network { get; }
+
+    // @property (readonly, nonatomic) NSString * campaign;
+    [Export ("campaign")]
+    string Campaign { get; }
+
+    // @property (readonly, nonatomic) NSString * adGroup;
+    [Export ("adGroup")]
+    string AdGroup { get; }
+
+    // @property (readonly, nonatomic) NSString * creative;
+    [Export ("creative")]
+    string Creative { get; }
+  }
+
+
+  // @interface ABKTwitterUser : NSObject
+  [BaseType (typeof(NSObject))]
+  interface ABKTwitterUser
+  {
+    // @property (copy) NSString * userDescription;
+    [Export ("userDescription")]
+    string UserDescription { get; set; }
+
+    // @property (copy) NSString * twitterName;
+    [Export ("twitterName")]
+    string TwitterName { get; set; }
+
+    // @property (copy) NSString * profileImageUrl;
+    [Export ("profileImageUrl")]
+    string ProfileImageUrl { get; set; }
+
+    // @property (copy) NSString * screenName;
+    [Export ("screenName")]
+    string ScreenName { get; set; }
+
+    // @property NSInteger followersCount;
+    [Export ("followersCount")]
+    nint FollowersCount { get; set; }
+
+    // @property NSInteger friendsCount;
+    [Export ("friendsCount")]
+    nint FriendsCount { get; set; }
+
+    // @property NSInteger statusesCount;
+    [Export ("statusesCount")]
+    nint StatusesCount { get; set; }
+
+    // @property NSInteger twitterID;
+    [Export ("twitterID")]
+    nint TwitterID { get; set; }
+  }
+
+  // @interface ABKFacebookUser : NSObject
+  [BaseType (typeof(NSObject))]
+  interface ABKFacebookUser
+  {
+    // -(id)initWithFacebookUserDictionary:(NSDictionary *)facebookUserDictionary numberOfFriends:(NSInteger)numberOfFriends likes:(NSArray *)likes;
+    [Export ("initWithFacebookUserDictionary:numberOfFriends:likes:")]
+    IntPtr Constructor (NSDictionary facebookUserDictionary, nint numberOfFriends, NSObject[] likes);
+
+    // @property (readonly) NSDictionary * facebookUserDictionary;
+    [Export ("facebookUserDictionary")]
+    NSDictionary FacebookUserDictionary { get; }
+
+    // @property (readonly) NSInteger numberOfFriends;
+    [Export ("numberOfFriends")]
+    nint NumberOfFriends { get; }
+
+    // @property (readonly) NSArray * likes;
+    [Export ("likes")]
+    NSObject[] Likes { get; }
+  }
+
   // @interface ABKUser : NSObject
   [Protocol]
   [BaseType (typeof (NSObject))]
@@ -183,17 +263,9 @@ namespace AppboyPlatformXamariniOSBinding
     [Export ("homeCity")]
     string HomeCity { get; set; }
 
-    // @property (copy, nonatomic) NSString * bio;
-    [Export ("bio")]
-    string Bio { get; set; }
-
     // @property (copy, nonatomic) NSString * phone;
     [Export ("phone")]
     string Phone { get; set; }
-
-    // @property (copy, nonatomic) NSString * foursquareAccessToken;
-    [Export ("foursquareAccessToken")]
-    string FoursquareAccessToken { get; set; }
 
     // @property (readonly, copy, nonatomic) NSString * userID;
     [Export ("userID")]
@@ -203,13 +275,17 @@ namespace AppboyPlatformXamariniOSBinding
     [Export ("avatarImageURL")]
     string AvatarImageURL { get; set; }
 
-    // @property (copy, nonatomic) NSString * twitterAccountIdentifier;
-    [Export ("twitterAccountIdentifier")]
-    string TwitterAccountIdentifier { get; set; }
+    // @property ABKFacebookUser * facebookUser;
+    [Export ("facebookUser", ArgumentSemantic.Retain)]
+    ABKFacebookUser FacebookUser { get; set; }
 
-    // @property (assign, nonatomic) BOOL clearTwitterDataWhenNoDataOfTwitterIdentifier;
-    [Export ("clearTwitterDataWhenNoDataOfTwitterIdentifier", ArgumentSemantic.UnsafeUnretained)]
-    bool ClearTwitterDataWhenNoDataOfTwitterIdentifier { get; set; }
+    // @property ABKTwitterUser * twitterUser;
+    [Export ("twitterUser", ArgumentSemantic.Retain)]
+    ABKTwitterUser TwitterUser { get; set; }
+
+    // @property ABKAttributionData * attributionData;
+    [Export ("attributionData", ArgumentSemantic.Retain)]
+    ABKAttributionData AttributionData { get; set; }
 
     // -(BOOL)setGender:(ABKUserGenderType)gender;
     [Export ("setGender:")]
@@ -279,6 +355,37 @@ namespace AppboyPlatformXamariniOSBinding
     // -(BOOL)setLastKnownLocationWithLatitude:(double)latitude longitude:(double)longitude horizontalAccuracy:(double)horizontalAccuracy altitude:(double)altitude verticalAccuracy:(double)verticalAccuracy;
     [Export ("setLastKnownLocationWithLatitude:longitude:horizontalAccuracy:altitude:verticalAccuracy:")]
     bool SetLastKnownLocationWithLatitude (double latitude, double longitude, double horizontalAccuracy, double altitude, double verticalAccuracy);
+  }
+
+  // @interface ABKLocationManager : NSObject
+  [BaseType (typeof(NSObject))]
+  interface ABKLocationManager
+  {
+    // @property (readonly) BOOL disableLocationTracking;
+    [Export ("disableLocationTracking")]
+    bool DisableLocationTracking { get; }
+
+    // -(void)allowRequestWhenInUseLocationPermission;
+    [Export ("allowRequestWhenInUseLocationPermission")]
+    void AllowRequestWhenInUseLocationPermission ();
+
+    // -(void)allowRequestAlwaysPermission;
+    [Export ("allowRequestAlwaysPermission")]
+    void AllowRequestAlwaysPermission ();
+
+    // -(void)logSingleLocation;
+    [Export ("logSingleLocation")]
+    void LogSingleLocation ();
+  }
+
+  // @interface ABKPushUtils : NSObject
+  [BaseType (typeof(NSObject))]
+  interface ABKPushUtils
+  {
+    // +(BOOL)isUninstallTrackingNotification:(NSDictionary *)userInfo;
+    [Static]
+    [Export ("isUninstallTrackingNotification:")]
+    bool IsUninstallTrackingNotification (NSDictionary userInfo);
   }
 
   /******************************************************************************************************************************************************
@@ -480,6 +587,10 @@ namespace AppboyPlatformXamariniOSBinding
     // @optional -(BOOL)onInAppMessageButtonClicked:(ABKInAppMessageImmersive *)inAppMessage button:(ABKInAppMessageButton *)button;
     [Export ("onInAppMessageButtonClicked:button:")]
     bool OnInAppMessageButtonClicked (ABKInAppMessageImmersive inAppMessage, ABKInAppMessageButton button);
+
+    // @optional -(BOOL)onInAppMessageHTMLButtonClicked:(ABKInAppMessageHTML *)inAppMessage clickedURL:(NSURL *)clickedURL buttonID:(NSString *)buttonID;
+    [Export ("onInAppMessageHTMLButtonClicked:clickedURL:buttonID:")]
+    bool OnInAppMessageHTMLButtonClicked (ABKInAppMessageHTML inAppMessage, NSUrl clickedURL, string buttonID);
   }
 
   // @interface ABKInAppMessageController : NSObject
@@ -544,6 +655,40 @@ namespace AppboyPlatformXamariniOSBinding
   // @interface ABKInAppMessageFull : ABKInAppMessageImmersive
   [BaseType (typeof(ABKInAppMessageImmersive))]
   interface ABKInAppMessageFull
+  {
+  }
+
+  // @interface ABKInAppMessageHTML : ABKInAppMessage
+  [BaseType (typeof(ABKInAppMessage))]
+  interface ABKInAppMessageHTML
+  {
+    // @property NSURL * assetsZipRemoteUrl;
+    [Export ("assetsZipRemoteUrl", ArgumentSemantic.Assign)]
+    NSUrl AssetsZipRemoteUrl { get; set; }
+
+    // -(void)logInAppMessageHTMLClickWithButtonID:(NSString *)buttonID;
+    [Export ("logInAppMessageHTMLClickWithButtonID:")]
+    void LogInAppMessageHTMLClickWithButtonID (string buttonID);
+  }
+
+  // @interface ABKInAppMessageHTMLFull : ABKInAppMessageHTML
+  [BaseType (typeof(ABKInAppMessageHTML))]
+  interface ABKInAppMessageHTMLFull
+  {
+  }
+
+  // @interface ABKInAppMessageHTMLViewController : ABKInAppMessageViewController <UIWebViewDelegate>
+  [BaseType (typeof(ABKInAppMessageViewController))]
+  interface ABKInAppMessageHTMLViewController : IUIWebViewDelegate
+  {
+    // @property UIWebView * webView __attribute__((iboutlet));
+    [Export ("webView", ArgumentSemantic.Assign)]
+    UIWebView WebView { get; set; }
+  }
+
+  // @interface ABKInAppMessageHTMLFullViewController : ABKInAppMessageHTMLViewController
+  [BaseType (typeof(ABKInAppMessageHTMLViewController))]
+  interface ABKInAppMessageHTMLFullViewController
   {
   }
     
@@ -773,6 +918,10 @@ namespace AppboyPlatformXamariniOSBinding
     [Export ("categories", ArgumentSemantic.UnsafeUnretained)]
     ABKCardCategory Categories { get; set; }
 
+    // @property (readonly) double expiresAt;
+    [Export ("expiresAt")]
+    double ExpiresAt { get; }
+
     // +(ABKCard *)deserializeCardFromDictionary:(NSDictionary *)cardDictionary;
     [Static, Export ("deserializeCardFromDictionary:")]
     ABKCard DeserializeCardFromDictionary (NSDictionary cardDictionary);
@@ -965,6 +1114,10 @@ namespace AppboyPlatformXamariniOSBinding
     // - (void) feedbackViewControllerModalContextFeedbackSent:(ABKFeedbackViewControllerModalContext *)sender;
     [Export ("feedbackViewControllerModalContextFeedbackSent:")]
     void FeedbackViewControllerModalContextFeedbackSent (ABKFeedbackViewControllerModalContext sender);
+
+    // @optional -(NSString *)feedbackViewControllerBeforeFeedbackSent:(NSString *)message;
+    [Export ("feedbackViewControllerBeforeFeedbackSent:")]
+    string FeedbackViewControllerBeforeFeedbackSent (string message);
   }
 
   // @interface ABKFeedbackViewControllerModalContext : UINavigationController
@@ -989,6 +1142,10 @@ namespace AppboyPlatformXamariniOSBinding
     // - (void) feedbackViewControllerNavigationContextFeedbackSent:(ABKFeedbackViewControllerNavigationContext *)sender;
     [Export ("feedbackViewControllerNavigationContextFeedbackSent:")]
     void FeedbackViewControllerNavigationContextFeedbackSent (ABKFeedbackViewControllerNavigationContext sender);
+
+    // @optional -(NSString *)feedbackViewControllerBeforeFeedbackSent:(NSString *)message;
+    [Export ("feedbackViewControllerBeforeFeedbackSent:")]
+    string FeedbackViewControllerBeforeFeedbackSent (string message);
   }
 
   // @interface ABKFeedbackViewControllerNavigationContext : ABKFeedbackViewController
@@ -1017,6 +1174,10 @@ namespace AppboyPlatformXamariniOSBinding
     // - (void) feedbackViewControllerPopoverContextFeedbackSent:(ABKFeedbackViewControllerPopoverContext *)sender;
     [Export ("feedbackViewControllerPopoverContextFeedbackSent:")]
     void FeedbackViewControllerPopoverContextFeedbackSent (ABKFeedbackViewControllerPopoverContext sender);
+
+    // @optional -(NSString *)feedbackViewControllerBeforeFeedbackSent:(NSString *)message;
+    [Export ("feedbackViewControllerBeforeFeedbackSent:")]
+    string FeedbackViewControllerBeforeFeedbackSent (string message);
   }
 
   // @interface ABKFeedbackViewControllerPopoverContext : ABKFeedbackViewController
