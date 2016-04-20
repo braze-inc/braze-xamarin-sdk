@@ -1,4 +1,4 @@
-Copyright (c) 2014 Appboy, Inc.
+Copyright (c) 2016 Appboy, Inc.
 All rights reserved.
 
 * Use of source code or binaries contained within Appboy's Xamarin Component is permitted only to enable use of the Appboy platform by customers of Appboy.
