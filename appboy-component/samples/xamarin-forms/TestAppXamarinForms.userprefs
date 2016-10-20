@@ -1,35 +1,34 @@
-﻿<Properties StartupItem="Droid/TestAppXamarinForms.Droid.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.Xamarin_Android_API_15" />
+﻿<Properties StartupConfiguration="{5F744F80-1AD3-44A3-ABCD-802807573972}|Default">
+  <MonoDevelop.Ide.ItemProperties.TestAppXamarinForms.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.D35F80E4-0002-451C-96EB-8551AD8388E7" />
   <MonoDevelop.Ide.Workbench ActiveDocument="iOS/AppDelegate.cs">
     <Files>
-      <File FileName="TestAppXamarinForms.cs" Line="1" Column="1" />
-      <File FileName="packages.config" Line="1" Column="1" />
-      <File FileName="Droid/Properties/AndroidManifest.xml" Line="1" Column="1" />
-      <File FileName="Droid/Resources/values/Styles.xml" Line="1" Column="1" />
-      <File FileName="Droid/MainActivity.cs" Line="1" Column="1" />
-      <File FileName="Droid/Resources/AboutResources.txt" Line="1" Column="1" />
-      <File FileName="Droid/Resources/Resource.designer.cs" Line="1" Column="1" />
-      <File FileName="AppboyNewsFeedPage.cs" Line="1" Column="1" />
-      <File FileName="iOS/AppDelegate.cs" Line="7" Column="7" />
-      <File FileName="iOS/AppboyNewsFeedPageRenderer.cs" Line="1" Column="1" />
-      <File FileName="Droid/AppboyNewsFeedPageRenderer.cs" Line="1" Column="1" />
+      <File FileName="Droid/AppboyPlatformDelegate.cs" Line="2" Column="7" />
+      <File FileName="iOS/AppDelegate.cs" Line="41" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="TestAppXamarinForms" expanded="True">
-            <Node name="AppboyPlatformXamariniOSBinding" expanded="True" />
-            <Node name="TestAppXamarinForms.Droid" selected="True" />
-            <Node name="TestAppXamarinForms.iOS" expanded="True" />
+            <Node name="AppboyPlatform.XamarinAndroidBinding" expanded="True" />
+            <Node name="TestAppXamarinForms" expanded="True">
+              <Node name="References" expanded="True" />
+              <Node name="Properties" expanded="True" />
+            </Node>
+            <Node name="TestAppXamarinForms.Droid" expanded="True">
+              <Node name="References" expanded="True" />
+              <Node name="ComponentReferenceFolder" selected="True" />
+            </Node>
+            <Node name="TestAppXamarinForms.iOS" expanded="True">
+              <Node name="References" expanded="True" />
+            </Node>
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="/Users/brianwheeler/appboy_code/xamarin-bindings/appboy-component/samples/forms/TestAppXamarinForms/Droid/AndroidAppboyNewsFeedHandler.cs" line="15" column="31" />
-    </BreakpointStore>
+    <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

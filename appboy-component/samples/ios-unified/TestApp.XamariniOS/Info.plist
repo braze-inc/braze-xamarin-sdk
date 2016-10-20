@@ -32,14 +32,13 @@
 	<string>Resources/Images.xcassets/AppIcons.appiconset</string>
 	<key>CFBundleDisplayName</key>
 	<string>AppboySample</string>
-	<key>Appboy</key>
-	<dict>
-		<key>Server</key>
-		<string>https://sondheim.appboy.com/api/v2</string>
-		<key>LogLevel</key>
-		<string>0</string>
-	</dict>
 	<key>FacebookAppID</key>
 	<string>463631850383433</string>
+	<key>CFBundleName</key>
+	<string>AppboySample</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
 </dict>
 </plist>

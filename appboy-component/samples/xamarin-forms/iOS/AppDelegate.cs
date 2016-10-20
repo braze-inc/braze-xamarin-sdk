@@ -25,7 +25,15 @@ namespace TestAppXamarinForms.iOS
       // Start Appboy
       Appboy.StartWithApiKey ("5546dc47-fcd3-4245-85d6-963a1dd6c373", UIApplication.SharedApplication, options);
 
+      // Subscribe to notification 
+      NSNotificationCenter.DefaultCenter.AddObserver (ABKFeedController.ABKFeedUpdatedNotification, OnFeedUpdated);
+
       return base.FinishedLaunching (app, options);
+    }
+
+    void OnFeedUpdated (NSNotification notification)
+    {
+      Console.WriteLine ("ABKFeedUpdatedNotification was posted");
     }
   }
 }

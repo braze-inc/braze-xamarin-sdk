@@ -5,7 +5,7 @@
 	<key>CFBundleDisplayName</key>
 	<string>TestAppXamarinForms</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.appboy.testappxamarinforms</string>
+	<string>com.appboy.stopwatch</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
@@ -64,5 +64,7 @@
 		<key>Server</key>
 		<string>https://sondheim.appboy.com/api/v2</string>
 	</dict>
+	<key>CFBundleName</key>
+	<string>TestAppXamarinForms</string>
 </dict>
 </plist>

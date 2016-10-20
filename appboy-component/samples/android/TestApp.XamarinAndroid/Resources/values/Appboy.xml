@@ -2,7 +2,7 @@
 <resources>
   <!-- General configuration -->
   <!-- The API key is not shown to the user and thus we don't require that it be translated. -->
-  <string translatable="false" name="com_appboy_api_key">ceb56287-45aa-4278-a997-b97fd753c2a3</string>
+  <string translatable="false" name="com_appboy_api_key">94589301-2ebd-4cb4-91ed-aa8dbc0472ed</string>
   <string translatable="false" name="com_appboy_server_target">STAGING</string>
   <!-- To disable automatic flushing in any of these network conditions, simply set the value to -1. To turn off
       all automatic data flushing, set all three intervals to -1. When automatic flushing is disabled, you can use
@@ -34,4 +34,5 @@
   location will not be set for the user unless integrating apps manually call setUserLastKnownLocation on the AppboyUser.
    -->
   <bool name="com_appboy_disable_location_collection">false</bool>
+  <bool name="com_appboy_handle_push_deep_links_automatically">true</bool>
 </resources>

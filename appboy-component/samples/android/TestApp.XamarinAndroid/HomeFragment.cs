@@ -6,13 +6,12 @@ using System.Text;
 using Android.Support.V4.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Util;
 using Android.Views;
 using Android.Widget;
+
 using Com.Appboy;
-using Com.Appboy.UI.Inappmessage;
 using Com.Appboy.UI;
+using Com.Appboy.UI.Inappmessage;
 using Com.Appboy.Models;
 using Com.Appboy.Enums;
 using Com.Appboy.Enums.Inappmessage;
@@ -144,15 +143,15 @@ namespace com.appboy.xamarinsample
     }
 
     class FeedbackFinishedListener : Java.Lang.Object, AppboyFeedbackFragment.IFeedbackFinishedListener {
-      FragmentManager mFragmentManager;
+      FragmentManager fragmentManager;
 
       public FeedbackFinishedListener(FragmentManager supportFragmentManager) {
-        mFragmentManager = supportFragmentManager;
+        fragmentManager = supportFragmentManager;
       }
 
-      public void OnFeedbackFinished (Com.Appboy.UI.AppboyFeedbackFragment.FeedbackResult feedbackResult) {
-        Console.WriteLine ("Feedback finished");
-        mFragmentManager.PopBackStack ();
+      public void OnFeedbackFinished (AppboyFeedbackFragment.FeedbackResult feedbackResult) {
+        Console.WriteLine("Feedback finished");
+        fragmentManager.PopBackStack();
       }
 
       public string BeforeFeedbackSubmitted(string feedback) {
@@ -161,4 +160,3 @@ namespace com.appboy.xamarinsample
     }
   }
 }
-

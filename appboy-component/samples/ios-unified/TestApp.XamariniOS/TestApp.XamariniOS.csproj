@@ -50,11 +50,11 @@
     <ConsolePause>false</ConsolePause>
     <MtouchArch>ARMv7, ARMv7s, ARM64</MtouchArch>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
-    <CodesignKey>iPhone Developer: Wenzhi Lin (LU84W4P9RR)</CodesignKey>
+    <CodesignKey>iPhone Distribution: Appboy Inc. (5GLZKGNWQ3)</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
     <MtouchI18n>
     </MtouchI18n>
-    <CodesignProvision>7b2ef5f2-d57a-4cb5-97ca-21ca08f04b00</CodesignProvision>
+    <CodesignProvision>272afe39-dedf-487b-95df-b7c185458533</CodesignProvision>
     <IpaPackageName>
     </IpaPackageName>
   </PropertyGroup>
@@ -104,6 +104,15 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Default-568h%402x.png" />
+    <BundleResource Include="Appboy.bundle\ABKBannerCardCell.nib" />
+    <BundleResource Include="Appboy.bundle\ABKCrossPromotionCardCell.nib" />
+    <BundleResource Include="Appboy.bundle\ABKFeedNoConnectionView.nib" />
+    <BundleResource Include="Appboy.bundle\ABKFeedbackContentView.nib" />
+    <BundleResource Include="Appboy.bundle\ABKFeedbackEmailViewPortrait.nib" />
+    <BundleResource Include="Appboy.bundle\ABKFeedbackNavBar.nib" />
+    <BundleResource Include="Appboy.bundle\ABKInAppMessageHTMLFullViewController.nib" />
+    <BundleResource Include="Appboy.bundle\ABKSpinnerView.nib" />
+    <BundleResource Include="Appboy.bundle\ABKTextAnnouncementCardCell.nib" />
     <BundleResource Include="Appboy.bundle\FontAwesome.otf" />
     <BundleResource Include="Appboy.bundle\Icons_Read.png" />
     <BundleResource Include="Appboy.bundle\Icons_Read%402x.png" />
@@ -149,42 +158,18 @@
     <BundleResource Include="Appboy.bundle\img-star-half.png" />
     <BundleResource Include="Appboy.bundle\img-star-half%402x.png" />
     <BundleResource Include="Appboy.bundle\radio-tower.png" />
-    <BundleResource Include="Appboy.bundle\ABKBannerCardCell.nib\objects.nib" />
-    <BundleResource Include="Appboy.bundle\ABKBannerCardCell.nib\runtime.nib" />
     <BundleResource Include="Appboy.bundle\ABKCaptionedMessageCardCell.nib\objects.nib" />
     <BundleResource Include="Appboy.bundle\ABKCaptionedMessageCardCell.nib\runtime.nib" />
-    <BundleResource Include="Appboy.bundle\ABKCrossPromotionCardCell.nib\objects.nib" />
-    <BundleResource Include="Appboy.bundle\ABKCrossPromotionCardCell.nib\runtime.nib" />
-    <BundleResource Include="Appboy.bundle\ABKFeedNoConnectionView.nib\objects.nib" />
-    <BundleResource Include="Appboy.bundle\ABKFeedNoConnectionView.nib\runtime.nib" />
     <BundleResource Include="Appboy.bundle\ABKFeedViewController.nib\objects.nib" />
     <BundleResource Include="Appboy.bundle\ABKFeedViewController.nib\runtime.nib" />
-    <BundleResource Include="Appboy.bundle\ABKFeedbackContentView.nib\objects.nib" />
-    <BundleResource Include="Appboy.bundle\ABKFeedbackContentView.nib\runtime.nib" />
-    <BundleResource Include="Appboy.bundle\ABKFeedbackEmailViewPortrait.nib\objects.nib" />
-    <BundleResource Include="Appboy.bundle\ABKFeedbackEmailViewPortrait.nib\runtime.nib" />
-    <BundleResource Include="Appboy.bundle\ABKFeedbackNavBar.nib\objects.nib" />
-    <BundleResource Include="Appboy.bundle\ABKFeedbackNavBar.nib\runtime.nib" />
     <BundleResource Include="Appboy.bundle\ABKInAppMessageFullViewController.nib\objects.nib" />
     <BundleResource Include="Appboy.bundle\ABKInAppMessageFullViewController.nib\runtime.nib" />
-    <BundleResource Include="Appboy.bundle\ABKInAppMessageFullViewController_iPad.nib\objects.nib" />
-    <BundleResource Include="Appboy.bundle\ABKInAppMessageFullViewController_iPad.nib\runtime.nib" />
-    <BundleResource Include="Appboy.bundle\ABKInAppMessageHTMLFullViewController.nib\objects.nib" />
-    <BundleResource Include="Appboy.bundle\ABKInAppMessageHTMLFullViewController.nib\runtime.nib" />
     <BundleResource Include="Appboy.bundle\ABKInAppMessageModalViewController.nib\objects.nib" />
     <BundleResource Include="Appboy.bundle\ABKInAppMessageModalViewController.nib\runtime.nib" />
-    <BundleResource Include="Appboy.bundle\ABKInAppMessageModalViewController_iPad.nib\objects.nib" />
-    <BundleResource Include="Appboy.bundle\ABKInAppMessageModalViewController_iPad.nib\runtime.nib" />
     <BundleResource Include="Appboy.bundle\ABKInAppMessageSlideupViewController.nib\objects.nib" />
     <BundleResource Include="Appboy.bundle\ABKInAppMessageSlideupViewController.nib\runtime.nib" />
-    <BundleResource Include="Appboy.bundle\ABKInAppMessageSlideupViewController_iPad.nib\objects.nib" />
-    <BundleResource Include="Appboy.bundle\ABKInAppMessageSlideupViewController_iPad.nib\runtime.nib" />
     <BundleResource Include="Appboy.bundle\ABKNewsCardCell.nib\objects.nib" />
     <BundleResource Include="Appboy.bundle\ABKNewsCardCell.nib\runtime.nib" />
-    <BundleResource Include="Appboy.bundle\ABKSpinnerView.nib\objects.nib" />
-    <BundleResource Include="Appboy.bundle\ABKSpinnerView.nib\runtime.nib" />
-    <BundleResource Include="Appboy.bundle\ABKTextAnnouncementCardCell.nib\objects.nib" />
-    <BundleResource Include="Appboy.bundle\ABKTextAnnouncementCardCell.nib\runtime.nib" />
     <BundleResource Include="Appboy.bundle\ABKWebViewController.nib\objects.nib" />
     <BundleResource Include="Appboy.bundle\ABKWebViewController.nib\runtime.nib" />
     <BundleResource Include="Appboy.bundle\ar.lproj\LocalizedAppboyUIString.strings" />
@@ -198,6 +183,7 @@
     <BundleResource Include="Appboy.bundle\fi.lproj\LocalizedAppboyUIString.strings" />
     <BundleResource Include="Appboy.bundle\fil.lproj\LocalizedAppboyUIString.strings" />
     <BundleResource Include="Appboy.bundle\fr.lproj\LocalizedAppboyUIString.strings" />
+    <BundleResource Include="Appboy.bundle\he.lproj\LocalizedAppboyUIString.strings" />
     <BundleResource Include="Appboy.bundle\hi.lproj\LocalizedAppboyUIString.strings" />
     <BundleResource Include="Appboy.bundle\id.lproj\LocalizedAppboyUIString.strings" />
     <BundleResource Include="Appboy.bundle\it.lproj\LocalizedAppboyUIString.strings" />

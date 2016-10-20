@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Foundation;
 using UIKit;
 using AppboyPlatformXamariniOSBinding;
+using UserNotifications;
 
 namespace TestApp.XamariniOS
 {
@@ -14,17 +15,18 @@ namespace TestApp.XamariniOS
 
     public static UIStoryboard Storyboard = UIStoryboard.FromName ("MainStoryboard", null);
     public static UIViewController initialViewController;
+    private UserNotificationsDelegate notificationsDelegate;
 
     public override UIWindow Window {
       get;
       set;
     }
 
-  public override void DidReceiveRemoteNotification (UIApplication application, NSDictionary userInfo, Action<UIBackgroundFetchResult> completionHandler) 
-  {
-    Appboy.SharedInstance.RegisterApplicationWithFetchCompletionHandler(application, userInfo, completionHandler);
-  }
-   
+    public override void DidReceiveRemoteNotification (UIApplication application, NSDictionary userInfo, Action<UIBackgroundFetchResult> completionHandler) 
+    {
+      Appboy.SharedInstance.RegisterApplicationWithFetchCompletionHandler(application, userInfo, completionHandler);
+    }
+
     //
     // You have 17 seconds to return from this method, or iOS will terminate your application.
     //
@@ -42,18 +44,40 @@ namespace TestApp.XamariniOS
       // Start Appboy
       Appboy.StartWithApiKey ("5546dc47-fcd3-4245-85d6-963a1dd6c373", UIApplication.SharedApplication, options);
 
-      // Settings for Appboy push
-      UIUserNotificationSettings settings = UIUserNotificationSettings.GetSettingsForTypes (UIUserNotificationType.Badge | UIUserNotificationType.Alert | UIUserNotificationType.Sound, null);
-      UIApplication.SharedApplication.RegisterForRemoteNotifications ();
-      UIApplication.SharedApplication.RegisterUserNotificationSettings (settings);
+      if (UIDevice.CurrentDevice.CheckSystemVersion(10, 0))
+      {
+        UNUserNotificationCenter.Current.RequestAuthorization(UNAuthorizationOptions.Alert | UNAuthorizationOptions.Badge | UNAuthorizationOptions.Sound, (approved, err) =>
+        {
+          Console.WriteLine("Permission granted");
+        });
 
+        notificationsDelegate = new UserNotificationsDelegate();
+        UNUserNotificationCenter.Current.Delegate = notificationsDelegate;
+        UIApplication.SharedApplication.RegisterForRemoteNotifications();
+      }
+      else
+      {
+        // Settings for Appboy push
+        UIUserNotificationSettings settings = UIUserNotificationSettings.GetSettingsForTypes (UIUserNotificationType.Badge | UIUserNotificationType.Alert | UIUserNotificationType.Sound, null);
+        UIApplication.SharedApplication.RegisterForRemoteNotifications ();
+        UIApplication.SharedApplication.RegisterUserNotificationSettings(settings);
+      }
+ 
       return true;
     }
-      
+    
     public override void RegisteredForRemoteNotifications (UIApplication application, NSData deviceToken)
     {
       Console.WriteLine ("Registered For Remote Notifications");
       Appboy.SharedInstance.RegisterPushToken (deviceToken.ToString ());
+    }
+
+    private class UserNotificationsDelegate : UNUserNotificationCenterDelegate
+    {
+      public override void DidReceiveNotificationResponse (UNUserNotificationCenter center, UNNotificationResponse response, Action completionHandler)
+      {
+        Appboy.SharedInstance.UserNotificationCenter(center, response, completionHandler);
+      }
     }
   }
 }

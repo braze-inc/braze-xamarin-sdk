@@ -1,2 +1,26 @@
+# user specific files
+*.pidb
+*.userprefs
+*.swp
 *.DS_Store
+*.suo
+*.user
+*.pfx
+
+# emacs temporary files
 *~
+
+# generated files
+**/bin
+**/obj
+**/_ReSharper.*
+
+# resource files
+**/Resource.designer.cs
+
+# nuget and component packages
+**/packages
+**/Components
+
+# Support v4 dll
+**/Xamarin.Android.Support.v4.dll
