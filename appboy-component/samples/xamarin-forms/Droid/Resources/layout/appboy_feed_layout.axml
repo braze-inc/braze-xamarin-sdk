@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
     <fragment
         android:name="com.appboy.ui.AppboyXamarinFormsFeedFragment"
-        android:id="@+id/com_appboy_feed"
+        android:id="@+id/com_appboy_feed_xamarin"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </LinearLayout>
