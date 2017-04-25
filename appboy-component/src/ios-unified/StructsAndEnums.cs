@@ -13,62 +13,93 @@ namespace AppboyPlatformXamariniOSBinding
     All = 1 << 0 | 1 << 1 | 1 << 2 | 1 << 3 | 1 << 4
   }
 
-  public enum ABKUserGenderType /* nint */
+  public enum ABKUserGenderType /* nuint */
   {
     Male,
     Female
   }
 
-  public enum ABKNotificationSubscriptionType /* nint */
+  public enum ABKNotificationSubscriptionType /* nuint */
   {
     ABKOptedIn,
     ABKSubscribed,
     ABKUnsubscribed
   }
 
-  public enum ABKInAppMessageClickActionType
+  public enum ABKFeedbackValidation : uint
+  {
+    ValidFeedback,
+    InvalidEmailAddressFeedback,
+    EmptyFeedbackMessageFeedback
+  }
+
+  public enum ABKInAppMessageClickActionType /* nuint */
   {
     DisplayNewsFeed,
     RedirectToURI,
     NoneClickAction
   }
 
-  public enum ABKInAppMessageDismissType
+  public enum ABKInAppMessageDismissType /* nuint */
   {
     Automatically,
     Manually
   }
 
-  public enum ABKInAppMessageOrientation /* nint */
+  public enum ABKInAppMessageOrientation /* nuint */
   {
     Any,
     Portrait,
     Landscape
   }
 
-  public enum ABKInAppMessageDisplayChoice
+  public enum ABKInAppMessageDisplayChoice /* nuint */
   {
     playInAppMessageNow,
     playInAppMessageLater,
     cardInAppMessage
   }
 
-  public enum ABKInAppMessageImmersiveImageStyle /* nint */
+  public enum ABKInAppMessageImmersiveImageStyle /* nuint */
   {
     Graphic,
     TopImage
   }
 
-  public enum ABKInAppMessageSlideupAnchor
+  public enum ABKInAppMessageSlideupAnchor /* nuint */
   {
     Top,
     Bottom
   }
 
-  public enum ABKRequestProcessingPolicy /* nint */
+  public enum ABKChannel /* nuint */
+  {
+    PushNotificationChannel,
+    InAppMessageChannel,
+    NewsFeedChannel
+  }
+
+  public enum ABKRequestProcessingPolicy /* nuint */
   {
     AutomaticRequestProcessing,
     AutomaticRequestProcessingExceptForDataFlush,
     ManualRequestProcessing
+  }
+
+  public enum ABKSDKFlavor /* nuint */
+  {
+    Unity = 1,
+    React,
+    Cordova,
+    Xamarin,
+    Segment,
+    Mparticle
+  }
+
+  public enum ABKFeedbackSentResult /* nuint */
+  {
+    InvalidFeedback,
+    NetworkIssue,
+    FeedbackSentSuccessfully
   }
 }

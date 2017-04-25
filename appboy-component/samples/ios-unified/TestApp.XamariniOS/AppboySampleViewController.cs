@@ -26,11 +26,14 @@ namespace TestApp.XamariniOS
       UserPropertyButton.TouchUpInside += UserPropertyButtonHandler;
       EventsAndPurchasesButton.TouchUpInside += EventsAndPurchasesButtonHandler;
       AddSlideupButton.TouchUpInside += AddSlideupButtonHandler;
+      ChangeUserLabel.Text = "Current User: " + Appboy.SharedInstance.User.UserID;
     }
       
     private void ChangeUserButtonHandler (object sender, EventArgs e)
     {
-      Appboy.SharedInstance.ChangeUser("myUserId" + new Random().Next(1,10000));
+      String userId = "myUserId" + new Random().Next(1, 10000);
+      Appboy.SharedInstance.ChangeUser(userId);
+      ChangeUserLabel.Text = "Current User: "  + userId;
     }
 
     private void UserPropertyButtonHandler (object sender, EventArgs e)
@@ -79,7 +82,8 @@ namespace TestApp.XamariniOS
       Appboy.SharedInstance.InAppMessageController.Delegate = new ABKInAppMessageControllerDelegate ();
       ABKInAppMessageFull full = new ABKInAppMessageFull () {
         Message = "This is a full",
-        Duration = 10
+        Duration = 10,
+        ImageURI = new NSUrl("https://raw.githubusercontent.com/Appboy/appboy-xamarin-bindings/master/Appboy_Logo_400x100.png")
       };
       Appboy.SharedInstance.InAppMessageController.AddInAppMessage (full); 
     }
@@ -93,4 +97,3 @@ namespace TestApp.XamariniOS
     }
   }
 }
-

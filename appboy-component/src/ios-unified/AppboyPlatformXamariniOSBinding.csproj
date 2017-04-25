@@ -47,16 +47,24 @@
     <ObjcBindingCoreSource Include="StructsAndEnums.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ObjcBindingNativeLibrary Include="libSDWebImage.a" />
     <ObjcBindingNativeLibrary Include="libAppboyKitLibrary.a" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="libSDWebImage.linkwith.cs">
-      <DependentUpon>libSDWebImage.a</DependentUpon>
-    </Compile>
     <Compile Include="libAppboyKitLibrary.linkwith.cs">
       <DependentUpon>libAppboyKitLibrary.a</DependentUpon>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <NativeReference Include="SDWebImage.framework">
+      <Kind>Framework</Kind>
+      <SmartLink>False</SmartLink>
+      <ForceLoad>True</ForceLoad>
+    </NativeReference>
+    <NativeReference Include="FLAnimatedImage.framework">
+      <Kind>Framework</Kind>
+      <SmartLink>False</SmartLink>
+      <ForceLoad>True</ForceLoad>
+    </NativeReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.ObjCBinding.CSharp.targets" />
 </Project>

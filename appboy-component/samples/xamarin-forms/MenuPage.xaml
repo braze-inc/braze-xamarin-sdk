@@ -7,8 +7,20 @@
     <StackLayout>
       <Button Text="Log custom event"
               HorizontalOptions="Center"
-              VerticalOptions="CenterAndExpand"
+              VerticalOptions="Center"
               Clicked="OnLogCustomEvent" />
+      <Button Text="Show Slideup"
+              HorizontalOptions="Center"
+              VerticalOptions="Center"
+              Clicked="OnShowSlideupIam" />
+      <Button Text="Show Modal"
+              HorizontalOptions="Center"
+              VerticalOptions="Center"
+              Clicked="OnShowModalIam" />
+      <Button Text="Show Full"
+              HorizontalOptions="Center"
+              VerticalOptions="Center"
+              Clicked="OnShowFullIam" />
     </StackLayout>
   </ContentPage.Content>
 </ContentPage>

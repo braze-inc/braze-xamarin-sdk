@@ -7,7 +7,7 @@ namespace TestAppXamarinForms
 {
   public partial class MenuPage : ContentPage
   {
-    public MenuPage ()
+    public MenuPage()
     {
       InitializeComponent();
     }
@@ -15,6 +15,21 @@ namespace TestAppXamarinForms
     void OnLogCustomEvent(object sender, EventArgs args)
     {
       DependencyService.Get<IAppboyPlatformDelegate>().LogCustomEvent("FormsSampleEvent");
+    }
+
+    void OnShowSlideupIam(object sender, EventArgs args)
+    {
+      DependencyService.Get<IAppboyPlatformDelegate>().ShowSlideupIam();
+    }
+
+    void OnShowModalIam (object sender, EventArgs args)
+    {
+      DependencyService.Get<IAppboyPlatformDelegate>().ShowModalIam();
+    }
+
+    void OnShowFullIam (object sender, EventArgs args)
+    {
+      DependencyService.Get<IAppboyPlatformDelegate>().ShowFullIam();
     }
   }
 }

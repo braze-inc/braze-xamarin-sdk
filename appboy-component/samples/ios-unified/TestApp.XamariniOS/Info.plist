@@ -38,7 +38,10 @@
 	<string>AppboySample</string>
 	<key>UIBackgroundModes</key>
 	<array>
+		<string>location</string>
 		<string>remote-notification</string>
 	</array>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Please share your location.</string>
 </dict>
 </plist>

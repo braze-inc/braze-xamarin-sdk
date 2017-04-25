@@ -3,6 +3,7 @@ using Android.App;
 using Android.Runtime;
 
 using Com.Appboy;
+using Com.Appboy.Support;
 
 namespace com.appboy.xamarinsample
 {
@@ -15,6 +16,7 @@ namespace com.appboy.xamarinsample
 
     public override void OnCreate ()
     {
+      AppboyLogger.LogLevel = 2;
       RegisterActivityLifecycleCallbacks (new AppboyLifecycleCallbackListener ());
     }
   }

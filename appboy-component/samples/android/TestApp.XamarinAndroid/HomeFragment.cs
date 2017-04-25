@@ -39,7 +39,6 @@ namespace com.appboy.xamarinsample
 
       // Set User Properties
       view.FindViewById<Button> (Resource.Id.userPropertyButton).Click += delegate {
-        Appboy.GetInstance(Activity).CurrentUser.SetBio("My bio");
         Appboy.GetInstance(Activity).CurrentUser.SetCountry("USA");
         Appboy.GetInstance(Activity).CurrentUser.SetDateOfBirth(1987, Month.September, 21);
         Appboy.GetInstance(Activity).CurrentUser.SetEmail("brian@appboy.com");
@@ -56,7 +55,7 @@ namespace com.appboy.xamarinsample
       // Events and purchases
       view.FindViewById<Button> (Resource.Id.eventsAndPurchasesButton).Click += delegate {
         Appboy.GetInstance(Activity).LogCustomEvent("myCustomEvent");
-        Appboy.GetInstance(Activity).LogPurchase("myProduct", 100);
+        Appboy.GetInstance(Activity).LogPurchase("myProduct", "USD", new Java.Math.BigDecimal(3.50));
       };
 
       // Feedback
@@ -66,7 +65,6 @@ namespace com.appboy.xamarinsample
 
       // Social
       view.FindViewById<Button> (Resource.Id.trackSocialDataButton).Click += delegate {
-        Appboy.GetInstance(Activity).LogShare(SocialNetwork.Facebook);
 
         /*
            FacebookUser(
