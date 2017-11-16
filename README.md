@@ -1,4 +1,4 @@
-<!--- ![Braze Logo](https://github.com/Appboy/appboy-xamarin-bindings/blob/master/braze-logo.png) -->
+![Braze Logo](https://github.com/Appboy/appboy-xamarin-bindings/blob/master/braze-logo.png)
 
 # Xamarin Bindings SDK
 
