@@ -33,52 +33,6 @@ namespace AppboyPlatformXamariniOSBinding
     EmptyFeedbackMessageFeedback
   }
 
-  public enum ABKInAppMessageClickActionType /* nuint */
-  {
-    DisplayNewsFeed,
-    RedirectToURI,
-    NoneClickAction
-  }
-
-  public enum ABKInAppMessageDismissType /* nuint */
-  {
-    Automatically,
-    Manually
-  }
-
-  public enum ABKInAppMessageOrientation /* nuint */
-  {
-    Any,
-    Portrait,
-    Landscape
-  }
-
-  public enum ABKInAppMessageDisplayChoice /* nuint */
-  {
-    playInAppMessageNow,
-    playInAppMessageLater,
-    cardInAppMessage
-  }
-
-  public enum ABKInAppMessageImmersiveImageStyle /* nuint */
-  {
-    Graphic,
-    TopImage
-  }
-
-  public enum ABKInAppMessageSlideupAnchor /* nuint */
-  {
-    Top,
-    Bottom
-  }
-
-  public enum ABKChannel /* nuint */
-  {
-    PushNotificationChannel,
-    InAppMessageChannel,
-    NewsFeedChannel
-  }
-
   public enum ABKRequestProcessingPolicy /* nuint */
   {
     AutomaticRequestProcessing,
@@ -101,5 +55,51 @@ namespace AppboyPlatformXamariniOSBinding
     InvalidFeedback,
     NetworkIssue,
     FeedbackSentSuccessfully
+  }
+
+  public enum ABKInAppMessageClickActionType /* nuint */
+  {
+    DisplayNewsFeed,
+    RedirectToURI,
+    NoneClickAction
+  }
+
+  public enum ABKInAppMessageDismissType /* nuint */
+  {
+    Automatically,
+    Manually
+  }
+
+  public enum ABKInAppMessageOrientation /* nuint */
+  {
+    Any,
+    Portrait,
+    Landscape
+  }
+
+  public enum ABKInAppMessageSlideupAnchor /* nuint */
+  {
+    Top,
+    Bottom
+  }
+
+  public enum ABKInAppMessageImmersiveImageStyle /* nuint */
+  {
+    Graphic,
+    TopImage
+  }
+
+  public enum ABKInAppMessageDisplayChoice /* nuint */
+  {
+    displayInAppMessageNow,
+    displayInAppMessageLater,
+    discardInAppMessage
+  }
+
+  public enum ABKChannel /* nuint */
+  {
+    PushNotificationChannel,
+    InAppMessageChannel,
+    NewsFeedChannel
   }
 }

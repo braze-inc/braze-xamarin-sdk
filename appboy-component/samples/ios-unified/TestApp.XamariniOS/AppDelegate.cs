@@ -9,11 +9,11 @@ using UserNotifications;
 
 namespace TestApp.XamariniOS
 {
-  [Register ("AppDelegate")]
+  [Register("AppDelegate")]
   public partial class AppDelegate : UIApplicationDelegate
   {
 
-    public static UIStoryboard Storyboard = UIStoryboard.FromName ("MainStoryboard", null);
+    public static UIStoryboard Storyboard = UIStoryboard.FromName("MainStoryboard", null);
     public static UIViewController initialViewController;
     private UserNotificationsDelegate notificationsDelegate;
 
@@ -22,7 +22,7 @@ namespace TestApp.XamariniOS
       set;
     }
 
-    public override void DidReceiveRemoteNotification (UIApplication application, NSDictionary userInfo, Action<UIBackgroundFetchResult> completionHandler) 
+    public override void DidReceiveRemoteNotification(UIApplication application, NSDictionary userInfo, Action<UIBackgroundFetchResult> completionHandler) 
     {
       Appboy.SharedInstance.RegisterApplicationWithFetchCompletionHandler(application, userInfo, completionHandler);
     }
@@ -30,19 +30,20 @@ namespace TestApp.XamariniOS
     //
     // You have 17 seconds to return from this method, or iOS will terminate your application.
     //
-    public override bool FinishedLaunching (UIApplication app, NSDictionary options)
+    public override bool FinishedLaunching(UIApplication app, NSDictionary options)
     {
       // create a new window instance based on the screen size
-      Window = new UIWindow (UIScreen.MainScreen.Bounds);
+      Window = new UIWindow(UIScreen.MainScreen.Bounds);
 
-      initialViewController = Storyboard.InstantiateInitialViewController () as UIViewController;
+      initialViewController = Storyboard.InstantiateInitialViewController() as UIViewController;
       Window.RootViewController = initialViewController;
 
       // make the window visible
-      Window.MakeKeyAndVisible ();
-				
+      Window.MakeKeyAndVisible();
+
       // Start Appboy
-      Appboy.StartWithApiKey ("5546dc47-fcd3-4245-85d6-963a1dd6c373", UIApplication.SharedApplication, options);
+      Appboy.StartWithApiKey("09aa7156-9aef-4043-acfa-424d0dbc3d80", UIApplication.SharedApplication, options);
+      Appboy.SharedInstance.SdkFlavor = ABKSDKFlavor.Xamarin;
 
       if (UIDevice.CurrentDevice.CheckSystemVersion(10, 0))
       {
@@ -58,23 +59,23 @@ namespace TestApp.XamariniOS
       else
       {
         // Settings for Appboy push
-        UIUserNotificationSettings settings = UIUserNotificationSettings.GetSettingsForTypes (UIUserNotificationType.Badge | UIUserNotificationType.Alert | UIUserNotificationType.Sound, null);
-        UIApplication.SharedApplication.RegisterForRemoteNotifications ();
+        UIUserNotificationSettings settings = UIUserNotificationSettings.GetSettingsForTypes(UIUserNotificationType.Badge | UIUserNotificationType.Alert | UIUserNotificationType.Sound, null);
+        UIApplication.SharedApplication.RegisterForRemoteNotifications();
         UIApplication.SharedApplication.RegisterUserNotificationSettings(settings);
       }
  
       return true;
     }
     
-    public override void RegisteredForRemoteNotifications (UIApplication application, NSData deviceToken)
+    public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
     {
-      Console.WriteLine ("Registered For Remote Notifications");
-      Appboy.SharedInstance.RegisterPushToken (deviceToken.ToString ());
+      Console.WriteLine("Registered For Remote Notifications");
+      Appboy.SharedInstance.RegisterPushToken(deviceToken.ToString());
     }
 
     private class UserNotificationsDelegate : UNUserNotificationCenterDelegate
     {
-      public override void DidReceiveNotificationResponse (UNUserNotificationCenter center, UNNotificationResponse response, Action completionHandler)
+      public override void DidReceiveNotificationResponse(UNUserNotificationCenter center, UNNotificationResponse response, Action completionHandler)
       {
         Appboy.SharedInstance.UserNotificationCenter(center, response, completionHandler);
       }

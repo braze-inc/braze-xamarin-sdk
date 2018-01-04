@@ -5,10 +5,10 @@ using ObjCRuntime;
 using StoreKit;
 using UIKit;
 using UserNotifications;
+using WebKit;
 
 namespace AppboyPlatformXamariniOSBinding
 {
-
   // @protocol ABKAppboyEndpointDelegate <NSObject>
   [Protocol, Model]
   [BaseType(typeof(NSObject))]
@@ -281,13 +281,13 @@ namespace AppboyPlatformXamariniOSBinding
     [NullAllowed, Export("homeCity")]
     string HomeCity { get; set; }
 
+    // @property (copy, nonatomic) NSString * _Nullable language;
+    [NullAllowed, Export("language")]
+    string Language { get; set; }
+
     // @property (copy, nonatomic) NSString * _Nullable phone;
     [NullAllowed, Export("phone")]
     string Phone { get; set; }
-
-    // @property (copy, nonatomic) NSString * _Nullable foursquareAccessToken;
-    [NullAllowed, Export("foursquareAccessToken")]
-    string FoursquareAccessToken { get; set; }
 
     // @property (readonly, copy, nonatomic) NSString * _Nonnull userID;
     [Export("userID")]
@@ -308,6 +308,10 @@ namespace AppboyPlatformXamariniOSBinding
     // @property (strong) ABKAttributionData * _Nullable attributionData;
     [NullAllowed, Export("attributionData", ArgumentSemantic.Strong)]
     ABKAttributionData AttributionData { get; set; }
+
+    // -(BOOL)addAlias:(NSString * _Nonnull)alias withLabel:(NSString * _Nonnull)label;
+    [Export("addAlias:withLabel:")]
+    bool AddAlias(string alias, string label);
 
     // -(BOOL)setGender:(ABKUserGenderType)gender;
     [Export("setGender:")]
@@ -378,10 +382,6 @@ namespace AppboyPlatformXamariniOSBinding
   [BaseType(typeof(NSObject))]
   interface ABKFacebookUser
   {
-    // extern const NSInteger DefaultNumberOfFriends;
-    [Field("DefaultNumberOfFriends", "__Internal")]
-    nint DefaultNumberOfFriends { get; }
-
     // -(instancetype _Nonnull)initWithFacebookUserDictionary:(NSDictionary * _Nullable)facebookUserDictionary numberOfFriends:(NSInteger)numberOfFriends likes:(NSArray * _Nullable)likes;
     [Export("initWithFacebookUserDictionary:numberOfFriends:likes:")]
     IntPtr Constructor([NullAllowed] NSDictionary facebookUserDictionary, nint numberOfFriends, [NullAllowed] NSObject[] likes);
@@ -397,136 +397,6 @@ namespace AppboyPlatformXamariniOSBinding
     // @property (readonly) NSArray * _Nullable likes;
     [NullAllowed, Export("likes")]
     NSObject[] Likes { get; }
-  }
-
-  // @interface ABKFeedback : NSObject
-  [BaseType(typeof(NSObject))]
-  interface ABKFeedback
-  {
-    // @property (copy) NSString * _Nonnull message;
-    [Export("message")]
-    string Message { get; set; }
-
-    // @property (copy) NSString * _Nonnull email;
-    [Export("email")]
-    string Email { get; set; }
-
-    // @property BOOL isBug;
-    [Export("isBug")]
-    bool IsBug { get; set; }
-
-    // -(instancetype _Nonnull)initWithFeedbackMessage:(NSString * _Nonnull)message email:(NSString * _Nonnull)email isBug:(BOOL)isBug;
-    [Export("initWithFeedbackMessage:email:isBug:")]
-    IntPtr Constructor(string message, string email, bool isBug);
-
-    // -(ABKFeedbackValidation)feedbackValidation;
-    [Export("feedbackValidation")]
-    ABKFeedbackValidation FeedbackValidation { get; }
-  }
-
-  // @interface ABKFeedbackViewController : UIViewController
-  [BaseType(typeof(UIViewController))]
-  interface ABKFeedbackViewController
-  {
-    [Wrap("WeakDelegate")]
-    [NullAllowed]
-    NSObject Delegate { get; set; }
-
-    // @property (nonatomic, weak) id _Nullable delegate;
-    [NullAllowed, Export("delegate", ArgumentSemantic.Weak)]
-    NSObject WeakDelegate { get; set; }
-  }
-
-  // @protocol ABKFeedbackViewControllerModalContextDelegate <NSObject>
-  [Protocol, Model]
-  [BaseType(typeof(NSObject))]
-  interface ABKFeedbackViewControllerModalContextDelegate
-  {
-    // @optional -(void)feedbackViewControllerModalContextCancelTapped:(ABKFeedbackViewControllerModalContext * _Nonnull)sender;
-    [Export("feedbackViewControllerModalContextCancelTapped:")]
-    void FeedbackViewControllerModalContextCancelTapped(ABKFeedbackViewControllerModalContext sender);
-
-    // @optional -(void)feedbackViewControllerModalContextFeedbackSent:(ABKFeedbackViewControllerModalContext * _Nonnull)sender;
-    [Export("feedbackViewControllerModalContextFeedbackSent:")]
-    void FeedbackViewControllerModalContextFeedbackSent(ABKFeedbackViewControllerModalContext sender);
-
-    // @optional -(NSString * _Nonnull)feedbackViewControllerBeforeFeedbackSent:(NSString * _Nonnull)message;
-    [Export("feedbackViewControllerBeforeFeedbackSent:")]
-    string FeedbackViewControllerBeforeFeedbackSent(string message);
-  }
-
-  // @interface ABKFeedbackViewControllerModalContext : UINavigationController
-  [BaseType(typeof(UINavigationController))]
-  interface ABKFeedbackViewControllerModalContext
-  {
-    [Wrap("WeakFeedbackDelegate")]
-    [NullAllowed]
-    ABKFeedbackViewControllerModalContextDelegate FeedbackDelegate { get; set; }
-
-    // @property (weak) id<ABKFeedbackViewControllerModalContextDelegate> _Nullable feedbackDelegate;
-    [NullAllowed, Export("feedbackDelegate", ArgumentSemantic.Weak)]
-    NSObject WeakFeedbackDelegate { get; set; }
-  }
-
-  // @protocol ABKFeedbackViewControllerNavigationContextDelegate <NSObject>
-  [Protocol, Model]
-  [BaseType(typeof(NSObject))]
-  interface ABKFeedbackViewControllerNavigationContextDelegate
-  {
-    // @required -(void)feedbackViewControllerNavigationContextFeedbackSent:(ABKFeedbackViewControllerNavigationContext * _Nonnull)sender;
-    [Abstract]
-    [Export("feedbackViewControllerNavigationContextFeedbackSent:")]
-    void FeedbackViewControllerNavigationContextFeedbackSent(ABKFeedbackViewControllerNavigationContext sender);
-
-    // @optional -(NSString * _Nonnull)feedbackViewControllerBeforeFeedbackSent:(NSString * _Nonnull)message;
-    [Export("feedbackViewControllerBeforeFeedbackSent:")]
-    string FeedbackViewControllerBeforeFeedbackSent(string message);
-  }
-
-  // @interface ABKFeedbackViewControllerNavigationContext : ABKFeedbackViewController
-  [BaseType(typeof(ABKFeedbackViewController))]
-  interface ABKFeedbackViewControllerNavigationContext
-  {
-    [Wrap("WeakDelegate")]
-    [NullAllowed]
-    ABKFeedbackViewControllerNavigationContextDelegate Delegate { get; set; }
-
-    // @property (nonatomic, weak) id<ABKFeedbackViewControllerNavigationContextDelegate> _Nullable delegate;
-    [NullAllowed, Export("delegate", ArgumentSemantic.Weak)]
-    NSObject WeakDelegate { get; set; }
-  }
-
-  // @protocol ABKFeedbackViewControllerPopoverContextDelegate <NSObject>
-  [Protocol, Model]
-  [BaseType(typeof(NSObject))]
-  interface ABKFeedbackViewControllerPopoverContextDelegate
-  {
-    // @required -(void)feedbackViewControllerPopoverContextCancelTapped:(ABKFeedbackViewControllerPopoverContext * _Nonnull)sender;
-    [Abstract]
-    [Export("feedbackViewControllerPopoverContextCancelTapped:")]
-    void FeedbackViewControllerPopoverContextCancelTapped(ABKFeedbackViewControllerPopoverContext sender);
-
-    // @required -(void)feedbackViewControllerPopoverContextFeedbackSent:(ABKFeedbackViewControllerPopoverContext * _Nonnull)sender;
-    [Abstract]
-    [Export("feedbackViewControllerPopoverContextFeedbackSent:")]
-    void FeedbackViewControllerPopoverContextFeedbackSent(ABKFeedbackViewControllerPopoverContext sender);
-
-    // @optional -(NSString * _Nonnull)feedbackViewControllerBeforeFeedbackSent:(NSString * _Nonnull)message;
-    [Export("feedbackViewControllerBeforeFeedbackSent:")]
-    string FeedbackViewControllerBeforeFeedbackSent(string message);
-  }
-
-  // @interface ABKFeedbackViewControllerPopoverContext : ABKFeedbackViewController
-  [BaseType(typeof(ABKFeedbackViewController))]
-  interface ABKFeedbackViewControllerPopoverContext
-  {
-    [Wrap("WeakDelegate")]
-    [NullAllowed]
-    ABKFeedbackViewControllerPopoverContextDelegate Delegate { get; set; }
-
-    // @property (nonatomic, weak) id<ABKFeedbackViewControllerPopoverContextDelegate> _Nullable delegate;
-    [NullAllowed, Export("delegate", ArgumentSemantic.Weak)]
-    NSObject WeakDelegate { get; set; }
   }
 
   // @protocol ABKFeedViewControllerDelegate <NSObject>
@@ -679,579 +549,46 @@ namespace AppboyPlatformXamariniOSBinding
     void FeedViewControllerPopoverContextCloseTapped(ABKFeedViewControllerPopoverContext sender);
   }
 
-  // @protocol ABKIDFADelegate <NSObject>
-  [Protocol, Model]
+  // @interface ABKFeedback : NSObject
   [BaseType(typeof(NSObject))]
-  interface ABKIDFADelegate
-  {
-    // @required -(NSString * _Nonnull)advertisingIdentifierString;
-    [Abstract]
-    [Export("advertisingIdentifierString")]
-    string AdvertisingIdentifierString { get; }
-
-    // @required -(BOOL)isAdvertisingTrackingEnabled;
-    [Abstract]
-    [Export("isAdvertisingTrackingEnabled")]
-    bool IsAdvertisingTrackingEnabled { get; }
-  }
-
-  // @interface ABKInAppMessage : NSObject
-  [BaseType(typeof(NSObject))]
-  interface ABKInAppMessage
+  interface ABKFeedback
   {
     // @property (copy) NSString * _Nonnull message;
     [Export("message")]
     string Message { get; set; }
 
-    // @property (strong) NSDictionary * _Nullable extras;
-    [NullAllowed, Export("extras", ArgumentSemantic.Strong)]
-    NSDictionary Extras { get; set; }
+    // @property (copy) NSString * _Nonnull email;
+    [Export("email")]
+    string Email { get; set; }
 
-    // @property (nonatomic) NSTimeInterval duration;
-    [Export("duration")]
-    double Duration { get; set; }
+    // @property BOOL isBug;
+    [Export("isBug")]
+    bool IsBug { get; set; }
 
-    // @property (readonly) ABKInAppMessageClickActionType inAppMessageClickActionType;
-    [Export("inAppMessageClickActionType")]
-    ABKInAppMessageClickActionType InAppMessageClickActionType { get; }
+    // -(instancetype _Nonnull)initWithFeedbackMessage:(NSString * _Nonnull)message email:(NSString * _Nonnull)email isBug:(BOOL)isBug;
+    [Export("initWithFeedbackMessage:email:isBug:")]
+    IntPtr Constructor(string message, string email, bool isBug);
 
-    // @property (readonly) NSURL * _Nullable uri;
-    [NullAllowed, Export("uri")]
-    NSUrl Uri { get; }
-
-    // @property BOOL openUrlInWebView;
-    [Export("openUrlInWebView")]
-    bool OpenUrlInWebView { get; set; }
-
-    // @property ABKInAppMessageDismissType inAppMessageDismissType;
-    [Export("inAppMessageDismissType", ArgumentSemantic.Assign)]
-    ABKInAppMessageDismissType InAppMessageDismissType { get; set; }
-
-    // @property (strong) UIColor * _Nullable backgroundColor;
-    [NullAllowed, Export("backgroundColor", ArgumentSemantic.Strong)]
-    UIColor BackgroundColor { get; set; }
-
-    // @property (strong) UIColor * _Nullable textColor;
-    [NullAllowed, Export("textColor", ArgumentSemantic.Strong)]
-    UIColor TextColor { get; set; }
-
-    // @property (copy, nonatomic) NSString * _Nullable icon;
-    [NullAllowed, Export("icon")]
-    string Icon { get; set; }
-
-    // @property (strong) UIColor * _Nullable iconColor;
-    [NullAllowed, Export("iconColor", ArgumentSemantic.Strong)]
-    UIColor IconColor { get; set; }
-
-    // @property (strong) UIColor * _Nullable iconBackgroundColor;
-    [NullAllowed, Export("iconBackgroundColor", ArgumentSemantic.Strong)]
-    UIColor IconBackgroundColor { get; set; }
-
-    // @property (copy) NSURL * _Nullable imageURI;
-    [NullAllowed, Export("imageURI", ArgumentSemantic.Copy)]
-    NSUrl ImageURI { get; set; }
-
-    // @property UIViewContentMode imageContentMode;
-    [Export("imageContentMode", ArgumentSemantic.Assign)]
-    UIViewContentMode ImageContentMode { get; set; }
-
-    // @property ABKInAppMessageOrientation orientation;
-    [Export("orientation", ArgumentSemantic.Assign)]
-    ABKInAppMessageOrientation Orientation { get; set; }
-
-    // @property NSTextAlignment messageTextAlignment;
-    [Export("messageTextAlignment", ArgumentSemantic.Assign)]
-    UITextAlignment MessageTextAlignment { get; set; }
-
-    // @property BOOL animateIn;
-    [Export("animateIn")]
-    bool AnimateIn { get; set; }
-
-    // @property BOOL animateOut;
-    [Export("animateOut")]
-    bool AnimateOut { get; set; }
-
-    // -(void)logInAppMessageImpression;
-    [Export("logInAppMessageImpression")]
-    void LogInAppMessageImpression();
-
-    // -(void)logInAppMessageClicked;
-    [Export("logInAppMessageClicked")]
-    void LogInAppMessageClicked();
-
-    // -(void)setInAppMessageClickAction:(ABKInAppMessageClickActionType)clickActionType withURI:(NSURL * _Nullable)uri;
-    [Export("setInAppMessageClickAction:withURI:")]
-    void SetInAppMessageClickAction(ABKInAppMessageClickActionType clickActionType, [NullAllowed] NSUrl uri);
-
-    // -(NSData * _Nullable)serializeToData;
-    [NullAllowed, Export("serializeToData")]
-    NSData SerializeToData { get; }
+    // -(ABKFeedbackValidation)feedbackValidation;
+    [Export("feedbackValidation")]
+    ABKFeedbackValidation FeedbackValidation { get; }
   }
 
-  // @interface ABKInAppMessageButton : NSObject
-  [BaseType(typeof(NSObject))]
-  interface ABKInAppMessageButton
-  {
-    // @property (copy) NSString * _Nullable buttonText;
-    [NullAllowed, Export("buttonText")]
-    string ButtonText { get; set; }
-
-    // @property (strong) UIColor * _Nullable buttonBackgroundColor;
-    [NullAllowed, Export("buttonBackgroundColor", ArgumentSemantic.Strong)]
-    UIColor ButtonBackgroundColor { get; set; }
-
-    // @property (strong) UIColor * _Nullable buttonTextColor;
-    [NullAllowed, Export("buttonTextColor", ArgumentSemantic.Strong)]
-    UIColor ButtonTextColor { get; set; }
-
-    // @property (readonly) ABKInAppMessageClickActionType buttonClickActionType;
-    [Export("buttonClickActionType")]
-    ABKInAppMessageClickActionType ButtonClickActionType { get; }
-
-    // @property (readonly, copy) NSURL * _Nullable buttonClickedURI;
-    [NullAllowed, Export("buttonClickedURI", ArgumentSemantic.Copy)]
-    NSUrl ButtonClickedURI { get; }
-
-    // @property BOOL buttonOpenUrlInWebView;
-    [Export("buttonOpenUrlInWebView")]
-    bool ButtonOpenUrlInWebView { get; set; }
-
-    // @property (readonly) NSInteger buttonID;
-    [Export("buttonID")]
-    nint ButtonID { get; }
-
-    // -(void)setButtonClickAction:(ABKInAppMessageClickActionType)clickActionType withURI:(NSURL * _Nullable)uri;
-    [Export("setButtonClickAction:withURI:")]
-    void SetButtonClickAction(ABKInAppMessageClickActionType clickActionType, [NullAllowed] NSUrl uri);
-  }
-
-  // @interface ABKInAppMessageViewController : UIViewController
-  [BaseType(typeof(UIViewController))]
-  interface ABKInAppMessageViewController
-  {
-    // @property (strong) ABKInAppMessage * _Nonnull inAppMessage;
-    [Export("inAppMessage", ArgumentSemantic.Strong)]
-    ABKInAppMessage InAppMessage { get; set; }
-
-    // @property (nonatomic, weak) UIImageView * _Nullable iconImageView __attribute__((iboutlet));
-    [NullAllowed, Export("iconImageView", ArgumentSemantic.Weak)]
-    UIImageView IconImageView { get; set; }
-
-    // @property (nonatomic, weak) UILabel * _Nullable iconLabelView __attribute__((iboutlet));
-    [NullAllowed, Export("iconLabelView", ArgumentSemantic.Weak)]
-    UILabel IconLabelView { get; set; }
-
-    // @property (nonatomic, weak) ABKLabel * _Nullable inAppMessageMessageLabel __attribute__((iboutlet));
-    [NullAllowed, Export("inAppMessageMessageLabel", ArgumentSemantic.Weak)]
-    ABKLabel InAppMessageMessageLabel { get; set; }
-
-    // -(instancetype _Nonnull)initWithInAppMessage:(ABKInAppMessage * _Nonnull)inAppMessage;
-    [Export("initWithInAppMessage:")]
-    IntPtr Constructor(ABKInAppMessage inAppMessage);
-
-    // -(void)hideInAppMessage:(BOOL)animated;
-    [Export("hideInAppMessage:")]
-    void HideInAppMessage(bool animated);
-
-    // -(void)moveInAppMessageViewOffScreen:(CGRect)inAppMessageWindowFrame;
-    [Export("moveInAppMessageViewOffScreen:")]
-    void MoveInAppMessageViewOffScreen(CGRect inAppMessageWindowFrame);
-
-    // -(void)moveInAppMessageViewOnScreen:(CGRect)inAppMessageWindowFrame;
-    [Export("moveInAppMessageViewOnScreen:")]
-    void MoveInAppMessageViewOnScreen(CGRect inAppMessageWindowFrame);
-  }
-
-  // @protocol ABKInAppMessageControllerDelegate <NSObject>
-  [Protocol, Model]
-  [BaseType(typeof(NSObject))]
-  interface ABKInAppMessageControllerDelegate
-  {
-    // @optional -(BOOL)onInAppMessageReceived:(ABKInAppMessage * _Nonnull)inAppMessage __attribute__((deprecated("")));
-    [Export("onInAppMessageReceived:")]
-    bool OnInAppMessageReceived(ABKInAppMessage inAppMessage);
-
-    // @optional -(ABKInAppMessageDisplayChoice)beforeInAppMessageDisplayed:(ABKInAppMessage * _Nonnull)inAppMessage withKeyboardIsUp:(BOOL)keyboardIsUp;
-    [Export("beforeInAppMessageDisplayed:withKeyboardIsUp:")]
-    ABKInAppMessageDisplayChoice BeforeInAppMessageDisplayed(ABKInAppMessage inAppMessage, bool keyboardIsUp);
-
-    // @optional -(ABKInAppMessageViewController * _Nonnull)inAppMessageViewControllerWithInAppMessage:(ABKInAppMessage * _Nonnull)inAppMessage;
-    [Export("inAppMessageViewControllerWithInAppMessage:")]
-    ABKInAppMessageViewController InAppMessageViewControllerWithInAppMessage(ABKInAppMessage inAppMessage);
-
-    // @optional -(void)onInAppMessageDismissed:(ABKInAppMessage * _Nonnull)inAppMessage;
-    [Export("onInAppMessageDismissed:")]
-    void OnInAppMessageDismissed(ABKInAppMessage inAppMessage);
-
-    // @optional -(BOOL)onInAppMessageClicked:(ABKInAppMessage * _Nonnull)inAppMessage;
-    [Export("onInAppMessageClicked:")]
-    bool OnInAppMessageClicked(ABKInAppMessage inAppMessage);
-
-    // @optional -(BOOL)onInAppMessageButtonClicked:(ABKInAppMessageImmersive * _Nonnull)inAppMessage button:(ABKInAppMessageButton * _Nonnull)button;
-    [Export("onInAppMessageButtonClicked:button:")]
-    bool OnInAppMessageButtonClicked(ABKInAppMessageImmersive inAppMessage, ABKInAppMessageButton button);
-
-    // @optional -(BOOL)onInAppMessageHTMLButtonClicked:(ABKInAppMessageHTML * _Nonnull)inAppMessage clickedURL:(NSURL * _Nullable)clickedURL buttonID:(NSString * _Nonnull)buttonId;
-    [Export("onInAppMessageHTMLButtonClicked:clickedURL:buttonID:")]
-    bool OnInAppMessageHTMLButtonClicked(ABKInAppMessageHTML inAppMessage, [NullAllowed] NSUrl clickedURL, string buttonId);
-  }
-
-  // @interface ABKInAppMessageController : NSObject
-  [BaseType(typeof(NSObject))]
-  interface ABKInAppMessageController
-  {
-    [Wrap("WeakDelegate")]
-    [NullAllowed]
-    ABKInAppMessageControllerDelegate Delegate { get; set; }
-
-    // @property (weak) id<ABKInAppMessageControllerDelegate> _Nullable delegate;
-    [NullAllowed, Export("delegate", ArgumentSemantic.Weak)]
-    NSObject WeakDelegate { get; set; }
-
-    // @property UIInterfaceOrientationMask supportedOrientationMasks;
-    [Export("supportedOrientationMasks", ArgumentSemantic.Assign)]
-    UIInterfaceOrientationMask SupportedOrientationMasks { get; set; }
-
-    // @property UIInterfaceOrientation supportedOrientations;
-    [Export("supportedOrientations", ArgumentSemantic.Assign)]
-    UIInterfaceOrientation SupportedOrientations { get; set; }
-
-    // -(void)displayNextInAppMessageWithDelegate:(id<ABKInAppMessageControllerDelegate> _Nullable)delegate;
-    [Export("displayNextInAppMessageWithDelegate:")]
-    void DisplayNextInAppMessageWithDelegate([NullAllowed] ABKInAppMessageControllerDelegate @delegate);
-
-    // -(NSInteger)inAppMessagesRemainingOnStack;
-    [Export("inAppMessagesRemainingOnStack")]
-    nint InAppMessagesRemainingOnStack { get; }
-
-    // -(void)addInAppMessage:(ABKInAppMessage * _Nonnull)newInAppMessage;
-    [Export("addInAppMessage:")]
-    void AddInAppMessage(ABKInAppMessage newInAppMessage);
-
-    // -(void)hideCurrentInAppMessage:(BOOL)animated;
-    [Export("hideCurrentInAppMessage:")]
-    void HideCurrentInAppMessage(bool animated);
-  }
-
-  // @interface ABKInAppMessageImmersive : ABKInAppMessage
-  [BaseType(typeof(ABKInAppMessage))]
-  interface ABKInAppMessageImmersive
-  {
-    // @property (copy) NSString * _Nullable header;
-    [NullAllowed, Export("header")]
-    string Header { get; set; }
-
-    // @property (strong) UIColor * _Nullable headerTextColor;
-    [NullAllowed, Export("headerTextColor", ArgumentSemantic.Strong)]
-    UIColor HeaderTextColor { get; set; }
-
-    // @property (strong) UIColor * _Nullable closeButtonColor;
-    [NullAllowed, Export("closeButtonColor", ArgumentSemantic.Strong)]
-    UIColor CloseButtonColor { get; set; }
-
-    // @property (readonly) NSArray * _Nullable buttons;
-    [NullAllowed, Export("buttons")]
-    ABKInAppMessageButton[] Buttons { get; }
-
-    // @property (strong) UIColor * _Nullable frameColor;
-    [NullAllowed, Export("frameColor", ArgumentSemantic.Strong)]
-    UIColor FrameColor { get; set; }
-
-    // @property NSTextAlignment headerTextAlignment;
-    [Export("headerTextAlignment", ArgumentSemantic.Assign)]
-    UITextAlignment HeaderTextAlignment { get; set; }
-
-    // @property ABKInAppMessageImmersiveImageStyle imageStyle;
-    [Export("imageStyle", ArgumentSemantic.Assign)]
-    ABKInAppMessageImmersiveImageStyle ImageStyle { get; set; }
-
-    // -(void)logInAppMessageClickedWithButtonID:(NSInteger)buttonId;
-    [Export("logInAppMessageClickedWithButtonID:")]
-    void LogInAppMessageClickedWithButtonID(nint buttonId);
-
-    // -(void)setInAppMessageButtons:(NSArray * _Nonnull)buttonArray;
-    [Export("setInAppMessageButtons:")]
-    void SetInAppMessageButtons(ABKInAppMessageButton[] buttonArray);
-  }
-
-  // @interface ABKInAppMessageFull : ABKInAppMessageImmersive
-  [BaseType(typeof(ABKInAppMessageImmersive))]
-  interface ABKInAppMessageFull
-  {
-  }
-
-  // @interface ABKInAppMessageImmersiveViewController : ABKInAppMessageViewController
-  [BaseType(typeof(ABKInAppMessageViewController))]
-  interface ABKInAppMessageImmersiveViewController
-  {
-    // @property (nonatomic, weak) ABKLabel * _Nullable inAppMessageHeaderLabel __attribute__((iboutlet));
-    [NullAllowed, Export("inAppMessageHeaderLabel", ArgumentSemantic.Weak)]
-    ABKLabel InAppMessageHeaderLabel { get; set; }
-
-    // @property (nonatomic, weak) UIImageView * _Nullable graphicImageView __attribute__((iboutlet));
-    [NullAllowed, Export("graphicImageView", ArgumentSemantic.Weak)]
-    UIImageView GraphicImageView { get; set; }
-
-    // -(void)dismissInAppMessage:(id _Nonnull)sender __attribute__((ibaction));
-    [Export("dismissInAppMessage:")]
-    void DismissInAppMessage(NSObject sender);
-  }
-
-  // @interface ABKInAppMessageFullViewController : ABKInAppMessageImmersiveViewController
-  [BaseType(typeof(ABKInAppMessageImmersiveViewController))]
-  interface ABKInAppMessageFullViewController
-  {
-  }
-
-  // @interface ABKInAppMessageHTML : ABKInAppMessage
-  [BaseType(typeof(ABKInAppMessage))]
-  interface ABKInAppMessageHTML
-  {
-    // @property (strong) NSURL * _Nullable assetsZipRemoteUrl;
-    [NullAllowed, Export("assetsZipRemoteUrl", ArgumentSemantic.Strong)]
-    NSUrl AssetsZipRemoteUrl { get; set; }
-
-    // -(void)logInAppMessageHTMLClickWithButtonID:(NSString * _Nonnull)buttonId;
-    [Export("logInAppMessageHTMLClickWithButtonID:")]
-    void LogInAppMessageHTMLClickWithButtonID(string buttonId);
-  }
-
-  // @interface ABKInAppMessageHTMLFull : ABKInAppMessageHTML
-  [BaseType(typeof(ABKInAppMessageHTML))]
-  interface ABKInAppMessageHTMLFull
-  {
-  }
-
-  // @interface ABKInAppMessageHTMLViewController : ABKInAppMessageViewController <UIWebViewDelegate>
-  [BaseType(typeof(ABKInAppMessageViewController))]
-  interface ABKInAppMessageHTMLViewController : IUIWebViewDelegate
-  {
-    // @property (nonatomic, weak) UIWebView * _Nullable webView __attribute__((iboutlet));
-    [NullAllowed, Export("webView", ArgumentSemantic.Weak)]
-    UIWebView WebView { get; set; }
-  }
-
-  // @interface ABKInAppMessageHTMLFullViewController : ABKInAppMessageHTMLViewController
-  [BaseType(typeof(ABKInAppMessageHTMLViewController))]
-  interface ABKInAppMessageHTMLFullViewController
-  {
-  }
-
-  // @interface ABKInAppMessageModal : ABKInAppMessageImmersive
-  [BaseType(typeof(ABKInAppMessageImmersive))]
-  interface ABKInAppMessageModal
-  {
-  }
-
-  // @interface ABKInAppMessageModalViewController : ABKInAppMessageImmersiveViewController
-  [BaseType(typeof(ABKInAppMessageImmersiveViewController))]
-  interface ABKInAppMessageModalViewController
-  {
-  }
-
-  // @interface ABKInAppMessageSlideup : ABKInAppMessage
-  [BaseType(typeof(ABKInAppMessage))]
-  interface ABKInAppMessageSlideup
-  {
-    // @property BOOL hideChevron;
-    [Export("hideChevron")]
-    bool HideChevron { get; set; }
-
-    // @property ABKInAppMessageSlideupAnchor inAppMessageSlideupAnchor;
-    [Export("inAppMessageSlideupAnchor", ArgumentSemantic.Assign)]
-    ABKInAppMessageSlideupAnchor InAppMessageSlideupAnchor { get; set; }
-
-    // @property (strong) UIColor * _Nullable chevronColor;
-    [NullAllowed, Export("chevronColor", ArgumentSemantic.Strong)]
-    UIColor ChevronColor { get; set; }
-  }
-
-  // @interface ABKInAppMessageSlideupViewController : ABKInAppMessageViewController
-  [BaseType(typeof(ABKInAppMessageViewController))]
-  interface ABKInAppMessageSlideupViewController
-  {
-    // @property (nonatomic, weak) UIImageView * _Nullable arrowImage __attribute__((iboutlet));
-    [NullAllowed, Export("arrowImage", ArgumentSemantic.Weak)]
-    UIImageView ArrowImage { get; set; }
-  }
-
-  // @interface ABKInAppMessageView : UIView
-  [BaseType(typeof(UIView))]
-  interface ABKInAppMessageView
-  {
-  }
-
-  // @interface ABKLocationManager : NSObject
-  [BaseType(typeof(NSObject))]
-  interface ABKLocationManager
-  {
-    // @property (readonly) BOOL disableLocationTracking;
-    [Export("disableLocationTracking")]
-    bool DisableLocationTracking { get; }
-
-    // -(void)allowRequestWhenInUseLocationPermission;
-    [Export("allowRequestWhenInUseLocationPermission")]
-    void AllowRequestWhenInUseLocationPermission();
-
-    // -(void)allowRequestAlwaysPermission;
-    [Export("allowRequestAlwaysPermission")]
-    void AllowRequestAlwaysPermission();
-
-    // -(void)logSingleLocation;
-    [Export("logSingleLocation")]
-    void LogSingleLocation();
-  }
-
-  // @interface ABKNavigationBar : UINavigationBar
-  [BaseType(typeof(UINavigationBar))]
-  interface ABKNavigationBar
-  {
-  }
-
-  // @protocol ABKPushURIDelegate <NSObject>
-  [Protocol, Model]
-  [BaseType(typeof(NSObject))]
-  interface ABKPushURIDelegate
-  {
-    // @required -(BOOL)handleAppboyPushURI:(NSString * _Nonnull)URIString withNotificationInfo:(NSDictionary * _Nonnull)notificationInfo;
-    [Abstract]
-    [Export("handleAppboyPushURI:withNotificationInfo:")]
-    bool WithNotificationInfo(string URIString, NSDictionary notificationInfo);
-  }
-
-  // @interface ABKPushUtils : NSObject
-  [BaseType(typeof(NSObject))]
-  interface ABKPushUtils
-  {
-    // +(BOOL)isAppboyUserNotification:(UNNotificationResponse * _Nonnull)response;
-    [Static]
-    [Export("isAppboyUserNotification:")]
-    bool IsAppboyUserNotification(UNNotificationResponse response);
-
-    // +(BOOL)isAppboyRemoteNotification:(NSDictionary * _Nonnull)userInfo;
-    [Static]
-    [Export("isAppboyRemoteNotification:")]
-    bool IsAppboyRemoteNotification(NSDictionary userInfo);
-
-    // +(BOOL)isAppboyInternalUserNotification:(UNNotificationResponse * _Nonnull)response;
-    [Static]
-    [Export("isAppboyInternalUserNotification:")]
-    bool IsAppboyInternalUserNotification(UNNotificationResponse response);
-
-    // +(BOOL)isAppboyInternalRemoteNotification:(NSDictionary * _Nonnull)userInfo;
-    [Static]
-    [Export("isAppboyInternalRemoteNotification:")]
-    bool IsAppboyInternalRemoteNotification(NSDictionary userInfo);
-
-    // +(BOOL)isUninstallTrackingUserNotification:(UNNotificationResponse * _Nonnull)response;
-    [Static]
-    [Export("isUninstallTrackingUserNotification:")]
-    bool IsUninstallTrackingUserNotification(UNNotificationResponse response);
-
-    // +(BOOL)isUninstallTrackingRemoteNotification:(NSDictionary * _Nonnull)userInfo;
-    [Static]
-    [Export("isUninstallTrackingRemoteNotification:")]
-    bool IsUninstallTrackingRemoteNotification(NSDictionary userInfo);
-
-    // +(BOOL)isGeofencesSyncUserNotification:(UNNotificationResponse * _Nonnull)response;
-    [Static]
-    [Export("isGeofencesSyncUserNotification:")]
-    bool IsGeofencesSyncUserNotification(UNNotificationResponse response);
-
-    // +(BOOL)isGeofencesSyncRemoteNotification:(NSDictionary * _Nonnull)userInfo;
-    [Static]
-    [Export("isGeofencesSyncRemoteNotification:")]
-    bool IsGeofencesSyncRemoteNotification(NSDictionary userInfo);
-
-    // +(BOOL)shouldFetchTestTriggersFlagContainedInPayload:(NSDictionary * _Nonnull)userInfo __attribute__((deprecated("")));
-    [Static]
-    [Export("shouldFetchTestTriggersFlagContainedInPayload:")]
-    bool ShouldFetchTestTriggersFlagContainedInPayload(NSDictionary userInfo);
-
-    // +(NSSet<UNNotificationCategory *> * _Nonnull)getAppboyUNNotificationCategorySet;
-    [Static]
-    [Export("getAppboyUNNotificationCategorySet")]
-    NSSet<UNNotificationCategory> AppboyUNNotificationCategorySet { get; }
-
-    // +(NSSet<UIUserNotificationCategory *> * _Nonnull)getAppboyUIUserNotificationCategorySet;
-    [Static]
-    [Export("getAppboyUIUserNotificationCategorySet")]
-    NSSet<UIUserNotificationCategory> AppboyUIUserNotificationCategorySet { get; }
-  }
-
-  // @interface ABKTextAnnouncementCard : ABKCard <NSCoding>
-  [BaseType(typeof(ABKCard))]
-  interface ABKTextAnnouncementCard : INSCoding
-  {
-    // @property (copy) NSString * _Nonnull title;
-    [Export("title")]
-    string Title { get; set; }
-
-    // @property (copy) NSString * _Nonnull cardDescription;
-    [Export("cardDescription")]
-    string CardDescription { get; set; }
-
-    // @property (copy) NSString * _Nullable domain;
-    [NullAllowed, Export("domain")]
-    string Domain { get; set; }
-  }
-
-  // @interface ABKThemableFeedNavigationBar : ABKNavigationBar
-  [BaseType(typeof(ABKNavigationBar))]
-  interface ABKThemableFeedNavigationBar
-  {
-  }
-
-  // @interface ABKTwitterUser : NSObject
-  [BaseType(typeof(NSObject))]
-  interface ABKTwitterUser
-  {
-    // @property (copy) NSString * _Nullable userDescription;
-    [NullAllowed, Export("userDescription")]
-    string UserDescription { get; set; }
-
-    // @property (copy) NSString * _Nullable twitterName;
-    [NullAllowed, Export("twitterName")]
-    string TwitterName { get; set; }
-
-    // @property (copy) NSString * _Nullable profileImageUrl;
-    [NullAllowed, Export("profileImageUrl")]
-    string ProfileImageUrl { get; set; }
-
-    // @property (copy) NSString * _Nullable screenName;
-    [NullAllowed, Export("screenName")]
-    string ScreenName { get; set; }
-
-    // @property NSInteger followersCount;
-    [Export("followersCount")]
-    nint FollowersCount { get; set; }
-
-    // @property NSInteger friendsCount;
-    [Export("friendsCount")]
-    nint FriendsCount { get; set; }
-
-    // @property NSInteger statusesCount;
-    [Export("statusesCount")]
-    nint StatusesCount { get; set; }
-
-    // @property NSInteger twitterID;
-    [Export("twitterID")]
-    nint TwitterID { get; set; }
-  }
-
-  // @protocol ABKURLDelegate <NSObject>
-  [Protocol, Model]
-  [BaseType(typeof(NSObject))]
-  interface ABKURLDelegate
-  {
-    // @required -(BOOL)handleAppboyURL:(NSURL * _Nonnull)url fromChannel:(ABKChannel)channel withExtras:(NSDictionary * _Nonnull)extras;
-    [Abstract]
-    [Export("handleAppboyURL:fromChannel:withExtras:")]
-    bool FromChannel(NSUrl url, ABKChannel channel, NSDictionary extras);
-  }
-
+  [Static]
   interface Constants
   {
+    // extern const NSInteger DefaultNumberOfFriends;
+    [Field("DefaultNumberOfFriends", "__Internal")]
+    nint DefaultNumberOfFriends { get; }
+
+    // extern NSString *const _Nonnull ABKFeedUpdatedNotification;
+    [Field("ABKFeedUpdatedNotification", "__Internal")]
+    NSString ABKFeedUpdatedNotification { get; }
+
+    // extern NSString *const _Nonnull ABKFeedUpdatedIsSuccessfulKey;
+    [Field("ABKFeedUpdatedIsSuccessfulKey", "__Internal")]
+    NSString ABKFeedUpdatedIsSuccessfulKey { get; }
+
     // extern NSString *const _Nonnull ABKRequestProcessingPolicyOptionKey;
     [Field("ABKRequestProcessingPolicyOptionKey", "__Internal")]
     NSString ABKRequestProcessingPolicyOptionKey { get; }
@@ -1308,13 +645,9 @@ namespace AppboyPlatformXamariniOSBinding
     [Field("ABKSDKFlavorKey", "__Internal")]
     NSString ABKSDKFlavorKey { get; }
 
-    // extern double Appboy_iOS_SDKVersionNumber;
-    [Field("Appboy_iOS_SDKVersionNumber", "__Internal")]
-    double Appboy_iOS_SDKVersionNumber { get; }
-
-    // extern const unsigned char [] Appboy_iOS_SDKVersionString;
-    [Field("Appboy_iOS_SDKVersionString", "__Internal")]
-    byte[] Appboy_iOS_SDKVersionString { get; }
+    // extern NSString *const _Nonnull ABKPushStoryAppGroupKey;
+    [Field("ABKPushStoryAppGroupKey", "__Internal")]
+    NSString ABKPushStoryAppGroupKey { get; }
   }
 
   // @interface Appboy : NSObject
@@ -1457,11 +790,12 @@ namespace AppboyPlatformXamariniOSBinding
     [Export("requestFeedRefresh")]
     void RequestFeedRefresh();
 
-    // -(void)requestInAppMessageRefresh;
-    [Export("requestInAppMessageRefresh")]
-    void RequestInAppMessageRefresh();
+    // -(NSString * _Nonnull)getDeviceId;
+    [Export("getDeviceId")]
+    string DeviceId { get; }
 
-    // -(BOOL)userNotificationWasSentFromAppboy:(UNNotificationResponse * _Nonnull)response __attribute__((deprecated("Use [ABKPushUtils isAppboyUserNotification:] instead.")));
+    // -(BOOL)userNotificationWasSentFromAppboy:(UNNotificationResponse * _Nonnull)response __attribute__((availability(ios, introduced=10.0))) __attribute__((deprecated("Use [ABKPushUtils isAppboyUserNotification:] instead.")));
+    [Introduced(PlatformName.iOS, 10, 0, message: "")]
     [Export("userNotificationWasSentFromAppboy:")]
     bool UserNotificationWasSentFromAppboy(UNNotificationResponse response);
 
@@ -1473,7 +807,7 @@ namespace AppboyPlatformXamariniOSBinding
     [Export("registerPushToken:")]
     void RegisterPushToken(string token);
 
-    // -(void)registerApplication:(UIApplication * _Nonnull)application didReceiveRemoteNotification:(NSDictionary * _Nonnull)notification __attribute__((availability(ios, introduced=3.0, deprecated=10.0)));
+    // -(void)registerApplication:(UIApplication * _Nonnull)application didReceiveRemoteNotification:(NSDictionary * _Nonnull)notification __attribute__((availability(ios, introduced=3_0, deprecated=10_0)));
     [Introduced(PlatformName.iOS, 3, 0, message: "`registerApplication:didReceiveRemoteNotification:` is deprecated in iOS 10, please use `registerApplication:didReceiveRemoteNotification:fetchCompletionHandler:` instead.")]
     [Deprecated(PlatformName.iOS, 10, 0, message: "`registerApplication:didReceiveRemoteNotification:` is deprecated in iOS 10, please use `registerApplication:didReceiveRemoteNotification:fetchCompletionHandler:` instead.")]
     [Export("registerApplication:didReceiveRemoteNotification:")]
@@ -1483,13 +817,14 @@ namespace AppboyPlatformXamariniOSBinding
     [Export("registerApplication:didReceiveRemoteNotification:fetchCompletionHandler:")]
     void RegisterApplicationWithFetchCompletionHandler(UIApplication application, NSDictionary notification, [NullAllowed] Action<UIBackgroundFetchResult> completionHandler);
 
-    // -(void)getActionWithIdentifier:(NSString * _Nonnull)identifier forRemoteNotification:(NSDictionary * _Nonnull)userInfo completionHandler:(void (^ _Nullable)())completionHandler __attribute__((availability(ios, introduced=8.0, deprecated=10.0)));
+    // -(void)getActionWithIdentifier:(NSString * _Nonnull)identifier forRemoteNotification:(NSDictionary * _Nonnull)userInfo completionHandler:(void (^ _Nullable)(void))completionHandler __attribute__((availability(ios, introduced=8_0, deprecated=10_0)));
     [Introduced(PlatformName.iOS, 8, 0, message: "`getActionWithIdentifier:forRemoteNotification:completionHandler:` is deprecated in iOS 10, please use `userNotificationCenter:didReceiveNotificationResponse:withCompletionHandler:` instead.")]
     [Deprecated(PlatformName.iOS, 10, 0, message: "`getActionWithIdentifier:forRemoteNotification:completionHandler:` is deprecated in iOS 10, please use `userNotificationCenter:didReceiveNotificationResponse:withCompletionHandler:` instead.")]
     [Export("getActionWithIdentifier:forRemoteNotification:completionHandler:")]
     void GetActionWithIdentifier(string identifier, NSDictionary userInfo, [NullAllowed] Action completionHandler);
 
-    // -(void)userNotificationCenter:(UNUserNotificationCenter * _Nonnull)center didReceiveNotificationResponse:(UNNotificationResponse * _Nonnull)response withCompletionHandler:(void (^ _Nullable)())completionHandler;
+    // -(void)userNotificationCenter:(UNUserNotificationCenter * _Nonnull)center didReceiveNotificationResponse:(UNNotificationResponse * _Nonnull)response withCompletionHandler:(void (^ _Nullable)(void))completionHandler __attribute__((availability(ios, introduced=10_0)));
+    [Introduced(PlatformName.iOS, 10, 0, message: "")]
     [Export("userNotificationCenter:didReceiveNotificationResponse:withCompletionHandler:")]
     void UserNotificationCenter(UNUserNotificationCenter center, UNNotificationResponse response, [NullAllowed] Action completionHandler);
 
@@ -1498,9 +833,1146 @@ namespace AppboyPlatformXamariniOSBinding
     void PushAuthorizationFromUserNotificationCenter(bool pushAuthGranted);
   }
 
-  // @interface ABKLabel : UILabel
-  [BaseType(typeof(UILabel))]
-  interface ABKLabel
+  // @interface ABKTwitterUser : NSObject
+  [BaseType(typeof(NSObject))]
+  interface ABKTwitterUser
   {
+    // @property (copy) NSString * _Nullable userDescription;
+    [NullAllowed, Export("userDescription")]
+    string UserDescription { get; set; }
+
+    // @property (copy) NSString * _Nullable twitterName;
+    [NullAllowed, Export("twitterName")]
+    string TwitterName { get; set; }
+
+    // @property (copy) NSString * _Nullable profileImageUrl;
+    [NullAllowed, Export("profileImageUrl")]
+    string ProfileImageUrl { get; set; }
+
+    // @property (copy) NSString * _Nullable screenName;
+    [NullAllowed, Export("screenName")]
+    string ScreenName { get; set; }
+
+    // @property NSInteger followersCount;
+    [Export("followersCount")]
+    nint FollowersCount { get; set; }
+
+    // @property NSInteger friendsCount;
+    [Export("friendsCount")]
+    nint FriendsCount { get; set; }
+
+    // @property NSInteger statusesCount;
+    [Export("statusesCount")]
+    nint StatusesCount { get; set; }
+
+    // @property NSInteger twitterID;
+    [Export("twitterID")]
+    nint TwitterID { get; set; }
+  }
+
+  // @interface ABKTextAnnouncementCard : ABKCard <NSCoding>
+  [BaseType(typeof(ABKCard))]
+  interface ABKTextAnnouncementCard : INSCoding
+  {
+    // @property (copy) NSString * _Nonnull title;
+    [Export("title")]
+    string Title { get; set; }
+
+    // @property (copy) NSString * _Nonnull cardDescription;
+    [Export("cardDescription")]
+    string CardDescription { get; set; }
+
+    // @property (copy) NSString * _Nullable domain;
+    [NullAllowed, Export("domain")]
+    string Domain { get; set; }
+  }
+
+  // @interface ABKInAppMessage : NSObject
+  [BaseType(typeof(NSObject))]
+  interface ABKInAppMessage
+  {
+    // @property (copy) NSString * _Nonnull message;
+    [Export("message")]
+    string Message { get; set; }
+
+    // @property (strong) NSDictionary * _Nullable extras;
+    [NullAllowed, Export("extras", ArgumentSemantic.Strong)]
+    NSDictionary Extras { get; set; }
+
+    // @property (nonatomic) NSTimeInterval duration;
+    [Export("duration")]
+    double Duration { get; set; }
+
+    // @property (readonly) ABKInAppMessageClickActionType inAppMessageClickActionType;
+    [Export("inAppMessageClickActionType")]
+    ABKInAppMessageClickActionType InAppMessageClickActionType { get; }
+
+    // @property (readonly) NSURL * _Nullable uri;
+    [NullAllowed, Export("uri")]
+    NSUrl Uri { get; }
+
+    // @property BOOL openUrlInWebView;
+    [Export("openUrlInWebView")]
+    bool OpenUrlInWebView { get; set; }
+
+    // @property ABKInAppMessageDismissType inAppMessageDismissType;
+    [Export("inAppMessageDismissType", ArgumentSemantic.Assign)]
+    ABKInAppMessageDismissType InAppMessageDismissType { get; set; }
+
+    // @property (strong) UIColor * _Nullable backgroundColor;
+    [NullAllowed, Export("backgroundColor", ArgumentSemantic.Strong)]
+    UIColor BackgroundColor { get; set; }
+
+    // @property (strong) UIColor * _Nullable textColor;
+    [NullAllowed, Export("textColor", ArgumentSemantic.Strong)]
+    UIColor TextColor { get; set; }
+
+    // @property (copy, nonatomic) NSString * _Nullable icon;
+    [NullAllowed, Export("icon")]
+    string Icon { get; set; }
+
+    // @property (strong) UIColor * _Nullable iconColor;
+    [NullAllowed, Export("iconColor", ArgumentSemantic.Strong)]
+    UIColor IconColor { get; set; }
+
+    // @property (strong) UIColor * _Nullable iconBackgroundColor;
+    [NullAllowed, Export("iconBackgroundColor", ArgumentSemantic.Strong)]
+    UIColor IconBackgroundColor { get; set; }
+
+    // @property (copy) NSURL * _Nullable imageURI;
+    [NullAllowed, Export("imageURI", ArgumentSemantic.Copy)]
+    NSUrl ImageURI { get; set; }
+
+    // @property UIViewContentMode imageContentMode;
+    [Export("imageContentMode", ArgumentSemantic.Assign)]
+    UIViewContentMode ImageContentMode { get; set; }
+
+    // @property ABKInAppMessageOrientation orientation;
+    [Export("orientation", ArgumentSemantic.Assign)]
+    ABKInAppMessageOrientation Orientation { get; set; }
+
+    // @property NSTextAlignment messageTextAlignment;
+    [Export("messageTextAlignment", ArgumentSemantic.Assign)]
+    UITextAlignment MessageTextAlignment { get; set; }
+
+    // @property BOOL animateIn;
+    [Export("animateIn")]
+    bool AnimateIn { get; set; }
+
+    // @property BOOL animateOut;
+    [Export("animateOut")]
+    bool AnimateOut { get; set; }
+
+    // -(void)logInAppMessageImpression;
+    [Export("logInAppMessageImpression")]
+    void LogInAppMessageImpression();
+
+    // -(void)logInAppMessageClicked;
+    [Export("logInAppMessageClicked")]
+    void LogInAppMessageClicked();
+
+    // -(void)setInAppMessageClickAction:(ABKInAppMessageClickActionType)clickActionType withURI:(NSURL * _Nullable)uri;
+    [Export("setInAppMessageClickAction:withURI:")]
+    void SetInAppMessageClickAction(ABKInAppMessageClickActionType clickActionType, [NullAllowed] NSUrl uri);
+
+    // -(NSData * _Nullable)serializeToData;
+    [NullAllowed, Export("serializeToData")]
+    NSData SerializeToData { get; }
+  }
+
+  // @interface ABKInAppMessageSlideup : ABKInAppMessage
+  [BaseType(typeof(ABKInAppMessage))]
+  interface ABKInAppMessageSlideup
+  {
+    // @property BOOL hideChevron;
+    [Export("hideChevron")]
+    bool HideChevron { get; set; }
+
+    // @property ABKInAppMessageSlideupAnchor inAppMessageSlideupAnchor;
+    [Export("inAppMessageSlideupAnchor", ArgumentSemantic.Assign)]
+    ABKInAppMessageSlideupAnchor InAppMessageSlideupAnchor { get; set; }
+
+    // @property (strong) UIColor * _Nullable chevronColor;
+    [NullAllowed, Export("chevronColor", ArgumentSemantic.Strong)]
+    UIColor ChevronColor { get; set; }
+
+    // -(BOOL)isBeveled;
+    [Export("isBeveled")]
+    bool IsBeveled { get; }
+  }
+
+  // @interface ABKInAppMessageImmersive : ABKInAppMessage
+  [BaseType(typeof(ABKInAppMessage))]
+  interface ABKInAppMessageImmersive
+  {
+    // @property (copy) NSString * _Nullable header;
+    [NullAllowed, Export("header")]
+    string Header { get; set; }
+
+    // @property (strong) UIColor * _Nullable headerTextColor;
+    [NullAllowed, Export("headerTextColor", ArgumentSemantic.Strong)]
+    UIColor HeaderTextColor { get; set; }
+
+    // @property (strong) UIColor * _Nullable closeButtonColor;
+    [NullAllowed, Export("closeButtonColor", ArgumentSemantic.Strong)]
+    UIColor CloseButtonColor { get; set; }
+
+    // @property (readonly) NSArray * _Nullable buttons;
+    [NullAllowed, Export("buttons")]
+    NSObject[] Buttons { get; }
+
+    // @property (strong) UIColor * _Nullable frameColor;
+    [NullAllowed, Export("frameColor", ArgumentSemantic.Strong)]
+    UIColor FrameColor { get; set; }
+
+    // @property NSTextAlignment headerTextAlignment;
+    [Export("headerTextAlignment", ArgumentSemantic.Assign)]
+    UITextAlignment HeaderTextAlignment { get; set; }
+
+    // @property ABKInAppMessageImmersiveImageStyle imageStyle;
+    [Export("imageStyle", ArgumentSemantic.Assign)]
+    ABKInAppMessageImmersiveImageStyle ImageStyle { get; set; }
+
+    // -(void)logInAppMessageClickedWithButtonID:(NSInteger)buttonId;
+    [Export("logInAppMessageClickedWithButtonID:")]
+    void LogInAppMessageClickedWithButtonID(nint buttonId);
+
+    // -(void)setInAppMessageButtons:(NSArray * _Nonnull)buttonArray;
+    [Export("setInAppMessageButtons:")]
+    void SetInAppMessageButtons(NSObject[] buttonArray);
+  }
+
+  // @interface ABKInAppMessageModal : ABKInAppMessageImmersive
+  [BaseType(typeof(ABKInAppMessageImmersive))]
+  interface ABKInAppMessageModal
+  {
+  }
+
+  // @interface ABKInAppMessageFull : ABKInAppMessageImmersive
+  [BaseType(typeof(ABKInAppMessageImmersive))]
+  interface ABKInAppMessageFull
+  {
+  }
+
+  // @interface ABKInAppMessageHTML : ABKInAppMessage
+  [BaseType(typeof(ABKInAppMessage))]
+  interface ABKInAppMessageHTML
+  {
+    // @property (strong) NSURL * _Nullable assetsZipRemoteUrl;
+    [NullAllowed, Export("assetsZipRemoteUrl", ArgumentSemantic.Strong)]
+    NSUrl AssetsZipRemoteUrl { get; set; }
+
+    // @property NSURL * _Nonnull assetsLocalDirectoryPath;
+    [Export("assetsLocalDirectoryPath", ArgumentSemantic.Assign)]
+    NSUrl AssetsLocalDirectoryPath { get; set; }
+
+    // -(void)logInAppMessageHTMLClickWithButtonID:(NSString * _Nonnull)buttonId;
+    [Export("logInAppMessageHTMLClickWithButtonID:")]
+    void LogInAppMessageHTMLClickWithButtonID(string buttonId);
+  }
+
+  // @interface ABKInAppMessageHTMLFull : ABKInAppMessageHTML
+  [BaseType(typeof(ABKInAppMessageHTML))]
+  interface ABKInAppMessageHTMLFull
+  {
+  }
+
+  // @protocol ABKInAppMessageControllerDelegate <NSObject>
+  [Protocol, Model]
+  [BaseType(typeof(NSObject))]
+  interface ABKInAppMessageControllerDelegate
+  {
+    // @optional -(ABKInAppMessageDisplayChoice)beforeInAppMessageDisplayed:(ABKInAppMessage * _Nonnull)inAppMessage;
+    [Export("beforeInAppMessageDisplayed:")]
+    ABKInAppMessageDisplayChoice BeforeInAppMessageDisplayed(ABKInAppMessage inAppMessage);
+  }
+
+  // @protocol ABKInAppMessageUIControlling <NSObject>
+  [Protocol, Model]
+  [BaseType(typeof(NSObject))]
+  interface ABKInAppMessageUIControlling
+  {
+    // @optional -(void)setInAppMessageUIDelegate:(id)uiDelegate;
+    [Export("setInAppMessageUIDelegate:")]
+    void SetInAppMessageUIDelegate(NSObject uiDelegate);
+
+    // @optional -(void)hideCurrentInAppMessage:(BOOL)animated;
+    [Export("hideCurrentInAppMessage:")]
+    void HideCurrentInAppMessage(bool animated);
+
+    // @optional -(ABKInAppMessageDisplayChoice)getCurrentDisplayChoiceForInAppMessage:(ABKInAppMessage *)inAppMessage;
+    [Export("getCurrentDisplayChoiceForInAppMessage:")]
+    ABKInAppMessageDisplayChoice GetCurrentDisplayChoiceForInAppMessage(ABKInAppMessage inAppMessage);
+
+    // @optional -(void)showInAppMessage:(ABKInAppMessage *)inAppMessage;
+    [Export("showInAppMessage:")]
+    void ShowInAppMessage(ABKInAppMessage inAppMessage);
+
+    // @optional -(BOOL)inAppMessageCurrentlyVisible;
+    [Export("inAppMessageCurrentlyVisible")]
+    bool InAppMessageCurrentlyVisible { get; }
+  }
+
+  // @interface ABKInAppMessageController : NSObject
+  [BaseType(typeof(NSObject))]
+  interface ABKInAppMessageController
+  {
+    [Wrap("WeakDelegate")]
+    [NullAllowed]
+    ABKInAppMessageControllerDelegate Delegate { get; set; }
+
+    // @property (weak) id<ABKInAppMessageControllerDelegate> _Nullable delegate;
+    [NullAllowed, Export("delegate", ArgumentSemantic.Weak)]
+    NSObject WeakDelegate { get; set; }
+
+    // @property id<ABKInAppMessageUIControlling> _Nullable inAppMessageUIController;
+    [NullAllowed, Export("inAppMessageUIController", ArgumentSemantic.Assign)]
+    ABKInAppMessageUIControlling InAppMessageUIController { get; set; }
+
+    // -(void)displayNextInAppMessageWithDelegate:(id<ABKInAppMessageControllerDelegate> _Nullable)delegate;
+    [Export("displayNextInAppMessageWithDelegate:")]
+    void DisplayNextInAppMessageWithDelegate([NullAllowed] ABKInAppMessageControllerDelegate @delegate);
+
+    // -(NSInteger)inAppMessagesRemainingOnStack;
+    [Export("inAppMessagesRemainingOnStack")]
+    nint InAppMessagesRemainingOnStack { get; }
+
+    // -(void)addInAppMessage:(ABKInAppMessage * _Nonnull)newInAppMessage;
+    [Export("addInAppMessage:")]
+    void AddInAppMessage(ABKInAppMessage newInAppMessage);
+  }
+
+  // @interface ABKInAppMessageButton : NSObject
+  [BaseType(typeof(NSObject))]
+  interface ABKInAppMessageButton
+  {
+    // @property (copy) NSString * _Nullable buttonText;
+    [NullAllowed, Export("buttonText")]
+    string ButtonText { get; set; }
+
+    // @property (strong) UIColor * _Nullable buttonBackgroundColor;
+    [NullAllowed, Export("buttonBackgroundColor", ArgumentSemantic.Strong)]
+    UIColor ButtonBackgroundColor { get; set; }
+
+    // @property (strong) UIColor * _Nullable buttonTextColor;
+    [NullAllowed, Export("buttonTextColor", ArgumentSemantic.Strong)]
+    UIColor ButtonTextColor { get; set; }
+
+    // @property (copy) UIFont * _Nullable buttonTextFont;
+    [NullAllowed, Export("buttonTextFont", ArgumentSemantic.Copy)]
+    UIFont ButtonTextFont { get; set; }
+
+    // @property (readonly) ABKInAppMessageClickActionType buttonClickActionType;
+    [Export("buttonClickActionType")]
+    ABKInAppMessageClickActionType ButtonClickActionType { get; }
+
+    // @property (readonly, copy) NSURL * _Nullable buttonClickedURI;
+    [NullAllowed, Export("buttonClickedURI", ArgumentSemantic.Copy)]
+    NSUrl ButtonClickedURI { get; }
+
+    // @property BOOL buttonOpenUrlInWebView;
+    [Export("buttonOpenUrlInWebView")]
+    bool ButtonOpenUrlInWebView { get; set; }
+
+    // @property (readonly) NSInteger buttonID;
+    [Export("buttonID")]
+    nint ButtonID { get; }
+
+    // -(void)setButtonClickAction:(ABKInAppMessageClickActionType)clickActionType withURI:(NSURL * _Nullable)uri;
+    [Export("setButtonClickAction:withURI:")]
+    void SetButtonClickAction(ABKInAppMessageClickActionType clickActionType, [NullAllowed] NSUrl uri);
+  }
+
+  // @interface ABKInAppMessageHTMLJSBridge : NSObject
+  [BaseType(typeof(NSObject))]
+  interface ABKInAppMessageHTMLJSBridge
+  {
+    // +(BOOL)isBridgeURL:(NSURL *)url;
+    [Static]
+    [Export("isBridgeURL:")]
+    bool IsBridgeURL(NSUrl url);
+
+    // -(void)handleBridgeCallWithURL:(NSURL *)url appboyInstance:(Appboy *)appboy;
+    [Export("handleBridgeCallWithURL:appboyInstance:")]
+    void HandleBridgeCallWithURL(NSUrl url, Appboy appboy);
+  }
+
+  // @interface ABKInAppMessageHTMLJSInterface : NSObject
+  [BaseType(typeof(NSObject))]
+  interface ABKInAppMessageHTMLJSInterface
+  {
+    // +(NSString *)getJSInterface;
+    [Static]
+    [Export("getJSInterface")]
+    string JSInterface { get; }
+  }
+
+  // @interface ABKIdentifierForAdvertisingProvider : NSObject
+  [BaseType(typeof(NSObject))]
+  interface ABKIdentifierForAdvertisingProvider
+  {
+    // +(NSString * _Nullable)getIdentifierForAdvertiser;
+    [Static]
+    [NullAllowed, Export("getIdentifierForAdvertiser")]
+    string IdentifierForAdvertiser { get; }
+
+    // +(NSNumber * _Nullable)getIsAdvertisingTrackingEnabledAsNSNumber;
+    [Static]
+    [NullAllowed, Export("getIsAdvertisingTrackingEnabledAsNSNumber")]
+    NSNumber IsAdvertisingTrackingEnabledAsNSNumber { get; }
+  }
+
+  // @protocol ABKIDFADelegate <NSObject>
+  [Protocol, Model]
+  [BaseType(typeof(NSObject))]
+  interface ABKIDFADelegate
+  {
+    // @required -(NSString * _Nonnull)advertisingIdentifierString;
+    [Abstract]
+    [Export("advertisingIdentifierString")]
+    string AdvertisingIdentifierString { get; }
+
+    // @required -(BOOL)isAdvertisingTrackingEnabled;
+    [Abstract]
+    [Export("isAdvertisingTrackingEnabled")]
+    bool IsAdvertisingTrackingEnabled { get; }
+  }
+
+  // @interface ABKSDWebImageProxy : NSObject
+  [BaseType(typeof(NSObject))]
+  interface ABKSDWebImageProxy
+  {
+    // +(void)setImageForView:(UIImageView * _Nonnull)imageView showActivityIndicator:(BOOL)showActivityIndicator withURL:(NSURL * _Nullable)imageURL imagePlaceHolder:(UIImage * _Nullable)placeHolder completed:(void (^ _Nullable)(UIImage * _Nullable, NSError * _Nullable, NSInteger, NSUrl * _Nullable))completion;
+    [Static]
+    [Export("setImageForView:showActivityIndicator:withURL:imagePlaceHolder:completed:")]
+    void SetImageForView(UIImageView imageView, bool showActivityIndicator, [NullAllowed] NSUrl imageURL, [NullAllowed] UIImage placeHolder, [NullAllowed] Action<UIImage, NSError, nint, NSUrl> completion);
+
+    // +(void)prefetchURLs:(NSArray * _Nullable)imageURLs;
+    [Static]
+    [Export("prefetchURLs:")]
+    void PrefetchURLs([NullAllowed] NSObject[] imageURLs);
+
+    // +(void)loadImageWithURL:(NSURL * _Nullable)url options:(NSInteger)options completed:(void (^ _Nullable)(UIImage * _Nonnull, NSData * _Nonnull, NSError * _Nonnull, NSInteger, BOOL, NSUrl * _Nonnull))completion;
+    [Static]
+    [Export("loadImageWithURL:options:completed:")]
+    void LoadImageWithURL([NullAllowed] NSUrl url, nint options, [NullAllowed] Action<UIImage, NSData, NSError, nint, bool, NSUrl> completion);
+
+    // +(void)diskImageExistsForURL:(NSURL * _Nullable)url completed:(void (^ _Nullable)(BOOL))completion;
+    [Static]
+    [Export("diskImageExistsForURL:completed:")]
+    void DiskImageExistsForURL([NullAllowed] NSUrl url, [NullAllowed] Action<bool> completion);
+
+    // +(NSString * _Nullable)cacheKeyForURL:(NSURL * _Nullable)url;
+    [Static]
+    [Export("cacheKeyForURL:")]
+    [return: NullAllowed]
+    string CacheKeyForURL([NullAllowed] NSUrl url);
+
+    // +(void)removeImageForKey:(NSString * _Nullable)key;
+    [Static]
+    [Export("removeImageForKey:")]
+    void RemoveImageForKey([NullAllowed] string key);
+
+    // +(UIImage * _Nullable)imageFromCacheForKey:(NSString * _Nullable)key;
+    [Static]
+    [Export("imageFromCacheForKey:")]
+    [return: NullAllowed]
+    UIImage ImageFromCacheForKey([NullAllowed] string key);
+
+    // +(BOOL)isSupportedSDWebImageVersion;
+    [Static]
+    [Export("isSupportedSDWebImageVersion")]
+    bool IsSupportedSDWebImageVersion { get; }
+  }
+
+  // @interface ABKLocationManager : NSObject
+  [BaseType(typeof(NSObject))]
+  interface ABKLocationManager
+  {
+    // @property (readonly) BOOL disableLocationTracking;
+    [Export("disableLocationTracking")]
+    bool DisableLocationTracking { get; }
+
+    // -(void)allowRequestWhenInUseLocationPermission;
+    [Export("allowRequestWhenInUseLocationPermission")]
+    void AllowRequestWhenInUseLocationPermission();
+
+    // -(void)allowRequestAlwaysPermission;
+    [Export("allowRequestAlwaysPermission")]
+    void AllowRequestAlwaysPermission();
+
+    // -(void)logSingleLocation;
+    [Export("logSingleLocation")]
+    void LogSingleLocation();
+  }
+
+  // @protocol ABKURLDelegate <NSObject>
+  [Protocol, Model]
+  [BaseType(typeof(NSObject))]
+  interface ABKURLDelegate
+  {
+    // @required -(BOOL)handleAppboyURL:(NSURL * _Nonnull)url fromChannel:(ABKChannel)channel withExtras:(NSDictionary * _Nonnull)extras;
+    [Abstract]
+    [Export("handleAppboyURL:fromChannel:withExtras:")]
+    bool FromChannel(NSUrl url, ABKChannel channel, NSDictionary extras);
+  }
+
+  // @protocol ABKPushURIDelegate <NSObject>
+  [Protocol, Model]
+  [BaseType(typeof(NSObject))]
+  interface ABKPushURIDelegate
+  {
+    // @required -(BOOL)handleAppboyPushURI:(NSString * _Nonnull)URIString withNotificationInfo:(NSDictionary * _Nonnull)notificationInfo;
+    [Abstract]
+    [Export("handleAppboyPushURI:withNotificationInfo:")]
+    bool WithNotificationInfo(string URIString, NSDictionary notificationInfo);
+  }
+
+  // @interface ABKPushUtils : NSObject
+  [BaseType(typeof(NSObject))]
+  interface ABKPushUtils
+  {
+    // +(BOOL)isAppboyUserNotification:(UNNotificationResponse * _Nonnull)response __attribute__((availability(ios, introduced=10.0)));
+    [Introduced(PlatformName.iOS, 10, 0, message: "")]
+    [Static]
+    [Export("isAppboyUserNotification:")]
+    bool IsAppboyUserNotification(UNNotificationResponse response);
+
+    // +(BOOL)isAppboyRemoteNotification:(NSDictionary * _Nonnull)userInfo;
+    [Static]
+    [Export("isAppboyRemoteNotification:")]
+    bool IsAppboyRemoteNotification(NSDictionary userInfo);
+
+    // +(BOOL)isAppboyInternalRemoteNotification:(NSDictionary * _Nonnull)userInfo;
+    [Static]
+    [Export("isAppboyInternalRemoteNotification:")]
+    bool IsAppboyInternalRemoteNotification(NSDictionary userInfo);
+
+    // +(BOOL)isUninstallTrackingUserNotification:(UNNotificationResponse * _Nonnull)response __attribute__((availability(ios, introduced=10.0)));
+    [Introduced(PlatformName.iOS, 10, 0, message: "")]
+    [Static]
+    [Export("isUninstallTrackingUserNotification:")]
+    bool IsUninstallTrackingUserNotification(UNNotificationResponse response);
+
+    // +(BOOL)isUninstallTrackingRemoteNotification:(NSDictionary * _Nonnull)userInfo;
+    [Static]
+    [Export("isUninstallTrackingRemoteNotification:")]
+    bool IsUninstallTrackingRemoteNotification(NSDictionary userInfo);
+
+    // +(BOOL)isGeofencesSyncUserNotification:(UNNotificationResponse * _Nonnull)response __attribute__((availability(ios, introduced=10.0)));
+    [Introduced(PlatformName.iOS, 10, 0, message: "")]
+    [Static]
+    [Export("isGeofencesSyncUserNotification:")]
+    bool IsGeofencesSyncUserNotification(UNNotificationResponse response);
+
+    // +(BOOL)isGeofencesSyncRemoteNotification:(NSDictionary * _Nonnull)userInfo;
+    [Static]
+    [Export("isGeofencesSyncRemoteNotification:")]
+    bool IsGeofencesSyncRemoteNotification(NSDictionary userInfo);
+
+    // +(BOOL)isPushStoryRemoteNotification:(NSDictionary * _Nonnull)userInfo;
+    [Static]
+    [Export("isPushStoryRemoteNotification:")]
+    bool IsPushStoryRemoteNotification(NSDictionary userInfo);
+
+    // +(BOOL)shouldFetchTestTriggersFlagContainedInPayload:(NSDictionary * _Nonnull)userInfo __attribute__((deprecated("")));
+    [Static]
+    [Export("shouldFetchTestTriggersFlagContainedInPayload:")]
+    bool ShouldFetchTestTriggersFlagContainedInPayload(NSDictionary userInfo);
+
+    // +(NSSet<UNNotificationCategory *> * _Nonnull)getAppboyUNNotificationCategorySet __attribute__((availability(ios, introduced=10.0)));
+    [Introduced(PlatformName.iOS, 10, 0, message: "")]
+    [Static]
+    [Export("getAppboyUNNotificationCategorySet")]
+    NSSet<UNNotificationCategory> AppboyUNNotificationCategorySet { get; }
+
+    // +(NSSet<UIUserNotificationCategory *> * _Nonnull)getAppboyUIUserNotificationCategorySet __attribute__((deprecated("")));
+    [Static]
+    [Export("getAppboyUIUserNotificationCategorySet")]
+    NSSet<UIUserNotificationCategory> AppboyUIUserNotificationCategorySet { get; }
+  }
+
+  // @interface ABKFeedbackViewController : UIViewController <UITextFieldDelegate>
+  [BaseType(typeof(UIViewController))]
+  interface ABKFeedbackViewController : IUITextFieldDelegate
+  {
+    // @property (nonatomic, weak) UITextView * feedbackTextView __attribute__((iboutlet));
+    [Export("feedbackTextView", ArgumentSemantic.Weak)]
+    UITextView FeedbackTextView { get; set; }
+
+    // @property (nonatomic, weak) UIButton * issueButton __attribute__((iboutlet));
+    [Export("issueButton", ArgumentSemantic.Weak)]
+    UIButton IssueButton { get; set; }
+
+    // @property (nonatomic, weak) UILabel * messageLabel __attribute__((iboutlet));
+    [Export("messageLabel", ArgumentSemantic.Weak)]
+    UILabel MessageLabel { get; set; }
+
+    // @property (nonatomic, weak) UILabel * reportIssueLabel __attribute__((iboutlet));
+    [Export("reportIssueLabel", ArgumentSemantic.Weak)]
+    UILabel ReportIssueLabel { get; set; }
+
+    // @property (nonatomic, weak) UITextField * emailTextField __attribute__((iboutlet));
+    [Export("emailTextField", ArgumentSemantic.Weak)]
+    UITextField EmailTextField { get; set; }
+
+    // @property (nonatomic, weak) UIView * spinnerView __attribute__((iboutlet));
+    [Export("spinnerView", ArgumentSemantic.Weak)]
+    UIView SpinnerView { get; set; }
+
+    // -(void)issueButtonTapped:(UIButton *)sender __attribute__((ibaction));
+    [Export("issueButtonTapped:")]
+    void IssueButtonTapped(UIButton sender);
+
+    // -(void)sendButtonTapped:(UIBarButtonItem *)sender __attribute__((ibaction));
+    [Export("sendButtonTapped:")]
+    void SendButtonTapped(UIBarButtonItem sender);
+
+    // -(ABKFeedback *)appboyFeedbackFromMessage:(NSString *)message email:(NSString *)email isBug:(BOOL)isBug;
+    [Export("appboyFeedbackFromMessage:email:isBug:")]
+    ABKFeedback AppboyFeedbackFromMessage(string message, string email, bool isBug);
+
+    // -(void)feedbackSent:(ABKFeedbackSentResult)feedbackSentResult;
+    [Export("feedbackSent:")]
+    void FeedbackSent(ABKFeedbackSentResult feedbackSentResult);
+
+    // -(NSString *)localizedAppboyFeedbackString:(NSString *)key;
+    [Export("localizedAppboyFeedbackString:")]
+    string LocalizedAppboyFeedbackString(string key);
+
+    // -(void)displayAlertViewWithTitle:(NSString *)title message:(NSString *)message;
+    [Export("displayAlertViewWithTitle:message:")]
+    void DisplayAlertViewWithTitle(string title, string message);
+  }
+
+  // @interface ABKInAppMessageViewController : UIViewController
+  [BaseType(typeof(UIViewController))]
+  interface ABKInAppMessageViewController
+  {
+    // @property (strong) ABKInAppMessage * _Nonnull inAppMessage;
+    [Export("inAppMessage", ArgumentSemantic.Strong)]
+    ABKInAppMessage InAppMessage { get; set; }
+
+    // @property (nonatomic, weak) UIImageView * _Nullable iconImageView __attribute__((iboutlet));
+    [NullAllowed, Export("iconImageView", ArgumentSemantic.Weak)]
+    UIImageView IconImageView { get; set; }
+
+    // @property (nonatomic, weak) UILabel * _Nullable iconLabelView __attribute__((iboutlet));
+    [NullAllowed, Export("iconLabelView", ArgumentSemantic.Weak)]
+    UILabel IconLabelView { get; set; }
+
+    // @property (nonatomic, weak) UILabel * _Nullable inAppMessageMessageLabel __attribute__((iboutlet));
+    [NullAllowed, Export("inAppMessageMessageLabel", ArgumentSemantic.Weak)]
+    UILabel InAppMessageMessageLabel { get; set; }
+
+    // @property BOOL isiPad;
+    [Export("isiPad")]
+    bool IsiPad { get; set; }
+
+    // -(instancetype _Nonnull)initWithInAppMessage:(ABKInAppMessage * _Nonnull)inAppMessage;
+    [Export("initWithInAppMessage:")]
+    IntPtr Constructor(ABKInAppMessage inAppMessage);
+
+    // -(void)hideInAppMessage:(BOOL)animated;
+    [Export("hideInAppMessage:")]
+    void HideInAppMessage(bool animated);
+
+    // -(void)beforeMoveInAppMessageViewOffScreen;
+    [Export("beforeMoveInAppMessageViewOffScreen")]
+    void BeforeMoveInAppMessageViewOffScreen();
+
+    // -(void)moveInAppMessageViewOffScreen;
+    [Export("moveInAppMessageViewOffScreen")]
+    void MoveInAppMessageViewOffScreen();
+
+    // -(void)beforeMoveInAppMessageViewOnScreen;
+    [Export("beforeMoveInAppMessageViewOnScreen")]
+    void BeforeMoveInAppMessageViewOnScreen();
+
+    // -(void)moveInAppMessageViewOnScreen;
+    [Export("moveInAppMessageViewOnScreen")]
+    void MoveInAppMessageViewOnScreen();
+
+    // -(BOOL)applyImageToImageView:(UIImageView * _Nonnull)iconImageView;
+    [Export("applyImageToImageView:")]
+    bool ApplyImageToImageView(UIImageView iconImageView);
+
+    // -(BOOL)applyIconToLabelView:(UILabel * _Nonnull)iconLabelView;
+    [Export("applyIconToLabelView:")]
+    bool ApplyIconToLabelView(UILabel iconLabelView);
+  }
+
+  // @interface ABKInAppMessageUIButton : UIButton
+  [BaseType(typeof(UIButton))]
+  interface ABKInAppMessageUIButton
+  {
+    // @property ABKInAppMessageButton * _Nonnull inAppButtonModel;
+    [Export("inAppButtonModel", ArgumentSemantic.Assign)]
+    ABKInAppMessageButton InAppButtonModel { get; set; }
+  }
+
+  // @interface ABKInAppMessageImmersiveViewController : ABKInAppMessageViewController
+  [BaseType(typeof(ABKInAppMessageViewController))]
+  interface ABKInAppMessageImmersiveViewController
+  {
+    // @property (nonatomic, weak) UILabel * _Nullable inAppMessageHeaderLabel __attribute__((iboutlet));
+    [NullAllowed, Export("inAppMessageHeaderLabel", ArgumentSemantic.Weak)]
+    UILabel InAppMessageHeaderLabel { get; set; }
+
+    // @property (nonatomic, weak) UIImageView * _Nullable graphicImageView __attribute__((iboutlet));
+    [NullAllowed, Export("graphicImageView", ArgumentSemantic.Weak)]
+    UIImageView GraphicImageView { get; set; }
+
+    // @property (nonatomic) NSLayoutConstraint * _Nonnull headerBodySpaceConstraint __attribute__((iboutlet));
+    [Export("headerBodySpaceConstraint", ArgumentSemantic.Assign)]
+    NSLayoutConstraint HeaderBodySpaceConstraint { get; set; }
+
+    // @property (retain, nonatomic) ABKInAppMessageUIButton * _Nullable leftInAppMessageButton __attribute__((iboutlet));
+    [NullAllowed, Export("leftInAppMessageButton", ArgumentSemantic.Retain)]
+    ABKInAppMessageUIButton LeftInAppMessageButton { get; set; }
+
+    // @property (retain, nonatomic) ABKInAppMessageUIButton * _Nullable rightInAppMessageButton __attribute__((iboutlet));
+    [NullAllowed, Export("rightInAppMessageButton", ArgumentSemantic.Retain)]
+    ABKInAppMessageUIButton RightInAppMessageButton { get; set; }
+
+    // @property (nonatomic) UIScrollView * _Nullable textsView __attribute__((iboutlet));
+    [NullAllowed, Export("textsView", ArgumentSemantic.Assign)]
+    UIScrollView TextsView { get; set; }
+
+    // -(void)setupLayoutForGraphic;
+    [Export("setupLayoutForGraphic")]
+    void SetupLayoutForGraphic();
+
+    // -(void)setupLayoutForTopImage;
+    [Export("setupLayoutForTopImage")]
+    void SetupLayoutForTopImage();
+
+    // -(void)changeCloseButtonColor;
+    [Export("changeCloseButtonColor")]
+    void ChangeCloseButtonColor();
+
+    // -(void)dismissInAppMessage:(id _Nonnull)sender __attribute__((ibaction));
+    [Export("dismissInAppMessage:")]
+    void DismissInAppMessage(NSObject sender);
+
+    // -(void)buttonClicked:(ABKInAppMessageUIButton * _Nonnull)button __attribute__((ibaction));
+    [Export("buttonClicked:")]
+    void ButtonClicked(ABKInAppMessageUIButton button);
+  }
+
+  // @interface ABKInAppMessageFullViewController : ABKInAppMessageImmersiveViewController
+  [BaseType(typeof(ABKInAppMessageImmersiveViewController))]
+  interface ABKInAppMessageFullViewController
+  {
+    // @property (nonatomic, unsafe_unretained) NSLayoutConstraint * _Nonnull textsViewLeadingConstraint __attribute__((iboutlet));
+    [Export("textsViewLeadingConstraint", ArgumentSemantic.Assign)]
+    NSLayoutConstraint TextsViewLeadingConstraint { get; set; }
+
+    // @property (nonatomic, unsafe_unretained) NSLayoutConstraint * _Nonnull textsViewTrailingConstraint __attribute__((iboutlet));
+    [Export("textsViewTrailingConstraint", ArgumentSemantic.Assign)]
+    NSLayoutConstraint TextsViewTrailingConstraint { get; set; }
+
+    // @property (nonatomic, unsafe_unretained) NSLayoutConstraint * _Nonnull headerLeadingConstraint __attribute__((iboutlet));
+    [Export("headerLeadingConstraint", ArgumentSemantic.Assign)]
+    NSLayoutConstraint HeaderLeadingConstraint { get; set; }
+
+    // @property (nonatomic, unsafe_unretained) NSLayoutConstraint * _Nonnull headerTrailingConstraint __attribute__((iboutlet));
+    [Export("headerTrailingConstraint", ArgumentSemantic.Assign)]
+    NSLayoutConstraint HeaderTrailingConstraint { get; set; }
+
+    // @property (nonatomic, unsafe_unretained) NSLayoutConstraint * _Nonnull messageLeadingConstraint __attribute__((iboutlet));
+    [Export("messageLeadingConstraint", ArgumentSemantic.Assign)]
+    NSLayoutConstraint MessageLeadingConstraint { get; set; }
+
+    // @property (nonatomic, unsafe_unretained) NSLayoutConstraint * _Nonnull messageTrailingConstraint __attribute__((iboutlet));
+    [Export("messageTrailingConstraint", ArgumentSemantic.Assign)]
+    NSLayoutConstraint MessageTrailingConstraint { get; set; }
+  }
+
+  // @interface ABKInAppMessageHTMLViewController : ABKInAppMessageViewController <UIWebViewDelegate>
+  [BaseType(typeof(ABKInAppMessageViewController))]
+  interface ABKInAppMessageHTMLViewController : IUIWebViewDelegate
+  {
+    // @property (nonatomic, weak) UIWebView * _Nullable webView __attribute__((iboutlet));
+    [NullAllowed, Export("webView", ArgumentSemantic.Weak)]
+    UIWebView WebView { get; set; }
+  }
+
+  // @interface ABKInAppMessageHTMLFullViewController : ABKInAppMessageHTMLViewController
+  [BaseType(typeof(ABKInAppMessageHTMLViewController))]
+  interface ABKInAppMessageHTMLFullViewController
+  {
+    // @property (nonatomic, weak) NSLayoutConstraint * _Nullable topConstraint __attribute__((iboutlet));
+    [NullAllowed, Export("topConstraint", ArgumentSemantic.Weak)]
+    NSLayoutConstraint TopConstraint { get; set; }
+
+    // @property (nonatomic, weak) NSLayoutConstraint * _Nullable bottomConstraint __attribute__((iboutlet));
+    [NullAllowed, Export("bottomConstraint", ArgumentSemantic.Weak)]
+    NSLayoutConstraint BottomConstraint { get; set; }
+  }
+
+  // @interface ABKInAppMessageModalViewController : ABKInAppMessageImmersiveViewController
+  [BaseType(typeof(ABKInAppMessageImmersiveViewController))]
+  interface ABKInAppMessageModalViewController
+  {
+    // @property (retain, nonatomic) NSLayoutConstraint * _Nonnull iconImageHeightConstraint __attribute__((iboutlet));
+    [Export("iconImageHeightConstraint", ArgumentSemantic.Retain)]
+    NSLayoutConstraint IconImageHeightConstraint { get; set; }
+
+    // @property (retain, nonatomic) NSLayoutConstraint * _Nonnull textsViewWidthConstraint __attribute__((iboutlet));
+    [Export("textsViewWidthConstraint", ArgumentSemantic.Retain)]
+    NSLayoutConstraint TextsViewWidthConstraint { get; set; }
+  }
+
+  // @interface ABKInAppMessageSlideupViewController : ABKInAppMessageViewController
+  [BaseType(typeof(ABKInAppMessageViewController))]
+  interface ABKInAppMessageSlideupViewController
+  {
+    // @property (nonatomic, weak) UIImageView * _Nullable arrowImage __attribute__((iboutlet));
+    [NullAllowed, Export("arrowImage", ArgumentSemantic.Weak)]
+    UIImageView ArrowImage { get; set; }
+
+    // @property (nonatomic, weak) NSLayoutConstraint * _Nullable slideConstraint __attribute__((iboutlet));
+    [NullAllowed, Export("slideConstraint", ArgumentSemantic.Weak)]
+    NSLayoutConstraint SlideConstraint { get; set; }
+  }
+
+  // @protocol ABKInAppMessageUIDelegate <NSObject>
+  [Protocol, Model]
+  [BaseType(typeof(NSObject))]
+  interface ABKInAppMessageUIDelegate
+  {
+    // @optional -(ABKInAppMessageDisplayChoice)beforeInAppMessageDisplayed:(ABKInAppMessage * _Nonnull)inAppMessage withKeyboardIsUp:(BOOL)keyboardIsUp __attribute__((deprecated("")));
+    [Export("beforeInAppMessageDisplayed:withKeyboardIsUp:")]
+    ABKInAppMessageDisplayChoice BeforeInAppMessageDisplayed(ABKInAppMessage inAppMessage, bool keyboardIsUp);
+
+    // @optional -(ABKInAppMessageViewController * _Nonnull)inAppMessageViewControllerWithInAppMessage:(ABKInAppMessage * _Nonnull)inAppMessage;
+    [Export("inAppMessageViewControllerWithInAppMessage:")]
+    ABKInAppMessageViewController InAppMessageViewControllerWithInAppMessage(ABKInAppMessage inAppMessage);
+
+    // @optional -(void)onInAppMessageDismissed:(ABKInAppMessage * _Nonnull)inAppMessage;
+    [Export("onInAppMessageDismissed:")]
+    void OnInAppMessageDismissed(ABKInAppMessage inAppMessage);
+
+    // @optional -(BOOL)onInAppMessageClicked:(ABKInAppMessage * _Nonnull)inAppMessage;
+    [Export("onInAppMessageClicked:")]
+    bool OnInAppMessageClicked(ABKInAppMessage inAppMessage);
+
+    // @optional -(BOOL)onInAppMessageButtonClicked:(ABKInAppMessageImmersive * _Nonnull)inAppMessage button:(ABKInAppMessageButton * _Nonnull)button;
+    [Export("onInAppMessageButtonClicked:button:")]
+    bool OnInAppMessageButtonClicked(ABKInAppMessageImmersive inAppMessage, ABKInAppMessageButton button);
+
+    // @optional -(BOOL)onInAppMessageHTMLButtonClicked:(ABKInAppMessageHTML * _Nonnull)inAppMessage clickedURL:(NSURL * _Nullable)clickedURL buttonID:(NSString * _Nonnull)buttonId;
+    [Export("onInAppMessageHTMLButtonClicked:clickedURL:buttonID:")]
+    bool OnInAppMessageHTMLButtonClicked(ABKInAppMessageHTML inAppMessage, [NullAllowed] NSUrl clickedURL, string buttonId);
+  }
+
+  // @interface ABKInAppMessageWindow : UIWindow
+  [BaseType(typeof(UIWindow))]
+  interface ABKInAppMessageWindow
+  {
+    // @property BOOL catchClicksOutsideInAppMessage;
+    [Export("catchClicksOutsideInAppMessage")]
+    bool CatchClicksOutsideInAppMessage { get; set; }
+  }
+
+  // @interface ABKInAppMessageWindowController : UIViewController <UIGestureRecognizerDelegate>
+  [BaseType(typeof(UIViewController))]
+  interface ABKInAppMessageWindowController : IUIGestureRecognizerDelegate
+  {
+    // @property (nonatomic) ABKInAppMessageWindow * _Nullable inAppMessageWindow __attribute__((iboutlet));
+    [NullAllowed, Export("inAppMessageWindow", ArgumentSemantic.Assign)]
+    ABKInAppMessageWindow InAppMessageWindow { get; set; }
+
+    // @property NSTimer * _Nullable slideAwayTimer;
+    [NullAllowed, Export("slideAwayTimer", ArgumentSemantic.Assign)]
+    NSTimer SlideAwayTimer { get; set; }
+
+    // @property ABKInAppMessage * _Nonnull inAppMessage;
+    [Export("inAppMessage", ArgumentSemantic.Assign)]
+    ABKInAppMessage InAppMessage { get; set; }
+
+    [Wrap("WeakInAppMessageUIDelegate")]
+    [NullAllowed]
+    ABKInAppMessageUIDelegate InAppMessageUIDelegate { get; set; }
+
+    // @property (weak) id<ABKInAppMessageUIDelegate> _Nullable inAppMessageUIDelegate;
+    [NullAllowed, Export("inAppMessageUIDelegate", ArgumentSemantic.Weak)]
+    NSObject WeakInAppMessageUIDelegate { get; set; }
+
+    // @property ABKInAppMessageViewController * _Nonnull inAppMessageViewController;
+    [Export("inAppMessageViewController", ArgumentSemantic.Assign)]
+    ABKInAppMessageViewController InAppMessageViewController { get; set; }
+
+    // @property CGFloat slideupConstraintMaxValue;
+    [Export("slideupConstraintMaxValue")]
+    nfloat SlideupConstraintMaxValue { get; set; }
+
+    // @property CGPoint inAppMessagePreviousPanPosition;
+    [Export("inAppMessagePreviousPanPosition", ArgumentSemantic.Assign)]
+    CGPoint InAppMessagePreviousPanPosition { get; set; }
+
+    // @property UIInterfaceOrientationMask supportedOrientationMasks;
+    [Export("supportedOrientationMasks", ArgumentSemantic.Assign)]
+    UIInterfaceOrientationMask SupportedOrientationMasks { get; set; }
+
+    // @property UIInterfaceOrientation supportedOrientations;
+    [Export("supportedOrientations", ArgumentSemantic.Assign)]
+    UIInterfaceOrientation SupportedOrientations { get; set; }
+
+    // @property (nonatomic, weak) UIWindow * _Nullable appWindow;
+    [NullAllowed, Export("appWindow", ArgumentSemantic.Weak)]
+    UIWindow AppWindow { get; set; }
+
+    // @property BOOL isInRotation;
+    [Export("isInRotation")]
+    bool IsInRotation { get; set; }
+
+    // @property BOOL inAppMessageIsTapped;
+    [Export("inAppMessageIsTapped")]
+    bool InAppMessageIsTapped { get; set; }
+
+    // @property NSInteger clickedButtonId;
+    [Export("clickedButtonId")]
+    nint ClickedButtonId { get; set; }
+
+    // @property NSString * _Nullable clickedHTMLButtonId;
+    [NullAllowed, Export("clickedHTMLButtonId")]
+    string ClickedHTMLButtonId { get; set; }
+
+    // -(instancetype _Nonnull)initWithInAppMessage:(ABKInAppMessage * _Nonnull)inAppMessage inAppMessageViewController:(ABKInAppMessageViewController * _Nonnull)inAppMessageViewController inAppMessageDelegate:(id<ABKInAppMessageUIDelegate> _Nonnull)delegate;
+    [Export("initWithInAppMessage:inAppMessageViewController:inAppMessageDelegate:")]
+    IntPtr Constructor(ABKInAppMessage inAppMessage, ABKInAppMessageViewController inAppMessageViewController, ABKInAppMessageUIDelegate @delegate);
+
+    // -(void)keyboardWasShown;
+    [Export("keyboardWasShown")]
+    void KeyboardWasShown();
+
+    // -(void)displayInAppMessageViewWithAnimation:(BOOL)withAnimation;
+    [Export("displayInAppMessageViewWithAnimation:")]
+    void DisplayInAppMessageViewWithAnimation(bool withAnimation);
+
+    // -(void)hideInAppMessageViewWithAnimation:(BOOL)withAnimation;
+    [Export("hideInAppMessageViewWithAnimation:")]
+    void HideInAppMessageViewWithAnimation(bool withAnimation);
+
+    // -(void)hideInAppMessageViewWithAnimation:(BOOL)withAnimation completionHandler:(void (^ _Nullable)(void))completionHandler;
+    [Export("hideInAppMessageViewWithAnimation:completionHandler:")]
+    void HideInAppMessageViewWithAnimation(bool withAnimation, [NullAllowed] Action completionHandler);
+
+    // -(void)inAppMessageClickedWithActionType:(ABKInAppMessageClickActionType)actionType URL:(NSURL * _Nullable)url openURLInWebView:(BOOL)openUrlInWebView;
+    [Export("inAppMessageClickedWithActionType:URL:openURLInWebView:")]
+    void InAppMessageClickedWithActionType(ABKInAppMessageClickActionType actionType, [NullAllowed] NSUrl url, bool openUrlInWebView);
+  }
+
+  // @interface ABKInAppMessageUIController : NSObject <ABKInAppMessageUIControlling>
+  [BaseType(typeof(NSObject))]
+  interface ABKInAppMessageUIController : ABKInAppMessageUIControlling
+  {
+    // @property UIInterfaceOrientationMask supportedOrientationMasks;
+    [Export("supportedOrientationMasks", ArgumentSemantic.Assign)]
+    UIInterfaceOrientationMask SupportedOrientationMasks { get; set; }
+
+    // @property UIInterfaceOrientation supportedOrientations;
+    [Export("supportedOrientations", ArgumentSemantic.Assign)]
+    UIInterfaceOrientation SupportedOrientations { get; set; }
+
+    // @property BOOL keyboardVisible;
+    [Export("keyboardVisible")]
+    bool KeyboardVisible { get; set; }
+
+    // @property ABKInAppMessageWindowController * _Nullable inAppMessageWindowController;
+    [NullAllowed, Export("inAppMessageWindowController", ArgumentSemantic.Assign)]
+    ABKInAppMessageWindowController InAppMessageWindowController { get; set; }
+
+    [Wrap("WeakUiDelegate")]
+    [NullAllowed]
+    ABKInAppMessageUIDelegate UiDelegate { get; set; }
+
+    // @property (weak) id<ABKInAppMessageUIDelegate> _Nullable uiDelegate;
+    [NullAllowed, Export("uiDelegate", ArgumentSemantic.Weak)]
+    NSObject WeakUiDelegate { get; set; }
+  }
+
+  // @interface ABKInAppMessageView : UIView
+  [BaseType(typeof(UIView))]
+  interface ABKInAppMessageView
+  {
+  }
+
+  // @interface ABKModalFeedbackViewController : ABKFeedbackViewController
+  [BaseType(typeof(ABKFeedbackViewController))]
+  interface ABKModalFeedbackViewController
+  {
+    // @property (nonatomic, weak) UINavigationBar * navigationBar __attribute__((iboutlet));
+    [Export("navigationBar", ArgumentSemantic.Weak)]
+    UINavigationBar NavigationBar { get; set; }
+
+    // @property (nonatomic, weak) UIBarButtonItem * cancelBarButton __attribute__((iboutlet));
+    [Export("cancelBarButton", ArgumentSemantic.Weak)]
+    UIBarButtonItem CancelBarButton { get; set; }
+
+    // @property (nonatomic, weak) UIBarButtonItem * sendBarButton __attribute__((iboutlet));
+    [Export("sendBarButton", ArgumentSemantic.Weak)]
+    UIBarButtonItem SendBarButton { get; set; }
+
+    // -(void)cancelButtonTapped:(UIBarButtonItem *)sender __attribute__((ibaction));
+    [Export("cancelButtonTapped:")]
+    void CancelButtonTapped(UIBarButtonItem sender);
+  }
+
+  // @interface ABKModalWebViewController : UINavigationController <WKNavigationDelegate>
+  [BaseType(typeof(UINavigationController))]
+  interface ABKModalWebViewController : IWKNavigationDelegate
+  {
+    // @property NSURL * url;
+    [Export("url", ArgumentSemantic.Assign)]
+    NSUrl Url { get; set; }
+
+    // @property (nonatomic) WKWebView * webView __attribute__((iboutlet));
+    [Export("webView", ArgumentSemantic.Assign)]
+    WKWebView WebView { get; set; }
+
+    // @property (nonatomic) UIProgressView * progressBar __attribute__((iboutlet));
+    [Export("progressBar", ArgumentSemantic.Assign)]
+    UIProgressView ProgressBar { get; set; }
+  }
+
+  // @interface ABKNavigationBar : UINavigationBar
+  [BaseType(typeof(UINavigationBar))]
+  interface ABKNavigationBar
+  {
+  }
+
+  // @interface ABKNavigationFeedbackViewController : ABKFeedbackViewController
+  [BaseType(typeof(ABKFeedbackViewController))]
+  interface ABKNavigationFeedbackViewController
+  {
+  }
+
+  // @interface ABKNoConnectionLocalization : NSObject
+  [BaseType(typeof(NSObject))]
+  interface ABKNoConnectionLocalization
+  {
+    // +(NSString *)getNoConnectionLocalizedString;
+    [Static]
+    [Export("getNoConnectionLocalizedString")]
+    string NoConnectionLocalizedString { get; }
+  }
+
+  // @interface ABKThemableFeedNavigationBar : ABKNavigationBar
+  [BaseType(typeof(ABKNavigationBar))]
+  interface ABKThemableFeedNavigationBar
+  {
+  }
+
+  // @interface ABKUIURLUtils : NSObject
+  [BaseType(typeof(NSObject))]
+  interface ABKUIURLUtils
+  {
+    // +(BOOL)URLDelegate:(id<ABKURLDelegate>)urlDelegate handlesURL:(NSURL *)url fromChannel:(ABKChannel)channel withExtras:(NSDictionary *)extras;
+    [Static]
+    [Export("URLDelegate:handlesURL:fromChannel:withExtras:")]
+    bool URLDelegate(ABKURLDelegate urlDelegate, NSUrl url, ABKChannel channel, NSDictionary extras);
+
+    // +(BOOL)URL:(NSURL *)url shouldOpenInWebView:(BOOL)openUrlInWebView;
+    [Static]
+    [Export("URL:shouldOpenInWebView:")]
+    bool URL(NSUrl url, bool openUrlInWebView);
+
+    // +(void)openURLWithSystem:(NSURL *)url;
+    [Static]
+    [Export("openURLWithSystem:")]
+    void OpenURLWithSystem(NSUrl url);
+
+    // +(UIViewController *)topmostViewControllerWithRootViewController:(UIViewController *)viewController;
+    [Static]
+    [Export("topmostViewControllerWithRootViewController:")]
+    UIViewController TopmostViewControllerWithRootViewController(UIViewController viewController);
+
+    // +(void)displayModalWebViewWithURL:(NSURL *)url topmostViewController:(UIViewController *)topmostViewController;
+    [Static]
+    [Export("displayModalWebViewWithURL:topmostViewController:")]
+    void DisplayModalWebViewWithURL(NSUrl url, UIViewController topmostViewController);
+  }
+
+  // @interface ABKUIUtils : NSObject
+  [BaseType(typeof(NSObject))]
+  interface ABKUIUtils
+  {
+    // +(NSString *)getLocalizedString:(NSString *)key inAppboyBundle:(NSBundle *)appboyBundle table:(NSString *)table;
+    [Static]
+    [Export("getLocalizedString:inAppboyBundle:table:")]
+    string GetLocalizedString(string key, NSBundle appboyBundle, string table);
+
+    // +(BOOL)objectIsValidAndNotEmpty:(id)object;
+    [Static]
+    [Export("objectIsValidAndNotEmpty:")]
+    bool ObjectIsValidAndNotEmpty(NSObject @object);
+
+    // +(UIImage *)maskImage:(UIImage *)image toColor:(UIColor *)color;
+    [Static]
+    [Export("maskImage:toColor:")]
+    UIImage MaskImage(UIImage image, UIColor color);
+
+    // +(Class)getSDWebImageProxyClass;
+    [Static]
+    [Export("getSDWebImageProxyClass")]
+    Class SDWebImageProxyClass { get; }
+
+    // +(Class)getModalFeedViewControllerClass;
+    [Static]
+    [Export("getModalFeedViewControllerClass")]
+    Class ModalFeedViewControllerClass { get; }
+
+    // +(BOOL)isiPhoneX;
+    [Static]
+    [Export("isiPhoneX")]
+    bool IsiPhoneX { get; }
+  }
+
+  // @interface ABKViewUtilities : NSObject
+  [BaseType(typeof(NSObject))]
+  interface ABKViewUtilities
+  {
+    // +(void)setViewOriginY:(UIView *)view originY:(CGFloat)originY;
+    [Static]
+    [Export("setViewOriginY:originY:")]
+    void SetViewOriginY(UIView view, nfloat originY);
+
+    // +(void)setViewOriginX:(UIView *)view originX:(CGFloat)originX;
+    [Static]
+    [Export("setViewOriginX:originX:")]
+    void SetViewOriginX(UIView view, nfloat originX);
+
+    // +(void)setViewHeight:(UIView *)view height:(CGFloat)aHeight;
+    [Static]
+    [Export("setViewHeight:height:")]
+    void SetViewHeight(UIView view, nfloat aHeight);
+
+    // +(void)setViewWidth:(UIView *)view width:(CGFloat)aWidth;
+    [Static]
+    [Export("setViewWidth:width:")]
+    void SetViewWidth(UIView view, nfloat aWidth);
+
+    // +(void)setViewCenterY:(UIView *)view centerY:(CGFloat)centerY;
+    [Static]
+    [Export("setViewCenterY:centerY:")]
+    void SetViewCenterY(UIView view, nfloat centerY);
+
+    // +(void)setViewCenterX:(UIView *)view centerX:(CGFloat)centerX;
+    [Static]
+    [Export("setViewCenterX:centerX:")]
+    void SetViewCenterX(UIView view, nfloat centerX);
+
+    // +(void)stackViews:(NSArray *)views startYPosition:(CGFloat)startYPosition padding:(CGFloat)padding spacing:(CGFloat)spacing maxTotalHeight:(CGFloat)maxTotalHeight;
+    [Static]
+    [Export("stackViews:startYPosition:padding:spacing:maxTotalHeight:")]
+    void StackViews(NSObject[] views, nfloat startYPosition, nfloat padding, nfloat spacing, nfloat maxTotalHeight);
+
+    // +(UIImage *)fetchImageIfCached:(NSString *)imageUrlString;
+    [Static]
+    [Export("fetchImageIfCached:")]
+    UIImage FetchImageIfCached(string imageUrlString);
   }
 }

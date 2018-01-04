@@ -61,8 +61,8 @@
 	<string>LaunchScreen</string>
 	<key>Appboy</key>
 	<dict>
-		<key>Server</key>
-		<string>https://sondheim.appboy.com/api/v2</string>
+		<key>Endpoint</key>
+		<string>sondheim.appboy.com</string>
 	</dict>
 	<key>CFBundleName</key>
 	<string>TestAppXamarinForms</string>

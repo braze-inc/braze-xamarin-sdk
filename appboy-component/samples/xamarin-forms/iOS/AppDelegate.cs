@@ -8,32 +8,33 @@ using AppboyPlatformXamariniOSBinding;
 
 namespace TestAppXamarinForms.iOS
 {
-  [Register ("AppDelegate")]
+  [Register("AppDelegate")]
   public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
   {
-    public override bool FinishedLaunching (UIApplication app, NSDictionary options)
+    public override bool FinishedLaunching(UIApplication app, NSDictionary options)
     {
-      global::Xamarin.Forms.Forms.Init ();
+      global::Xamarin.Forms.Forms.Init();
 
       // Code for starting up the Xamarin Test Cloud Agent
       #if ENABLE_TEST_CLOUD
       Xamarin.Calabash.Start();
       #endif
 
-      LoadApplication (new App ());
+      LoadApplication(new App());
 
       // Start Appboy
-      Appboy.StartWithApiKey ("5546dc47-fcd3-4245-85d6-963a1dd6c373", UIApplication.SharedApplication, options);
+      Appboy.StartWithApiKey("09aa7156-9aef-4043-acfa-424d0dbc3d80", UIApplication.SharedApplication, options);
+      Appboy.SharedInstance.SdkFlavor = ABKSDKFlavor.Xamarin;
 
       // Subscribe to notification 
-      NSNotificationCenter.DefaultCenter.AddObserver (ABKFeedController.ABKFeedUpdatedNotification, OnFeedUpdated);
+      NSNotificationCenter.DefaultCenter.AddObserver(ABKFeedController.ABKFeedUpdatedNotification, OnFeedUpdated);
 
-      return base.FinishedLaunching (app, options);
+      return base.FinishedLaunching(app, options);
     }
 
-    void OnFeedUpdated (NSNotification notification)
+    void OnFeedUpdated(NSNotification notification)
     {
-      Console.WriteLine ("ABKFeedUpdatedNotification was posted");
+      Console.WriteLine("ABKFeedUpdatedNotification was posted");
     }
   }
 }

@@ -42,7 +42,7 @@ namespace TestAppXamarinForms.iOS
       ABKInAppMessageFull full = new ABKInAppMessageFull() {
         Message = "This is a full",
         Duration = 10,
-        ImageURI = new Foundation.NSUrl("https://raw.githubusercontent.com/Appboy/appboy-xamarin-bindings/master/Appboy_Logo_400x100.png")
+        ImageURI = new Foundation.NSUrl("https://raw.githubusercontent.com/Appboy/appboy-xamarin-bindings/master/braze-logo.png")
       };
       Appboy.SharedInstance.InAppMessageController.AddInAppMessage(full);
     }

@@ -19,7 +19,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
-    <MtouchArch>i386</MtouchArch>
+    <MtouchArch>x86_64</MtouchArch>
     <MtouchLink>None</MtouchLink>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <CodesignKey>iPhone Developer</CodesignKey>
@@ -50,11 +50,11 @@
     <ConsolePause>false</ConsolePause>
     <MtouchArch>ARMv7, ARMv7s, ARM64</MtouchArch>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
-    <CodesignKey>iPhone Distribution: Appboy Inc. (5GLZKGNWQ3)</CodesignKey>
+    <CodesignKey>iPhone Developer</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
     <MtouchI18n>
     </MtouchI18n>
-    <CodesignProvision>272afe39-dedf-487b-95df-b7c185458533</CodesignProvision>
+    <CodesignProvision></CodesignProvision>
     <IpaPackageName>
     </IpaPackageName>
   </PropertyGroup>
@@ -104,109 +104,6 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Default-568h%402x.png" />
-    <BundleResource Include="Appboy.bundle\ABKBannerCardCell.nib" />
-    <BundleResource Include="Appboy.bundle\ABKCrossPromotionCardCell.nib" />
-    <BundleResource Include="Appboy.bundle\ABKFeedNoConnectionView.nib" />
-    <BundleResource Include="Appboy.bundle\ABKFeedbackContentView.nib" />
-    <BundleResource Include="Appboy.bundle\ABKFeedbackEmailViewPortrait.nib" />
-    <BundleResource Include="Appboy.bundle\ABKFeedbackNavBar.nib" />
-    <BundleResource Include="Appboy.bundle\ABKInAppMessageHTMLFullViewController.nib" />
-    <BundleResource Include="Appboy.bundle\ABKSpinnerView.nib" />
-    <BundleResource Include="Appboy.bundle\ABKTextAnnouncementCardCell.nib" />
-    <BundleResource Include="Appboy.bundle\FontAwesome.otf" />
-    <BundleResource Include="Appboy.bundle\Icons_Read.png" />
-    <BundleResource Include="Appboy.bundle\Icons_Read%402x.png" />
-    <BundleResource Include="Appboy.bundle\Icons_Unread.png" />
-    <BundleResource Include="Appboy.bundle\Icons_Unread%402x.png" />
-    <BundleResource Include="Appboy.bundle\Info.plist" />
-    <BundleResource Include="Appboy.bundle\SlideupArrow.png" />
-    <BundleResource Include="Appboy.bundle\arrow.png" />
-    <BundleResource Include="Appboy.bundle\arrow%402x.png" />
-    <BundleResource Include="Appboy.bundle\btn-app-purchase-disabled.png" />
-    <BundleResource Include="Appboy.bundle\btn-app-purchase-disabled%402x.png" />
-    <BundleResource Include="Appboy.bundle\btn-app-purchase-highlighted.png" />
-    <BundleResource Include="Appboy.bundle\btn-app-purchase-highlighted%402x.png" />
-    <BundleResource Include="Appboy.bundle\btn-app-purchase-normal.png" />
-    <BundleResource Include="Appboy.bundle\btn-app-purchase-normal%402x.png" />
-    <BundleResource Include="Appboy.bundle\btn-app-purchase-plus-disabled.png" />
-    <BundleResource Include="Appboy.bundle\btn-app-purchase-plus-disabled%402x.png" />
-    <BundleResource Include="Appboy.bundle\btn-app-purchase-plus-highlighted.png" />
-    <BundleResource Include="Appboy.bundle\btn-app-purchase-plus-highlighted%402x.png" />
-    <BundleResource Include="Appboy.bundle\btn-app-purchase-plus-normal.png" />
-    <BundleResource Include="Appboy.bundle\btn-app-purchase-plus-normal%402x.png" />
-    <BundleResource Include="Appboy.bundle\checkmark-bg.png" />
-    <BundleResource Include="Appboy.bundle\checkmark-bg%402x.png" />
-    <BundleResource Include="Appboy.bundle\checkmark.png" />
-    <BundleResource Include="Appboy.bundle\checkmark%402x.png" />
-    <BundleResource Include="Appboy.bundle\com_appboy_inapp_close_icon.png" />
-    <BundleResource Include="Appboy.bundle\com_appboy_inapp_close_icon%402x.png" />
-    <BundleResource Include="Appboy.bundle\com_appboy_inapp_close_icon%403x.png" />
-    <BundleResource Include="Appboy.bundle\img-background.png" />
-    <BundleResource Include="Appboy.bundle\img-background%402x.png" />
-    <BundleResource Include="Appboy.bundle\img-disclosure-arrow.png" />
-    <BundleResource Include="Appboy.bundle\img-disclosure-arrow%402x.png" />
-    <BundleResource Include="Appboy.bundle\img-noimage-lrg.png" />
-    <BundleResource Include="Appboy.bundle\img-noimage-lrg%402x.png" />
-    <BundleResource Include="Appboy.bundle\img-noimage-sm.png" />
-    <BundleResource Include="Appboy.bundle\img-noimage-sm%402x.png" />
-    <BundleResource Include="Appboy.bundle\img-recommended-tab.png" />
-    <BundleResource Include="Appboy.bundle\img-recommended-tab%402x.png" />
-    <BundleResource Include="Appboy.bundle\img-star-empty.png" />
-    <BundleResource Include="Appboy.bundle\img-star-empty%402x.png" />
-    <BundleResource Include="Appboy.bundle\img-star-filled.png" />
-    <BundleResource Include="Appboy.bundle\img-star-filled%402x.png" />
-    <BundleResource Include="Appboy.bundle\img-star-half.png" />
-    <BundleResource Include="Appboy.bundle\img-star-half%402x.png" />
-    <BundleResource Include="Appboy.bundle\radio-tower.png" />
-    <BundleResource Include="Appboy.bundle\ABKCaptionedMessageCardCell.nib\objects.nib" />
-    <BundleResource Include="Appboy.bundle\ABKCaptionedMessageCardCell.nib\runtime.nib" />
-    <BundleResource Include="Appboy.bundle\ABKFeedViewController.nib\objects.nib" />
-    <BundleResource Include="Appboy.bundle\ABKFeedViewController.nib\runtime.nib" />
-    <BundleResource Include="Appboy.bundle\ABKInAppMessageFullViewController.nib\objects.nib" />
-    <BundleResource Include="Appboy.bundle\ABKInAppMessageFullViewController.nib\runtime.nib" />
-    <BundleResource Include="Appboy.bundle\ABKInAppMessageModalViewController.nib\objects.nib" />
-    <BundleResource Include="Appboy.bundle\ABKInAppMessageModalViewController.nib\runtime.nib" />
-    <BundleResource Include="Appboy.bundle\ABKInAppMessageSlideupViewController.nib\objects.nib" />
-    <BundleResource Include="Appboy.bundle\ABKInAppMessageSlideupViewController.nib\runtime.nib" />
-    <BundleResource Include="Appboy.bundle\ABKNewsCardCell.nib\objects.nib" />
-    <BundleResource Include="Appboy.bundle\ABKNewsCardCell.nib\runtime.nib" />
-    <BundleResource Include="Appboy.bundle\ABKWebViewController.nib\objects.nib" />
-    <BundleResource Include="Appboy.bundle\ABKWebViewController.nib\runtime.nib" />
-    <BundleResource Include="Appboy.bundle\ar.lproj\LocalizedAppboyUIString.strings" />
-    <BundleResource Include="Appboy.bundle\da.lproj\LocalizedAppboyUIString.strings" />
-    <BundleResource Include="Appboy.bundle\de.lproj\LocalizedAppboyUIString.strings" />
-    <BundleResource Include="Appboy.bundle\en.lproj\LocalizedAppboyUIString.strings" />
-    <BundleResource Include="Appboy.bundle\es-419.lproj\LocalizedAppboyUIString.strings" />
-    <BundleResource Include="Appboy.bundle\es-MX.lproj\LocalizedAppboyUIString.strings" />
-    <BundleResource Include="Appboy.bundle\es.lproj\LocalizedAppboyUIString.strings" />
-    <BundleResource Include="Appboy.bundle\et.lproj\LocalizedAppboyUIString.strings" />
-    <BundleResource Include="Appboy.bundle\fi.lproj\LocalizedAppboyUIString.strings" />
-    <BundleResource Include="Appboy.bundle\fil.lproj\LocalizedAppboyUIString.strings" />
-    <BundleResource Include="Appboy.bundle\fr.lproj\LocalizedAppboyUIString.strings" />
-    <BundleResource Include="Appboy.bundle\he.lproj\LocalizedAppboyUIString.strings" />
-    <BundleResource Include="Appboy.bundle\hi.lproj\LocalizedAppboyUIString.strings" />
-    <BundleResource Include="Appboy.bundle\id.lproj\LocalizedAppboyUIString.strings" />
-    <BundleResource Include="Appboy.bundle\it.lproj\LocalizedAppboyUIString.strings" />
-    <BundleResource Include="Appboy.bundle\ja.lproj\LocalizedAppboyUIString.strings" />
-    <BundleResource Include="Appboy.bundle\km.lproj\LocalizedAppboyUIString.strings" />
-    <BundleResource Include="Appboy.bundle\ko.lproj\LocalizedAppboyUIString.strings" />
-    <BundleResource Include="Appboy.bundle\lo.lproj\LocalizedAppboyUIString.strings" />
-    <BundleResource Include="Appboy.bundle\ms.lproj\LocalizedAppboyUIString.strings" />
-    <BundleResource Include="Appboy.bundle\my.lproj\LocalizedAppboyUIString.strings" />
-    <BundleResource Include="Appboy.bundle\nb.lproj\LocalizedAppboyUIString.strings" />
-    <BundleResource Include="Appboy.bundle\nl.lproj\LocalizedAppboyUIString.strings" />
-    <BundleResource Include="Appboy.bundle\pl.lproj\LocalizedAppboyUIString.strings" />
-    <BundleResource Include="Appboy.bundle\pt-PT.lproj\LocalizedAppboyUIString.strings" />
-    <BundleResource Include="Appboy.bundle\pt.lproj\LocalizedAppboyUIString.strings" />
-    <BundleResource Include="Appboy.bundle\ru.lproj\LocalizedAppboyUIString.strings" />
-    <BundleResource Include="Appboy.bundle\sv.lproj\LocalizedAppboyUIString.strings" />
-    <BundleResource Include="Appboy.bundle\th.lproj\LocalizedAppboyUIString.strings" />
-    <BundleResource Include="Appboy.bundle\vi.lproj\LocalizedAppboyUIString.strings" />
-    <BundleResource Include="Appboy.bundle\zh-HK.lproj\LocalizedAppboyUIString.strings" />
-    <BundleResource Include="Appboy.bundle\zh-Hans.lproj\LocalizedAppboyUIString.strings" />
-    <BundleResource Include="Appboy.bundle\zh-Hant.lproj\LocalizedAppboyUIString.strings" />
-    <BundleResource Include="Appboy.bundle\zh-TW.lproj\LocalizedAppboyUIString.strings" />
-    <BundleResource Include="Appboy.bundle\zh.lproj\LocalizedAppboyUIString.strings" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
