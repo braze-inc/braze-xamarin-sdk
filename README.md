@@ -23,7 +23,7 @@ generally be ignored, unless you are integrating the Xamarin component and want 
 
 ## Version Support
 
-The Android SDK supports Android 2.3+ (Gingerbread and up).  The iOS SDK supports iOS 7.0+.
+The Android SDK supports Android 4.0+ (Ice Cream Sandwich and up).  The iOS SDK supports iOS 8.0+.
 
 ## Questions?
 
