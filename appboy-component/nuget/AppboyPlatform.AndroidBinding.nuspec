@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>AppboyPlatform.AndroidBinding</id>
+    <version>1.5.0</version>
+    <authors>Braze, Inc.</authors>
+    <owners>Braze, Inc.</owners>
+    <licenseUrl>https://github.com/Appboy/appboy-xamarin-bindings/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/Appboy/appboy-xamarin-bindings</projectUrl>
+    <iconUrl>https://github.com/Appboy/appboy-xamarin-bindings/blob/master/braze-logo.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Braze Xamarin Android Binding</description>
+    <releaseNotes>Initial Nuget release.</releaseNotes>
+    <copyright>Copyright 2018</copyright>
+    <tags>Braze Appboy</tags>
+    <dependencies>
+      <dependency id="Xamarin.Android.Support.v4" version="26.1.0.1" />
+    </dependencies>
+  </metadata>
+  <files>  
+    <file src="../lib/android/AppboyPlatform.AndroidBinding.dll" target="lib/MonoAndroid80" />
+  </files>
+</package>
