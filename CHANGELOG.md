@@ -5,6 +5,7 @@
 
 ##### Added
 - Added the ability to report to Braze that the app is running Xamarin to iOS integrations. We strongly recommend reporting this value to allow Braze to calculate accurate usage around different SDK platforms. To enable reporting, add `Appboy.SharedInstance.SdkFlavor = ABKSDKFlavor.Xamarin;` to your `AppDelegate.cs` after calling `Appboy.StartWithApiKey()`.
+- Braze Xamarin Bindings are now available on [Nuget](nuget.org). Check out our [iOS Binding](https://www.nuget.org/packages/AppboyPlatformXamariniOSBinding/) and [Android Binding](https://www.nuget.org/packages/AppboyPlatform.AndroidBinding/). Note that Braze Xamarin SDK version `1.5.0` is the last version to receive a Xamarin component store release. Future releases will be released to Nuget and the open source repo only.
 
 ##### Changed
 - Updated the iOS binding to use Braze SDK version 3.3.0.
