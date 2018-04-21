@@ -1,6 +1,6 @@
 // WARNING
 //
-// This file has been generated automatically by Xamarin Studio from the outlets and
+// This file has been generated automatically by Visual Studio from the outlets and
 // actions declared in your storyboard file.
 // Manual changes to this file will not be maintained.
 //
@@ -57,6 +57,18 @@ namespace TestApp.XamariniOS
         [Action ("AddModalButton_TouchUpInside:")]
         [GeneratedCode ("iOS Designer", "1.0")]
         partial void AddModalButton_TouchUpInside (UIKit.UIButton sender);
+
+        [Action ("DisableSDK_TouchUpInside:")]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        partial void DisableSDK_TouchUpInside (UIKit.UIButton sender);
+
+        [Action ("EnableSDK_TouchUpInside:")]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        partial void EnableSDK_TouchUpInside (UIKit.UIButton sender);
+
+        [Action ("WipeData_TouchUpInside:")]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        partial void WipeData_TouchUpInside (UIKit.UIButton sender);
 
         void ReleaseDesignerOutlets ()
         {

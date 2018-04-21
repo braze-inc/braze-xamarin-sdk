@@ -55,4 +55,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/dataFlushButton" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/wipeDataButton"
+        android:text="Wipe Data" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/enableSDKButton"
+        android:text="Enable SDK" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/disableSDKButton"
+        android:text="Disable SDK" />
 </LinearLayout>

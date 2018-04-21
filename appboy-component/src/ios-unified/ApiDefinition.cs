@@ -831,6 +831,21 @@ namespace AppboyPlatformXamariniOSBinding
     // -(void)pushAuthorizationFromUserNotificationCenter:(BOOL)pushAuthGranted;
     [Export("pushAuthorizationFromUserNotificationCenter:")]
     void PushAuthorizationFromUserNotificationCenter(bool pushAuthGranted);
+
+    // +(void)wipeDataAndDisableForAppRun;
+    [Static]
+    [Export("wipeDataAndDisableForAppRun")]
+    void WipeDataAndDisableForAppRun();
+
+    // +(void)disableSDK;
+    [Static]
+    [Export("disableSDK")]
+    void DisableSDK();
+
+    // +(void)requestEnableSDKOnNextAppRun;
+    [Static]
+    [Export("requestEnableSDKOnNextAppRun")]
+    void RequestEnableSDKOnNextAppRun();
   }
 
   // @interface ABKTwitterUser : NSObject

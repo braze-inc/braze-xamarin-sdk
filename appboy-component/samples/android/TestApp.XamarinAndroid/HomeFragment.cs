@@ -136,6 +136,21 @@ namespace com.appboy.xamarinsample
       view.FindViewById<Button> (Resource.Id.dataFlushButton).Click += delegate {
         Appboy.GetInstance(Activity).RequestImmediateDataFlush();
       };
+
+      // Wipe Data
+      view.FindViewById<Button> (Resource.Id.wipeDataButton).Click += delegate {
+        Appboy.WipeData(Activity);
+      };
+
+      // Disable SDK
+      view.FindViewById<Button> (Resource.Id.disableSDKButton).Click += delegate {
+        Appboy.DisableSdk(Activity);
+      };
+
+      // Enable SDK
+      view.FindViewById<Button> (Resource.Id.enableSDKButton).Click += delegate {
+        Appboy.EnableSdk(Activity);
+      };
 				
       return view;
     }

@@ -1,3 +1,14 @@
+## 1.5.1
+
+##### Changed
+- Updated the iOS binding to use Braze SDK version 3.3.4.
+  - Added `DisableSDK()` and `RequestEnableSDKOnNextAppRun()` to the `Appboy` interface to disable and re-enable the Braze SDK.
+  - Added `WipeDataAndDisableForAppRun()` on the `Appboy` interface to support wiping all customer data created by the Braze SDK.
+  - Note that methods that disable the SDK will cause `Appboy.SharedInstance` to return `null`. If you have code that uses `Appboy.SharedInstance`, do not use `DisableSDK()` or `WipeDataAndDisableForAppRun()` until your code can safely execute even if `Appboy.SharedInstance` is null.
+- Updated the Android binding to use Braze SDK version 2.2.5.
+  - Added `DisableSdk()` and `EnableSdk()` to the `Appboy` interface to disable and re-enable the Braze SDK.
+  - Added `WipeData()` on the `Appboy` interface to support wiping all customer data created by the Braze SDK.
+
 ## 1.5
 
 ##### Breaking

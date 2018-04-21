@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using ObjCRuntime;
 
 namespace AppboyPlatformXamariniOSBinding
@@ -16,7 +16,11 @@ namespace AppboyPlatformXamariniOSBinding
   public enum ABKUserGenderType /* nuint */
   {
     Male,
-    Female
+    Female,
+    Other,
+    Unknown,
+    NotApplicable,
+    PreferNotToSay
   }
 
   public enum ABKNotificationSubscriptionType /* nuint */

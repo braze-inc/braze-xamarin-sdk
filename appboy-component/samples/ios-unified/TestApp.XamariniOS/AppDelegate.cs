@@ -24,7 +24,7 @@ namespace TestApp.XamariniOS
 
     public override void DidReceiveRemoteNotification(UIApplication application, NSDictionary userInfo, Action<UIBackgroundFetchResult> completionHandler) 
     {
-      Appboy.SharedInstance.RegisterApplicationWithFetchCompletionHandler(application, userInfo, completionHandler);
+      Appboy.SharedInstance?.RegisterApplicationWithFetchCompletionHandler(application, userInfo, completionHandler);
     }
 
     //
@@ -43,7 +43,9 @@ namespace TestApp.XamariniOS
 
       // Start Appboy
       Appboy.StartWithApiKey("09aa7156-9aef-4043-acfa-424d0dbc3d80", UIApplication.SharedApplication, options);
+      if (Appboy.SharedInstance != null) {
       Appboy.SharedInstance.SdkFlavor = ABKSDKFlavor.Xamarin;
+      }
 
       if (UIDevice.CurrentDevice.CheckSystemVersion(10, 0))
       {
@@ -70,14 +72,14 @@ namespace TestApp.XamariniOS
     public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
     {
       Console.WriteLine("Registered For Remote Notifications");
-      Appboy.SharedInstance.RegisterPushToken(deviceToken.ToString());
+      Appboy.SharedInstance?.RegisterPushToken(deviceToken.ToString());
     }
 
     private class UserNotificationsDelegate : UNUserNotificationCenterDelegate
     {
       public override void DidReceiveNotificationResponse(UNUserNotificationCenter center, UNNotificationResponse response, Action completionHandler)
       {
-        Appboy.SharedInstance.UserNotificationCenter(center, response, completionHandler);
+        Appboy.SharedInstance?.UserNotificationCenter(center, response, completionHandler);
       }
     }
   }
