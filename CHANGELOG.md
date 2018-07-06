@@ -1,3 +1,12 @@
+## 1.5.2
+
+##### Fixed
+- Fixed an issue that caused C# bindings to not be generated for certain classes in the Braze UI library.
+
+##### Changed
+- Updated the Android binding to use Braze SDK version 2.5.0.
+- Updated the Android sample app to use Firebase Cloud Messaging (FCM).
+
 ## 1.5.1
 
 ##### Changed

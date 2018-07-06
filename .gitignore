@@ -24,3 +24,6 @@
 
 # Support v4 dll
 **/Xamarin.Android.Support.v4.dll
+
+# Visual Studio
+**/.vs

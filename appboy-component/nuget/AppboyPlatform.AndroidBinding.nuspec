@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>AppboyPlatform.AndroidBinding</id>
-    <version>1.5.1</version>
+    <version>1.5.2</version>
     <authors>Braze, Inc.</authors>
     <owners>Braze, Inc.</owners>
     <licenseUrl>https://github.com/Appboy/appboy-xamarin-bindings/blob/master/LICENSE</licenseUrl>
@@ -14,7 +14,7 @@
     <copyright>Copyright 2018</copyright>
     <tags>Braze Appboy</tags>
     <dependencies>
-      <dependency id="Xamarin.Android.Support.v4" version="26.1.0.1" />
+      <dependency id="Xamarin.Android.Support.v4" version="27.0.2.1" />
     </dependencies>
   </metadata>
   <files>  
