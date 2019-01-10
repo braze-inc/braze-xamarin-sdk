@@ -1,50 +1,56 @@
+## 1.6.0
+
+##### Breaking
+- Updated the native iOS bridge to [Braze iOS SDK 3.11.0](https://github.com/Appboy/appboy-ios-sdk/releases/tag/3.11.0).
+- Updated the Android binding to use [Braze Android SDK 3.0.1](https://github.com/Appboy/appboy-android-sdk/blob/master/CHANGELOG.md#301).
+
 ## 1.5.2
+
+##### Breaking
+- Updated the Android binding to use [Braze SDK version 2.5.0](https://github.com/Appboy/appboy-android-sdk/blob/master/CHANGELOG.md#250).
 
 ##### Fixed
 - Fixed an issue that caused C# bindings to not be generated for certain classes in the Braze UI library.
 
 ##### Changed
-- Updated the Android binding to use Braze SDK version 2.5.0.
 - Updated the Android sample app to use Firebase Cloud Messaging (FCM).
 
 ## 1.5.1
 
 ##### Changed
-- Updated the iOS binding to use Braze SDK version 3.3.4.
+- Updated the iOS binding to use Braze SDK version [Braze iOS SDK 3.3.4](https://github.com/Appboy/appboy-ios-sdk/releases/tag/3.3.4).
   - Added `DisableSDK()` and `RequestEnableSDKOnNextAppRun()` to the `Appboy` interface to disable and re-enable the Braze SDK.
   - Added `WipeDataAndDisableForAppRun()` on the `Appboy` interface to support wiping all customer data created by the Braze SDK.
   - Note that methods that disable the SDK will cause `Appboy.SharedInstance` to return `null`. If you have code that uses `Appboy.SharedInstance`, do not use `DisableSDK()` or `WipeDataAndDisableForAppRun()` until your code can safely execute even if `Appboy.SharedInstance` is null.
-- Updated the Android binding to use Braze SDK version 2.2.5.
+- Updated the Android binding to use [Braze SDK version 2.2.5](https://github.com/Appboy/appboy-android-sdk/blob/master/CHANGELOG.md#225).
   - Added `DisableSdk()` and `EnableSdk()` to the `Appboy` interface to disable and re-enable the Braze SDK.
   - Added `WipeData()` on the `Appboy` interface to support wiping all customer data created by the Braze SDK.
 
 ## 1.5
 
 ##### Breaking
+- Updated the iOS binding to use Braze SDK version [Braze iOS SDK 3.3.0](https://github.com/Appboy/appboy-ios-sdk/releases/tag/3.3.0).
+- Updated the Android binding to use [Braze SDK version 2.2.1](https://github.com/Appboy/appboy-android-sdk/blob/master/CHANGELOG.md#221).
 - Removed the need to include `Appboy.bundle` manually in iOS integrations. Integrators should remove existing `Appboy.bundle` files from their iOS integrations.
 
 ##### Added
 - Added the ability to report to Braze that the app is running Xamarin to iOS integrations. We strongly recommend reporting this value to allow Braze to calculate accurate usage around different SDK platforms. To enable reporting, add `Appboy.SharedInstance.SdkFlavor = ABKSDKFlavor.Xamarin;` to your `AppDelegate.cs` after calling `Appboy.StartWithApiKey()`.
 - Braze Xamarin Bindings are now available on [Nuget](nuget.org). Check out our [iOS Binding](https://www.nuget.org/packages/AppboyPlatformXamariniOSBinding/) and [Android Binding](https://www.nuget.org/packages/AppboyPlatform.AndroidBinding/). Note that Braze Xamarin SDK version `1.5.0` is the last version to receive a Xamarin component store release. Future releases will be released to Nuget and the open source repo only.
 
-##### Changed
-- Updated the iOS binding to use Braze SDK version 3.3.0.
-- Updated the Android binding to use Braze SDK version 2.2.1.
-
 ## 1.4
 
-##### Changed
-- Updated the iOS binding to use Braze SDK version 2.29.0.
-- Updated the Android binding to use Braze SDK version 2.0.0.
+##### Breaking
+- Updated the iOS binding to use Braze SDK version [Braze iOS SDK 2.29.0](https://github.com/Appboy/appboy-ios-sdk/releases/tag/2.29.0).
+- Updated the Android binding to use [Braze SDK version 2.0.0](https://github.com/Appboy/appboy-android-sdk/blob/master/CHANGELOG.md#200).
 
 ## 1.3
 
 ##### Breaking
+- Updated the iOS binding to use Braze SDK version [Braze iOS SDK 2.24.2](https://github.com/Appboy/appboy-ios-sdk/releases/tag/2.24.2).
+- Updated the Android binding to use [Braze SDK version 1.15.3](https://github.com/Appboy/appboy-android-sdk/blob/master/CHANGELOG.md#1153).
 - **Update Required** — Updated iOS push handling in the AppboyProject sample project to be compatible with iOS 10. For more information, refer to the CHANGELOG for [Braze iOS SDK v2.24.0](https://github.com/Appboy/appboy-ios-sdk/blob/master/CHANGELOG.md#2240).
 
 ##### Changed
-- Updated the iOS binding to use Braze SDK version 2.24.2.
-- Updated the Android binding to use Braze SDK version 1.15.3.
 - Updated the AppboyProject sample project to integrate session handling and in-app message manager registration using an [AppboyLifecycleCallbackListener](https://github.com/Appboy/appboy-android-sdk/blob/master/android-sdk-ui/src/com/appboy/AppboyLifecycleCallbackListener.java), as introduced in Braze Android SDK v1.15.0.
 
 ##### Removed
@@ -52,19 +58,19 @@
 
 ## 1.2
 
-##### Changed
-- Updated the iOS binding to use Braze SDK version 2.17.1.
-- Updated the Android binding to use Braze SDK version 1.11.0.
+##### Breaking
+- Updated the iOS binding to use Braze SDK version [Braze iOS SDK 2.17.1](https://github.com/Appboy/appboy-ios-sdk/releases/tag/2.17.1).
+- Updated the Android binding to use [Braze SDK version 1.11.0](https://github.com/Appboy/appboy-android-sdk/blob/master/CHANGELOG.md#1110).
 
 ## 1.1
+
+##### Breaking
+- Updated the iOS binding to use Braze SDK version [Braze iOS SDK 2.12.0](https://github.com/Appboy/appboy-ios-sdk/releases/tag/2.12.0).
+- Updated the Android binding to use [Braze SDK version 1.8.0](https://github.com/Appboy/appboy-android-sdk/blob/master/CHANGELOG.md#180).
 
 ##### Added
 - Added a Xamarin Forms sample application with News Feed integrations.
 - Added AppboyXamarinFormsFeedFragment that inherits from Android.App.Fragment to be compatible with Xamarin Forms.
-
-##### Changed
-- Updated the iOS binding to use Braze SDK version 2.12.0.
-- Updated the Android binding to use Braze SDK version 1.8.0.
 
 ## 1.0
 

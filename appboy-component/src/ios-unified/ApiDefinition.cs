@@ -253,6 +253,165 @@ namespace AppboyPlatformXamariniOSBinding
     bool Universal { get; set; }
   }
 
+  // @interface ABKContentCard : NSObject <NSCopying, NSCoding>
+  [BaseType (typeof(NSObject))]
+  interface ABKContentCard : INSCopying, INSCoding
+  {
+    // @property (readonly) NSString * idString;
+    [Export ("idString")]
+    string IdString { get; }
+
+    // @property (nonatomic) BOOL viewed;
+    [Export ("viewed")]
+    bool Viewed { get; set; }
+
+    // @property (readonly, nonatomic) double created;
+    [Export ("created")]
+    double Created { get; }
+
+    // @property (readonly) double expiresAt;
+    [Export ("expiresAt")]
+    double ExpiresAt { get; }
+
+    // @property (nonatomic) BOOL dismissible;
+    [Export ("dismissible")]
+    bool Dismissible { get; set; }
+
+    // @property (nonatomic) BOOL pinned;
+    [Export ("pinned")]
+    bool Pinned { get; set; }
+
+    // @property (nonatomic) BOOL dismissed;
+    [Export ("dismissed")]
+    bool Dismissed { get; set; }
+
+    // @property (nonatomic) BOOL clicked;
+    [Export ("clicked")]
+    bool Clicked { get; set; }
+
+    // @property (strong) NSDictionary * _Nullable extras;
+    [NullAllowed, Export ("extras", ArgumentSemantic.Strong)]
+    NSDictionary Extras { get; set; }
+
+    // @property (copy) NSString * _Nullable urlString;
+    [NullAllowed, Export ("urlString")]
+    string UrlString { get; set; }
+
+    // @property BOOL openUrlInWebView;
+    [Export ("openUrlInWebView")]
+    bool OpenUrlInWebView { get; set; }
+
+    // +(ABKContentCard * _Nullable)deserializeCardFromDictionary:(NSDictionary * _Nullable)cardDictionary;
+    [Static]
+    [Export ("deserializeCardFromDictionary:")]
+    [return: NullAllowed]
+    ABKContentCard DeserializeCardFromDictionary ([NullAllowed] NSDictionary cardDictionary);
+
+    // -(NSData * _Nullable)serializeToData;
+    [NullAllowed, Export ("serializeToData")]
+    NSData SerializeToData { get; }
+
+    // -(void)logContentCardImpression;
+    [Export ("logContentCardImpression")]
+    void LogContentCardImpression ();
+
+    // -(void)logContentCardClicked;
+    [Export ("logContentCardClicked")]
+    void LogContentCardClicked ();
+
+    // -(void)logContentCardDismissed;
+    [Export ("logContentCardDismissed")]
+    void LogContentCardDismissed ();
+
+    // -(BOOL)isControlCard;
+    [Export ("isControlCard")]
+    bool IsControlCard { get; }
+
+    // -(BOOL)hasSameId:(ABKContentCard *)card;
+    [Export ("hasSameId:")]
+    bool HasSameId (ABKContentCard card);
+  }
+
+	// @interface ABKBannerContentCard : ABKContentCard <NSCoding>
+	[BaseType (typeof(ABKContentCard))]
+	interface ABKBannerContentCard : INSCoding
+	{
+		// @property (copy) NSString * image;
+		[Export ("image")]
+		string Image { get; set; }
+
+		// @property float imageAspectRatio;
+		[Export ("imageAspectRatio")]
+		float ImageAspectRatio { get; set; }
+	}
+
+	// @interface ABKCaptionedImageContentCard : ABKContentCard <NSCoding>
+	[BaseType (typeof(ABKContentCard))]
+	interface ABKCaptionedImageContentCard : INSCoding
+	{
+		// @property (copy) NSString * image;
+		[Export ("image")]
+		string Image { get; set; }
+
+		// @property float imageAspectRatio;
+		[Export ("imageAspectRatio")]
+		float ImageAspectRatio { get; set; }
+
+		// @property (copy) NSString * title;
+		[Export ("title")]
+		string Title { get; set; }
+
+		// @property (copy) NSString * cardDescription;
+		[Export ("cardDescription")]
+		string CardDescription { get; set; }
+
+		// @property (copy) NSString * _Nullable domain;
+		[NullAllowed, Export ("domain")]
+		string Domain { get; set; }
+	}
+
+	// @interface ABKClassicContentCard : ABKContentCard <NSCoding>
+	[BaseType (typeof(ABKContentCard))]
+	interface ABKClassicContentCard : INSCoding
+	{
+		// @property (copy) NSString * _Nullable image;
+		[NullAllowed, Export ("image")]
+		string Image { get; set; }
+
+		// @property (copy) NSString * title;
+		[Export ("title")]
+		string Title { get; set; }
+
+		// @property (copy) NSString * cardDescription;
+		[Export ("cardDescription")]
+		string CardDescription { get; set; }
+
+		// @property (copy) NSString * _Nullable domain;
+		[NullAllowed, Export ("domain")]
+		string Domain { get; set; }
+	}
+
+	// @interface ABKContentCardsController : NSObject
+	[BaseType (typeof(NSObject))]
+	interface ABKContentCardsController
+	{
+		// @property (readonly, getter = getContentCards) NSArray * _Nonnull contentCards;
+		[Export ("contentCards")]
+		NSObject[] ContentCards { [Bind ("getContentCards")] get; }
+
+		// @property (readonly) NSDate * _Nullable lastUpdate;
+		[NullAllowed, Export ("lastUpdate")]
+		NSDate LastUpdate { get; }
+
+		// -(NSInteger)unviewedContentCardCount;
+		[Export ("unviewedContentCardCount")]
+		nint UnviewedContentCardCount { get; }
+
+		// -(NSInteger)contentCardCount;
+		[Export ("contentCardCount")]
+		nint ContentCardCount { get; }
+	}
+
   // @interface ABKUser : NSObject
   [BaseType(typeof(NSObject))]
   interface ABKUser
@@ -376,6 +535,14 @@ namespace AppboyPlatformXamariniOSBinding
     // -(BOOL)setLastKnownLocationWithLatitude:(double)latitude longitude:(double)longitude horizontalAccuracy:(double)horizontalAccuracy altitude:(double)altitude verticalAccuracy:(double)verticalAccuracy;
     [Export("setLastKnownLocationWithLatitude:longitude:horizontalAccuracy:altitude:verticalAccuracy:")]
     bool SetLastKnownLocationWithLatitude(double latitude, double longitude, double horizontalAccuracy, double altitude, double verticalAccuracy);
+
+    // -(BOOL)addLocationCustomAttributeWithKey:(NSString * _Nonnull)key latitude:(double)latitude longitude:(double)longitude;
+    [Export ("addLocationCustomAttributeWithKey:latitude:longitude:")]
+    bool AddLocationCustomAttributeWithKey (string key, double latitude, double longitude);
+
+    // -(BOOL)removeLocationCustomAttributeWithKey:(NSString * _Nonnull)key;
+    [Export ("removeLocationCustomAttributeWithKey:")]
+    bool RemoveLocationCustomAttributeWithKey (string key);
   }
 
   // @interface ABKFacebookUser : NSObject
@@ -397,156 +564,6 @@ namespace AppboyPlatformXamariniOSBinding
     // @property (readonly) NSArray * _Nullable likes;
     [NullAllowed, Export("likes")]
     NSObject[] Likes { get; }
-  }
-
-  // @protocol ABKFeedViewControllerDelegate <NSObject>
-  [Protocol, Model]
-  [BaseType(typeof(NSObject))]
-  interface ABKFeedViewControllerDelegate
-  {
-    // @optional -(BOOL)onCardClicked:(ABKCard * _Nonnull)clickedCard feedViewController:(UIViewController * _Nonnull)newsFeed;
-    [Export("onCardClicked:feedViewController:")]
-    bool FeedViewController(ABKCard clickedCard, UIViewController newsFeed);
-  }
-
-  // @interface ABKFeedViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, SKStoreProductViewControllerDelegate>
-  [BaseType(typeof(UIViewController))]
-  interface ABKFeedViewController : IUITableViewDataSource, IUITableViewDelegate, ISKStoreProductViewControllerDelegate
-  {
-    // @property CGFloat cardWidthForiPhone;
-    [Export("cardWidthForiPhone")]
-    nfloat CardWidthForiPhone { get; set; }
-
-    // @property CGFloat cardWidthForiPad;
-    [Export("cardWidthForiPad")]
-    nfloat CardWidthForiPad { get; set; }
-
-    // @property CGFloat minimumCardMarginForiPhone;
-    [Export("minimumCardMarginForiPhone")]
-    nfloat MinimumCardMarginForiPhone { get; set; }
-
-    // @property CGFloat minimumCardMarginForiPad;
-    [Export("minimumCardMarginForiPad")]
-    nfloat MinimumCardMarginForiPad { get; set; }
-
-    [Wrap("WeakAppboyDelegate")]
-    [NullAllowed]
-    ABKFeedViewControllerDelegate AppboyDelegate { get; set; }
-
-    // @property (weak) id<ABKFeedViewControllerDelegate> _Nullable appboyDelegate;
-    [NullAllowed, Export("appboyDelegate", ArgumentSemantic.Weak)]
-    NSObject WeakAppboyDelegate { get; set; }
-
-    // @property (nonatomic) ABKCardCategory categories;
-    [Export("categories", ArgumentSemantic.Assign)]
-    ABKCardCategory Categories { get; set; }
-
-    // @property (nonatomic) BOOL disableUnreadIndicator;
-    [Export("disableUnreadIndicator")]
-    bool DisableUnreadIndicator { get; set; }
-  }
-
-  // @interface ABKFeedViewControllerGenericContext : UINavigationController <UINavigationControllerDelegate>
-  [BaseType(typeof(UINavigationController))]
-  interface ABKFeedViewControllerGenericContext : IUINavigationControllerDelegate
-  {
-    // @property CGFloat cardWidthForiPhone;
-    [Export("cardWidthForiPhone")]
-    nfloat CardWidthForiPhone { get; set; }
-
-    // @property CGFloat cardWidthForiPad;
-    [Export("cardWidthForiPad")]
-    nfloat CardWidthForiPad { get; set; }
-
-    // @property CGFloat minimumCardMarginForiPhone;
-    [Export("minimumCardMarginForiPhone")]
-    nfloat MinimumCardMarginForiPhone { get; set; }
-
-    // @property CGFloat minimumCardMarginForiPad;
-    [Export("minimumCardMarginForiPad")]
-    nfloat MinimumCardMarginForiPad { get; set; }
-
-    [Wrap("WeakAppboyDelegate")]
-    [NullAllowed]
-    ABKFeedViewControllerDelegate AppboyDelegate { get; set; }
-
-    // @property (weak) id<ABKFeedViewControllerDelegate> _Nullable appboyDelegate;
-    [NullAllowed, Export("appboyDelegate", ArgumentSemantic.Weak)]
-    NSObject WeakAppboyDelegate { get; set; }
-
-    // -(void)closeButtonPressed:(id _Nonnull)sender;
-    [Export("closeButtonPressed:")]
-    void CloseButtonPressed(NSObject sender);
-
-    // @property ABKCardCategory categories;
-    [Export("categories", ArgumentSemantic.Assign)]
-    ABKCardCategory Categories { get; set; }
-
-    // @property (nonatomic) BOOL disableUnreadIndicator;
-    [Export("disableUnreadIndicator")]
-    bool DisableUnreadIndicator { get; set; }
-  }
-
-  // @interface ABKFeedViewControllerModalContext : ABKFeedViewControllerGenericContext
-  [BaseType(typeof(ABKFeedViewControllerGenericContext))]
-  interface ABKFeedViewControllerModalContext
-  {
-    // @property (strong) NSString * _Nullable navigationBarTitle;
-    [NullAllowed, Export("navigationBarTitle", ArgumentSemantic.Strong)]
-    string NavigationBarTitle { get; set; }
-
-    [Wrap("WeakCloseButtonDelegate")]
-    [NullAllowed]
-    ABKFeedViewControllerModalContextDelegate CloseButtonDelegate { get; set; }
-
-    // @property (weak) id<ABKFeedViewControllerModalContextDelegate> _Nullable closeButtonDelegate;
-    [NullAllowed, Export("closeButtonDelegate", ArgumentSemantic.Weak)]
-    NSObject WeakCloseButtonDelegate { get; set; }
-  }
-
-  // @protocol ABKFeedViewControllerModalContextDelegate <NSObject>
-  [Protocol, Model]
-  [BaseType(typeof(NSObject))]
-  interface ABKFeedViewControllerModalContextDelegate
-  {
-    // @required -(void)feedViewControllerModalContextCloseTapped:(ABKFeedViewControllerModalContext * _Nonnull)sender;
-    [Abstract]
-    [Export("feedViewControllerModalContextCloseTapped:")]
-    void FeedViewControllerModalContextCloseTapped(ABKFeedViewControllerModalContext sender);
-  }
-
-  // @interface ABKFeedViewControllerNavigationContext : ABKFeedViewController <UINavigationControllerDelegate>
-  [BaseType(typeof(ABKFeedViewController))]
-  interface ABKFeedViewControllerNavigationContext : IUINavigationControllerDelegate
-  {
-  }
-
-  // @interface ABKFeedViewControllerPopoverContext : ABKFeedViewControllerGenericContext
-  [BaseType(typeof(ABKFeedViewControllerGenericContext))]
-  interface ABKFeedViewControllerPopoverContext
-  {
-    // @property (strong) NSString * _Nullable navigationBarTitle;
-    [NullAllowed, Export("navigationBarTitle", ArgumentSemantic.Strong)]
-    string NavigationBarTitle { get; set; }
-
-    [Wrap("WeakCloseButtonDelegate")]
-    [NullAllowed]
-    ABKFeedViewControllerPopoverContextDelegate CloseButtonDelegate { get; set; }
-
-    // @property (weak) id<ABKFeedViewControllerPopoverContextDelegate> _Nullable closeButtonDelegate;
-    [NullAllowed, Export("closeButtonDelegate", ArgumentSemantic.Weak)]
-    NSObject WeakCloseButtonDelegate { get; set; }
-  }
-
-  // @protocol ABKFeedViewControllerPopoverContextDelegate <NSObject>
-  [Protocol, Model]
-  [BaseType(typeof(NSObject))]
-  interface ABKFeedViewControllerPopoverContextDelegate
-  {
-    // @required -(void)feedViewControllerPopoverContextCloseTapped:(ABKFeedViewControllerPopoverContext * _Nonnull)sender;
-    [Abstract]
-    [Export("feedViewControllerPopoverContextCloseTapped:")]
-    void FeedViewControllerPopoverContextCloseTapped(ABKFeedViewControllerPopoverContext sender);
   }
 
   // @interface ABKFeedback : NSObject
@@ -589,6 +606,14 @@ namespace AppboyPlatformXamariniOSBinding
     [Field("ABKFeedUpdatedIsSuccessfulKey", "__Internal")]
     NSString ABKFeedUpdatedIsSuccessfulKey { get; }
 
+		// extern NSString *const _Nonnull ABKContentCardsProcessedNotification;
+		[Field ("ABKContentCardsProcessedNotification", "__Internal")]
+		NSString ABKContentCardsProcessedNotification { get; }
+
+		// extern NSString *const _Nonnull ABKContentCardsProcessedIsSuccessfulKey;
+		[Field ("ABKContentCardsProcessedIsSuccessfulKey", "__Internal")]
+		NSString ABKContentCardsProcessedIsSuccessfulKey { get; }
+
     // extern NSString *const _Nonnull ABKRequestProcessingPolicyOptionKey;
     [Field("ABKRequestProcessingPolicyOptionKey", "__Internal")]
     NSString ABKRequestProcessingPolicyOptionKey { get; }
@@ -601,18 +626,6 @@ namespace AppboyPlatformXamariniOSBinding
     [Field("ABKDisableAutomaticLocationCollectionKey", "__Internal")]
     NSString ABKDisableAutomaticLocationCollectionKey { get; }
 
-    // extern NSString *const _Nonnull ABKSignificantChangeCollectionEnabledOptionKey;
-    [Field("ABKSignificantChangeCollectionEnabledOptionKey", "__Internal")]
-    NSString ABKSignificantChangeCollectionEnabledOptionKey { get; }
-
-    // extern NSString *const _Nonnull ABKSignificantChangeCollectionDistanceFilterOptionKey;
-    [Field("ABKSignificantChangeCollectionDistanceFilterOptionKey", "__Internal")]
-    NSString ABKSignificantChangeCollectionDistanceFilterOptionKey { get; }
-
-    // extern NSString *const _Nonnull ABKSignificantChangeCollectionTimeFilterOptionKey;
-    [Field("ABKSignificantChangeCollectionTimeFilterOptionKey", "__Internal")]
-    NSString ABKSignificantChangeCollectionTimeFilterOptionKey { get; }
-
     // extern NSString *const _Nonnull ABKIDFADelegateKey;
     [Field("ABKIDFADelegateKey", "__Internal")]
     NSString ABKIDFADelegateKey { get; }
@@ -620,10 +633,6 @@ namespace AppboyPlatformXamariniOSBinding
     // extern NSString *const _Nonnull ABKAppboyEndpointDelegateKey;
     [Field("ABKAppboyEndpointDelegateKey", "__Internal")]
     NSString ABKAppboyEndpointDelegateKey { get; }
-
-    // extern NSString *const _Nonnull ABKPushURIDelegateKey __attribute__((deprecated("ABKPushURIDelegate is deprecated, please use the ABKURLDelegate protocol instead.")));
-    [Field("ABKPushURIDelegateKey", "__Internal")]
-    NSString ABKPushURIDelegateKey { get; }
 
     // extern NSString *const _Nonnull ABKURLDelegateKey;
     [Field("ABKURLDelegateKey", "__Internal")]
@@ -644,6 +653,10 @@ namespace AppboyPlatformXamariniOSBinding
     // extern NSString *const _Nonnull ABKSDKFlavorKey;
     [Field("ABKSDKFlavorKey", "__Internal")]
     NSString ABKSDKFlavorKey { get; }
+
+		// extern NSString *const _Nonnull ABKDeviceWhitelistKey;
+		[Field ("ABKDeviceWhitelistKey", "__Internal")]
+		NSString ABKDeviceWhitelistKey { get; }
 
     // extern NSString *const _Nonnull ABKPushStoryAppGroupKey;
     [Field("ABKPushStoryAppGroupKey", "__Internal")]
@@ -682,6 +695,10 @@ namespace AppboyPlatformXamariniOSBinding
     [Export("feedController")]
     ABKFeedController FeedController { get; }
 
+		// @property (readonly) ABKContentCardsController * _Nonnull contentCardsController;
+		[Export ("contentCardsController")]
+		ABKContentCardsController ContentCardsController { get; }
+
     // @property ABKRequestProcessingPolicy requestProcessingPolicy;
     [Export("requestProcessingPolicy", ArgumentSemantic.Assign)]
     ABKRequestProcessingPolicy RequestProcessingPolicy { get; set; }
@@ -709,18 +726,6 @@ namespace AppboyPlatformXamariniOSBinding
     // @property (readonly, nonatomic) ABKLocationManager * _Nonnull locationManager;
     [Export("locationManager")]
     ABKLocationManager LocationManager { get; }
-
-    // @property (nonatomic) BOOL useNUITheming;
-    [Export("useNUITheming")]
-    bool UseNUITheming { get; set; }
-
-    [Wrap("WeakAppboyPushURIDelegate")]
-    [NullAllowed]
-    ABKPushURIDelegate AppboyPushURIDelegate { get; set; }
-
-    // @property (nonatomic, weak) id<ABKPushURIDelegate> _Nullable appboyPushURIDelegate __attribute__((deprecated("Use appboyURLDelegate instead.")));
-    [NullAllowed, Export("appboyPushURIDelegate", ArgumentSemantic.Weak)]
-    NSObject WeakAppboyPushURIDelegate { get; set; }
 
     [Wrap("WeakAppboyUrlDelegate")]
     [NullAllowed]
@@ -786,9 +791,17 @@ namespace AppboyPlatformXamariniOSBinding
     [Export("logFeedbackDisplayed")]
     void LogFeedbackDisplayed();
 
+		// -(void)logContentCardsDisplayed;
+		[Export ("logContentCardsDisplayed")]
+		void LogContentCardsDisplayed ();
+
     // -(void)requestFeedRefresh;
     [Export("requestFeedRefresh")]
     void RequestFeedRefresh();
+
+		// -(void)requestContentCardsRefresh;
+		[Export ("requestContentCardsRefresh")]
+		void RequestContentCardsRefresh ();
 
     // -(NSString * _Nonnull)getDeviceId;
     [Export("getDeviceId")]
@@ -1092,15 +1105,19 @@ namespace AppboyPlatformXamariniOSBinding
   {
   }
 
-  // @protocol ABKInAppMessageControllerDelegate <NSObject>
-  [Protocol, Model]
-  [BaseType(typeof(NSObject))]
-  interface ABKInAppMessageControllerDelegate
-  {
-    // @optional -(ABKInAppMessageDisplayChoice)beforeInAppMessageDisplayed:(ABKInAppMessage * _Nonnull)inAppMessage;
-    [Export("beforeInAppMessageDisplayed:")]
-    ABKInAppMessageDisplayChoice BeforeInAppMessageDisplayed(ABKInAppMessage inAppMessage);
-  }
+	// @protocol ABKInAppMessageControllerDelegate <NSObject>
+	[Protocol, Model]
+	[BaseType (typeof(NSObject))]
+	interface ABKInAppMessageControllerDelegate
+	{
+		// @optional -(ABKInAppMessageDisplayChoice)beforeInAppMessageDisplayed:(ABKInAppMessage * _Nonnull)inAppMessage;
+		[Export ("beforeInAppMessageDisplayed:")]
+		ABKInAppMessageDisplayChoice BeforeInAppMessageDisplayed (ABKInAppMessage inAppMessage);
+
+		// @optional -(ABKInAppMessageDisplayChoice)beforeControlMessageImpressionLogged:(ABKInAppMessage * _Nonnull)inAppMessage;
+		[Export ("beforeControlMessageImpressionLogged:")]
+		ABKInAppMessageDisplayChoice BeforeControlMessageImpressionLogged (ABKInAppMessage inAppMessage);
+	}
 
   // @protocol ABKInAppMessageUIControlling <NSObject>
   [Protocol, Model]
@@ -1254,49 +1271,54 @@ namespace AppboyPlatformXamariniOSBinding
   }
 
   // @interface ABKSDWebImageProxy : NSObject
-  [BaseType(typeof(NSObject))]
+  [BaseType (typeof(NSObject))]
   interface ABKSDWebImageProxy
   {
-    // +(void)setImageForView:(UIImageView * _Nonnull)imageView showActivityIndicator:(BOOL)showActivityIndicator withURL:(NSURL * _Nullable)imageURL imagePlaceHolder:(UIImage * _Nullable)placeHolder completed:(void (^ _Nullable)(UIImage * _Nullable, NSError * _Nullable, NSInteger, NSUrl * _Nullable))completion;
+    // +(void)setImageForView:(UIImageView * _Nonnull)imageView showActivityIndicator:(BOOL)showActivityIndicator withURL:(NSURL * _Nullable)imageURL imagePlaceHolder:(UIImage * _Nullable)placeHolder completed:(void (^ _Nullable)(UIImage * _Nullable, NSError * _Nullable, NSInteger, NSURL * _Nullable))completion;
     [Static]
-    [Export("setImageForView:showActivityIndicator:withURL:imagePlaceHolder:completed:")]
-    void SetImageForView(UIImageView imageView, bool showActivityIndicator, [NullAllowed] NSUrl imageURL, [NullAllowed] UIImage placeHolder, [NullAllowed] Action<UIImage, NSError, nint, NSUrl> completion);
+    [Export ("setImageForView:showActivityIndicator:withURL:imagePlaceHolder:completed:")]
+    void SetImageForView (UIImageView imageView, bool showActivityIndicator, [NullAllowed] NSUrl imageURL, [NullAllowed] UIImage placeHolder, [NullAllowed] Action<UIImage, NSError, nint, NSUrl> completion);
 
     // +(void)prefetchURLs:(NSArray * _Nullable)imageURLs;
     [Static]
-    [Export("prefetchURLs:")]
-    void PrefetchURLs([NullAllowed] NSObject[] imageURLs);
+    [Export ("prefetchURLs:")]
+    void PrefetchURLs ([NullAllowed] NSObject[] imageURLs);
 
-    // +(void)loadImageWithURL:(NSURL * _Nullable)url options:(NSInteger)options completed:(void (^ _Nullable)(UIImage * _Nonnull, NSData * _Nonnull, NSError * _Nonnull, NSInteger, BOOL, NSUrl * _Nonnull))completion;
+    // +(void)loadImageWithURL:(NSURL * _Nullable)url options:(NSInteger)options completed:(void (^ _Nullable)(UIImage * _Nonnull, NSData * _Nonnull, NSError * _Nonnull, NSInteger, BOOL, NSURL * _Nonnull))completion;
     [Static]
-    [Export("loadImageWithURL:options:completed:")]
-    void LoadImageWithURL([NullAllowed] NSUrl url, nint options, [NullAllowed] Action<UIImage, NSData, NSError, nint, bool, NSUrl> completion);
+    [Export ("loadImageWithURL:options:completed:")]
+    void LoadImageWithURL ([NullAllowed] NSUrl url, nint options, [NullAllowed] Action<UIImage, NSData, NSError, nint, bool, NSUrl> completion);
 
     // +(void)diskImageExistsForURL:(NSURL * _Nullable)url completed:(void (^ _Nullable)(BOOL))completion;
     [Static]
-    [Export("diskImageExistsForURL:completed:")]
-    void DiskImageExistsForURL([NullAllowed] NSUrl url, [NullAllowed] Action<bool> completion);
+    [Export ("diskImageExistsForURL:completed:")]
+    void DiskImageExistsForURL ([NullAllowed] NSUrl url, [NullAllowed] Action<bool> completion);
 
     // +(NSString * _Nullable)cacheKeyForURL:(NSURL * _Nullable)url;
     [Static]
-    [Export("cacheKeyForURL:")]
+    [Export ("cacheKeyForURL:")]
     [return: NullAllowed]
-    string CacheKeyForURL([NullAllowed] NSUrl url);
+    string CacheKeyForURL ([NullAllowed] NSUrl url);
 
-    // +(void)removeImageForKey:(NSString * _Nullable)key;
+    // +(void)removeSDWebImageForKey:(NSString * _Nullable)key;
     [Static]
-    [Export("removeImageForKey:")]
-    void RemoveImageForKey([NullAllowed] string key);
+    [Export ("removeSDWebImageForKey:")]
+    void RemoveSDWebImageForKey ([NullAllowed] string key);
 
     // +(UIImage * _Nullable)imageFromCacheForKey:(NSString * _Nullable)key;
     [Static]
-    [Export("imageFromCacheForKey:")]
+    [Export ("imageFromCacheForKey:")]
     [return: NullAllowed]
-    UIImage ImageFromCacheForKey([NullAllowed] string key);
+    UIImage ImageFromCacheForKey ([NullAllowed] string key);
+
+    // +(void)clearSDWebImageCache;
+    [Static]
+    [Export ("clearSDWebImageCache")]
+    void ClearSDWebImageCache ();
 
     // +(BOOL)isSupportedSDWebImageVersion;
     [Static]
-    [Export("isSupportedSDWebImageVersion")]
+    [Export ("isSupportedSDWebImageVersion")]
     bool IsSupportedSDWebImageVersion { get; }
   }
 
@@ -1330,17 +1352,6 @@ namespace AppboyPlatformXamariniOSBinding
     [Abstract]
     [Export("handleAppboyURL:fromChannel:withExtras:")]
     bool FromChannel(NSUrl url, ABKChannel channel, NSDictionary extras);
-  }
-
-  // @protocol ABKPushURIDelegate <NSObject>
-  [Protocol, Model]
-  [BaseType(typeof(NSObject))]
-  interface ABKPushURIDelegate
-  {
-    // @required -(BOOL)handleAppboyPushURI:(NSString * _Nonnull)URIString withNotificationInfo:(NSDictionary * _Nonnull)notificationInfo;
-    [Abstract]
-    [Export("handleAppboyPushURI:withNotificationInfo:")]
-    bool WithNotificationInfo(string URIString, NSDictionary notificationInfo);
   }
 
   // @interface ABKPushUtils : NSObject
@@ -1780,40 +1791,228 @@ namespace AppboyPlatformXamariniOSBinding
     void InAppMessageClickedWithActionType(ABKInAppMessageClickActionType actionType, [NullAllowed] NSUrl url, bool openUrlInWebView);
   }
 
-  // @interface ABKInAppMessageUIController : NSObject <ABKInAppMessageUIControlling>
-  [BaseType(typeof(NSObject))]
-  interface ABKInAppMessageUIController : ABKInAppMessageUIControlling
-  {
-    // @property UIInterfaceOrientationMask supportedOrientationMasks;
-    [Export("supportedOrientationMasks", ArgumentSemantic.Assign)]
-    UIInterfaceOrientationMask SupportedOrientationMasks { get; set; }
-
-    // @property UIInterfaceOrientation supportedOrientations;
-    [Export("supportedOrientations", ArgumentSemantic.Assign)]
-    UIInterfaceOrientation SupportedOrientations { get; set; }
-
-    // @property BOOL keyboardVisible;
-    [Export("keyboardVisible")]
-    bool KeyboardVisible { get; set; }
-
-    // @property ABKInAppMessageWindowController * _Nullable inAppMessageWindowController;
-    [NullAllowed, Export("inAppMessageWindowController", ArgumentSemantic.Assign)]
-    ABKInAppMessageWindowController InAppMessageWindowController { get; set; }
-
-    [Wrap("WeakUiDelegate")]
-    [NullAllowed]
-    ABKInAppMessageUIDelegate UiDelegate { get; set; }
-
-    // @property (weak) id<ABKInAppMessageUIDelegate> _Nullable uiDelegate;
-    [NullAllowed, Export("uiDelegate", ArgumentSemantic.Weak)]
-    NSObject WeakUiDelegate { get; set; }
-  }
-
   // @interface ABKInAppMessageView : UIView
   [BaseType(typeof(UIView))]
   interface ABKInAppMessageView
   {
   }
+
+  // @interface ABKContentCardsTableViewController : UITableViewController
+  [BaseType (typeof(UITableViewController))]
+  interface ABKContentCardsTableViewController
+  {
+    // @property (nonatomic, strong) UIView * emptyFeedView __attribute__((iboutlet));
+    [Export ("emptyFeedView", ArgumentSemantic.Strong)]
+    UIView EmptyFeedView { get; set; }
+
+    // @property (nonatomic, unsafe_unretained) UILabel * emptyFeedLabel __attribute__((iboutlet));
+    [Export ("emptyFeedLabel", ArgumentSemantic.Assign)]
+    UILabel EmptyFeedLabel { get; set; }
+
+    // @property (nonatomic) BOOL disableUnreadIndicator;
+    [Export ("disableUnreadIndicator")]
+    bool DisableUnreadIndicator { get; set; }
+
+    // @property NSTimeInterval cacheTimeout;
+    [Export ("cacheTimeout")]
+    double CacheTimeout { get; set; }
+
+    // +(instancetype)getNavigationContentCardsViewController;
+    [Static]
+    [Export ("getNavigationContentCardsViewController")]
+    ABKContentCardsTableViewController GetNavigationContentCardsViewController ();
+
+    // -(NSString *)localizedAppboyContentCardsString:(NSString *)key;
+    [Export ("localizedAppboyContentCardsString:")]
+    string LocalizedAppboyContentCardsString (string key);
+
+    // +(ABKBaseContentCardCell *)dequeueCellFromTableView:(UITableView *)tableView forIndexPath:(NSIndexPath *)indexPath forCard:(ABKContentCard *)card;
+    [Static]
+    [Export ("dequeueCellFromTableView:forIndexPath:forCard:")]
+    ABKBaseContentCardCell DequeueCellFromTableView (UITableView tableView, NSIndexPath indexPath, ABKContentCard card);
+
+    // -(void)handleCardClick:(ABKContentCard *)card;
+    [Export ("handleCardClick:")]
+    void HandleCardClick (ABKContentCard card);
+
+    // -(void)requestNewCardsIfTimeout;
+    [Export ("requestNewCardsIfTimeout")]
+    void RequestNewCardsIfTimeout ();
+  }
+
+  // @interface ABKContentCardsViewController : UINavigationController
+  [BaseType (typeof(UINavigationController))]
+  interface ABKContentCardsViewController
+  {
+    // @property (nonatomic, unsafe_unretained) ABKContentCardsTableViewController * contentCardsViewController;
+    [Export ("contentCardsViewController", ArgumentSemantic.Assign)]
+    ABKContentCardsTableViewController ContentCardsViewController { get; set; }
+  }
+
+	// @interface ABKContentCardsWebViewController : UIViewController <WKNavigationDelegate>
+	[BaseType (typeof(UIViewController))]
+	interface ABKContentCardsWebViewController : IWKNavigationDelegate
+	{
+		// @property NSURL * url;
+		[Export ("url", ArgumentSemantic.Assign)]
+		NSUrl Url { get; set; }
+
+		// @property (nonatomic) WKWebView * webView __attribute__((iboutlet));
+		[Export ("webView", ArgumentSemantic.Assign)]
+		WKWebView WebView { get; set; }
+
+		// @property (nonatomic) UIProgressView * progressBar __attribute__((iboutlet));
+		[Export ("progressBar", ArgumentSemantic.Assign)]
+		UIProgressView ProgressBar { get; set; }
+
+		// @property (nonatomic) BOOL showDoneButton;
+		[Export ("showDoneButton")]
+		bool ShowDoneButton { get; set; }
+  }
+
+  // @interface ABKBaseContentCardCell : UITableViewCell
+  [BaseType(typeof(UITableViewCell))]
+  interface ABKBaseContentCardCell
+  {
+    // @property (nonatomic, weak) UIView * rootView __attribute__((iboutlet));
+    [Export("rootView", ArgumentSemantic.Weak)]
+    UIView RootView { get; set; }
+
+    // @property (nonatomic, weak) UIImageView * pinImageView __attribute__((iboutlet));
+    [Export("pinImageView", ArgumentSemantic.Weak)]
+    UIImageView PinImageView { get; set; }
+
+    // @property (nonatomic, weak) UIView * unviewedLineView __attribute__((iboutlet));
+    [Export("unviewedLineView", ArgumentSemantic.Weak)]
+    UIView UnviewedLineView { get; set; }
+
+    // @property (nonatomic, weak) NSLayoutConstraint * rootViewLeadingConstraint __attribute__((iboutlet));
+    [Export("rootViewLeadingConstraint", ArgumentSemantic.Weak)]
+    NSLayoutConstraint RootViewLeadingConstraint { get; set; }
+
+    // @property (nonatomic, weak) NSLayoutConstraint * rootViewTrailingConstraint __attribute__((iboutlet));
+    [Export("rootViewTrailingConstraint", ArgumentSemantic.Weak)]
+    NSLayoutConstraint RootViewTrailingConstraint { get; set; }
+
+    // @property (nonatomic, weak) NSLayoutConstraint * rootViewTopConstraint __attribute__((iboutlet));
+    [Export("rootViewTopConstraint", ArgumentSemantic.Weak)]
+    NSLayoutConstraint RootViewTopConstraint { get; set; }
+
+    // @property (nonatomic, weak) NSLayoutConstraint * rootViewBottomConstraint __attribute__((iboutlet));
+    [Export("rootViewBottomConstraint", ArgumentSemantic.Weak)]
+    NSLayoutConstraint RootViewBottomConstraint { get; set; }
+
+    // @property (assign, nonatomic) CGFloat cardSidePadding;
+    [Export("cardSidePadding")]
+    nfloat CardSidePadding { get; set; }
+
+    // @property (assign, nonatomic) CGFloat cardSpacing;
+    [Export("cardSpacing")]
+    nfloat CardSpacing { get; set; }
+
+    // @property (assign, nonatomic) BOOL hideUnreadIndicator;
+    [Export("hideUnreadIndicator")]
+    bool HideUnreadIndicator { get; set; }
+
+    // -(void)applyCard:(ABKContentCard *)card;
+    [Export("applyCard:")]
+    void ApplyCard(ABKContentCard card);
+
+    // -(UIImage *)getPlaceHolderImage;
+    [Export("getPlaceHolderImage")]
+    UIImage PlaceHolderImage { get; }
+
+    // -(void)applyAppboyAttributedTextStyleFrom:(NSString *)text forLabel:(UILabel *)label;
+    [Export("applyAppboyAttributedTextStyleFrom:forLabel:")]
+    void ApplyAppboyAttributedTextStyleFrom(string text, UILabel label);
+  }
+
+  // @protocol ABKNFCrossPromotionCardActionDelegate <NSObject>
+  [Protocol, Model]
+  [BaseType(typeof(NSObject))]
+  interface ABKNFCrossPromotionCardActionDelegate
+  {
+    // @required -(void)openItunesStoreProductWithId:(NSNumber *)productId url:(NSURL *)url;
+    [Abstract]
+    [Export("openItunesStoreProductWithId:url:")]
+    void Url(NSNumber productId, NSUrl url);
+  }
+
+  // @interface ABKNewsFeedTableViewController : UITableViewController <ABKNFCrossPromotionCardActionDelegate, SKStoreProductViewControllerDelegate>
+  [BaseType (typeof(UITableViewController))]
+	interface ABKNewsFeedTableViewController : ABKNFCrossPromotionCardActionDelegate, ISKStoreProductViewControllerDelegate
+	{
+		// @property (nonatomic, strong) UIView * emptyFeedView __attribute__((iboutlet));
+		[Export ("emptyFeedView", ArgumentSemantic.Strong)]
+		UIView EmptyFeedView { get; set; }
+
+		// @property (nonatomic, unsafe_unretained) UILabel * emptyFeedLabel __attribute__((iboutlet));
+		[Export ("emptyFeedLabel", ArgumentSemantic.Assign)]
+		UILabel EmptyFeedLabel { get; set; }
+
+		// @property (nonatomic) BOOL disableUnreadIndicator;
+		[Export ("disableUnreadIndicator")]
+		bool DisableUnreadIndicator { get; set; }
+
+		// @property (nonatomic) ABKCardCategory categories;
+		[Export ("categories", ArgumentSemantic.Assign)]
+		ABKCardCategory Categories { get; set; }
+
+		// @property (nonatomic) NSArray<ABKCard *> * cards;
+		[Export ("cards", ArgumentSemantic.Assign)]
+		ABKCard[] Cards { get; set; }
+
+		// @property NSTimeInterval cacheTimeout;
+		[Export ("cacheTimeout")]
+		double CacheTimeout { get; set; }
+
+		// @property id constraintWarningValue;
+		[Export ("constraintWarningValue", ArgumentSemantic.Assign)]
+		NSObject ConstraintWarningValue { get; set; }
+
+		// +(instancetype)getNavigationFeedViewController;
+		[Static]
+		[Export ("getNavigationFeedViewController")]
+		ABKNewsFeedTableViewController GetNavigationFeedViewController ();
+
+		// -(NSString *)localizedAppboyFeedString:(NSString *)key;
+		[Export ("localizedAppboyFeedString:")]
+		string LocalizedAppboyFeedString (string key);
+
+		// -(void)handleCardClick:(ABKCard *)card;
+		[Export ("handleCardClick:")]
+		void HandleCardClick (ABKCard card);
+	}
+
+	// @interface ABKNewsFeedViewController : UINavigationController
+	[BaseType (typeof(UINavigationController))]
+	interface ABKNewsFeedViewController
+	{
+		// @property (nonatomic, unsafe_unretained) ABKNewsFeedTableViewController * newsFeed;
+		[Export ("newsFeed", ArgumentSemantic.Assign)]
+		ABKNewsFeedTableViewController NewsFeed { get; set; }
+	}
+
+	// @interface ABKFeedWebViewController : UIViewController <WKNavigationDelegate>
+	[BaseType (typeof(UIViewController))]
+	interface ABKFeedWebViewController : IWKNavigationDelegate
+	{
+		// @property NSURL * url;
+		[Export ("url", ArgumentSemantic.Assign)]
+		NSUrl Url { get; set; }
+
+		// @property (nonatomic) WKWebView * webView __attribute__((iboutlet));
+		[Export ("webView", ArgumentSemantic.Assign)]
+		WKWebView WebView { get; set; }
+
+		// @property (nonatomic) UIProgressView * progressBar __attribute__((iboutlet));
+		[Export ("progressBar", ArgumentSemantic.Assign)]
+		UIProgressView ProgressBar { get; set; }
+
+		// @property (nonatomic) BOOL showDoneButton;
+		[Export ("showDoneButton")]
+		bool ShowDoneButton { get; set; }
+	}
 
   // @interface ABKModalFeedbackViewController : ABKFeedbackViewController
   [BaseType(typeof(ABKFeedbackViewController))]
@@ -1853,12 +2052,6 @@ namespace AppboyPlatformXamariniOSBinding
     UIProgressView ProgressBar { get; set; }
   }
 
-  // @interface ABKNavigationBar : UINavigationBar
-  [BaseType(typeof(UINavigationBar))]
-  interface ABKNavigationBar
-  {
-  }
-
   // @interface ABKNavigationFeedbackViewController : ABKFeedbackViewController
   [BaseType(typeof(ABKFeedbackViewController))]
   interface ABKNavigationFeedbackViewController
@@ -1873,12 +2066,6 @@ namespace AppboyPlatformXamariniOSBinding
     [Static]
     [Export("getNoConnectionLocalizedString")]
     string NoConnectionLocalizedString { get; }
-  }
-
-  // @interface ABKThemableFeedNavigationBar : ABKNavigationBar
-  [BaseType(typeof(ABKNavigationBar))]
-  interface ABKThemableFeedNavigationBar
-  {
   }
 
   // @interface ABKUIURLUtils : NSObject
@@ -1944,50 +2131,5 @@ namespace AppboyPlatformXamariniOSBinding
     [Static]
     [Export("isiPhoneX")]
     bool IsiPhoneX { get; }
-  }
-
-  // @interface ABKViewUtilities : NSObject
-  [BaseType(typeof(NSObject))]
-  interface ABKViewUtilities
-  {
-    // +(void)setViewOriginY:(UIView *)view originY:(CGFloat)originY;
-    [Static]
-    [Export("setViewOriginY:originY:")]
-    void SetViewOriginY(UIView view, nfloat originY);
-
-    // +(void)setViewOriginX:(UIView *)view originX:(CGFloat)originX;
-    [Static]
-    [Export("setViewOriginX:originX:")]
-    void SetViewOriginX(UIView view, nfloat originX);
-
-    // +(void)setViewHeight:(UIView *)view height:(CGFloat)aHeight;
-    [Static]
-    [Export("setViewHeight:height:")]
-    void SetViewHeight(UIView view, nfloat aHeight);
-
-    // +(void)setViewWidth:(UIView *)view width:(CGFloat)aWidth;
-    [Static]
-    [Export("setViewWidth:width:")]
-    void SetViewWidth(UIView view, nfloat aWidth);
-
-    // +(void)setViewCenterY:(UIView *)view centerY:(CGFloat)centerY;
-    [Static]
-    [Export("setViewCenterY:centerY:")]
-    void SetViewCenterY(UIView view, nfloat centerY);
-
-    // +(void)setViewCenterX:(UIView *)view centerX:(CGFloat)centerX;
-    [Static]
-    [Export("setViewCenterX:centerX:")]
-    void SetViewCenterX(UIView view, nfloat centerX);
-
-    // +(void)stackViews:(NSArray *)views startYPosition:(CGFloat)startYPosition padding:(CGFloat)padding spacing:(CGFloat)spacing maxTotalHeight:(CGFloat)maxTotalHeight;
-    [Static]
-    [Export("stackViews:startYPosition:padding:spacing:maxTotalHeight:")]
-    void StackViews(NSObject[] views, nfloat startYPosition, nfloat padding, nfloat spacing, nfloat maxTotalHeight);
-
-    // +(UIImage *)fetchImageIfCached:(NSString *)imageUrlString;
-    [Static]
-    [Export("fetchImageIfCached:")]
-    UIImage FetchImageIfCached(string imageUrlString);
   }
 }

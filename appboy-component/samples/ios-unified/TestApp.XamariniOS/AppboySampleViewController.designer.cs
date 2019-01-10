@@ -36,6 +36,10 @@ namespace TestApp.XamariniOS
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIButton ContentCardsButton { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton EventsAndPurchasesButton { get; set; }
 
         [Outlet]
@@ -95,6 +99,11 @@ namespace TestApp.XamariniOS
             if (ChangeUserLabel != null) {
                 ChangeUserLabel.Dispose ();
                 ChangeUserLabel = null;
+            }
+
+            if (ContentCardsButton != null) {
+                ContentCardsButton.Dispose ();
+                ContentCardsButton = null;
             }
 
             if (EventsAndPurchasesButton != null) {

@@ -1,8 +1,9 @@
 ﻿<metadata>
   <!-- The mapping was throwing errors in each of the following, so we just remove them.  They are not needed for a fully featured integration -->
-  <remove-node path="/api/package[@name='com.appboy.ui.widget']" />
   <remove-node path="/api/package[@name='com.appboy']/class[@name='AppboyAdmReceiver']" />
-  <remove-node path="/api/package[@name='com.appboy']/class[@name='AppboyGcmReceiver']" />
+  <remove-node path="/api/package[@name='com.appboy']/class[@name='AppboyFcmReceiver']" />
+  <remove-node path="/api/package[@name='com.appboy.ui.widget']" />
+  <remove-node path="/api/package[@name='com.appboy.ui.contentcards']/class[@name='AppboyCardAdapter']" />
   <remove-node path="/api/package[@name='com.appboy.ui.inappmessage']/class[@name='AppboyAsyncInAppMessageDisplayer']" />
   <remove-node path="/api/package[@name='com.appboy.ui.inappmessage']/interface[@name='TouchAwareSwipeDismissTouchListener.ITouchListener']" />
   <remove-node path="/api/package[@name='com.appboy.ui.inappmessage.factories']/class[@name='AppboyFullViewFactory']" />
@@ -13,8 +14,6 @@
   <remove-node path="/api/package[@name='com.appboy.ui.inappmessage.views']/class[@name='AppboyInAppMessageModalView']" />
   <remove-node path="/api/package[@name='com.appboy.ui.inappmessage.views']/class[@name='AppboyInAppMessageSlideupView']" />
   <remove-node path="/api/package[@name='com.appboy.ui.inappmessage.views']/class[@name='AppboyInAppMessageFullView']" />
-  <attr 
-    path="/api/package[@name='com.appboy.models']/class[@name='InAppMessageBase']/method[@name='forJsonPut']"
-    name="managedReturn">Java.Lang.Object
-  </attr>
+  <remove-node path="/api/package[@name='com.appboy.ui.inappmessage']/class[@name='AppboyInAppMessageManager']/field[@name='mCustomControlInAppMessageManagerListener']" />
+  <remove-node path="/api/package[@name='com.appboy.ui.inappmessage']/class[@name='AppboyInAppMessageManager']/method[@name='setCustomControlInAppMessageManagerListener']" />
 </metadata>

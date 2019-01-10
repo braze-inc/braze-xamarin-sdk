@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppboyPlatform.XamarinAndroidBinding", "AppboyPlatform.XamarinAndroidBinding.csproj", "{9038A212-68E1-4C7A-B029-94F5C8FE76E9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppboyPlatform.AndroidCore", "..\android-core\AppboyPlatform.AndroidCore\AppboyPlatform.AndroidCore.csproj", "{91B92A4E-E8E1-4F4E-B55F-02141C2CB5F4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,5 +15,9 @@ Global
 		{9038A212-68E1-4C7A-B029-94F5C8FE76E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9038A212-68E1-4C7A-B029-94F5C8FE76E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9038A212-68E1-4C7A-B029-94F5C8FE76E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91B92A4E-E8E1-4F4E-B55F-02141C2CB5F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91B92A4E-E8E1-4F4E-B55F-02141C2CB5F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91B92A4E-E8E1-4F4E-B55F-02141C2CB5F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91B92A4E-E8E1-4F4E-B55F-02141C2CB5F4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

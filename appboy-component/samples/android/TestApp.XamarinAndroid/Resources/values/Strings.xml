@@ -6,7 +6,8 @@
   <string name="eventsAndPurchases">Log Events And Purchases</string>
   <string name="submitFeedback">Submit Feedback</string>
   <string name="trackSocialData">Track Social Data</string>
-  <string name="launchNewsFeed">Launch News Feed</string>
+  <string name="launchContentCards">Content Cards</string>
+  <string name="launchNewsFeed">News Feed</string>
   <string name="launchFeedback">Launch Feedback</string>
   <string name="addNewInAppMessage">Add In-App Message</string>
   <string name="dataFlush">Request Data Flush</string>

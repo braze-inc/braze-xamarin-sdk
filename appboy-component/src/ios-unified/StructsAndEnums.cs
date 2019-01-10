@@ -3,6 +3,25 @@ using ObjCRuntime;
 
 namespace AppboyPlatformXamariniOSBinding
 {
+
+  [Native]
+  public enum ABKDeviceOptions /* nuint */
+  {
+    None = 0,
+    Resolution = (1 << 0),
+    Carrier = (1 << 1),
+    Locale = (1 << 2),
+    Model = (1 << 3),
+    OSVersion = (1 << 4),
+    Idfv = (1 << 5),
+    Idfa = (1 << 6),
+    PushEnabled = (1 << 7),
+    Timezone = (1 << 8),
+    PushAuthStatus = (1 << 9),
+    AdTrackingEnabled = (1 << 10),
+    All = ~None
+  }
+
   public enum ABKCardCategory /* nuint */
   {
     NoCategory = 1 << 0,

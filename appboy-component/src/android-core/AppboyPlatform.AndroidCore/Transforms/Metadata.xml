@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <!-- The mapping was throwing errors in each of the following, so we just remove them.  They are not needed for a fully featured integration -->
+  <remove-node path="/api/package[@name='com.appboy.models']/class[@name='AppboyGeofence']" />
+  <attr 
+    path="/api/package[@name='com.appboy.models']/class[@name='InAppMessageBase']/method[@name='forJsonPut']"
+    name="managedReturn">Java.Lang.Object
+  </attr>
+</metadata>

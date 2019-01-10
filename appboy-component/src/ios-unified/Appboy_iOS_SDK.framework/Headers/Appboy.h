@@ -13,7 +13,7 @@
 #import <UserNotifications/UserNotifications.h>
 
 #ifndef APPBOY_SDK_VERSION
-#define APPBOY_SDK_VERSION @"3.3.4"
+#define APPBOY_SDK_VERSION @"3.11.0"
 #endif
 
 #if !TARGET_OS_TV
@@ -24,12 +24,12 @@
 
 @class ABKUser;
 @class ABKFeedController;
+@class ABKContentCardsController;
 @class ABKLocationManager;
 @class ABKFeedback;
 @protocol ABKInAppMessageControllerDelegate;
 @protocol ABKIDFADelegate;
 @protocol ABKAppboyEndpointDelegate;
-@protocol ABKPushURIDelegate;
 @protocol ABKURLDelegate;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -61,27 +61,6 @@ extern NSString *const ABKFlushIntervalOptionKey;
 extern NSString *const ABKDisableAutomaticLocationCollectionKey;
 
 /*!
- * This key can be set to YES or NO and will configure whether Braze will automatically collect significant change location
- * events.  If this key isn't set and the server doesn't provide a value, it will default to false.
- */
-extern NSString *const ABKSignificantChangeCollectionEnabledOptionKey;
-
-/*!
- * This key can be set to an integer value that represents the minimum distance in meters between location events logged to Braze.
- * If this value is set and significant change location is enabled, this value will be used to filter locations that are received from the significant
- * change location provider.  The default and minimum value is 50.  Note that significant change location updates shouldn't occur if the user has
- * gone 50 meters or less.
- */
-extern NSString *const ABKSignificantChangeCollectionDistanceFilterOptionKey;
-
-/*!
- * This key can be set to an integer value that represents the minimum time in seconds between location events logged to Braze.
- * If this value is set and significant change location is enabled, this value will be used to filter locations that are received from the significant
- * change location provider.  The default value is 3600 (1 hour); the minimum is 300 (5 minutes).
- */
-extern NSString *const ABKSignificantChangeCollectionTimeFilterOptionKey;
-
-/*!
  * This key can be set to an instance of a class that extends ABKIDFADelegate, which can be used to pass advertiser tracking information to to Braze.
  */
 extern NSString *const ABKIDFADelegateKey;
@@ -91,12 +70,6 @@ extern NSString *const ABKIDFADelegateKey;
  * (e.g. image) URIs used by the Braze SDK.
  */
 extern NSString *const ABKAppboyEndpointDelegateKey;
-
-/*!
- * This key can be set to an instance of a class that conforms to the ABKPushURIDelegate protocol, which can be used to handle deep linking
- * in push in a custom way.
- */
-extern NSString *const ABKPushURIDelegateKey __deprecated_msg("ABKPushURIDelegate is deprecated, please use the ABKURLDelegate protocol instead.");
 
 /*!
  * This key can be set to an instance of a class that conforms to the ABKURLDelegate protocol, allowing it to handle URLs in a custom way.
@@ -125,6 +98,15 @@ extern NSString *const ABKMinimumTriggerTimeIntervalKey;
  * Key to report the SDK flavor currently being used.  For internal use only.
  */
 extern NSString *const ABKSDKFlavorKey;
+
+/*!
+ * Key to specify a whitelist for device fields that are collected by the Braze SDK.
+ *
+ * To specify whitelisted device fields, assign the bitwise `OR` of desired fields to this key. Fields are defined
+ * in `ABKDeviceOptions`. To turn off all fields, set the value of this key to `ABKDeviceOptionNone`. By default,
+ * all fields are collected.
+ */
+extern NSString *const ABKDeviceWhitelistKey;
 
 /*!
  * This key can be set to a string value representing the app group name for the Push Story Notification
@@ -196,6 +178,22 @@ typedef NS_ENUM(NSInteger, ABKFeedbackSentResult) {
   ABKFeedbackSentSuccessfully
 };
 
+typedef NS_OPTIONS(NSUInteger, ABKDeviceOptions) {
+  ABKDeviceOptionNone = 0,
+  ABKDeviceOptionResolution = (1 << 0),
+  ABKDeviceOptionCarrier = (1 << 1),
+  ABKDeviceOptionLocale = (1 << 2),
+  ABKDeviceOptionModel = (1 << 3),
+  ABKDeviceOptionOSVersion = (1 << 4),
+  ABKDeviceOptionIDFV = (1 << 5),
+  ABKDeviceOptionIDFA = (1 << 6),
+  ABKDeviceOptionPushEnabled = (1 << 7),
+  ABKDeviceOptionTimezone = (1 << 8),
+  ABKDeviceOptionPushAuthStatus = (1 << 9),
+  ABKDeviceOptionAdTrackingEnabled = (1 << 10),
+  ABKDeviceOptionAll = ~ABKDeviceOptionNone
+};
+
 /*
  * Braze Public API: Appboy
  */
@@ -259,6 +257,8 @@ typedef NS_ENUM(NSInteger, ABKFeedbackSentResult) {
 
 @property (readonly) ABKFeedController *feedController;
 
+@property (readonly) ABKContentCardsController *contentCardsController;
+
 /*!
 * The policy regarding processing of network requests by the SDK. See the enumeration values for more information on
 * possible options. This value can be set at runtime, or can be injected in at startup via the appboyOptions dictionary.
@@ -297,31 +297,6 @@ typedef NS_ENUM(NSInteger, ABKFeedbackSentResult) {
  * See ABKLocationManager.h.
  */
 @property (nonatomic, readonly) ABKLocationManager *locationManager;
-
-/*!
- * Appboy UI elements can be themed using the NUI framework. See https://github.com/tombenner/nui and the Appboy docs.
- * To enable NUI, take the following steps:
- *
- * - If your app uses ARC: Get NUI from https://github.com/tombenner/nui
- *
- * - If your app does not use ARC: Get NUI from https://github.com/Appboy/nui which is our fork of NUI that manages its
- *   own memory
- *
- * - Follow the instructions in either repo above to integrate NUI
- *
- * - Create a style sheet called NUIStyle.nss
- *
- * - Set the property below to YES
- *
- * If useNUITheming is NO, NUI is ignored completely whether or not it's integrated into your app.  Note that
- * you can theme your app and Appboy differently -- Appboy uses NUI independently of your app's use of NUI.
- */
-@property (nonatomic) BOOL useNUITheming;
-
-/*!
- * A class conforming to the ABKPushURIDelegate protocol can be set to handle deep linking in push in a custom way.
- */
-@property (nonatomic, weak, nullable) id<ABKPushURIDelegate> appboyPushURIDelegate __deprecated_msg("Use appboyURLDelegate instead.");
 
 /*!
  * A class conforming to the ABKURLDelegate protocol can be set to handle URLs in a custom way.
@@ -438,21 +413,18 @@ typedef NS_ENUM(NSInteger, ABKFeedbackSentResult) {
 /*!
  * This method is equivalent to calling logPurchase:inCurrency:atPrice:withQuantity:andProperties: with a quantity of 1 and nil properties.
  * Please see logPurchase:inCurrency:atPrice:withQuantity:andProperties: for more information.
- *
  */
 - (void)logPurchase:(NSString *)productIdentifier inCurrency:(NSString *)currencyCode atPrice:(NSDecimalNumber *)price;
 
 /*!
  * This method is equivalent to calling logPurchase:inCurrency:atPrice:withQuantity:andProperties with a quantity of 1.
  * Please see logPurchase:inCurrency:atPrice:withQuantity:andProperties: for more information.
- *
  */
 - (void)logPurchase:(NSString *)productIdentifier inCurrency:(NSString *)currencyCode atPrice:(NSDecimalNumber *)price withProperties:(nullable NSDictionary *)properties;
 
 /*!
  * This method is equivalent to calling logPurchase:inCurrency:atPrice:withQuantity:andProperties with nil properties.
  * Please see logPurchase:inCurrency:atPrice:withQuantity:andProperties: for more information.
- *
  */
 - (void)logPurchase:(NSString *)productIdentifier inCurrency:(NSString *)currencyCode atPrice:(NSDecimalNumber *)price withQuantity:(NSUInteger)quantity;
 
@@ -486,7 +458,6 @@ typedef NS_ENUM(NSInteger, ABKFeedbackSentResult) {
  *
  * Note: Braze supports purchases in multiple currencies. Purchases that you report in a currency other than USD will
  * be shown in the dashboard in USD based on the exchange rate at the date they were reported.
- *
  */
 - (void)logPurchase:(NSString *)productIdentifier inCurrency:(NSString *)currencyCode atPrice:(NSDecimalNumber *)price withQuantity:(NSUInteger)quantity andProperties:(nullable NSDictionary *)properties;
 
@@ -499,9 +470,8 @@ typedef NS_ENUM(NSInteger, ABKFeedbackSentResult) {
  * @discussion Submits a piece of feedback to the Braze feedback center so that it can be handled in the Braze dashboard.
  * The request to submit feedback is made immediately, however, this method does not block and will return as soon as the
  * feedback request is placed on the network queue.
- *
  */
-- (BOOL)submitFeedback:(NSString *)replyToEmail message:(NSString *)message isReportingABug:(BOOL)isReportingABug;
+- (BOOL)submitFeedback:(NSString *)replyToEmail message:(NSString *)message isReportingABug:(BOOL)isReportingABug __deprecated_msg("The feedback feature is disabled for new accounts, and will be removed in a future SDK release.");
 
 /*!
  * @param feedback The feedback object with feedback message, email, and is-bug flag.
@@ -511,9 +481,8 @@ typedef NS_ENUM(NSInteger, ABKFeedbackSentResult) {
  * @discussion Submits a piece of feedback to the Braze feedback center so that it can be handled in the Braze dashboard.
  * The request to submit feedback is made immediately. However, this method does not block and will return as soon as the
  * feedback request is placed on the network queue.
- *
  */
-- (void)submitFeedback:(ABKFeedback *)feedback withCompletionHandler:(nullable void (^)(ABKFeedbackSentResult feedbackSentResult))completionHandler;
+- (void)submitFeedback:(ABKFeedback *)feedback withCompletionHandler:(nullable void (^)(ABKFeedbackSentResult feedbackSentResult))completionHandler __deprecated_msg("The feedback feature is disabled for new accounts, and will be removed in a future SDK release.");
 
 /*!
  * If you're displaying cards on your own instead of using ABKFeedViewController, you should still report impressions of
@@ -526,7 +495,14 @@ typedef NS_ENUM(NSInteger, ABKFeedbackSentResult) {
  * impressions of the feedback page back to Braze with this method so that your campaign reporting features still work
  * in the dashboard.
  */
-- (void)logFeedbackDisplayed;
+- (void)logFeedbackDisplayed __deprecated_msg("The feedback feature is disabled for new accounts, and will be removed in a future SDK release.");
+
+/*!
+ * If you're displaying content cards on your own instead of using ABKContentCardsViewController, you should still report
+ * impressions of the content cards back to Braze with this method so that your campaign reporting features still work
+ * in the dashboard.
+ */
+- (void)logContentCardsDisplayed;
 
 /*!
  * Enqueues a news feed request for the current user. Note that if the queue already contains another request for the
@@ -538,6 +514,11 @@ typedef NS_ENUM(NSInteger, ABKFeedbackSentResult) {
  * or not. For more detail about the ABKFeedUpdatedNotification and the ABKFeedUpdatedIsSuccessfulKey, please check ABKFeedController.
  */
 - (void)requestFeedRefresh;
+
+/*!
+ * Enqueues a content cards request for the current user.
+ */
+- (void)requestContentCardsRefresh;
 
 /*!
  * Get the device ID - the IDFV - which will reset if all apps for a given vendor are removed from the device.

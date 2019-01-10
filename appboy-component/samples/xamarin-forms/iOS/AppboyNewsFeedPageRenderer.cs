@@ -11,17 +11,15 @@ namespace TestAppXamarinForms.iOS
 {
   public class AppboyNewsFeedPageRenderer : PageRenderer
   {
-    ABKFeedViewControllerNavigationContext abkFeedViewControllerNavigationContext;
-
     public AppboyNewsFeedPageRenderer() {
-      abkFeedViewControllerNavigationContext = new ABKFeedViewControllerNavigationContext();
     }
 
     public override void ViewDidLoad ()
     {
-      base.ViewDidLoad ();
-      this.AddChildViewController (abkFeedViewControllerNavigationContext);
-      View.Add (abkFeedViewControllerNavigationContext.View);
+      base.ViewDidLoad();
+      ABKNewsFeedTableViewController feed = ABKNewsFeedTableViewController.GetNavigationFeedViewController();
+      this.AddChildViewController(feed);
+      View.Add(feed.View);
     }
   }
 }

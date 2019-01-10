@@ -105,6 +105,15 @@ namespace com.appboy.xamarinsample
         Appboy.GetInstance(Activity).CurrentUser.SetTwitterData(twitterUser);
       };
 
+      // Content Cards
+      view.FindViewById<Button> (Resource.Id.launchContentCardsButton).Click += delegate {
+        FragmentTransaction fragmentTransaction = Activity.SupportFragmentManager.BeginTransaction ();
+        AppboyContentCardsFragment contentCards = new AppboyContentCardsFragment();
+        fragmentTransaction.Replace (Resource.Id.root, contentCards, contentCards.Class.ToString ());
+        fragmentTransaction.AddToBackStack (contentCards.Class.ToString ());
+        fragmentTransaction.Commit ();
+      };
+
       // Feed
       view.FindViewById<Button> (Resource.Id.launchNewsFeedButton).Click += delegate {
         FragmentTransaction fragmentTransaction = Activity.SupportFragmentManager.BeginTransaction();
@@ -112,16 +121,6 @@ namespace com.appboy.xamarinsample
         fragmentTransaction.Replace(Resource.Id.root, feedFragment, feedFragment.Class.ToString());
         fragmentTransaction.AddToBackStack(feedFragment.Class.ToString());
         fragmentTransaction.Commit();   
-      };
-
-      // Feedback
-      view.FindViewById<Button> (Resource.Id.launchFeedbackButton).Click += delegate {
-        FragmentTransaction fragmentTransaction = Activity.SupportFragmentManager.BeginTransaction();
-        AppboyFeedbackFragment feedbackFragment = new AppboyFeedbackFragment();
-        feedbackFragment.SetFeedbackFinishedListener(new FeedbackFinishedListener(Activity.SupportFragmentManager));
-        fragmentTransaction.Replace(Resource.Id.root, feedbackFragment, feedbackFragment.Class.ToString());
-        fragmentTransaction.AddToBackStack(feedbackFragment.Class.ToString());
-        fragmentTransaction.Commit();     
       };
 
       // In-App Message
@@ -153,23 +152,6 @@ namespace com.appboy.xamarinsample
       };
 				
       return view;
-    }
-
-    class FeedbackFinishedListener : Java.Lang.Object, AppboyFeedbackFragment.IFeedbackFinishedListener {
-      FragmentManager fragmentManager;
-
-      public FeedbackFinishedListener(FragmentManager supportFragmentManager) {
-        fragmentManager = supportFragmentManager;
-      }
-
-      public void OnFeedbackFinished (AppboyFeedbackFragment.FeedbackResult feedbackResult) {
-        Console.WriteLine("Feedback finished");
-        fragmentManager.PopBackStack();
-      }
-
-      public string BeforeFeedbackSubmitted(string feedback) {
-        return feedback;
-      }
     }
   }
 }

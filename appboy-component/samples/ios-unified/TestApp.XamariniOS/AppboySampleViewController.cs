@@ -25,6 +25,8 @@ namespace TestApp.XamariniOS
       ChangeUserButton.TouchUpInside += ChangeUserButtonHandler;
       UserPropertyButton.TouchUpInside += UserPropertyButtonHandler;
       EventsAndPurchasesButton.TouchUpInside += EventsAndPurchasesButtonHandler;
+      NewsFeedButton.TouchUpInside += NewsFeedButtonHandler;
+      ContentCardsButton.TouchUpInside += ContentCardsButtonHandler;
       AddSlideupButton.TouchUpInside += AddSlideupButtonHandler;
       ChangeUserLabel.Text = "Current User: " + Appboy.SharedInstance?.User?.UserID;
     }
@@ -61,6 +63,18 @@ namespace TestApp.XamariniOS
     {
       Appboy.SharedInstance?.LogCustomEvent("myCustomEvent");
       Appboy.SharedInstance?.LogPurchase("myProduct", "USD", new NSDecimalNumber("10"));
+    }
+
+    private void NewsFeedButtonHandler(object sender, EventArgs e)
+    {
+      ABKNewsFeedTableViewController feed = ABKNewsFeedTableViewController.GetNavigationFeedViewController();
+      NavigationController.PushViewController(feed, true);
+    }
+
+    private void ContentCardsButtonHandler(object sender, EventArgs e)
+    {
+      ABKContentCardsTableViewController contentCards = ABKContentCardsTableViewController.GetNavigationContentCardsViewController();
+      NavigationController.PushViewController(contentCards, true);
     }
 
     private void AddSlideupButtonHandler(object sender, EventArgs e)

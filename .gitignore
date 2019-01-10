@@ -21,9 +21,20 @@
 # nuget and component packages
 **/packages
 **/Components
+**/*.nupkg
 
-# Support v4 dll
+# Support lib DLLs
 **/Xamarin.Android.Support.v4.dll
+**/android/Xamarin.Android.Arch.Core.Common.dll
+**/android/Xamarin.Android.Arch.Lifecycle.Common.dll
+**/android/Xamarin.Android.Arch.Lifecycle.Runtime.dll
+**/android/Xamarin.Android.Support.Annotations.dll
+**/android/Xamarin.Android.Support.Compat.dll
+**/android/Xamarin.Android.Support.Core.UI.dll
+**/android/Xamarin.Android.Support.Core.Utils.dll
+**/android/Xamarin.Android.Support.Fragment.dll
+**/android/Xamarin.Android.Support.Media.Compat.dll
+**/android/Xamarin.Android.Support.v7.RecyclerView.dll
 
 # Visual Studio
 **/.vs

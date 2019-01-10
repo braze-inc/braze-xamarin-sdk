@@ -23,10 +23,6 @@ contains:
 - nuget: Nuspec files for our Xamarin Nuget packages.
 - component:  this contains the information required generate the Xamarin component found in the component store. Note that Braze Xamarin SDK `v1.5.0` is the last version to receive a Xamarin component store release. Future releases will be released to Nuget and the open source repo only.
 
-## Version Support
-
-The Android SDK supports Android 4.0+ (Ice Cream Sandwich and up).  The iOS SDK supports iOS 8.0+.
-
 ## Questions?
 
 If you have questions, please contact [support@braze.com](mailto:support@braze.com).

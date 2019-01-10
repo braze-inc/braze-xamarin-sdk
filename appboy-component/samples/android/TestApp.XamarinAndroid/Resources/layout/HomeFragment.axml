@@ -36,15 +36,15 @@
         android:layout_height="wrap_content"
         android:id="@+id/trackSocialDataButton" />
     <Button
+        android:text="@string/launchContentCards"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/launchContentCardsButton" />
+    <Button
         android:text="@string/launchNewsFeed"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/launchNewsFeedButton" />
-    <Button
-        android:text="@string/launchFeedback"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/launchFeedbackButton" />
     <Button
         android:text="@string/addNewInAppMessage"
         android:layout_width="match_parent"
