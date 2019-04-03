@@ -1,3 +1,20 @@
+## 1.7.0
+
+##### Breaking
+- Updated the Android binding to use [Braze Android SDK 3.2.1](https://github.com/Appboy/appboy-android-sdk/blob/master/CHANGELOG.md#321).
+  - Added `AppboyFirebaseMessagingService` to directly use the Firebase messaging event `com.google.firebase.MESSAGING_EVENT`. This is now the recommended way to integrate Firebase push with Braze. The `AppboyFcmReceiver` should be removed from your `AndroidManifest` and replaced with the following:
+    ```
+    <service android:name="com.appboy.AppboyFirebaseMessagingService">
+    <intent-filter>
+    <action android:name="com.google.firebase.MESSAGING_EVENT" />
+    </intent-filter>
+    </service>
+    ```
+  - Also note that any `c2dm` related permissions should be removed from your manifest as Braze does not require any extra permissions for `AppboyFirebaseMessagingService` to work correctly.
+- Updated the native iOS bridge to [Braze iOS SDK 3.14.0](https://github.com/Appboy/appboy-ios-sdk/releases/tag/3.14.0).
+  - Drops support for iOS 8.
+  - Removes Cross-Promotion cards from the News Feed. 
+
 ## 1.6.0
 
 ##### Breaking

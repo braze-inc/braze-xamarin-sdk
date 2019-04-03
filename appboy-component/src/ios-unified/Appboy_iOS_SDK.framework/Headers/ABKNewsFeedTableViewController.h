@@ -1,9 +1,7 @@
 #import <UIKit/UIKit.h>
 #import "AppboyKit.h"
-#import "ABKNFCrossPromotionCardActionDelegate.h"
-#import <StoreKit/StoreKit.h>
 
-@interface ABKNewsFeedTableViewController : UITableViewController <ABKNFCrossPromotionCardActionDelegate, SKStoreProductViewControllerDelegate>
+@interface ABKNewsFeedTableViewController : UITableViewController
 
 /*!
  * UI elements which are used in the News Feed table view. You can find them in the News Feed Card Storyboard.
@@ -30,6 +28,11 @@
  * update the value of this property.
  */
 @property (nonatomic) NSArray<ABKCard *> *cards;
+
+/*!
+ * This set stores the card IDs for which the impressions have been logged.
+ */
+@property (nonatomic) NSMutableSet<NSString *> *cardImpressions;
 
 /*!
  * This property defines the timeout for stored News Feed cards in the Braze SDK. If the cards in the

@@ -4,8 +4,8 @@
 
 Successful marketing automation is essential to the future of your mobile app. Braze helps you engage your users beyond the download. Visit the following links for details and we'll have you up and running in no time!
 
-- [Braze Academy](http://www.braze.com/academy "Braze Academy")
-- [Technical Documentation](http://documentation.braze.com "Braze Technical Documentation")
+- [Braze User Guide](https://www.braze.com/docs/user_guide/introduction/ "Braze User Guide")
+- [Braze Developer Guide](https://www.braze.com/docs/developer_guide/home/ "Braze Developer Guide")
 - [Android JavaDocs](http://appboy.github.io/appboy-android-sdk/javadocs/ "Braze Android SDK Class Documentation")
 - [iOS Full Class Documentation](http://appboy.github.io/appboy-ios-sdk/docs/annotated.html "Braze iOS SDK Class Documentation")
 - [iOS Xamarin Bindings Nuget Package](https://www.nuget.org/packages/AppboyPlatformXamariniOSBinding/ "iOS Xamarin Bindings Nuget Package")
@@ -21,7 +21,6 @@ contains:
 - src:  the Xamarin bindings projects that generated the DLLs found in the libs folder.
 - samples:  Xamarin applications that show how to use the bindings to access the Braze feature set.
 - nuget: Nuspec files for our Xamarin Nuget packages.
-- component:  this contains the information required generate the Xamarin component found in the component store. Note that Braze Xamarin SDK `v1.5.0` is the last version to receive a Xamarin component store release. Future releases will be released to Nuget and the open source repo only.
 
 ## Questions?
 

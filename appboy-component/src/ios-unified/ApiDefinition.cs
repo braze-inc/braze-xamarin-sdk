@@ -204,55 +204,6 @@ namespace AppboyPlatformXamariniOSBinding
     string Domain { get; set; }
   }
 
-  // @interface ABKCrossPromotionCard : ABKCard <NSCoding>
-  [BaseType(typeof(ABKCard))]
-  interface ABKCrossPromotionCard : INSCoding
-  {
-    // @property (copy) NSString * _Nonnull mediaType;
-    [Export("mediaType")]
-    string MediaType { get; set; }
-
-    // @property (copy) NSString * _Nonnull title;
-    [Export("title")]
-    string Title { get; set; }
-
-    // @property (copy) NSString * _Nonnull subtitle;
-    [Export("subtitle")]
-    string Subtitle { get; set; }
-
-    // @property (copy) NSString * _Nonnull image;
-    [Export("image")]
-    string Image { get; set; }
-
-    // @property (copy) NSString * _Nullable displayPrice;
-    [NullAllowed, Export("displayPrice")]
-    string DisplayPrice { get; set; }
-
-    // @property (nonatomic) long long iTunesId;
-    [Export("iTunesId")]
-    long ITunesId { get; set; }
-
-    // @property (nonatomic) float rating;
-    [Export("rating")]
-    float Rating { get; set; }
-
-    // @property (nonatomic) float price;
-    [Export("price")]
-    float Price { get; set; }
-
-    // @property (nonatomic) int reviews;
-    [Export("reviews")]
-    int Reviews { get; set; }
-
-    // @property (copy) NSString * _Nonnull caption;
-    [Export("caption")]
-    string Caption { get; set; }
-
-    // @property BOOL universal;
-    [Export("universal")]
-    bool Universal { get; set; }
-  }
-
   // @interface ABKContentCard : NSObject <NSCopying, NSCoding>
   [BaseType (typeof(NSObject))]
   interface ABKContentCard : INSCopying, INSCoding
@@ -1927,20 +1878,9 @@ namespace AppboyPlatformXamariniOSBinding
     void ApplyAppboyAttributedTextStyleFrom(string text, UILabel label);
   }
 
-  // @protocol ABKNFCrossPromotionCardActionDelegate <NSObject>
-  [Protocol, Model]
-  [BaseType(typeof(NSObject))]
-  interface ABKNFCrossPromotionCardActionDelegate
-  {
-    // @required -(void)openItunesStoreProductWithId:(NSNumber *)productId url:(NSURL *)url;
-    [Abstract]
-    [Export("openItunesStoreProductWithId:url:")]
-    void Url(NSNumber productId, NSUrl url);
-  }
-
-  // @interface ABKNewsFeedTableViewController : UITableViewController <ABKNFCrossPromotionCardActionDelegate, SKStoreProductViewControllerDelegate>
+  // @interface ABKNewsFeedTableViewController : UITableViewController <SKStoreProductViewControllerDelegate>
   [BaseType (typeof(UITableViewController))]
-	interface ABKNewsFeedTableViewController : ABKNFCrossPromotionCardActionDelegate, ISKStoreProductViewControllerDelegate
+	interface ABKNewsFeedTableViewController : ISKStoreProductViewControllerDelegate
 	{
 		// @property (nonatomic, strong) UIView * emptyFeedView __attribute__((iboutlet));
 		[Export ("emptyFeedView", ArgumentSemantic.Strong)]

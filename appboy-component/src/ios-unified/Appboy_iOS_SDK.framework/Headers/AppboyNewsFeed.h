@@ -8,5 +8,3 @@
 #import "ABKNFBaseCardCell.h"
 #import "ABKNFCaptionedMessageCardCell.h"
 #import "ABKNFClassicCardCell.h"
-#import "ABKNFCrossPromotionCardActionDelegate.h"
-#import "ABKNFCrossPromotionCardCell.h"

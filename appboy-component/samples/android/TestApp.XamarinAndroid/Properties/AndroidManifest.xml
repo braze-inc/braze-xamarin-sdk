@@ -4,12 +4,11 @@
 	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<application android:label="TestApp.XamarinAndroid" android:icon="@drawable/icon">
-		<receiver android:name="com.appboy.AppboyFcmReceiver" android:permission="com.google.android.c2dm.permission.SEND">
+		<service android:name="com.appboy.AppboyFirebaseMessagingService">
 			<intent-filter>
-				<action android:name="com.google.android.c2dm.intent.RECEIVE" />
-				<category android:name="com.appboy.xamarinsample" />
+				<action android:name="com.google.firebase.MESSAGING_EVENT" />
 			</intent-filter>
-		</receiver>
+		</service>
 		<activity android:name="com.appboy.ui.AppboyWebViewActivity" />
 		<activity android:name="com.appboy.ui.activities.AppboyFeedActivity" />
 	</application>

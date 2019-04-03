@@ -10,10 +10,10 @@
 #endif
 #endif
 
+#import "AppboyContentCards.h"
 #import "ABKContentCardsTableViewController.h"
 #import "ABKContentCardsViewController.h"
 #import "ABKContentCardsWebViewController.h"
-#import "AppboyContentCards.h"
 #import "ABKBannerContentCardCell.h"
 #import "ABKBaseContentCardCell.h"
 #import "ABKCaptionedImageContentCardCell.h"
@@ -32,7 +32,6 @@
 #import "ABKClassicContentCard.h"
 #import "ABKContentCard.h"
 #import "ABKContentCardsController.h"
-#import "ABKCrossPromotionCard.h"
 #import "ABKFacebookUser.h"
 #import "ABKFeedback.h"
 #import "ABKFeedController.h"
@@ -86,16 +85,14 @@
 #import "ABKInAppMessageSlideupViewController.h"
 #import "ABKInAppMessageViewController.h"
 #import "ABKInAppMessageWindowController.h"
+#import "AppboyNewsFeed.h"
 #import "ABKFeedWebViewController.h"
 #import "ABKNewsFeedTableViewController.h"
 #import "ABKNewsFeedViewController.h"
-#import "AppboyNewsFeed.h"
 #import "ABKNFBannerCardCell.h"
 #import "ABKNFBaseCardCell.h"
 #import "ABKNFCaptionedMessageCardCell.h"
 #import "ABKNFClassicCardCell.h"
-#import "ABKNFCrossPromotionCardActionDelegate.h"
-#import "ABKNFCrossPromotionCardCell.h"
 #import "ABKUIURLUtils.h"
 #import "ABKUIUtils.h"
 
