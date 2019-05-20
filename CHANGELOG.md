@@ -1,3 +1,11 @@
+## 1.8.0
+
+##### Changed
+- Updated the Android binding to use [Braze Android SDK 3.3.0](https://github.com/Appboy/appboy-android-sdk/blob/master/CHANGELOG.md#330).
+
+##### Added
+- Added C# bindings for Braze Android SDK classes with Firebase Cloud Messaging dependencies.
+
 ## 1.7.0
 
 ##### Breaking

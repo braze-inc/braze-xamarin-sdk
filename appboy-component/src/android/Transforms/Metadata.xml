@@ -1,7 +1,7 @@
 ﻿<metadata>
   <!-- The mapping was throwing errors in each of the following, so we just remove them.  They are not needed for a fully featured integration -->
   <remove-node path="/api/package[@name='com.appboy']/class[@name='AppboyAdmReceiver']" />
-  <remove-node path="/api/package[@name='com.appboy']/class[@name='AppboyFcmReceiver']" />
+  <remove-node path="/api/package[@name='com.appboy']/class[@name='AppboyFcmReceiver.HandleAppboyFcmMessageTask']" />
   <remove-node path="/api/package[@name='com.appboy.ui.widget']" />
   <remove-node path="/api/package[@name='com.appboy.ui.contentcards']/class[@name='AppboyCardAdapter']" />
   <remove-node path="/api/package[@name='com.appboy.ui.inappmessage']/class[@name='AppboyAsyncInAppMessageDisplayer']" />
