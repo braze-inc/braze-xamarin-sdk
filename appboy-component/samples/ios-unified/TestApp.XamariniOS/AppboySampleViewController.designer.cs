@@ -48,10 +48,6 @@ namespace TestApp.XamariniOS
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIButton SubmitFeedbackButton1 { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton UserPropertyButton { get; set; }
 
         [Action ("AddFullButton_TouchUpInside:")]
@@ -114,11 +110,6 @@ namespace TestApp.XamariniOS
             if (NewsFeedButton != null) {
                 NewsFeedButton.Dispose ();
                 NewsFeedButton = null;
-            }
-
-            if (SubmitFeedbackButton1 != null) {
-                SubmitFeedbackButton1.Dispose ();
-                SubmitFeedbackButton1 = null;
             }
 
             if (UserPropertyButton != null) {

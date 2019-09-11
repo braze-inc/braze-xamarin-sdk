@@ -59,11 +59,6 @@ namespace com.appboy.xamarinsample
         Appboy.GetInstance(Activity).LogPurchase("myProduct", "USD", new Java.Math.BigDecimal(3.50));
       };
 
-      // Feedback
-      view.FindViewById<Button> (Resource.Id.submitFeedbackButton).Click += delegate {
-        Appboy.GetInstance(Activity).SubmitFeedback("testuser@test.com", "Great App!", false);
-      };
-
       // Social
       view.FindViewById<Button> (Resource.Id.trackSocialDataButton).Click += delegate {
 

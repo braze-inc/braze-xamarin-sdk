@@ -20,7 +20,7 @@ namespace com.appboy.xamarinsample
 
     public override void OnCreate()
     {
-      AppboyLogger.LogLevel = 2;
+      AppboyLogger.LogLevel = 0;
       RegisterActivityLifecycleCallbacks(new AppboyLifecycleCallbackListener());
 
       new Task(RegisterFirebasePush).Start();

@@ -21,7 +21,7 @@ namespace com.appboy.xamarinsample
       FragmentTransaction fragmentTransaction = SupportFragmentManager.BeginTransaction();
       HomeFragment homeFragment = new HomeFragment();
       fragmentTransaction.Add(com.appboy.xamarinsample.Resource.Id.root, homeFragment, homeFragment.Class.ToString());
-      fragmentTransaction.Commit();    
+      fragmentTransaction.Commit();
     }
   }
 }

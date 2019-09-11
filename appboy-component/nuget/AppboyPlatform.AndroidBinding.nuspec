@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>AppboyPlatform.AndroidBinding</id>
-    <version>1.8.0</version>
+    <version>1.9.0</version>
     <authors>Braze, Inc.</authors>
     <owners>Braze, Inc.</owners>
     <licenseUrl>https://github.com/Appboy/appboy-xamarin-bindings/blob/master/LICENSE</licenseUrl>

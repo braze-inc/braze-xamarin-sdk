@@ -1,3 +1,9 @@
+## 1.9.0
+- Updated the Android binding to use [Braze Android SDK 3.7.0](https://github.com/Appboy/appboy-android-sdk/blob/master/CHANGELOG.md#370).
+- Updated the native iOS bridge to [Braze iOS SDK 3.19.0](https://github.com/Appboy/appboy-ios-sdk/releases/tag/3.14.0).
+- Note: This Braze Xamarin SDK release updates to Braze Android SDK and Braze iOS SDK dependencies which no longer enable automatic Braze location collection by default. Please consult their respective changelogs for information on how to continue to enable automatic Braze location collection, as well as further information on breaking changes.
+- Removes the Feedback feature as well as all associated methods, classes, and interfaces.
+
 ## 1.8.0
 
 ##### Changed

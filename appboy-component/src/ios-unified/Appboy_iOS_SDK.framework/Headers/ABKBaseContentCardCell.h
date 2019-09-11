@@ -1,6 +1,11 @@
 #import <UIKit/UIKit.h>
-#import <FLAnimatedImage/FLAnimatedImageView.h>
 #import "ABKContentCard.h"
+
+@protocol ABKBaseContentCardCellDelegate <NSObject>
+
+- (void)refreshTableViewCellHeights;
+
+@end
 
 @interface ABKBaseContentCardCell : UITableViewCell
 
@@ -38,6 +43,11 @@
 @property (nonatomic, assign) CGFloat cardSidePadding;
 @property (nonatomic, assign) CGFloat cardSpacing;
 @property (nonatomic, assign) BOOL hideUnreadIndicator;
+
+/*!
+ * To communicate back after any cell updates occur
+ */
+@property (weak, nonatomic) id <ABKBaseContentCardCellDelegate> delegate;
 
 /*!
  * @param card The card model for the cell.

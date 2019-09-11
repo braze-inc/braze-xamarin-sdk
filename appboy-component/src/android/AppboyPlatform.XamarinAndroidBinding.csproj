@@ -102,7 +102,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.Bindings.targets" />
   <ItemGroup>
-    <LibraryProjectZip Include="Jars\android-sdk-ui-3.3.0.aar" />
+    <LibraryProjectZip Include="Jars\android-sdk-ui-3.7.0.aar" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\android-core\AppboyPlatform.AndroidCore\AppboyPlatform.AndroidCore.csproj">

@@ -91,12 +91,6 @@
     <Reference Include="Xamarin.Android.Support.v7.RecyclerView">
       <HintPath>..\packages\Xamarin.Android.Support.v7.RecyclerView.28.0.0.1\lib\monoandroid81\Xamarin.Android.Support.v7.RecyclerView.dll</HintPath>
     </Reference>
-    <Reference Include="AppboyPlatform.AndroidBinding">
-      <HintPath>..\packages\AppboyPlatform.AndroidBinding.1.8.0\lib\MonoAndroid81\AppboyPlatform.AndroidBinding.dll</HintPath>
-    </Reference>
-    <Reference Include="AppboyPlatform.AndroidCore">
-      <HintPath>..\packages\AppboyPlatform.AndroidBinding.1.8.0\lib\MonoAndroid81\AppboyPlatform.AndroidCore.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
@@ -122,6 +116,16 @@
   </ItemGroup>
   <ItemGroup>
     <GoogleServicesJson Include="google-services.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\src\android-core\AppboyPlatform.AndroidCore\AppboyPlatform.AndroidCore.csproj">
+      <Project>{91B92A4E-E8E1-4F4E-B55F-02141C2CB5F4}</Project>
+      <Name>AppboyPlatform.AndroidCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\src\android\AppboyPlatform.XamarinAndroidBinding.csproj">
+      <Project>{9038A212-68E1-4C7A-B029-94F5C8FE76E9}</Project>
+      <Name>AppboyPlatform.XamarinAndroidBinding</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.GooglePlayServices.Basement.60.1142.1\build\MonoAndroid80\Xamarin.GooglePlayServices.Basement.targets" Condition="Exists('..\packages\Xamarin.GooglePlayServices.Basement.60.1142.1\build\MonoAndroid80\Xamarin.GooglePlayServices.Basement.targets')" />

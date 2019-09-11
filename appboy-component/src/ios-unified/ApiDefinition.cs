@@ -9,17 +9,6 @@ using WebKit;
 
 namespace AppboyPlatformXamariniOSBinding
 {
-  // @protocol ABKAppboyEndpointDelegate <NSObject>
-  [Protocol, Model]
-  [BaseType(typeof(NSObject))]
-  interface ABKAppboyEndpointDelegate
-  {
-    // @required -(NSString * _Nonnull)getApiEndpoint:(NSString * _Nonnull)appboyApiEndpoint;
-    [Abstract]
-    [Export("getApiEndpoint:")]
-    string GetApiEndpoint(string appboyApiEndpoint);
-  }
-
   // @interface ABKAttributionData : NSObject
   [BaseType(typeof(NSObject))]
   interface ABKAttributionData
@@ -517,31 +506,6 @@ namespace AppboyPlatformXamariniOSBinding
     NSObject[] Likes { get; }
   }
 
-  // @interface ABKFeedback : NSObject
-  [BaseType(typeof(NSObject))]
-  interface ABKFeedback
-  {
-    // @property (copy) NSString * _Nonnull message;
-    [Export("message")]
-    string Message { get; set; }
-
-    // @property (copy) NSString * _Nonnull email;
-    [Export("email")]
-    string Email { get; set; }
-
-    // @property BOOL isBug;
-    [Export("isBug")]
-    bool IsBug { get; set; }
-
-    // -(instancetype _Nonnull)initWithFeedbackMessage:(NSString * _Nonnull)message email:(NSString * _Nonnull)email isBug:(BOOL)isBug;
-    [Export("initWithFeedbackMessage:email:isBug:")]
-    IntPtr Constructor(string message, string email, bool isBug);
-
-    // -(ABKFeedbackValidation)feedbackValidation;
-    [Export("feedbackValidation")]
-    ABKFeedbackValidation FeedbackValidation { get; }
-  }
-
   [Static]
   interface Constants
   {
@@ -573,17 +537,17 @@ namespace AppboyPlatformXamariniOSBinding
     [Field("ABKFlushIntervalOptionKey", "__Internal")]
     NSString ABKFlushIntervalOptionKey { get; }
 
-    // extern NSString *const _Nonnull ABKDisableAutomaticLocationCollectionKey;
-    [Field("ABKDisableAutomaticLocationCollectionKey", "__Internal")]
-    NSString ABKDisableAutomaticLocationCollectionKey { get; }
+    // extern NSString *const _Nonnull ABKEnableAutomaticLocationCollectionKey;
+    [Field("ABKEnableAutomaticLocationCollectionKey", "__Internal")]
+    NSString ABKEnableAutomaticLocationCollectionKey { get; }
 
     // extern NSString *const _Nonnull ABKIDFADelegateKey;
     [Field("ABKIDFADelegateKey", "__Internal")]
     NSString ABKIDFADelegateKey { get; }
 
-    // extern NSString *const _Nonnull ABKAppboyEndpointDelegateKey;
-    [Field("ABKAppboyEndpointDelegateKey", "__Internal")]
-    NSString ABKAppboyEndpointDelegateKey { get; }
+    // extern NSString *const _Nonnull ABKEndpointKey;
+    [Field("ABKEndpointKey", "__Internal")]
+    NSString ABKEndpointKey { get; }
 
     // extern NSString *const _Nonnull ABKURLDelegateKey;
     [Field("ABKURLDelegateKey", "__Internal")]
@@ -654,14 +618,6 @@ namespace AppboyPlatformXamariniOSBinding
     [Export("requestProcessingPolicy", ArgumentSemantic.Assign)]
     ABKRequestProcessingPolicy RequestProcessingPolicy { get; set; }
 
-    [Wrap("WeakAppboyEndpointDelegate")]
-    [NullAllowed]
-    ABKAppboyEndpointDelegate AppboyEndpointDelegate { get; set; }
-
-    // @property (nonatomic, weak) id<ABKAppboyEndpointDelegate> _Nullable appboyEndpointDelegate;
-    [NullAllowed, Export("appboyEndpointDelegate", ArgumentSemantic.Weak)]
-    NSObject WeakAppboyEndpointDelegate { get; set; }
-
     [Wrap("WeakIdfaDelegate")]
     [NullAllowed]
     ABKIDFADelegate IdfaDelegate { get; set; }
@@ -726,21 +682,9 @@ namespace AppboyPlatformXamariniOSBinding
     [Export("logPurchase:inCurrency:atPrice:withQuantity:andProperties:")]
     void LogPurchase(string productIdentifier, string currencyCode, NSDecimalNumber price, nuint quantity, [NullAllowed] NSDictionary properties);
 
-    // -(BOOL)submitFeedback:(NSString * _Nonnull)replyToEmail message:(NSString * _Nonnull)message isReportingABug:(BOOL)isReportingABug;
-    [Export("submitFeedback:message:isReportingABug:")]
-    bool SubmitFeedback(string replyToEmail, string message, bool isReportingABug);
-
-    // -(void)submitFeedback:(ABKFeedback * _Nonnull)feedback withCompletionHandler:(void (^ _Nullable)(ABKFeedbackSentResult))completionHandler;
-    [Export("submitFeedback:withCompletionHandler:")]
-    void SubmitFeedback(ABKFeedback feedback, [NullAllowed] Action<ABKFeedbackSentResult> completionHandler);
-
     // -(void)logFeedDisplayed;
     [Export("logFeedDisplayed")]
     void LogFeedDisplayed();
-
-    // -(void)logFeedbackDisplayed;
-    [Export("logFeedbackDisplayed")]
-    void LogFeedbackDisplayed();
 
 		// -(void)logContentCardsDisplayed;
 		[Export ("logContentCardsDisplayed")]
@@ -1369,59 +1313,6 @@ namespace AppboyPlatformXamariniOSBinding
     NSSet<UIUserNotificationCategory> AppboyUIUserNotificationCategorySet { get; }
   }
 
-  // @interface ABKFeedbackViewController : UIViewController <UITextFieldDelegate>
-  [BaseType(typeof(UIViewController))]
-  interface ABKFeedbackViewController : IUITextFieldDelegate
-  {
-    // @property (nonatomic, weak) UITextView * feedbackTextView __attribute__((iboutlet));
-    [Export("feedbackTextView", ArgumentSemantic.Weak)]
-    UITextView FeedbackTextView { get; set; }
-
-    // @property (nonatomic, weak) UIButton * issueButton __attribute__((iboutlet));
-    [Export("issueButton", ArgumentSemantic.Weak)]
-    UIButton IssueButton { get; set; }
-
-    // @property (nonatomic, weak) UILabel * messageLabel __attribute__((iboutlet));
-    [Export("messageLabel", ArgumentSemantic.Weak)]
-    UILabel MessageLabel { get; set; }
-
-    // @property (nonatomic, weak) UILabel * reportIssueLabel __attribute__((iboutlet));
-    [Export("reportIssueLabel", ArgumentSemantic.Weak)]
-    UILabel ReportIssueLabel { get; set; }
-
-    // @property (nonatomic, weak) UITextField * emailTextField __attribute__((iboutlet));
-    [Export("emailTextField", ArgumentSemantic.Weak)]
-    UITextField EmailTextField { get; set; }
-
-    // @property (nonatomic, weak) UIView * spinnerView __attribute__((iboutlet));
-    [Export("spinnerView", ArgumentSemantic.Weak)]
-    UIView SpinnerView { get; set; }
-
-    // -(void)issueButtonTapped:(UIButton *)sender __attribute__((ibaction));
-    [Export("issueButtonTapped:")]
-    void IssueButtonTapped(UIButton sender);
-
-    // -(void)sendButtonTapped:(UIBarButtonItem *)sender __attribute__((ibaction));
-    [Export("sendButtonTapped:")]
-    void SendButtonTapped(UIBarButtonItem sender);
-
-    // -(ABKFeedback *)appboyFeedbackFromMessage:(NSString *)message email:(NSString *)email isBug:(BOOL)isBug;
-    [Export("appboyFeedbackFromMessage:email:isBug:")]
-    ABKFeedback AppboyFeedbackFromMessage(string message, string email, bool isBug);
-
-    // -(void)feedbackSent:(ABKFeedbackSentResult)feedbackSentResult;
-    [Export("feedbackSent:")]
-    void FeedbackSent(ABKFeedbackSentResult feedbackSentResult);
-
-    // -(NSString *)localizedAppboyFeedbackString:(NSString *)key;
-    [Export("localizedAppboyFeedbackString:")]
-    string LocalizedAppboyFeedbackString(string key);
-
-    // -(void)displayAlertViewWithTitle:(NSString *)title message:(NSString *)message;
-    [Export("displayAlertViewWithTitle:message:")]
-    void DisplayAlertViewWithTitle(string title, string message);
-  }
-
   // @interface ABKInAppMessageViewController : UIViewController
   [BaseType(typeof(UIViewController))]
   interface ABKInAppMessageViewController
@@ -1954,27 +1845,6 @@ namespace AppboyPlatformXamariniOSBinding
 		bool ShowDoneButton { get; set; }
 	}
 
-  // @interface ABKModalFeedbackViewController : ABKFeedbackViewController
-  [BaseType(typeof(ABKFeedbackViewController))]
-  interface ABKModalFeedbackViewController
-  {
-    // @property (nonatomic, weak) UINavigationBar * navigationBar __attribute__((iboutlet));
-    [Export("navigationBar", ArgumentSemantic.Weak)]
-    UINavigationBar NavigationBar { get; set; }
-
-    // @property (nonatomic, weak) UIBarButtonItem * cancelBarButton __attribute__((iboutlet));
-    [Export("cancelBarButton", ArgumentSemantic.Weak)]
-    UIBarButtonItem CancelBarButton { get; set; }
-
-    // @property (nonatomic, weak) UIBarButtonItem * sendBarButton __attribute__((iboutlet));
-    [Export("sendBarButton", ArgumentSemantic.Weak)]
-    UIBarButtonItem SendBarButton { get; set; }
-
-    // -(void)cancelButtonTapped:(UIBarButtonItem *)sender __attribute__((ibaction));
-    [Export("cancelButtonTapped:")]
-    void CancelButtonTapped(UIBarButtonItem sender);
-  }
-
   // @interface ABKModalWebViewController : UINavigationController <WKNavigationDelegate>
   [BaseType(typeof(UINavigationController))]
   interface ABKModalWebViewController : IWKNavigationDelegate
@@ -1990,12 +1860,6 @@ namespace AppboyPlatformXamariniOSBinding
     // @property (nonatomic) UIProgressView * progressBar __attribute__((iboutlet));
     [Export("progressBar", ArgumentSemantic.Assign)]
     UIProgressView ProgressBar { get; set; }
-  }
-
-  // @interface ABKNavigationFeedbackViewController : ABKFeedbackViewController
-  [BaseType(typeof(ABKFeedbackViewController))]
-  interface ABKNavigationFeedbackViewController
-  {
   }
 
   // @interface ABKNoConnectionLocalization : NSObject

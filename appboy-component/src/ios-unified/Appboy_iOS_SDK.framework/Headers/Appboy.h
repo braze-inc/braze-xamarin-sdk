@@ -13,7 +13,7 @@
 #import <UserNotifications/UserNotifications.h>
 
 #ifndef APPBOY_SDK_VERSION
-#define APPBOY_SDK_VERSION @"3.14.0"
+#define APPBOY_SDK_VERSION @"3.19.0"
 #endif
 
 #if !TARGET_OS_TV
@@ -26,10 +26,8 @@
 @class ABKFeedController;
 @class ABKContentCardsController;
 @class ABKLocationManager;
-@class ABKFeedback;
 @protocol ABKInAppMessageControllerDelegate;
 @protocol ABKIDFADelegate;
-@protocol ABKAppboyEndpointDelegate;
 @protocol ABKURLDelegate;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -54,11 +52,20 @@ extern NSString *const ABKFlushIntervalOptionKey;
 
 /*!
  * This key can be set to YES or NO and will configure whether Braze will automatically collect location (if the user permits).
- * If set to YES, location will not be recorded for the user unless integrating apps manually call setUserLastKnownLocation on
- * ABKUser (i.e. you must manually set the location, Braze will not).  If it is set to NO or omitted, Braze will collect
- * location if authorized.
+ * If set to YES, Braze will collect location if authorized.
+ * If it is set to NO or omitted, location will not be recorded for the user unless you manually
+ * call setUserLastKnownLocation on ABKUser.
  */
-extern NSString *const ABKDisableAutomaticLocationCollectionKey;
+extern NSString *const ABKEnableAutomaticLocationCollectionKey;
+
+/*!
+ * This key can be set to YES or NO and will configure whether goefences are enabled.
+ * If set to YES, geofences will be enabled.
+ * If set to NO, geofences will be disabled.
+ * If the field is omitted, we will use the value of ABKEnableAutomaticLocationCollectionKey.
+ */
+extern NSString *const ABKEnableGeofencesKey;
+
 
 /*!
  * This key can be set to an instance of a class that extends ABKIDFADelegate, which can be used to pass advertiser tracking information to to Braze.
@@ -66,10 +73,9 @@ extern NSString *const ABKDisableAutomaticLocationCollectionKey;
 extern NSString *const ABKIDFADelegateKey;
 
 /*!
- * This key can be set to an instance of a class that conforms to the ABKAppboyEndpointDelegate protocol, which can be used to modify or substitute the API and Resource
- * (e.g. image) URIs used by the Braze SDK.
+ * This key can be set to a custom API endpoint. This gets sent in the format sdk.api.braze.eu.
  */
-extern NSString *const ABKAppboyEndpointDelegateKey;
+extern NSString *const ABKEndpointKey;
 
 /*!
  * This key can be set to an instance of a class that conforms to the ABKURLDelegate protocol, allowing it to handle URLs in a custom way.
@@ -122,35 +128,24 @@ extern NSString *const ABKPushStoryAppGroupKey;
 /*!
  * Possible values for the SDK's request processing policies:
  *   ABKAutomaticRequestProcessing (default) - All server communication is handled automatically. This includes flushing
- *        analytics data to the server, updating the feed, requesting new in-app messages and posting feedback. Braze's
+ *        analytics data to the server, updating the feed, and requesting new in-app messages. Braze's
  *        communication policy is to perform immediate server requests when user facing data is required (new in-app messages,
  *        feed refreshes, etc.), and to otherwise perform periodic flushes of new analytics data every few seconds.
  *        The interval between periodic flushes can be set explicitly using the ABKFlushInterval startup option.
- *   ABKAutomaticRequestProcessingExceptForDataFlush - The same as ABKAutomaticRequestProcessing, except that updates to
+ *   ABKAutomaticRequestProcessingExceptForDataFlush - Deprecated. Use ABKManualRequestProcessing.
+ *   ABKManualRequestProcessing - The same as ABKAutomaticRequestProcessing, except that updates to
  *        custom attributes and triggering of custom events will not automatically flush to the server. Instead, you
- *        must call flushDataAndProcessRequestQueue when you want to synchronize newly updated user data with Braze.
- *   ABKManualRequestProcessing - Braze will automatically add appropriate network requests (feed updates, user
- *        attribute flushes, feedback posts, etc.) to its network queue, but doesn't process
- *        network requests. Braze will make an exception and process requests in the following cases:
- *        - Feedback requests are made via Appboy::submitFeedback:message:isReportingABug:,
- *          Appboy::submitFeedback:withCompletionHandler:, or a FeedbackViewController.
- *        - Feed requests are made via Appboy::requestFeedRefresh or an ABKFeedViewController. The latter typically 
- *          occurs when an ABKFeedViewController is loaded and displayed on the screen or on a pull to refresh.
- *        - Network requests are required for internal features, such as templated in-app messages
- *          and certain location-based features.
- *        You can direct Braze to perform an immediate data flush as well as process any other
- *        requests on its queue by calling <pre>[[Appboy sharedInstance] flushDataAndProcessRequestQueue];</pre>
- *        This mode is only recommended for advanced use cases. If you're merely trying to
- *        control the background flush behavior, consider using ABKAutomaticRequestProcessing
- *        with a custom flush interval or ABKAutomaticRequestProcessingExceptForDataFlush.
+ *        must call flushDataAndProcessRequestQueue when you want to synchronize newly updated user data with Braze. Note that
+ *        the configuration does not turn off all networking, i.e. requests important to the proper functionality of the Braze
+ *        SDK will still occur.
  *
  * Regardless of policy, Braze will intelligently combine requests on the request queue to minimize the total number of
  * requests and their combined payload.
  */
 typedef NS_ENUM(NSInteger, ABKRequestProcessingPolicy) {
   ABKAutomaticRequestProcessing,
-  ABKAutomaticRequestProcessingExceptForDataFlush,
-  ABKManualRequestProcessing
+  ABKManualRequestProcessing,
+  ABKAutomaticRequestProcessingExceptForDataFlush __deprecated_enum_msg("ABKAutomaticRequestProcessingExceptForDataFlush is deprecated. Use ManualRequestProcessing.") = ABKManualRequestProcessing
 };
 
 /*!
@@ -160,22 +155,10 @@ typedef NS_ENUM(NSInteger , ABKSDKFlavor) {
   UNITY = 1,
   REACT,
   CORDOVA,
-  XAMARIN ,
+  XAMARIN,
+  FLUTTER,
   SEGMENT,
   MPARTICLE
-};
-
-/*!
- * Possible values for the result of submitting feedback:
- *   ABKInvalidFeedback - The passed-in feedback isn't valid. Please check the validity of the ABKFeedback
- *        object with instance method `feedbackValidation` before submitting it to Braze.
- *   ABKNetworkIssue - The SDK failed to send the feedback due to network issue. 
- *   ABKFeedbackSentSuccessfully - The feedback is sent to Braze server successfully.
- */
-typedef NS_ENUM(NSInteger, ABKFeedbackSentResult) {
-  ABKInvalidFeedback,
-  ABKNetworkIssue,
-  ABKFeedbackSentSuccessfully
 };
 
 typedef NS_OPTIONS(NSUInteger, ABKDeviceOptions) {
@@ -191,6 +174,7 @@ typedef NS_OPTIONS(NSUInteger, ABKDeviceOptions) {
   ABKDeviceOptionTimezone = (1 << 8),
   ABKDeviceOptionPushAuthStatus = (1 << 9),
   ABKDeviceOptionAdTrackingEnabled = (1 << 10),
+  ABKDeviceOptionPushDisplayOptions = (1 << 11),
   ABKDeviceOptionAll = ~ABKDeviceOptionNone
 };
 
@@ -273,13 +257,6 @@ typedef NS_OPTIONS(NSUInteger, ABKDeviceOptions) {
 */
 @property ABKRequestProcessingPolicy requestProcessingPolicy;
 
-
-/*!
- * A class conforming to the ABKAppboyEndpointDelegate protocol can be set to route Braze API and Resource traffic in a custom way.
- * For example, one might proxy Braze image downloads by having the getResourceEndpoint method return a proxy URI.
- */
-@property (nonatomic, weak, nullable) id<ABKAppboyEndpointDelegate> appboyEndpointDelegate;
-
 /*!
  * A class extending ABKIDFADelegate can be set to provide the IDFA to Braze.
  */
@@ -319,15 +296,7 @@ typedef NS_OPTIONS(NSUInteger, ABKDeviceOptions) {
  * the queue already contains another request for the current user, that the new data flush request
  * will be merged into the already existing request and only one will execute for that user.
  *
- * If you're using ABKManualRequestProcessing, you need to call this after each network related activity in your app.
- * This includes:
- * * Retrieving an updated feed and in-app message after a new session is opened or the user is changed. Braze will
- * automatically add the request for new data to the network queue, you just need to give it permission to execute
- * that request.
- * * Flushing updated user data (custom events, custom attributes, as well as automatically collected data).
- * * Flushing automatic analytics events such as starting and ending sessions.
- *
- * If you're using ABKAutomaticRequestProcessingExceptForDataFlush, you only need to call this when you want to force
+ * If you're using ABKManualRequestProcessing, you only need to call this when you want to force
  * an immediate flush of updated user data.
  */
 - (void)flushDataAndProcessRequestQueue;
@@ -462,40 +431,10 @@ typedef NS_OPTIONS(NSUInteger, ABKDeviceOptions) {
 - (void)logPurchase:(NSString *)productIdentifier inCurrency:(NSString *)currencyCode atPrice:(NSDecimalNumber *)price withQuantity:(NSUInteger)quantity andProperties:(nullable NSDictionary *)properties;
 
 /*!
- * @param replyToEmail The email address to send feedback replies to.
- * @param message The message input by the user. Must be non-null and non-empty.
- * @param isReportingABug Flag indicating whether or not the feedback describes a bug, or is merely a suggestion/question.
- * @return a boolean indicating whether or not the feedback item was successfully queued for delivery.
- *
- * @discussion Submits a piece of feedback to the Braze feedback center so that it can be handled in the Braze dashboard.
- * The request to submit feedback is made immediately, however, this method does not block and will return as soon as the
- * feedback request is placed on the network queue.
- */
-- (BOOL)submitFeedback:(NSString *)replyToEmail message:(NSString *)message isReportingABug:(BOOL)isReportingABug __deprecated_msg("The feedback feature is disabled for new accounts, and will be removed in a future SDK release.");
-
-/*!
- * @param feedback The feedback object with feedback message, email, and is-bug flag.
- * @param completionHandler The block to execute when the feedback sending process is complete. An ABKFeedbackSentResult enum
- * will be passed to the block indicating if the feedback was sent successfully.
- *
- * @discussion Submits a piece of feedback to the Braze feedback center so that it can be handled in the Braze dashboard.
- * The request to submit feedback is made immediately. However, this method does not block and will return as soon as the
- * feedback request is placed on the network queue.
- */
-- (void)submitFeedback:(ABKFeedback *)feedback withCompletionHandler:(nullable void (^)(ABKFeedbackSentResult feedbackSentResult))completionHandler __deprecated_msg("The feedback feature is disabled for new accounts, and will be removed in a future SDK release.");
-
-/*!
  * If you're displaying cards on your own instead of using ABKFeedViewController, you should still report impressions of
  * the news feed back to Braze with this method so that your campaign reporting features still work in the dashboard.
  */
 - (void)logFeedDisplayed;
-
-/*!
- * If you're displaying feedback page on your own instead of using ABKFeedbackViewController, you should still report
- * impressions of the feedback page back to Braze with this method so that your campaign reporting features still work
- * in the dashboard.
- */
-- (void)logFeedbackDisplayed __deprecated_msg("The feedback feature is disabled for new accounts, and will be removed in a future SDK release.");
 
 /*!
  * If you're displaying content cards on your own instead of using ABKContentCardsViewController, you should still report

@@ -49,13 +49,6 @@ namespace AppboyPlatformXamariniOSBinding
     ABKUnsubscribed
   }
 
-  public enum ABKFeedbackValidation : uint
-  {
-    ValidFeedback,
-    InvalidEmailAddressFeedback,
-    EmptyFeedbackMessageFeedback
-  }
-
   public enum ABKRequestProcessingPolicy /* nuint */
   {
     AutomaticRequestProcessing,
@@ -71,13 +64,6 @@ namespace AppboyPlatformXamariniOSBinding
     Xamarin,
     Segment,
     Mparticle
-  }
-
-  public enum ABKFeedbackSentResult /* nuint */
-  {
-    InvalidFeedback,
-    NetworkIssue,
-    FeedbackSentSuccessfully
   }
 
   public enum ABKInAppMessageClickActionType /* nuint */
