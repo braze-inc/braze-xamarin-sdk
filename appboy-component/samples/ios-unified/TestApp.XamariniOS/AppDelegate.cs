@@ -75,7 +75,7 @@ namespace TestApp.XamariniOS
     public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
     {
       Console.WriteLine("Registered For Remote Notifications");
-      Appboy.SharedInstance?.RegisterPushToken(deviceToken.ToString());
+      Appboy.SharedInstance?.RegisterDeviceToken(deviceToken);
     }
 
     private class UserNotificationsDelegate : UNUserNotificationCenterDelegate
@@ -87,4 +87,3 @@ namespace TestApp.XamariniOS
     }
   }
 }
-

@@ -711,9 +711,9 @@ namespace AppboyPlatformXamariniOSBinding
     [Export("pushNotificationWasSentFromAppboy:")]
     bool PushNotificationWasSentFromAppboy(NSDictionary options);
 
-    // -(void)registerPushToken:(NSString * _Nonnull)token;
-    [Export("registerPushToken:")]
-    void RegisterPushToken(string token);
+    // -(void)registerDeviceToken:(NSData * _Nonnull)deviceToken;
+    [Export("registerDeviceToken:")]
+    void RegisterDeviceToken(NSData deviceToken);
 
     // -(void)registerApplication:(UIApplication * _Nonnull)application didReceiveRemoteNotification:(NSDictionary * _Nonnull)notification __attribute__((availability(ios, introduced=3_0, deprecated=10_0)));
     [Introduced(PlatformName.iOS, 3, 0, message: "`registerApplication:didReceiveRemoteNotification:` is deprecated in iOS 10, please use `registerApplication:didReceiveRemoteNotification:fetchCompletionHandler:` instead.")]
