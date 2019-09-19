@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>AppboyPlatformXamariniOSBinding</id>
-    <version>1.10.1</version>
+    <version>1.10.2</version>
     <authors>Braze</authors>
     <owners>Braze</owners>
     <licenseUrl>https://github.com/Appboy/appboy-xamarin-bindings/blob/master/LICENSE</licenseUrl>
