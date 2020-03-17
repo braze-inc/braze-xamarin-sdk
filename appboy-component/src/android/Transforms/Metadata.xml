@@ -14,6 +14,5 @@
   <remove-node path="/api/package[@name='com.appboy.ui.inappmessage.views']/class[@name='AppboyInAppMessageModalView']" />
   <remove-node path="/api/package[@name='com.appboy.ui.inappmessage.views']/class[@name='AppboyInAppMessageSlideupView']" />
   <remove-node path="/api/package[@name='com.appboy.ui.inappmessage.views']/class[@name='AppboyInAppMessageFullView']" />
-  <remove-node path="/api/package[@name='com.appboy.ui.inappmessage']/class[@name='AppboyInAppMessageManager']/field[@name='mCustomControlInAppMessageManagerListener']" />
-  <remove-node path="/api/package[@name='com.appboy.ui.inappmessage']/class[@name='AppboyInAppMessageManager']/method[@name='setCustomControlInAppMessageManagerListener']" />
+  <remove-node path="/api/package[@name='com.appboy.ui.inappmessage']/class[@name='AppboyInAppMessageManagerBase']/method[@name='setCustomControlInAppMessageManagerListener']" />
 </metadata>
