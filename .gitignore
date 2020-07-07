@@ -1,3 +1,6 @@
+# support folders
+build
+
 # user specific files
 *.pidb
 *.userprefs
@@ -38,3 +41,4 @@
 
 # Visual Studio
 **/.vs
+*.code-workspace

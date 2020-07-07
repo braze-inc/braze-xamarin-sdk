@@ -10,6 +10,7 @@
   <remove-node path="/api/package[@name='com.appboy.ui.inappmessage.factories']/class[@name='AppboyHtmlFullViewFactory']" />
   <remove-node path="/api/package[@name='com.appboy.ui.inappmessage.factories']/class[@name='AppboyModalViewFactory']" />
   <remove-node path="/api/package[@name='com.appboy.ui.inappmessage.factories']/class[@name='AppboySlideupViewFactory']" />
+  <remove-node path="/api/package[@name='com.appboy.ui.inappmessage.factories']/class[@name='AppboyHtmlViewFactory']" />
   <remove-node path="/api/package[@name='com.appboy.ui.inappmessage.listeners']/interface[@name='IInAppMessageWebViewClientListener']" />
   <remove-node path="/api/package[@name='com.appboy.ui.inappmessage.views']/class[@name='AppboyInAppMessageModalView']" />
   <remove-node path="/api/package[@name='com.appboy.ui.inappmessage.views']/class[@name='AppboyInAppMessageSlideupView']" />

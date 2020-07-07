@@ -6,6 +6,7 @@
 
 static const CGFloat InAppMessageShadowBlurRadius = 4.0f;
 static const CGFloat InAppMessageShadowOpacity = 0.3f;
+static const CGFloat InAppMessageSelectedOpacity = 0.8f;
 
 NS_ASSUME_NONNULL_BEGIN
 @interface ABKInAppMessageViewController : UIViewController
@@ -34,6 +35,11 @@ NS_ASSUME_NONNULL_BEGIN
  * This is YES if the device being used is an iPad, and NO if the device is not an iPad.
  */
 @property BOOL isiPad;
+
+/*!
+ * This is YES for full screen in-app message controllers, NO otherwise
+ */
+@property (nonatomic, readonly) BOOL overrideApplicationStatusBarHiddenState;
 
 /*!
  * @discussion This method is used for passing the in-app message property to any custom view

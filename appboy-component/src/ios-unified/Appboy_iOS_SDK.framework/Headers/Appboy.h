@@ -13,7 +13,7 @@
 #import <UserNotifications/UserNotifications.h>
 
 #ifndef APPBOY_SDK_VERSION
-#define APPBOY_SDK_VERSION @"3.20.2"
+#define APPBOY_SDK_VERSION @"3.24.2"
 #endif
 
 #if !TARGET_OS_TV
@@ -59,13 +59,19 @@ extern NSString *const ABKFlushIntervalOptionKey;
 extern NSString *const ABKEnableAutomaticLocationCollectionKey;
 
 /*!
- * This key can be set to YES or NO and will configure whether goefences are enabled.
+ * This key can be set to YES or NO and will configure whether geofences are enabled.
  * If set to YES, geofences will be enabled.
  * If set to NO, geofences will be disabled.
  * If the field is omitted, we will use the value of ABKEnableAutomaticLocationCollectionKey.
  */
 extern NSString *const ABKEnableGeofencesKey;
 
+/*!
+ * This key can be set to YES or NO and will configure whether geofence requests are made automatically.
+ * If set to YES, geofence requests will not be made automatically.
+ * If set to NO, geofence requests will be made automatically. This is the default value when you have geofences enabled.
+ */
+extern NSString *const ABKDisableAutomaticGeofenceRequestsKey;
 
 /*!
  * This key can be set to an instance of a class that extends ABKIDFADelegate, which can be used to pass advertiser tracking information to to Braze.
@@ -96,7 +102,7 @@ extern NSString *const ABKSessionTimeoutKey;
 
 /*!
  * Set the minimum time interval in seconds between triggers. After a trigger happens, we will ignore any triggers until
- * the minimum time interval elapses. The default value is 30s.
+ * the minimum time interval elapses. The default value is 30s. The minimum valid value is 0s.
  */
 extern NSString *const ABKMinimumTriggerTimeIntervalKey;
 
@@ -158,7 +164,8 @@ typedef NS_ENUM(NSInteger , ABKSDKFlavor) {
   XAMARIN,
   FLUTTER,
   SEGMENT,
-  MPARTICLE
+  MPARTICLE,
+  TEALIUM
 };
 
 typedef NS_OPTIONS(NSUInteger, ABKDeviceOptions) {
@@ -168,6 +175,9 @@ typedef NS_OPTIONS(NSUInteger, ABKDeviceOptions) {
   ABKDeviceOptionLocale = (1 << 2),
   ABKDeviceOptionModel = (1 << 3),
   ABKDeviceOptionOSVersion = (1 << 4),
+  // Note: The ABKDeviceOptionIDFV whitelist key currently has no effect.
+  // IDFV is read regardless of whitelist settings due to its
+  // role as the primary device identifier within the Braze system.
   ABKDeviceOptionIDFV = (1 << 5),
   ABKDeviceOptionIDFA = (1 << 6),
   ABKDeviceOptionPushEnabled = (1 << 7),
@@ -458,6 +468,11 @@ typedef NS_OPTIONS(NSUInteger, ABKDeviceOptions) {
  * Enqueues a content cards request for the current user.
  */
 - (void)requestContentCardsRefresh;
+
+/*!
+ * Manually request geofences with a specific location.
+ */
+- (void)requestGeofencesWithLongitude:(double)longitude latitude:(double)latitude;
 
 /*!
  * Get the device ID - the IDFV - which will reset if all apps for a given vendor are removed from the device.

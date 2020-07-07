@@ -42,7 +42,10 @@ namespace TestApp.XamariniOS
       Window.MakeKeyAndVisible();
 
       // Start Appboy
-      Appboy.StartWithApiKey("09aa7156-9aef-4043-acfa-424d0dbc3d80", UIApplication.SharedApplication, options);
+      Appboy.StartWithApiKey("30291861-a7a0-4ad9-9d45-212353cbdac1", UIApplication.SharedApplication, options, new NSDictionary(
+          Constants.ABKEnableAutomaticLocationCollectionKey, false,
+          Constants.ABKMinimumTriggerTimeIntervalKey, 4
+        ));
       if (Appboy.SharedInstance != null) {
       Appboy.SharedInstance.SdkFlavor = ABKSDKFlavor.Xamarin;
       }

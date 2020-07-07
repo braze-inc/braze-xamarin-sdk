@@ -3,112 +3,130 @@ using ObjCRuntime;
 
 namespace AppboyPlatformXamariniOSBinding
 {
+	[Native]
+	public enum ABKRequestProcessingPolicy : long
+	{
+		AutomaticRequestProcessing,
+		ManualRequestProcessing,
+		AutomaticRequestProcessingExceptForDataFlush = ManualRequestProcessing
+	}
 
-  [Native]
-  public enum ABKDeviceOptions /* nuint */
-  {
-    None = 0,
-    Resolution = (1 << 0),
-    Carrier = (1 << 1),
-    Locale = (1 << 2),
-    Model = (1 << 3),
-    OSVersion = (1 << 4),
-    Idfv = (1 << 5),
-    Idfa = (1 << 6),
-    PushEnabled = (1 << 7),
-    Timezone = (1 << 8),
-    PushAuthStatus = (1 << 9),
-    AdTrackingEnabled = (1 << 10),
-    All = ~None
-  }
+	[Native]
+	public enum ABKSDKFlavor : long
+	{
+		Unity = 1,
+		React,
+		Cordova,
+		Xamarin,
+		Flutter,
+		Segment,
+		Mparticle,
+		Tealium
+	}
 
-  public enum ABKCardCategory /* nuint */
-  {
-    NoCategory = 1 << 0,
-    News = 1 << 1,
-    Advertising = 1 << 2,
-    Announcements = 1 << 3,
-    Social = 1 << 4,
-    All = 1 << 0 | 1 << 1 | 1 << 2 | 1 << 3 | 1 << 4
-  }
+	[Flags]
+	[Native]
+	public enum ABKDeviceOptions : ulong
+	{
+		None = 0x0,
+		Resolution = (1uL << 0),
+		Carrier = (1uL << 1),
+		Locale = (1uL << 2),
+		Model = (1uL << 3),
+		OSVersion = (1uL << 4),
+		Idfv = (1uL << 5),
+		Idfa = (1uL << 6),
+		PushEnabled = (1uL << 7),
+		Timezone = (1uL << 8),
+		PushAuthStatus = (1uL << 9),
+		AdTrackingEnabled = (1uL << 10),
+		PushDisplayOptions = (1uL << 11),
+		All = ~None
+	}
 
-  public enum ABKUserGenderType /* nuint */
-  {
-    Male,
-    Female,
-    Other,
-    Unknown,
-    NotApplicable,
-    PreferNotToSay
-  }
+	[Native]
+	public enum ABKUserGenderType : long
+	{
+		Male,
+		Female,
+		Other,
+		Unknown,
+		NotApplicable,
+		PreferNotToSay
+	}
 
-  public enum ABKNotificationSubscriptionType /* nuint */
-  {
-    ABKOptedIn,
-    ABKSubscribed,
-    ABKUnsubscribed
-  }
+	[Native]
+	public enum ABKNotificationSubscriptionType : long
+	{
+		ABKOptedIn,
+		ABKSubscribed,
+		ABKUnsubscribed
+	}
 
-  public enum ABKRequestProcessingPolicy /* nuint */
-  {
-    AutomaticRequestProcessing,
-    AutomaticRequestProcessingExceptForDataFlush,
-    ManualRequestProcessing
-  }
+	[Flags]
+	[Native]
+	public enum ABKCardCategory : ulong
+	{
+		NoCategory = 1uL << 0,
+		News = 1uL << 1,
+		Advertising = 1uL << 2,
+		Announcements = 1uL << 3,
+		Social = 1uL << 4,
+		All = 1uL << 0 | 1uL << 1 | 1uL << 2 | 1uL << 3 | 1uL << 4
+	}
 
-  public enum ABKSDKFlavor /* nuint */
-  {
-    Unity = 1,
-    React,
-    Cordova,
-    Xamarin,
-    Segment,
-    Mparticle
-  }
+	[Native]
+	public enum ABKInAppMessageClickActionType : long
+	{
+		DisplayNewsFeed,
+		RedirectToURI,
+		NoneClickAction
+	}
 
-  public enum ABKInAppMessageClickActionType /* nuint */
-  {
-    DisplayNewsFeed,
-    RedirectToURI,
-    NoneClickAction
-  }
+	[Native]
+	public enum ABKInAppMessageDismissType : long
+	{
+		Automatically,
+		Manually
+	}
 
-  public enum ABKInAppMessageDismissType /* nuint */
-  {
-    Automatically,
-    Manually
-  }
+	[Native]
+	public enum ABKInAppMessageOrientation : long
+	{
+		Any,
+		Portrait,
+		Landscape
+	}
 
-  public enum ABKInAppMessageOrientation /* nuint */
-  {
-    Any,
-    Portrait,
-    Landscape
-  }
+	[Native]
+	public enum ABKInAppMessageSlideupAnchor : long
+	{
+		Top,
+		Bottom
+	}
 
-  public enum ABKInAppMessageSlideupAnchor /* nuint */
-  {
-    Top,
-    Bottom
-  }
+	[Native]
+	public enum ABKInAppMessageImmersiveImageStyle : long
+	{
+		Graphic,
+		TopImage
+	}
 
-  public enum ABKInAppMessageImmersiveImageStyle /* nuint */
-  {
-    Graphic,
-    TopImage
-  }
+	[Native]
+	public enum ABKInAppMessageDisplayChoice : long
+	{
+		displayInAppMessageNow,
+		displayInAppMessageLater,
+		discardInAppMessage
+	}
 
-  public enum ABKInAppMessageDisplayChoice /* nuint */
-  {
-    displayInAppMessageNow,
-    displayInAppMessageLater,
-    discardInAppMessage
-  }
-
-  public enum ABKChannel /* nuint */
-  {
-    PushNotificationChannel,
-    InAppMessageChannel,
-    NewsFeedChannel
-  }
+	[Native]
+	public enum ABKChannel : long
+	{
+		PushNotificationChannel,
+		InAppMessageChannel,
+		NewsFeedChannel,
+		ContentCardChannel,
+		UnknownChannel
+	}
 }

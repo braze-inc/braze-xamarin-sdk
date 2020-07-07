@@ -26,7 +26,10 @@ namespace TestAppXamarinForms.iOS
       LoadApplication(new App());
 
       // Start Appboy
-      Appboy.StartWithApiKey("09aa7156-9aef-4043-acfa-424d0dbc3d80", UIApplication.SharedApplication, options);
+      Appboy.StartWithApiKey("09aa7156-9aef-4043-acfa-424d0dbc3d80", UIApplication.SharedApplication, options, new NSDictionary(
+          Constants.ABKEnableAutomaticLocationCollectionKey, false,
+          Constants.ABKMinimumTriggerTimeIntervalKey, 4
+        ));
       Appboy.SharedInstance.SdkFlavor = ABKSDKFlavor.Xamarin;
 
       // Subscribe to notification 

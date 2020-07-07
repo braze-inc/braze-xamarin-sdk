@@ -1,3 +1,11 @@
+## 1.12.0
+
+##### Breaking
+- Updated the Android binding to use [Braze Android SDK 8.0.1](https://github.com/Appboy/appboy-android-sdk/blob/master/CHANGELOG.md#801).
+- Updated the native iOS bridge to [Braze iOS SDK 3.24.2](https://github.com/Appboy/appboy-ios-sdk/releases/tag/3.24.2).
+  - Flipped `ABKLocationManager.DisableLocationTracking` to `ABKLocationManager.EnableLocationTracking`.
+  - Replaced `ABKInAppMessageWindowController.supportedOrientationMasks` with `ABKInAppMessageWindowController.supportedOrientationMask`.
+ 
 ## 1.11.0
 
 ##### Breaking

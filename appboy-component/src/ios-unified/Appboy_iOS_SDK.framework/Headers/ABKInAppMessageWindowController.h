@@ -10,6 +10,8 @@ NS_ASSUME_NONNULL_BEGIN
 // was dismissed.
 static NSString * const ABKNotificationInAppMessageWindowDismissed = @"inAppMessageWindowDismissedNotification";
 
+static double const InAppMessageAnimationDuration = 0.4;
+
 /*!
  * ABKInAppMessageWindowController is the view controller responsible for housing and displaying
  * ABKInAppMessageViewControllers and performing actions after the in-app message is clicked. Instances 
@@ -95,7 +97,7 @@ static NSString * const ABKNotificationInAppMessageWindowDismissed = @"inAppMess
 /*!
  * The UIWindow of the host app.
  */
-@property (weak, nonatomic, nullable) UIWindow *appWindow;
+@property (weak, nonatomic, nullable) UIWindow *appWindow DEPRECATED_MSG_ATTRIBUTE("appWindow is not used anymore.");
 
 /*!
  * The variable that shows if the device is being rotated.

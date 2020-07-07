@@ -1,4 +1,5 @@
 #import <Foundation/Foundation.h>
+#import <WebKit/WebKit.h>
 #import "ABKInAppMessageViewController.h"
 #import "AppboyKit.h"
 
@@ -109,9 +110,11 @@ NS_ASSUME_NONNULL_BEGIN
  *         Braze from performing the click action. Returning NO will cause Braze to follow the link.
  *
  * This delegate method is fired whenever the user clicks a link on the HTML in-app message. See
- * ABKInAppMessageHTML.h for more information.
+ * ABKInAppMessageHTMLBase.h for more information.
  */
-- (BOOL)onInAppMessageHTMLButtonClicked:(ABKInAppMessageHTML *)inAppMessage clickedURL:(nullable NSURL *)clickedURL buttonID:(NSString *)buttonId;
+- (BOOL)onInAppMessageHTMLButtonClicked:(ABKInAppMessageHTMLBase *)inAppMessage clickedURL:(nullable NSURL *)clickedURL buttonID:(NSString *)buttonId;
+
+- (WKWebViewConfiguration *)setCustomWKWebViewConfiguration;
 
 @end
 NS_ASSUME_NONNULL_END
