@@ -180,7 +180,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <LibraryProjectZip Include="Jars\android-sdk-ui-8.0.1.aar" />
+    <LibraryProjectZip Include="Jars\android-sdk-ui-8.1.0.aar" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
