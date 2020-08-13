@@ -1,3 +1,8 @@
+## 1.14.0
+
+##### Breaking
+- Updated the native iOS bridge to [Braze iOS SDK 3.26.1](https://github.com/Appboy/appboy-ios-sdk/releases/tag/3.26.1).
+
 ## 1.13.0
 
 ##### Breaking
