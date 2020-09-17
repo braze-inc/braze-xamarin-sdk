@@ -2,12 +2,11 @@
 <package >
   <metadata>
     <id>AppboyPlatformXamariniOSBinding</id>
-    <version>1.14.0</version>
+    <version>1.15.0</version>
     <authors>Braze</authors>
     <owners>Braze</owners>
-    <licenseUrl>https://github.com/Appboy/appboy-xamarin-bindings/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/Appboy/appboy-xamarin-bindings</projectUrl>
-    <iconUrl>https://github.com/Appboy/appboy-xamarin-bindings/blob/master/braze-logo.png</iconUrl>
+    <license type="file">LICENSE.txt</license>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Braze Xamarin iOS Binding</description>
     <releaseNotes></releaseNotes>
@@ -16,5 +15,7 @@
   </metadata>
   <files>
     <file src="../lib/ios-unified/AppboyPlatformXamariniOSBinding.dll" target="lib/Xamarin.iOS" />
+    <file src="../../Public/braze-logo.png" target="images/" />
+    <file src="../../Public/LICENSE.txt" target="" />
   </files>
 </package>

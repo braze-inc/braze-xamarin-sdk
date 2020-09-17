@@ -2,12 +2,11 @@
 <package >
   <metadata>
     <id>AppboyPlatform.AndroidBinding</id>
-    <version>1.14.0</version>
+    <version>1.15.0</version>
     <authors>Braze, Inc.</authors>
     <owners>Braze, Inc.</owners>
-    <licenseUrl>https://github.com/Appboy/appboy-xamarin-bindings/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/Appboy/appboy-xamarin-bindings</projectUrl>
-    <iconUrl>https://github.com/Appboy/appboy-xamarin-bindings/blob/master/braze-logo.png</iconUrl>
+    <license type="file">LICENSE.txt</license>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Braze Xamarin Android Binding</description>
     <releaseNotes></releaseNotes>
@@ -21,5 +20,7 @@
   <files>
     <file src="../lib/android/AppboyPlatform.AndroidBinding.dll" target="lib/MonoAndroid10.0" />
     <file src="../lib/android/AppboyPlatform.AndroidCore.dll" target="lib/MonoAndroid10.0" />
+    <file src="../../Public/braze-logo.png" target="images/" />
+    <file src="../../Public/LICENSE.txt" target="" />
   </files>
 </package>
