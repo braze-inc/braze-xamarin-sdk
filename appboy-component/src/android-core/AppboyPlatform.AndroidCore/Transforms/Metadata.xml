@@ -1,7 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <metadata>
-  <!-- https://jira.braze.com/browse/SDK-481 -->
-  <attr path="/api/package[@name='bo.app']/class[@name='h2']" name="obfuscated">false</attr>
   <attr 
     path="/api/package[@name='com.appboy.models']/class[@name='InAppMessageBase']/method[@name='forJsonPut']"
     name="managedReturn">Java.Lang.Object

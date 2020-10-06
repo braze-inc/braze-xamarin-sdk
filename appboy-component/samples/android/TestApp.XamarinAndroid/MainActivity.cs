@@ -1,12 +1,6 @@
-﻿using System;
+﻿using Android.OS;
 
-using Android.Gms.Common;
-using Android.Support.V4.App;
-using Android.OS;
-
-using Firebase.Messaging;
-using Firebase.Iid;
-using Android.Util;
+using AndroidX.Fragment.App;
 
 namespace com.appboy.xamarinsample
 {

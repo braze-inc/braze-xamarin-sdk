@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Android.Support.V4.App;
-using Android.Content;
+using AndroidX.Fragment.App;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
@@ -27,7 +26,6 @@ namespace com.appboy.xamarinsample
       {
         return null;
       }
-      AppboyFirebaseMessagingService appboyFirebaseMessagingService = new AppboyFirebaseMessagingService();
 
       View view = inflater.Inflate (Resource.Layout.HomeFragment, container, false);
 
