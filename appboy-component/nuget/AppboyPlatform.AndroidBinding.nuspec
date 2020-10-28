@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>AppboyPlatform.AndroidBinding</id>
-    <version>1.16.0</version>
+    <version>1.17.0</version>
     <authors>Braze, Inc.</authors>
     <owners>Braze, Inc.</owners>
     <projectUrl>https://github.com/Appboy/appboy-xamarin-bindings</projectUrl>
@@ -19,6 +19,9 @@
       <dependency id="Xamarin.AndroidX.SwipeRefreshLayout" version="1.0.0.5" />
       <dependency id="Xamarin.AndroidX.WebKit" version="1.2.0.5" />
       <dependency id="Xamarin.AndroidX.Collection" version="1.1.0.5" />
+      <dependency id="Xamarin.AndroidX.VersionedParcelable" version="1.1.1.5" />
+      <dependency id="Xamarin.AndroidX.SavedState" version="1.0.0.2" />
+      <dependency id="Xamarin.Firebase.Messaging" version="120.1.7" />
     </dependencies>
   </metadata>
   <files>

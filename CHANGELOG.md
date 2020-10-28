@@ -1,3 +1,9 @@
+## 1.17.0
+
+##### Breaking
+- Updated the iOS binding to use [Braze iOS SDK 3.29.1](https://github.com/Appboy/appboy-ios-sdk/blob/master/CHANGELOG.md#3291).
+- Updated the Android binding to use [Braze Android SDK 11.0.0](https://github.com/Appboy/appboy-android-sdk/blob/master/CHANGELOG.md#1100).
+
 ## 1.16.0
 
 ##### Breaking

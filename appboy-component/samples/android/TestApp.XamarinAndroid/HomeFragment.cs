@@ -26,6 +26,7 @@ namespace com.appboy.xamarinsample
       {
         return null;
       }
+      AppboyFirebaseMessagingService appboyFirebaseMessagingService = new AppboyFirebaseMessagingService();
 
       View view = inflater.Inflate (Resource.Layout.HomeFragment, container, false);
 

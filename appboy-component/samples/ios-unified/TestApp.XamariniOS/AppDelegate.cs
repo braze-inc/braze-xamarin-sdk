@@ -54,10 +54,7 @@ namespace TestApp.XamariniOS
       {
         UNUserNotificationCenter.Current.RequestAuthorization(UNAuthorizationOptions.Alert | UNAuthorizationOptions.Badge | UNAuthorizationOptions.Sound | UNAuthorizationOptions.Provisional, (approved, err) =>
         {
-          if (approved) {
-            Console.WriteLine("Permission granted");
-            Appboy.SharedInstance.PushAuthorizationFromUserNotificationCenter(approved);
-          }
+          Appboy.SharedInstance.PushAuthorizationFromUserNotificationCenter(approved);
         });
 
         notificationsDelegate = new UserNotificationsDelegate();
