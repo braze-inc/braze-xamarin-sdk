@@ -41,7 +41,7 @@ namespace com.appboy.xamarinsample
       view.FindViewById<Button> (Resource.Id.userPropertyButton).Click += delegate {
         Appboy.GetInstance(Activity).CurrentUser.SetCountry("USA");
         Appboy.GetInstance(Activity).CurrentUser.SetDateOfBirth(1987, Month.September, 21);
-        Appboy.GetInstance(Activity).CurrentUser.SetEmail("brian@appboy.com");
+        Appboy.GetInstance(Activity).CurrentUser.SetEmail("brian@braze.com");
         Appboy.GetInstance(Activity).CurrentUser.SetFirstName("Brian");
         Appboy.GetInstance(Activity).CurrentUser.SetLastName("Wheeler");
         Appboy.GetInstance(Activity).CurrentUser.SetHomeCity("Mountain View");

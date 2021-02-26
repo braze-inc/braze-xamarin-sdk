@@ -198,7 +198,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <LibraryProjectZip Include="Jars\android-sdk-ui-11.0.0.aar" />
+    <LibraryProjectZip Include="Jars\android-sdk-ui-13.0.0.aar" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

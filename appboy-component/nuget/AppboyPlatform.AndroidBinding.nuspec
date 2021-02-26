@@ -2,15 +2,15 @@
 <package >
   <metadata>
     <id>AppboyPlatform.AndroidBinding</id>
-    <version>1.17.0</version>
-    <authors>Braze, Inc.</authors>
-    <owners>Braze, Inc.</owners>
+    <version>1.18.0</version>
+    <authors>Braze</authors>
+    <owners>Braze</owners>
     <projectUrl>https://github.com/Appboy/appboy-xamarin-bindings</projectUrl>
     <license type="file">LICENSE.txt</license>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Braze Xamarin Android Binding</description>
     <releaseNotes></releaseNotes>
-    <copyright>Copyright 2020</copyright>
+    <copyright>Copyright 2021</copyright>
     <tags>Braze Appboy</tags>
     <dependencies>
       <dependency id="Xamarin.AndroidX.Core" version="1.3.0.3" />
@@ -22,6 +22,7 @@
       <dependency id="Xamarin.AndroidX.VersionedParcelable" version="1.1.1.5" />
       <dependency id="Xamarin.AndroidX.SavedState" version="1.0.0.2" />
       <dependency id="Xamarin.Firebase.Messaging" version="120.1.7" />
+      <dependency id="Xamarin.AndroidX.AppCompat" version="1.2.0.7" />
     </dependencies>
   </metadata>
   <files>
