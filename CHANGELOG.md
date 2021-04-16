@@ -1,3 +1,8 @@
+## 1.19.0
+
+##### Changed
+- Updated the Android binding to use [Braze Android SDK 13.1.2](https://github.com/Appboy/appboy-android-sdk/blob/master/CHANGELOG.md#1312).
+
 ## 1.18.0
 
 ##### Breaking
