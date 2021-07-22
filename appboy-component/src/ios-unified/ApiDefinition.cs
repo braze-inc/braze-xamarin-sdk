@@ -1078,7 +1078,7 @@ namespace AppboyPlatformXamariniOSBinding
 
 		// @property (nonatomic, strong) id<ABKInAppMessageUIControlling> _Nullable inAppMessageUIController;
 		[NullAllowed, Export ("inAppMessageUIController", ArgumentSemantic.Strong)]
-		ABKInAppMessageUIControlling InAppMessageUIController { get; set; }
+		ABKInAppMessageUIController InAppMessageUIController { get; set; }
 
 		// -(void)displayNextInAppMessageWithDelegate:(id<ABKInAppMessageControllerDelegate> _Nullable)delegate;
 		[Export ("displayNextInAppMessageWithDelegate:")]
