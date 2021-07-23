@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <!-- General configuration -->
+  <!-- The API key is not shown to the user and thus we don't require that it be translated. -->
+  <string translatable="false" name="com_appboy_api_key">94589301-2ebd-4cb4-91ed-aa8dbc0472ed</string>
+  <string translatable="false" name="com_appboy_server_target">STAGING</string>
+</resources>

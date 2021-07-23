@@ -253,7 +253,7 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\icon.png" />
-    <AndroidResource Include="Resources\values\Appboy.xml" />
+    <AndroidResource Include="Resources\values\Braze.xml" />
     <AndroidResource Include="Resources\layout\appboy_feed_layout.axml" />
     <AndroidResource Include="Resources\drawable-hdpi\icon.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\icon.png" />

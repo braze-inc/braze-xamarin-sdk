@@ -1,18 +1,17 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <metadata>
   <attr 
-    path="/api/package[@name='com.appboy.models']/class[@name='InAppMessageBase']/method[@name='forJsonPut']"
+    path="/api/package[@name='com.braze.models.inappmessage']/class[@name='InAppMessageBase']/method[@name='forJsonPut']"
     name="managedReturn">Java.Lang.Object
   </attr>
   <attr 
-    path="/api/package[@name='com.appboy.models']/class[@name='InAppMessageSlideup']/method[@name='forJsonPut']"
+    path="/api/package[@name='com.braze.models.inappmessage']/class[@name='InAppMessageSlideup']/method[@name='forJsonPut']"
     name="managedReturn">Java.Lang.Object
   </attr>
   <attr 
-    path="/api/package[@name='com.appboy.models']/class[@name='InAppMessageImmersiveBase']/method[@name='forJsonPut']"
+    path="/api/package[@name='com.braze.models.inappmessage']/class[@name='InAppMessageImmersiveBase']/method[@name='forJsonPut']"
     name="managedReturn">Java.Lang.Object
   </attr>
-    
   <!-- The mapping was throwing errors in each of the following, so we just remove them.  They are not needed for a fully featured integration -->
-  <remove-node path="/api/package[@name='com.appboy.models']/class[@name='AppboyGeofence']" />
+  <remove-node path="/api/package[@name='com.braze.models']/class[@name='BrazeGeofence']" />
 </metadata>

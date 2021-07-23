@@ -4,9 +4,8 @@ using System.Threading.Tasks;
 using Android.App;
 using Android.Runtime;
 
-using Com.Appboy;
-using Com.Appboy.Support;
-
+using Com.Braze;
+using Com.Braze.Support;
 using Firebase.Iid;
 
 namespace com.appboy.xamarinsample
@@ -20,8 +19,8 @@ namespace com.appboy.xamarinsample
 
     public override void OnCreate()
     {
-      AppboyLogger.LogLevel = 0;
-      RegisterActivityLifecycleCallbacks(new AppboyLifecycleCallbackListener());
+      BrazeLogger.LogLevel = 0;
+      RegisterActivityLifecycleCallbacks(new BrazeActivityLifecycleCallbackListener());
 
       new Task(RegisterFirebasePush).Start();
     }
@@ -29,7 +28,7 @@ namespace com.appboy.xamarinsample
     void RegisterFirebasePush() {
       try {
         var token = FirebaseInstanceId.Instance.GetToken("901477453852", "FCM");
-        Appboy.GetInstance(this).RegisterAppboyPushMessages (token);
+        Braze.GetInstance(this).RegisterAppboyPushMessages (token);
         Console.WriteLine("Registered Firebase push token with Braze: " + token);
       } catch (Exception e) {
         Console.WriteLine("Caught exception registering for Firebase push: " + e);

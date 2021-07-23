@@ -1,20 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using AndroidX.Fragment.App;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
 
-using Com.Appboy;
 using Com.Appboy.UI;
-using Com.Appboy.UI.Inappmessage;
-using Com.Appboy.Models;
 using Com.Appboy.Enums;
-using Com.Appboy.Enums.Inappmessage;
 using Com.Appboy.Models.Outgoing;
+using Com.Braze;
+using Com.Braze.Enums.Inappmessage;
+using Com.Braze.Push;
+using Com.Braze.Models.Inappmessage;
+using Com.Braze.UI.Contentcards;
+using Com.Braze.UI.Inappmessage;
 
 namespace com.appboy.xamarinsample
 {
@@ -26,36 +25,36 @@ namespace com.appboy.xamarinsample
       {
         return null;
       }
-      AppboyFirebaseMessagingService appboyFirebaseMessagingService = new AppboyFirebaseMessagingService();
+      BrazeFirebaseMessagingService brazeFirebaseMessagingService = new BrazeFirebaseMessagingService();
 
       View view = inflater.Inflate (Resource.Layout.HomeFragment, container, false);
 
       // Change User
       view.FindViewById<Button> (Resource.Id.changeUserButton).Click += delegate {
         String userId = "myUser" + (new Random().Next());
-        Appboy.GetInstance(Activity).ChangeUser(userId);
+        Braze.GetInstance(Activity).ChangeUser(userId);
         view.FindViewById<TextView> (Resource.Id.userId).Text = "UserId: " + userId;
       };
 
       // Set User Properties
       view.FindViewById<Button> (Resource.Id.userPropertyButton).Click += delegate {
-        Appboy.GetInstance(Activity).CurrentUser.SetCountry("USA");
-        Appboy.GetInstance(Activity).CurrentUser.SetDateOfBirth(1987, Month.September, 21);
-        Appboy.GetInstance(Activity).CurrentUser.SetEmail("brian@braze.com");
-        Appboy.GetInstance(Activity).CurrentUser.SetFirstName("Brian");
-        Appboy.GetInstance(Activity).CurrentUser.SetLastName("Wheeler");
-        Appboy.GetInstance(Activity).CurrentUser.SetHomeCity("Mountain View");
-        Appboy.GetInstance(Activity).CurrentUser.SetPhoneNumber("5555555555");
-        Appboy.GetInstance(Activity).CurrentUser.SetCustomUserAttribute("customAttributeKey", true);
-        Appboy.GetInstance(Activity).CurrentUser.SetEmailNotificationSubscriptionType(NotificationSubscriptionType.OptedIn);
-        Appboy.GetInstance(Activity).CurrentUser.SetGender(Gender.Male);
-        Appboy.GetInstance(Activity).CurrentUser.SetAttributionData(new AttributionData("a", "b", "c", "d"));
+        Braze.GetInstance(Activity).CurrentUser.SetCountry("USA");
+        Braze.GetInstance(Activity).CurrentUser.SetDateOfBirth(1987, Month.September, 21);
+        Braze.GetInstance(Activity).CurrentUser.SetEmail("brian@braze.com");
+        Braze.GetInstance(Activity).CurrentUser.SetFirstName("Brian");
+        Braze.GetInstance(Activity).CurrentUser.SetLastName("Wheeler");
+        Braze.GetInstance(Activity).CurrentUser.SetHomeCity("Mountain View");
+        Braze.GetInstance(Activity).CurrentUser.SetPhoneNumber("5555555555");
+        Braze.GetInstance(Activity).CurrentUser.SetCustomUserAttribute("customAttributeKey", true);
+        Braze.GetInstance(Activity).CurrentUser.SetEmailNotificationSubscriptionType(NotificationSubscriptionType.OptedIn);
+        Braze.GetInstance(Activity).CurrentUser.SetGender(Gender.Male);
+        Braze.GetInstance(Activity).CurrentUser.SetAttributionData(new AttributionData("a", "b", "c", "d"));
       };
 
       // Events and purchases
       view.FindViewById<Button> (Resource.Id.eventsAndPurchasesButton).Click += delegate {
-        Appboy.GetInstance(Activity).LogCustomEvent("myCustomEvent");
-        Appboy.GetInstance(Activity).LogPurchase("myProduct", "USD", new Java.Math.BigDecimal(3.50));
+        Braze.GetInstance(Activity).LogCustomEvent("myCustomEvent");
+        Braze.GetInstance(Activity).LogPurchase("myProduct", "USD", new Java.Math.BigDecimal(3.50));
       };
 
       // Social
@@ -81,7 +80,7 @@ namespace com.appboy.xamarinsample
         **/
         FacebookUser facebookUser = new FacebookUser("708379", "Test", "User", "test@appboy.com", "Test",
           "Testtown", Gender.Male, new Java.Lang.Integer(100), new String[]{"Cats", "Dogs"}, "06/17/1987");
-        Appboy.GetInstance(Activity).CurrentUser.SetFacebookData(facebookUser);
+        Braze.GetInstance(Activity).CurrentUser.SetFacebookData(facebookUser);
 
         /*
         TwitterUser(
@@ -97,13 +96,13 @@ namespace com.appboy.xamarinsample
         **/
         TwitterUser twitterUser = new TwitterUser(new Java.Lang.Integer(6253282), "Test", "User", "Tester",  new Java.Lang.Integer(100), new Java.Lang.Integer(100), 
           new Java.Lang.Integer(100), "https://si0.twimg.com/profile_images/2685532587/fa47382ad67a0135acc62d4c6b49dbdc_bigger.jpeg");
-        Appboy.GetInstance(Activity).CurrentUser.SetTwitterData(twitterUser);
+        Braze.GetInstance(Activity).CurrentUser.SetTwitterData(twitterUser);
       };
 
       // Content Cards
       view.FindViewById<Button> (Resource.Id.launchContentCardsButton).Click += delegate {
         FragmentTransaction fragmentTransaction = Activity.SupportFragmentManager.BeginTransaction ();
-        AppboyContentCardsFragment contentCards = new AppboyContentCardsFragment();
+        ContentCardsFragment contentCards = new ContentCardsFragment();
         fragmentTransaction.Replace (Resource.Id.root, contentCards, contentCards.Class.ToString ());
         fragmentTransaction.AddToBackStack (contentCards.Class.ToString ());
         fragmentTransaction.Commit ();
@@ -122,28 +121,28 @@ namespace com.appboy.xamarinsample
       view.FindViewById<Button> (Resource.Id.addInAppMessageButton).Click += delegate {
         InAppMessageSlideup slideup = new InAppMessageSlideup();
         slideup.Message = "This is the message";
-        slideup.SetClickAction(ClickAction.Uri, Android.Net.Uri.Parse("http://appboy.com"));
-        AppboyInAppMessageManager.Instance.AddInAppMessage(slideup);
+        slideup.SetClickAction(ClickAction.Uri, Android.Net.Uri.Parse("http://braze.com"));
+        BrazeInAppMessageManager.Instance.AddInAppMessage(slideup);
       };
 
       // Request Data Flush
       view.FindViewById<Button> (Resource.Id.dataFlushButton).Click += delegate {
-        Appboy.GetInstance(Activity).RequestImmediateDataFlush();
+        Braze.GetInstance(Activity).RequestImmediateDataFlush();
       };
 
       // Wipe Data
       view.FindViewById<Button> (Resource.Id.wipeDataButton).Click += delegate {
-        Appboy.WipeData(Activity);
+        Braze.WipeData(Activity);
       };
 
       // Disable SDK
       view.FindViewById<Button> (Resource.Id.disableSDKButton).Click += delegate {
-        Appboy.DisableSdk(Activity);
+        Braze.DisableSdk(Activity);
       };
 
       // Enable SDK
       view.FindViewById<Button> (Resource.Id.enableSDKButton).Click += delegate {
-        Appboy.EnableSdk(Activity);
+        Braze.EnableSdk(Activity);
       };
 				
       return view;
