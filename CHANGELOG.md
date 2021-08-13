@@ -1,3 +1,9 @@
+## 1.21.0
+
+##### Breaking
+- Updated the iOS binding to use [Braze iOS SDK 4.3.1](https://github.com/Appboy/appboy-ios-sdk/blob/master/CHANGELOG.md#431).
+  - This includes several breaking changes in the binding, and integrators should test before releasing. Please read the Braze iOS SDK changelog for details.
+
 ## 1.20.0
 
 ##### Breaking

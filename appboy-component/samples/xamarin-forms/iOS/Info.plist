@@ -59,7 +59,7 @@
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
-	<key>Appboy</key>
+	<key>Braze</key>
 	<dict>
 		<key>Endpoint</key>
 		<string>sondheim.appboy.com</string>

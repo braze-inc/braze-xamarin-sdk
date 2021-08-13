@@ -43,7 +43,7 @@
 	</array>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Please share your location.</string>
-	<key>Appboy</key>
+	<key>Braze</key>
 	<dict>
 		<key>Endpoint</key>
 		<string>sondheim.appboy.com</string>

@@ -44,6 +44,14 @@ namespace AppboyPlatformXamariniOSBinding
 		[Field ("ABKURLDelegateKey", "__Internal")]
 		NSString ABKURLDelegateKey { get; }
 
+		// extern NSString *const ABKEnableSDKAuthenticationKey;
+		[Field ("ABKEnableSDKAuthenticationKey", "__Internal")]
+		NSString ABKEnableSDKAuthenticationKey { get; }
+
+		// extern NSString* const ABKSdkAuthenticationDelegateKey;
+		[Field("ABKSdkAuthenticationDelegateKey", "__Internal")]
+		NSString ABKSdkAuthenticationDelegateKey { get; }
+
 		// extern NSString *const _Nonnull ABKInAppMessageControllerDelegateKey;
 		[Field ("ABKInAppMessageControllerDelegateKey", "__Internal")]
 		NSString ABKInAppMessageControllerDelegateKey { get; }
@@ -129,6 +137,14 @@ namespace AppboyPlatformXamariniOSBinding
 		[NullAllowed, Export ("idfaDelegate", ArgumentSemantic.Strong)]
 		NSObject WeakIdfaDelegate { get; set; }
 
+		[Wrap ("WeakSdkAuthenticationDelegate")]
+		[NullAllowed]
+		ABKSdkAuthenticationDelegate SdkAuthenticationDelegate { get; set; }
+
+		// @property (nonatomic, strong, nullable) id<ABKSdkAuthenticationDelegate> sdkAuthenticationDelegate;
+		[NullAllowed, Export ("sdkAuthenticationDelegate", ArgumentSemantic.Strong)]
+		NSObject WeakSdkAuthenticationDelegate { get; set; }
+
 		// @property (readonly) ABKInAppMessageController * _Nonnull inAppMessageController;
 		[Export ("inAppMessageController")]
 		ABKInAppMessageController InAppMessageController { get; }
@@ -149,7 +165,12 @@ namespace AppboyPlatformXamariniOSBinding
 		[Export ("sdkFlavor", ArgumentSemantic.Assign)]
 		ABKSDKFlavor SdkFlavor { get; set; }
 
-		// -(void)flushDataAndProcessRequestQueue;
+		// -(void)requestImmediateDataFlush;
+		[Export ("requestImmediateDataFlush")]
+		void RequestImmediateDataFlush ();
+
+		// - (void)flushDataAndProcessRequestQueue __deprecated_msg("Please use `requestImmediateDataFlush` instead.");
+		[Obsolete ("Please use `RequestImmediateDataFlush` instead.")]
 		[Export ("flushDataAndProcessRequestQueue")]
 		void FlushDataAndProcessRequestQueue ();
 
@@ -160,6 +181,18 @@ namespace AppboyPlatformXamariniOSBinding
 		// -(void)changeUser:(NSString * _Nonnull)userId;
 		[Export ("changeUser:")]
 		void ChangeUser (string userId);
+
+		// - (void)changeUser:(NSString *)userId sdkAuthSignature:(nullable NSString *)signature;
+		[Export ("changeUser:sdkAuthSignature:")]
+		void ChangeUser (string userId, [NullAllowed] string signature);
+
+		// - (void)setSdkAuthenticationSignature:(NSString *)signature;
+		[Export ("setSdkAuthenticationSignature:")]
+		void SetSdkAuthenticationSignature (string signature);
+
+		// - (void)unsubscribeFromSdkAuthenticationErrors;
+		[Export ("unsubscribeFromSdkAuthenticationErrors")]
+		void UnsubscribeFromSdkAuthenticationErrors ();
 
 		// -(void)logCustomEvent:(NSString * _Nonnull)eventName;
 		[Export ("logCustomEvent:")]
@@ -299,8 +332,8 @@ namespace AppboyPlatformXamariniOSBinding
 		[NullAllowed, Export ("phone")]
 		string Phone { get; set; }
 
-		// @property (readonly, copy, nonatomic) NSString * _Nonnull userID;
-		[Export ("userID")]
+		// @property (nonatomic, copy, nullable, readonly) NSString *userID;
+		[NullAllowed, Export ("userID")]
 		string UserID { get; }
 
 		// @property (copy, nonatomic) NSString * _Nullable avatarImageURL;
@@ -1080,9 +1113,14 @@ namespace AppboyPlatformXamariniOSBinding
 		[NullAllowed, Export ("inAppMessageUIController", ArgumentSemantic.Strong)]
 		ABKInAppMessageUIControlling InAppMessageUIController { get; set; }
 
-		// -(void)displayNextInAppMessageWithDelegate:(id<ABKInAppMessageControllerDelegate> _Nullable)delegate;
+		// - (void)displayNextInAppMessageWithDelegate:(nullable id<ABKInAppMessageControllerDelegate>)delegate __deprecated_msg("Please use 'displayNextInAppMessage' instead.");
+		[Obsolete ("Please use 'DisplayNextInAppMessage' instead.")]
 		[Export ("displayNextInAppMessageWithDelegate:")]
 		void DisplayNextInAppMessageWithDelegate ([NullAllowed] ABKInAppMessageControllerDelegate @delegate);
+
+		// - (void)displayNextInAppMessage;
+		[Export ("displayNextInAppMessage")]
+		void DisplayNextInAppMessage ();
 
 		// -(NSInteger)inAppMessagesRemainingOnStack;
 		[Export ("inAppMessagesRemainingOnStack")]
@@ -1278,11 +1316,6 @@ namespace AppboyPlatformXamariniOSBinding
 		[Export ("setImageForView:showActivityIndicator:withURL:imagePlaceHolder:completed:")]
 		void SetImageForView (UIImageView imageView, bool showActivityIndicator, [NullAllowed] NSUrl imageURL, [NullAllowed] UIImage placeHolder, [NullAllowed] Action<UIImage, NSError, nint, NSUrl> completion);
 
-		// +(void)prefetchURLs:(NSArray * _Nullable)imageURLs;
-		[Static]
-		[Export ("prefetchURLs:")]
-		void PrefetchURLs ([NullAllowed] NSObject[] imageURLs);
-
 		// +(void)loadImageWithURL:(NSUrl * _Nullable)url options:(NSInteger)options completed:(void (^ _Nullable)(UIImage * _Nonnull, NSData * _Nonnull, NSError * _Nonnull, NSInteger, BOOL, NSUrl * _Nonnull))completion;
 		[Static]
 		[Export ("loadImageWithURL:options:completed:")]
@@ -1363,12 +1396,48 @@ namespace AppboyPlatformXamariniOSBinding
 		bool FromChannel (NSUrl url, ABKChannel channel, NSDictionary extras);
 	}
 
+	// @protocol ABKSdkAuthenticationDelegate;
+	[Protocol, Model (AutoGeneratedName = true)]
+	[BaseType (typeof(NSObject))]
+	interface ABKSdkAuthenticationDelegate
+	{
+		// - (void)handleSdkAuthenticationError:(ABKSdkAuthenticationError *)authError;
+		[Abstract]
+		[Export ("handleSdkAuthenticationError:")]
+		void HandleSdkAuthenticationError (ABKSdkAuthenticationError authError);
+	}
+
+	// @interface ABKSdkAuthenticationError : NSObject
+	[BaseType (typeof(NSObject))]
+	interface ABKSdkAuthenticationError
+	{
+		// @property (readonly) NSInteger code;
+		[Export ("code")]
+		nint Code { get; }
+
+		// @property (nullable, readonly) NSString *reason;
+		[NullAllowed, Export ("reason")]
+		string Reason { get; }
+
+		// @property (nullable, readonly) NSString *userId;
+		[NullAllowed, Export ("userID")]
+		string UserId { get; }
+
+		// @property (readonly) NSString *signature;
+		[Export ("signature")]
+		string Signature { get; }
+
+		// - (instancetype)initWithCode:(NSInteger)code reason:(NSString *)reason userId:(NSString *)userId signature:(NSString *)signature;
+		[Export ("initWithCode:reason:userId:signature:")]
+		IntPtr Constructor ( nint code, [NullAllowed] string reason, [NullAllowed] string userId, string signature );
+	}
+
 	// @interface ABKPushUtils : NSObject
 	[BaseType (typeof(NSObject))]
 	interface ABKPushUtils
 	{
 		// +(BOOL)isAppboyUserNotification:(UNNotificationResponse * _Nonnull)response __attribute__((availability(ios, introduced=10.0)));
-		[iOS (10,0)]
+		[Introduced (PlatformName.iOS, 10, 0)]
 		[Static]
 		[Export ("isAppboyUserNotification:")]
 		bool IsAppboyUserNotification (UNNotificationResponse response);
@@ -1437,46 +1506,50 @@ namespace AppboyPlatformXamariniOSBinding
 	[BaseType (typeof(NSObject))]
 	interface ABKBaseContentCardCellDelegate
 	{
-		// @required -(void)refreshTableViewCellHeights;
+		// @required -(void)cellRequestSizeUpdate:(UITableViewCell *)cell;
 		[Abstract]
-		[Export ("refreshTableViewCellHeights")]
-		void RefreshTableViewCellHeights ();
+		[Export ("cellRequestSizeUpdate:")]
+		void CellRequestSizeUpdate (UITableViewCell cell);
 	}
 
 	// @interface ABKBaseContentCardCell : UITableViewCell
 	[BaseType (typeof(UITableViewCell))]
 	interface ABKBaseContentCardCell
 	{
-		// @property (nonatomic, weak) UIView * rootView __attribute__((iboutlet));
-		[Export ("rootView", ArgumentSemantic.Weak)]
+		// @property (nonatomic) UIView *rootView __attribute__((iboutlet));
+		[Export ("rootView")]
 		UIView RootView { get; set; }
 
-		// @property (nonatomic, weak) UIImageView * pinImageView __attribute__((iboutlet));
-		[Export ("pinImageView", ArgumentSemantic.Weak)]
+		// @property (nonatomic) UIImageView *pinImageView __attribute__((iboutlet));;
+		[Export ("pinImageView")]
 		UIImageView PinImageView { get; set; }
 
-		// @property (nonatomic, weak) UIView * unviewedLineView __attribute__((iboutlet));
-		[Export ("unviewedLineView", ArgumentSemantic.Weak)]
+		// @property (nonatomic) UIView * unviewedLineView __attribute__((iboutlet));
+		[Export ("unviewedLineView")]
 		UIView UnviewedLineView { get; set; }
 
-		// @property (nonatomic, weak) NSLayoutConstraint * rootViewLeadingConstraint __attribute__((iboutlet));
-		[Export ("rootViewLeadingConstraint", ArgumentSemantic.Weak)]
+		// @property (nonatomic) UIColor *unviewedLineViewColor;
+		[Export ("unviewedLineViewColor")]
+		UIColor UnviewedLineViewColor { get; set; }
+
+		// @property (nonatomic) NSLayoutConstraint * rootViewLeadingConstraint __attribute__((iboutlet));
+		[Export ("rootViewLeadingConstraint")]
 		NSLayoutConstraint RootViewLeadingConstraint { get; set; }
 
-		// @property (nonatomic, weak) NSLayoutConstraint * rootViewTrailingConstraint __attribute__((iboutlet));
-		[Export ("rootViewTrailingConstraint", ArgumentSemantic.Weak)]
+		// @property (nonatomic) NSLayoutConstraint * rootViewTrailingConstraint __attribute__((iboutlet));
+		[Export ("rootViewTrailingConstraint")]
 		NSLayoutConstraint RootViewTrailingConstraint { get; set; }
 
-		// @property (nonatomic, weak) NSLayoutConstraint * rootViewTopConstraint __attribute__((iboutlet));
-		[Export ("rootViewTopConstraint", ArgumentSemantic.Weak)]
+		// @property (nonatomic) NSLayoutConstraint * rootViewTopConstraint __attribute__((iboutlet));
+		[Export ("rootViewTopConstraint")]
 		NSLayoutConstraint RootViewTopConstraint { get; set; }
 
-		// @property (nonatomic, weak) NSLayoutConstraint * rootViewBottomConstraint __attribute__((iboutlet));
-		[Export ("rootViewBottomConstraint", ArgumentSemantic.Weak)]
+		// @property (nonatomic) NSLayoutConstraint * rootViewBottomConstraint __attribute__((iboutlet));
+		[Export ("rootViewBottomConstraint")]
 		NSLayoutConstraint RootViewBottomConstraint { get; set; }
 
-		// @property (nonatomic, weak) NSLayoutConstraint * cardWidthConstraint __attribute__((iboutlet));
-		[Export ("cardWidthConstraint", ArgumentSemantic.Weak)]
+		// @property (nonatomic) NSLayoutConstraint * cardWidthConstraint __attribute__((iboutlet));
+		[Export ("cardWidthConstraint")]
 		NSLayoutConstraint CardWidthConstraint { get; set; }
 
 		// @property (assign, nonatomic) CGFloat cardSidePadding;
@@ -1506,9 +1579,23 @@ namespace AppboyPlatformXamariniOSBinding
 		[Export ("getPlaceHolderImage")]
 		UIImage PlaceHolderImage { get; }
 
+		// - (Class)imageViewClass;
+		[Export ("imageViewClass")]
+		Class ImageViewClass { get; }
+
+		// - (void)setUp;
+		[Export ("setUp")]
+		void SetUp ();
+
+		// - (void)setUpUI;
+		[Export ("setUpUI")]
+		void SetUpUI ();
+
 		// -(void)applyAppboyAttributedTextStyleFrom:(NSString *)text forLabel:(UILabel *)label;
 		[Export ("applyAppboyAttributedTextStyleFrom:forLabel:")]
 		void ApplyAppboyAttributedTextStyleFrom (string text, UILabel label);
+
+		// static const UILayoutPriority ABKContentCardPriorityLayoutRequiredBelowAppleRequired = UILayoutPriorityRequired - 1;
 	}
 
 	// @interface ABKContentCardsTableViewController : UITableViewController
@@ -1519,8 +1606,8 @@ namespace AppboyPlatformXamariniOSBinding
 		[Export ("emptyFeedView", ArgumentSemantic.Strong)]
 		UIView EmptyFeedView { get; set; }
 
-		// @property (nonatomic, weak) UILabel * emptyFeedLabel __attribute__((iboutlet));
-		[Export ("emptyFeedLabel", ArgumentSemantic.Weak)]
+		// @property (nonatomic, strong) UILabel * emptyFeedLabel __attribute__((iboutlet));
+		[Export ("emptyFeedLabel", ArgumentSemantic.Strong)]
 		UILabel EmptyFeedLabel { get; set; }
 
 		[Wrap ("WeakDelegate")]
@@ -1559,8 +1646,31 @@ namespace AppboyPlatformXamariniOSBinding
 		[Export ("localizedAppboyContentCardsString:")]
 		string LocalizedAppboyContentCardsString (string key);
 
-		// +(ABKBaseContentCardCell *)dequeueCellFromTableView:(UITableView *)tableView forIndexPath:(NSIndexPath *)indexPath forCard:(ABKContentCard *)card;
-		[Static]
+		// - (void)setUp;
+		[Export ("setUp")]
+		void SetUp ();
+
+		// - (void)setUpUI;
+		[Export ("setUpUI")]
+		void SetUpUi ();
+
+		// - (void)setUpEmptyFeedLabel;
+		[Export ("setUpEmptyFeedLabel")]
+		void SetUpEmptyFeedLabel ();
+
+		// - (void)setUpEmptyFeedView;
+		[Export ("setUpEmptyFeedView")]
+		void SetUpEmptyFeedView ();
+
+		// - (void)registerTableViewCellClasses;
+		[Export ("registerTableViewCellClasses")]
+		void RegisterTableViewCellClasses ();
+
+		// - (NSString *)findCellIdentifierWithCard:(ABKContentCard *)card;
+		[Export ("findCellIdentifierWithCard:")]
+		string FindCellIdentifierWithCard (ABKContentCard card);
+
+		// -(ABKBaseContentCardCell *)dequeueCellFromTableView:(UITableView *)tableView forIndexPath:(NSIndexPath *)indexPath forCard:(ABKContentCard *)card;
 		[Export ("dequeueCellFromTableView:forIndexPath:forCard:")]
 		ABKBaseContentCardCell DequeueCellFromTableView (UITableView tableView, NSIndexPath indexPath, ABKContentCard card);
 
@@ -1595,8 +1705,8 @@ namespace AppboyPlatformXamariniOSBinding
 	[BaseType (typeof(UINavigationController))]
 	interface ABKContentCardsViewController
 	{
-		// @property (nonatomic, weak) ABKContentCardsTableViewController * contentCardsViewController;
-		[Export ("contentCardsViewController", ArgumentSemantic.Weak)]
+		// @property (strong, nonatomic) ABKContentCardsTableViewController * contentCardsViewController;
+		[Export ("contentCardsViewController", ArgumentSemantic.Strong)]
 		ABKContentCardsTableViewController ContentCardsViewController { get; set; }
 	}
 
@@ -1604,66 +1714,54 @@ namespace AppboyPlatformXamariniOSBinding
 	[BaseType (typeof(ABKBaseContentCardCell))]
 	interface ABKBannerContentCardCell
 	{
-    //// @property (nonatomic, weak) SDAnimatedImageView * bannerImageView __attribute__((iboutlet));
-    //[Export("bannerImageView", ArgumentSemantic.Weak)]
-    //SDAnimatedImageView BannerImageView { get; set; }
+	    //// @property (strong, nonatomic) UIImageView * bannerImageView __attribute__((iboutlet));
+		//[Export ("bannerImageView", ArgumentSemantic.Strong)]
+		//UIImageView BannerImageView { get; set; }
 
-    // @property (nonatomic, weak) NSLayoutConstraint * imageRatioConstraint __attribute__((iboutlet));
-    [Export ("imageRatioConstraint", ArgumentSemantic.Weak)]
+		// @property (strong, nonatomic) NSLayoutConstraint * imageRatioConstraint __attribute__((iboutlet));
+		[Export ("imageRatioConstraint", ArgumentSemantic.Strong)]
 		NSLayoutConstraint ImageRatioConstraint { get; set; }
 
 		// -(void)applyCard:(ABKBannerContentCard *)bannerCard;
 		[Export ("applyCard:")]
 		void ApplyCard (ABKBannerContentCard bannerCard);
-
-		// -(void)updateImageConstraintsWithRatio:(CGFloat)newRatio;
-		[Export ("updateImageConstraintsWithRatio:")]
-		void UpdateImageConstraintsWithRatio (nfloat newRatio);
 	}
 
 	// @interface ABKCaptionedImageContentCardCell : ABKBaseContentCardCell
 	[BaseType (typeof(ABKBaseContentCardCell))]
 	interface ABKCaptionedImageContentCardCell
 	{
-		//// @property (nonatomic, weak) SDAnimatedImageView * captionedImageView __attribute__((iboutlet));
-		//[Export ("captionedImageView", ArgumentSemantic.Weak)]
-		//SDAnimatedImageView CaptionedImageView { get; set; }
+		//// @property (class, nonatomic) UIColor *titleLabelColor;
+		//[Export ("titleLabelColor")]
+		//UIColor TitleLabelColor { get; set; }
 
-		// @property (nonatomic, weak) UILabel * titleLabel __attribute__((iboutlet));
-		[Export ("titleLabel", ArgumentSemantic.Weak)]
+		// @property (class, nonatomic) UIColor *descriptionLabelColor;
+		[Export ("descriptionLabelColor")]
+		UIColor DescriptionLabelColor { get; set; }
+
+		// @property (class, nonatomic) UIColor *linkLabelColor;
+		[Export ("linkLabelColor")]
+		UIColor LinkLabelColor { get; set; }
+
+		// @property (strong, nonatomic) UIImageView *captionedImageView __attribute__((iboutlet));
+		[Export ("captionedImageView", ArgumentSemantic.Strong)]
+		UIImageView CaptionedImageView { get; set; }
+
+		// @property (strong, nonatomic) NSLayoutConstraint *imageRatioConstraint __attribute__((iboutlet));
+		[Export ("imageRatioContraint", ArgumentSemantic.Strong)]
+		NSLayoutConstraint ImageRatioContraint { get; set; }
+
+		// @property (strong, nonatomic) UILabel *titleLabel __attribute__((iboutlet));
+		[Export ("titleLabel", ArgumentSemantic.Strong)]
 		UILabel TitleLabel { get; set; }
 
-		// @property (nonatomic, weak) UILabel * descriptionLabel __attribute__((iboutlet));
-		[Export ("descriptionLabel", ArgumentSemantic.Weak)]
+		// @property (strong, nonatomic) UILabel *descriptionLabel __attribute__((iboutlet));
+		[Export ("descriptionLabel", ArgumentSemantic.Strong)]
 		UILabel DescriptionLabel { get; set; }
 
-		// @property (nonatomic, weak) UIView * TitleBackgroundView __attribute__((iboutlet));
-		[Export ("TitleBackgroundView", ArgumentSemantic.Weak)]
-		UIView TitleBackgroundView { get; set; }
-
-		// @property (nonatomic, weak) UILabel * linkLabel __attribute__((iboutlet));
-		[Export ("linkLabel", ArgumentSemantic.Weak)]
+		// @property (strong, nonatomic) UILabel *linkLabel __attribute__((iboutlet));
+		[Export ("linkLabel", ArgumentSemantic.Strong)]
 		UILabel LinkLabel { get; set; }
-
-		// @property (nonatomic, weak) NSLayoutConstraint * imageHeightContraint __attribute__((iboutlet));
-		[Export ("imageHeightContraint", ArgumentSemantic.Weak)]
-		NSLayoutConstraint ImageHeightContraint { get; set; }
-
-		// @property (nonatomic, weak) NSLayoutConstraint * descriptionBottomConstraint __attribute__((iboutlet));
-		[Export ("descriptionBottomConstraint", ArgumentSemantic.Weak)]
-		NSLayoutConstraint DescriptionBottomConstraint { get; set; }
-
-		// @property (nonatomic, weak) NSLayoutConstraint * linkBottomConstraint __attribute__((iboutlet));
-		[Export ("linkBottomConstraint", ArgumentSemantic.Weak)]
-		NSLayoutConstraint LinkBottomConstraint { get; set; }
-
-		// -(void)hideLinkLabel:(BOOL)hide;
-		[Export ("hideLinkLabel:")]
-		void HideLinkLabel (bool hide);
-
-		// -(void)updateImageConstraintsWithNewConstant:(CGFloat)newConstant;
-		[Export ("updateImageConstraintsWithNewConstant:")]
-		void UpdateImageConstraintsWithNewConstant (nfloat newConstant);
 
 		// -(void)applyCard:(ABKCaptionedImageContentCard *)captionedImageCard;
 		[Export ("applyCard:")]
@@ -1674,34 +1772,50 @@ namespace AppboyPlatformXamariniOSBinding
 	[BaseType (typeof(ABKBaseContentCardCell))]
 	interface ABKClassicContentCardCell
 	{
-		// @property (nonatomic, weak) UILabel * titleLabel __attribute__((iboutlet));
-		[Export ("titleLabel", ArgumentSemantic.Weak)]
+		// @property (class, nonatomic) UIColor *titleLabelColor;
+		[Export ("titleLabelColor")]
+		UIColor TitleLabelColor { get; set; }
+
+		// @property (class, nonatomic) UIColor *descriptionLabelColor;
+		[Export ("descriptionLabelColor")]
+		UIColor DescriptionLabelColor { get; set; }
+
+		// @property (class, nonatomic) UIColor *linkLabelColor;
+		[Export ("linkLabelColor")]
+		UIColor LinkLabelColor { get; set; }
+
+		// @property (strong, nonatomic) UILabel *titleLabel __attribute__((iboutlet));
+		[Export ("titleLabel", ArgumentSemantic.Strong)]
 		UILabel TitleLabel { get; set; }
 
-		// @property (nonatomic, weak) UILabel * descriptionLabel __attribute__((iboutlet));
-		[Export ("descriptionLabel", ArgumentSemantic.Weak)]
+		// @property (strong, nonatomic) UILabel *descriptionLabel __attribute__((iboutlet));
+		[Export ("descriptionLabel", ArgumentSemantic.Strong)]
 		UILabel DescriptionLabel { get; set; }
 
-		// @property (nonatomic, weak) UILabel * linkLabel __attribute__((iboutlet));
-		[Export ("linkLabel", ArgumentSemantic.Weak)]
+		// @property (strong, nonatomic) UILabel *linkLabel __attribute__((iboutlet));
+		[Export ("linkLabel", ArgumentSemantic.Strong)]
 		UILabel LinkLabel { get; set; }
 
-		// @property (nonatomic, weak) NSLayoutConstraint * descriptionBottomConstraint __attribute__((iboutlet));
-		[Export ("descriptionBottomConstraint", ArgumentSemantic.Weak)]
-		NSLayoutConstraint DescriptionBottomConstraint { get; set; }
+		// @property (strong, nonatomic) NSArray *descriptionConstraints;
+		[Export ("descriptionConstraints", ArgumentSemantic.Strong)]
+		NSObject[] DescriptionConstraints { get; set; }
 
-		// @property (nonatomic, weak) NSLayoutConstraint * linkBottomConstraint __attribute__((iboutlet));
-		[Export ("linkBottomConstraint", ArgumentSemantic.Weak)]
-		NSLayoutConstraint LinkBottomConstraint { get; set; }
+		// @property (strong, nonatomic) NSArray *linkConstraints;
+		[Export ("linkConstraints", ArgumentSemantic.Strong)]
+		NSObject[] LinkConstraints { get; set; }
 
-		// -(void)hideLinkLabel:(BOOL)hide;
-		[Export ("hideLinkLabel:")]
-		void HideLinkLabel (bool hide);
+		// @property (nonatomic, assign) CGFloat padding;
+		[Export ("padding", ArgumentSemantic.Assign)]
+		nfloat Padding { get; set; }
 
-		// -(void)applyCard:(ABKClassicContentCard *)classicCard;
+		// - (void)applyCard:(ABKClassicContentCard *)classicCard;
 		[Export ("applyCard:")]
 		void ApplyCard (ABKClassicContentCard classicCard);
 	}
+
+	// @interface ABKControlTableViewCell : ABKBaseContentCardCell
+	[BaseType (typeof(ABKBaseContentCardCell))]
+	interface ABKControlTableViewCell {}
 
 	// @interface ABKContentCardsWebViewController : UIViewController <WKNavigationDelegate>
 	[BaseType (typeof(UIViewController))]
@@ -1728,9 +1842,9 @@ namespace AppboyPlatformXamariniOSBinding
 	[BaseType (typeof(ABKClassicContentCardCell))]
 	interface ABKClassicImageContentCardCell
 	{
-		//// @property (nonatomic, weak) SDAnimatedImageView * classicImageView __attribute__((iboutlet));
-		//[Export ("classicImageView", ArgumentSemantic.Weak)]
-		//SDAnimatedImageView ClassicImageView { get; set; }
+		//// @property (nonatomic, strong) UIImageView * classicImageView __attribute__((iboutlet));
+		//[Export ("classicImageView", ArgumentSemantic.Strong)]
+		//UIImageView ClassicImageView { get; set; }
 
 		// -(void)applyCard:(ABKClassicContentCard *)classicCard;
 		[Export ("applyCard:")]
@@ -1756,11 +1870,6 @@ namespace AppboyPlatformXamariniOSBinding
 		[Export ("openURLWithSystem:")]
 		void OpenURLWithSystem (NSUrl url);
 
-		// +(void)openURLWithSystem:(NSUrl *)url fromChannel:(ABKChannel)channel;
-		[Static]
-		[Export ("openURLWithSystem:fromChannel:")]
-		void OpenURLWithSystem (NSUrl url, ABKChannel channel);
-
 		// +(UIViewController *)topmostViewControllerWithRootViewController:(UIViewController *)viewController;
 		[Static]
 		[Export ("topmostViewControllerWithRootViewController:")]
@@ -1782,7 +1891,7 @@ namespace AppboyPlatformXamariniOSBinding
 	interface ABKUIUtils
 	{
 		// @property (readonly, nonatomic, class) UIWindowScene * activeWindowScene __attribute__((availability(ios, introduced=13.0)));
-		[iOS (13, 0)]
+		[Introduced (PlatformName.iOS, 13, 0)]
 		[Static]
 		[Export ("activeWindowScene")]
 		UIWindowScene ActiveWindowScene { get; }
@@ -1796,6 +1905,11 @@ namespace AppboyPlatformXamariniOSBinding
 		[Static]
 		[Export ("activeApplicationViewController")]
 		UIViewController ActiveApplicationViewController { get; }
+
+		// + (UIImage *)imageNamed:(NSString *)name bundle:(Class)bundleClass channel:(ABKChannel)channel;
+		[Static]
+		[Export ("imageNamed:bundle:channel:")]
+		UIImage ImageNamed (string name, Class bundleClass, ABKChannel channel);
 
 		// +(NSString *)getLocalizedString:(NSString *)key inAppboyBundle:(NSBundle *)appboyBundle table:(NSString *)table;
 		[Static]
@@ -1822,11 +1936,6 @@ namespace AppboyPlatformXamariniOSBinding
 		[Export ("isNotchedPhone")]
 		bool IsNotchedPhone { get; }
 
-		// +(UIImage *)getImageWithName:(NSString *)name type:(NSString *)type inAppboyBundle:(NSBundle *)appboyBundle;
-		[Static]
-		[Export ("getImageWithName:type:inAppboyBundle:")]
-		UIImage GetImageWithName (string name, string type, NSBundle appboyBundle);
-
 		// +(UIInterfaceOrientation)getInterfaceOrientation;
 		[Static]
 		[Export ("getInterfaceOrientation")]
@@ -1851,6 +1960,16 @@ namespace AppboyPlatformXamariniOSBinding
 		[Static]
 		[Export ("responderChainOf:hasKindOfClass:")]
 		bool ResponderChainOf (UIResponder responder, Class aClass);
+
+		// + (UIFont *)preferredFontForTextStyle:(UIFontTextStyle)textStyle weight:(UIFontWeight)weight;
+		[Static]
+		[Export ("preferredFontForTextStyle:weight:")]
+		UIFont PreferredFontForTextStyle (UIFontTextStyle textStyle, UIFontWeight weight);
+
+		// + (void)enableAdjustsFontForContentSizeCategory:(id)label;
+		[Static]
+		[Export ("enableAdjustsFontForContentSizeCategory:")]
+		void EnableAdjustsFontForContentSizeCategory (NSObject label);
 	}
 
 	// @interface ABKModalWebViewController : UINavigationController <WKNavigationDelegate>
@@ -2233,9 +2352,9 @@ namespace AppboyPlatformXamariniOSBinding
 		[NullAllowed, Export ("arrowImage", ArgumentSemantic.Weak)]
 		UIImageView ArrowImage { get; set; }
 
-		// @property (nonatomic, weak) NSLayoutConstraint * _Nullable slideConstraint __attribute__((iboutlet));
-		[NullAllowed, Export ("slideConstraint", ArgumentSemantic.Weak)]
-		NSLayoutConstraint SlideConstraint { get; set; }
+		// @property (assign, nonatomic) CGFloat offset;
+		[Export ("offset", ArgumentSemantic.Weak)]
+		nfloat Offset { get; set;}
 	}
 
 	// @interface ABKFeedWebViewController : UIViewController <WKNavigationDelegate>
@@ -2274,35 +2393,50 @@ namespace AppboyPlatformXamariniOSBinding
 	[BaseType (typeof(UITableViewCell))]
 	interface ABKNFBaseCardCell
 	{
-		// @property (nonatomic, weak) UIView * rootView __attribute__((iboutlet));
-		[Export ("rootView", ArgumentSemantic.Weak)]
+		// + (UIColor *)ABKNFDescriptionLabelColor;
+		[Static]
+		[Export ("ABKNFDescriptionLabelColor")]
+		UIColor ABKNFDescriptionLabelColor { get; }
+
+		// + (UIColor *)ABKNFTitleLabelColor;
+		[Static]
+		[Export ("ABKNFTitleLabelColor")]
+		UIColor ABKNFTitleLabelColor { get; }
+
+		// + (UIColor *)ABKNFTitleLabelColorOnGray;
+		[Static]
+		[Export ("ABKNFTitleLabelColorOnGray")]
+		UIColor ABKNFTitleLabelColorOnGray { get; }
+
+		// @property (nonatomic) UIView * rootView __attribute__((iboutlet));
+		[Export ("rootView", ArgumentSemantic.Assign)]
 		UIView RootView { get; set; }
 
-		// @property (nonatomic, weak) UIImageView * unreadIndicatorView __attribute__((iboutlet));
-		[Export ("unreadIndicatorView", ArgumentSemantic.Weak)]
+		// @property (nonatomic) UIImageView * unreadIndicatorView __attribute__((iboutlet));
+		[Export ("unreadIndicatorView", ArgumentSemantic.Assign)]
 		UIImageView UnreadIndicatorView { get; set; }
 
 		[Wrap ("WeakDelegate")]
 		ABKBaseNewsFeedCellDelegate Delegate { get; set; }
 
-		// @property (nonatomic, weak) id<ABKBaseNewsFeedCellDelegate> delegate;
-		[NullAllowed, Export ("delegate", ArgumentSemantic.Weak)]
+		// @property (nonatomic) id<ABKBaseNewsFeedCellDelegate> delegate;
+		[NullAllowed, Export ("delegate", ArgumentSemantic.Assign)]
 		NSObject WeakDelegate { get; set; }
 
-		// @property (nonatomic, weak) NSLayoutConstraint * rootViewLeadingConstraint __attribute__((iboutlet));
-		[Export ("rootViewLeadingConstraint", ArgumentSemantic.Weak)]
+		// @property (nonatomic) NSLayoutConstraint * rootViewLeadingConstraint __attribute__((iboutlet));
+		[Export ("rootViewLeadingConstraint")]
 		NSLayoutConstraint RootViewLeadingConstraint { get; set; }
 
-		// @property (nonatomic, weak) NSLayoutConstraint * rootViewTrailingConstraint __attribute__((iboutlet));
-		[Export ("rootViewTrailingConstraint", ArgumentSemantic.Weak)]
+		// @property (nonatomic) NSLayoutConstraint * rootViewTrailingConstraint __attribute__((iboutlet));
+		[Export ("rootViewTrailingConstraint")]
 		NSLayoutConstraint RootViewTrailingConstraint { get; set; }
 
-		// @property (nonatomic, weak) NSLayoutConstraint * rootViewTopConstraint __attribute__((iboutlet));
-		[Export ("rootViewTopConstraint", ArgumentSemantic.Weak)]
+		// @property (nonatomic) NSLayoutConstraint * rootViewTopConstraint __attribute__((iboutlet));
+		[Export ("rootViewTopConstraint")]
 		NSLayoutConstraint RootViewTopConstraint { get; set; }
 
-		// @property (nonatomic, weak) NSLayoutConstraint * rootViewBottomConstraint __attribute__((iboutlet));
-		[Export ("rootViewBottomConstraint", ArgumentSemantic.Weak)]
+		// @property (nonatomic) NSLayoutConstraint * rootViewBottomConstraint __attribute__((iboutlet));
+		[Export ("rootViewBottomConstraint")]
 		NSLayoutConstraint RootViewBottomConstraint { get; set; }
 
 		// @property CGFloat cardSidePadding;
@@ -2317,10 +2451,25 @@ namespace AppboyPlatformXamariniOSBinding
 		[Export ("hideUnreadIndicator")]
 		bool HideUnreadIndicator { get; set; }
 
-		// +(ABKNFBaseCardCell *)dequeueCellFromTableView:(UITableView *)tableView forIndexPath:(NSIndexPath *)indexPath forCard:(ABKCard *)card;
-		[Static]
-		[Export ("dequeueCellFromTableView:forIndexPath:forCard:")]
-		ABKNFBaseCardCell DequeueCellFromTableView (UITableView tableView, NSIndexPath indexPath, ABKCard card);
+		// - (void)setUp;
+		[Export ("setUp")]
+		void SetUp ();
+
+		// - (void)setUpUI;
+		[Export ("setUpUI")]
+		void SetUpUI ();
+
+		// - (void)setUpRootView;
+		[Export ("setUpRootView")]
+		void SetUpRootView ();
+
+		// - (void)setUpRootViewBorder;
+		[Export ("setUpRootViewBorder")]
+		void SetUpRootViewBorder ();
+
+		// - (void)setUpUnreadIndicatorView;
+		[Export ("setUpUnreadIndicatorView")]
+		void SetUpUnreadIndicatorView ();
 
 		// -(void)applyCard:(ABKCard *)card;
 		[Export ("applyCard:")]
@@ -2329,18 +2478,39 @@ namespace AppboyPlatformXamariniOSBinding
 		// -(UIImage *)getPlaceHolderImage;
 		[Export ("getPlaceHolderImage")]
 		UIImage PlaceHolderImage { get; }
+
+		// - (Class)imageViewClass;
+		[Export ("imageViewClass")]
+		Class ImageViewClass { get; }
 	}
 
 	// @interface ABKNewsFeedTableViewController : UITableViewController <ABKBaseNewsFeedCellDelegate>
 	[BaseType (typeof(UITableViewController))]
 	interface ABKNewsFeedTableViewController : ABKBaseNewsFeedCellDelegate
 	{
-		// @property (nonatomic, strong) UIView * emptyFeedView __attribute__((iboutlet));
-		[Export ("emptyFeedView", ArgumentSemantic.Strong)]
+
+		// - (void)setUp;
+		[Export ("setUp")]
+		void SetUp ();
+
+		// - (void)setUpUI;
+		[Export ("setUpUI")]
+		void SetUpUI ();
+
+		// - (void)registerTableViewCellClasses;
+		[Export ("registerTableViewCellClasses")]
+		void RegisterTableViewCellClasses ();
+
+		// - (ABKNFBaseCardCell *)dequeueCellFromTableView:(UITableView *)tableView forIndexPath:(NSIndexPath *)indexPath forCard:(ABKCard *)card;
+		[Export ("dequeueCellFromTableView:forIndexPath:forCard:")]
+		ABKNFBaseCardCell DequeueCellFromTableView (UITableView tableView, NSIndexPath indexPath, ABKCard card);
+
+		// @property (nonatomic) UIView * emptyFeedView __attribute__((iboutlet));
+		[Export ("emptyFeedView")]
 		UIView EmptyFeedView { get; set; }
 
-		// @property (nonatomic, unsafe_unretained) UILabel * emptyFeedLabel __attribute__((iboutlet));
-		[Export ("emptyFeedLabel", ArgumentSemantic.Assign)]
+		// @property (nonatomic) UILabel * emptyFeedLabel __attribute__((iboutlet));
+		[Export ("emptyFeedLabel")]
 		UILabel EmptyFeedLabel { get; set; }
 
 		// @property (nonatomic) BOOL disableUnreadIndicator;
@@ -2372,6 +2542,10 @@ namespace AppboyPlatformXamariniOSBinding
 		[Export ("getNavigationFeedViewController")]
 		ABKNewsFeedTableViewController GetNavigationFeedViewController ();
 
+		// - (NSString *)findCellIdentifierWithCard:(ABKCard *)card;
+		[Export ("findCellIdentifierWithCard:")]
+		string FindCellIdentifierWithCard (ABKCard card);
+
 		// -(NSString *)localizedAppboyFeedString:(NSString *)key;
 		[Export ("localizedAppboyFeedString:")]
 		string LocalizedAppboyFeedString (string key);
@@ -2385,7 +2559,7 @@ namespace AppboyPlatformXamariniOSBinding
 	[BaseType (typeof(UINavigationController))]
 	interface ABKNewsFeedViewController
 	{
-		// @property (nonatomic, unsafe_unretained) ABKNewsFeedTableViewController * newsFeed;
+		// @property (nonatomic) ABKNewsFeedTableViewController * newsFeed;
 		[Export ("newsFeed", ArgumentSemantic.Assign)]
 		ABKNewsFeedTableViewController NewsFeed { get; set; }
 	}
@@ -2394,13 +2568,17 @@ namespace AppboyPlatformXamariniOSBinding
 	[BaseType (typeof(ABKNFBaseCardCell))]
 	interface ABKNFBannerCardCell
 	{
-		//// @property (nonatomic, weak) SDAnimatedImageView * bannerImageView __attribute__((iboutlet));
-		//[Export ("bannerImageView", ArgumentSemantic.Weak)]
-		//SDAnimatedImageView BannerImageView { get; set; }
+		// @property (nonatomic) UIImageView * bannerImageView __attribute__((iboutlet));
+		[Export ("bannerImageView")]
+		UIImageView BannerImageView { get; set; }
 
-		// @property (nonatomic, weak) NSLayoutConstraint * imageRatioConstraint __attribute__((iboutlet));
-		[Export ("imageRatioConstraint", ArgumentSemantic.Weak)]
+		// @property (nonatomic) NSLayoutConstraint * imageRatioConstraint __attribute__((iboutlet));
+		[Export ("imageRatioConstraint")]
 		NSLayoutConstraint ImageRatioConstraint { get; set; }
+
+		// - (void)setUpBannerImageView;
+		[Export ("setUpBannerImageView")]
+		void SetUpBannerImageView ();
 
 		// -(void)applyCard:(ABKCard *)bannerCard;
 		[Export ("applyCard:")]
@@ -2411,33 +2589,70 @@ namespace AppboyPlatformXamariniOSBinding
 	[BaseType (typeof(ABKNFBaseCardCell))]
 	interface ABKNFCaptionedMessageCardCell
 	{
-		//// @property (nonatomic, weak) SDAnimatedImageView * captionedImageView __attribute__((iboutlet));
-		//[Export ("captionedImageView", ArgumentSemantic.Weak)]
-		//SDAnimatedImageView CaptionedImageView { get; set; }
 
-		// @property (nonatomic, weak) UILabel * titleLabel __attribute__((iboutlet));
-		[Export ("titleLabel", ArgumentSemantic.Weak)]
+		// @property (class, nonatomic) UIColor *titleLabelColor;
+		[Export ("titleLabelColor")]
+		UIColor TitleLabelColor { get; set; }
+
+		// @property (class, nonatomic) UIColor *descriptionLabelColor;
+		[Export ("descriptionLabelColor")]
+		UIColor DescriptionLabelColor { get; set; }
+
+		// @property (class, nonatomic) UIColor *linkLabelColor;
+		[Export ("linkLabelColor")]
+		UIColor LinkLabelColor { get; set; }
+
+		// @property (nonatomic) UIImageView *captionedImageView __attribute__((iboutlet));
+		[Export ("captionedImageView")]
+		UIImageView CaptionedImageView { get; set; }
+
+		// @property (nonatomic) UILabel *titleLabel __attribute__((iboutlet));
+		[Export ("titleLabel")]
 		UILabel TitleLabel { get; set; }
 
-		// @property (nonatomic, weak) UILabel * descriptionLabel __attribute__((iboutlet));
-		[Export ("descriptionLabel", ArgumentSemantic.Weak)]
+		// @property (nonatomic) UILabel *descriptionLabel __attribute__((iboutlet));
+		[Export ("descriptionLabel")]
 		UILabel DescriptionLabel { get; set; }
 
-		// @property (nonatomic, weak) UIView * TitleBackgroundView __attribute__((iboutlet));
-		[Export ("TitleBackgroundView", ArgumentSemantic.Weak)]
+		// @property (nonatomic) UIView *titleBackgroundView __attribute__((iboutlet));
+		[Export ("titleBackgroundView")]
 		UIView TitleBackgroundView { get; set; }
 
-		// @property (nonatomic, weak) UILabel * linkLabel __attribute__((iboutlet));
-		[Export ("linkLabel", ArgumentSemantic.Weak)]
+		// @property (nonatomic) UILabel *linkLabel __attribute__((iboutlet));
+		[Export ("linkLabel")]
 		UILabel LinkLabel { get; set; }
 
-		// @property (nonatomic, weak) NSLayoutConstraint * imageHeightContraint __attribute__((iboutlet));
-		[Export ("imageHeightContraint", ArgumentSemantic.Weak)]
-		NSLayoutConstraint ImageHeightContraint { get; set; }
+		// @property (nonatomic) NSLayoutConstraint *imageHeightConstraint __attribute__((iboutlet));
+		[Export ("imageHeightConstraint")]
+		NSLayoutConstraint ImageHeightConstraint { get; set; }
 
-		// @property (nonatomic, weak) NSLayoutConstraint * bodyAndLinkConstraint __attribute__((iboutlet));
-		[Export ("bodyAndLinkConstraint", ArgumentSemantic.Weak)]
+		// @property (nonatomic) NSLayoutConstraint *bodyAndLinkConstraint __attribute__((iboutlet));
+		[Export ("bodyAndLinkConstraint")]
 		NSLayoutConstraint BodyAndLinkConstraint { get; set; }
+
+		// - (void)setUpTitleBackgroundView;
+		[Export ("setUpTitleBackgroundView")]
+		void SetUpTitleBackgroundView ();
+
+		// - (void)setUpTitleLabel;
+		[Export ("setUpTitleLabel")]
+		void SetUpTitleLabel ();
+
+		// - (void)setUpDescriptionLabel;
+		[Export ("setUpDescriptionLabel")]
+		void SetUpDescriptionLabel ();
+
+		// - (void)setUpLinkLabel;
+		[Export ("setUpLinkLabel")]
+		void SetUpLinkLabel ();
+
+		// - (void)setUpCaptionedImageView;
+		[Export ("setUpCaptionedImageView")]
+		void SetUpCaptionedImageView ();
+
+		// - (void)setUpFonts;
+		[Export ("setUpFonts")]
+		void SetUpFonts ();
 
 		// -(void)hideLinkLabel:(BOOL)hide;
 		[Export ("hideLinkLabel:")]
@@ -2452,21 +2667,54 @@ namespace AppboyPlatformXamariniOSBinding
 	[BaseType (typeof(ABKNFBaseCardCell))]
 	interface ABKNFClassicCardCell
 	{
-		//// @property (nonatomic, weak) SDAnimatedImageView * classicImageView __attribute__((iboutlet));
-		//[Export ("classicImageView", ArgumentSemantic.Weak)]
-		//SDAnimatedImageView ClassicImageView { get; set; }
 
-		// @property (nonatomic, weak) UILabel * titleLabel __attribute__((iboutlet));
-		[Export ("titleLabel", ArgumentSemantic.Weak)]
+		// @property (class, nonatomic) UIColor *titleLabelColor;
+		[Export ("titleLabelColor")]
+		UIColor TitleLabelColor { get; set; }
+
+		// @property (class, nonatomic) UIColor *descriptionLabelColor;
+		[Export ("descriptionLabelColor")]
+		UIColor DescriptionLabelColor { get; set; }
+
+		// @property (class, nonatomic) UIColor *linkLabelColor;
+		[Export ("linkLabelColor")]
+		UIColor LinkLabelColor { get; set; }
+
+		// @property (nonatomic) UIImageView *classicImageView __attribute__((iboutlet));
+		[Export ("classicImageView")]
+		UIImageView ClassicImageView { get; set; }
+
+		// @property (nonatomic) UILabel *titleLabel __attribute__((iboutlet));
+		[Export ("titleLabel")]
 		UILabel TitleLabel { get; set; }
 
-		// @property (nonatomic, weak) UILabel * descriptionLabel __attribute__((iboutlet));
-		[Export ("descriptionLabel", ArgumentSemantic.Weak)]
+		// @property (nonatomic) UILabel *descriptionLabel __attribute__((iboutlet));
+		[Export ("descriptionLabel")]
 		UILabel DescriptionLabel { get; set; }
 
-		// @property (nonatomic, weak) UILabel * linkLabel __attribute__((iboutlet));
-		[Export ("linkLabel", ArgumentSemantic.Weak)]
+		// @property (nonatomic) UILabel *linkLabel __attribute__((iboutlet));
+		[Export ("linkLabel")]
 		UILabel LinkLabel { get; set; }
+
+		// - (void)setUpClassicImageView;
+		[Export ("setUpClassicImageView")]
+		void SetUpClassicImageView ();
+
+		// - (void)setUpTitleLabel;
+		[Export ("setUpTitleLabel")]
+		void SetUpTitleLabel ();
+
+		// - (void)setUpDescriptionLabel;
+		[Export ("setUpDescriptionLabel")]
+		void SetUpDescriptionLabel ();
+
+		// - (void)setUpLinkLabel;
+		[Export ("setUpLinkLabel")]
+		void SetUpLinkLabel ();
+
+		// - (void)setUpFonts;
+		[Export ("setUpFonts")]
+		void SetUpFonts ();
 
 		// -(void)applyCard:(ABKClassicCard *)classicCard;
 		[Export ("applyCard:")]

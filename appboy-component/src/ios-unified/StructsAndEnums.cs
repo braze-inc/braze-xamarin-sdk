@@ -127,6 +127,7 @@ namespace AppboyPlatformXamariniOSBinding
 		InAppMessageChannel,
 		NewsFeedChannel,
 		ContentCardChannel,
+		[Obsolete ("UnknownChannel will be removed in a future update.")]
 		UnknownChannel
 	}
 }

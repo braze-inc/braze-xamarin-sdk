@@ -44,10 +44,12 @@ namespace TestApp.XamariniOS
       // Start Appboy
       Appboy.StartWithApiKey("30291861-a7a0-4ad9-9d45-212353cbdac1", UIApplication.SharedApplication, options, new NSDictionary(
           Constants.ABKEnableAutomaticLocationCollectionKey, false,
-          Constants.ABKMinimumTriggerTimeIntervalKey, 4
+          Constants.ABKMinimumTriggerTimeIntervalKey, 4,
+          Constants.ABKEnableSDKAuthenticationKey, true
         ));
       if (Appboy.SharedInstance != null) {
-      Appboy.SharedInstance.SdkFlavor = ABKSDKFlavor.Xamarin;
+        Appboy.SharedInstance.SdkFlavor = ABKSDKFlavor.Xamarin;
+        Appboy.SharedInstance.SdkAuthenticationDelegate = new SampleSDKAuthenticationDelegate();
       }
 
       if (UIDevice.CurrentDevice.CheckSystemVersion(10, 0))
@@ -84,6 +86,16 @@ namespace TestApp.XamariniOS
       {
         Appboy.SharedInstance?.UserNotificationCenter(center, response, completionHandler);
       }
+    }
+  }
+
+  class SampleSDKAuthenticationDelegate : ABKSdkAuthenticationDelegate
+  {
+    public override void HandleSdkAuthenticationError(ABKSdkAuthenticationError authError)
+    {
+      Console.WriteLine("Invalid SDK Authentication signature.");
+      String newSignature = "NEW_SDK_AUTH_SIGNATURE_FOR_USER_" + Appboy.SharedInstance.User.UserID;
+      Appboy.SharedInstance.SetSdkAuthenticationSignature(newSignature);
     }
   }
 }

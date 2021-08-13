@@ -28,7 +28,14 @@ namespace TestApp.XamariniOS
       NewsFeedButton.TouchUpInside += NewsFeedButtonHandler;
       ContentCardsButton.TouchUpInside += ContentCardsButtonHandler;
       AddSlideupButton.TouchUpInside += AddSlideupButtonHandler;
-      ChangeUserLabel.Text = "Current User: " + Appboy.SharedInstance?.User?.UserID;
+      if (Appboy.SharedInstance?.User?.UserID != null)
+      {
+        ChangeUserLabel.Text = "Current User: " + Appboy.SharedInstance?.User?.UserID;
+      }
+      else
+      {
+        ChangeUserLabel.Text = "Current User is anonymous.";
+      }
     }
       
     private void ChangeUserButtonHandler(object sender, EventArgs e)
@@ -36,7 +43,8 @@ namespace TestApp.XamariniOS
       if (Appboy.SharedInstance != null)
       {
         String userId = "myUserId" + new Random().Next(1, 10000);
-        Appboy.SharedInstance.ChangeUser(userId);
+        String newSignature = "SDK_AUTH_SIGNATURE_FOR_USER_" + userId;
+        Appboy.SharedInstance.ChangeUser(userId, newSignature);
         ChangeUserLabel.Text = "Current User: " + userId;
       }
     }
@@ -56,6 +64,15 @@ namespace TestApp.XamariniOS
         Appboy.SharedInstance.User.SetEmailNotificationSubscriptionType(ABKNotificationSubscriptionType.ABKOptedIn);
         Appboy.SharedInstance.User.SetGender(ABKUserGenderType.Male);
         Appboy.SharedInstance.User.AttributionData = new ABKAttributionData("n1", "c1", "a1", "cr1");
+      }
+    }
+
+    partial void ChangeSDKAuthSignature_TouchUpInside(UIButton sender)
+    {
+      if (Appboy.SharedInstance != null)
+      {
+        String newSignature = "NEW_SDK_AUTH_SIGNATURE_FOR_USER_" + Appboy.SharedInstance.User.UserID;
+        Appboy.SharedInstance.SetSdkAuthenticationSignature(newSignature);
       }
     }
 
@@ -120,6 +137,11 @@ namespace TestApp.XamariniOS
       }
     }
 
+    partial void FlushData_TouchUpInside(UIButton sender)
+    {
+      Appboy.SharedInstance.RequestImmediateDataFlush();
+    }
+
     partial void WipeData_TouchUpInside(UIButton sender)
     {
       Appboy.WipeDataAndDisableForAppRun();
@@ -137,7 +159,8 @@ namespace TestApp.XamariniOS
   }
 
   // To add your own delegate, extend and override ABKSlideupControllerDelegate
-  class SampleInAppMessageDelegate :  ABKInAppMessageControllerDelegate {
+  class SampleInAppMessageDelegate :  ABKInAppMessageControllerDelegate
+  {
     public override ABKInAppMessageDisplayChoice BeforeInAppMessageDisplayed(ABKInAppMessage inAppMessage) {
       Console.WriteLine("Before IAM Displayed");
       return ABKInAppMessageDisplayChoice.displayInAppMessageNow;
