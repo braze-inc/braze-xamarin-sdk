@@ -13,39 +13,39 @@ namespace AppboyPlatformXamariniOSBinding
 	interface Constants
 	{
 		// extern NSString *const _Nonnull ABKRequestProcessingPolicyOptionKey;
-		[Field ("ABKRequestProcessingPolicyOptionKey", "__Internal")]
+		[Field("ABKRequestProcessingPolicyOptionKey", "__Internal")]
 		NSString ABKRequestProcessingPolicyOptionKey { get; }
 
 		// extern NSString *const _Nonnull ABKFlushIntervalOptionKey;
-		[Field ("ABKFlushIntervalOptionKey", "__Internal")]
+		[Field("ABKFlushIntervalOptionKey", "__Internal")]
 		NSString ABKFlushIntervalOptionKey { get; }
 
 		// extern NSString *const _Nonnull ABKEnableAutomaticLocationCollectionKey;
-		[Field ("ABKEnableAutomaticLocationCollectionKey", "__Internal")]
+		[Field("ABKEnableAutomaticLocationCollectionKey", "__Internal")]
 		NSString ABKEnableAutomaticLocationCollectionKey { get; }
 
 		// extern NSString *const _Nonnull ABKEnableGeofencesKey;
-		[Field ("ABKEnableGeofencesKey", "__Internal")]
+		[Field("ABKEnableGeofencesKey", "__Internal")]
 		NSString ABKEnableGeofencesKey { get; }
 
 		// extern NSString *const _Nonnull ABKDisableAutomaticGeofenceRequestsKey;
-		[Field ("ABKDisableAutomaticGeofenceRequestsKey", "__Internal")]
+		[Field("ABKDisableAutomaticGeofenceRequestsKey", "__Internal")]
 		NSString ABKDisableAutomaticGeofenceRequestsKey { get; }
 
 		// extern NSString *const _Nonnull ABKIDFADelegateKey;
-		[Field ("ABKIDFADelegateKey", "__Internal")]
+		[Field("ABKIDFADelegateKey", "__Internal")]
 		NSString ABKIDFADelegateKey { get; }
 
 		// extern NSString *const _Nonnull ABKEndpointKey;
-		[Field ("ABKEndpointKey", "__Internal")]
+		[Field("ABKEndpointKey", "__Internal")]
 		NSString ABKEndpointKey { get; }
 
 		// extern NSString *const _Nonnull ABKURLDelegateKey;
-		[Field ("ABKURLDelegateKey", "__Internal")]
+		[Field("ABKURLDelegateKey", "__Internal")]
 		NSString ABKURLDelegateKey { get; }
 
 		// extern NSString *const ABKEnableSDKAuthenticationKey;
-		[Field ("ABKEnableSDKAuthenticationKey", "__Internal")]
+		[Field("ABKEnableSDKAuthenticationKey", "__Internal")]
 		NSString ABKEnableSDKAuthenticationKey { get; }
 
 		// extern NSString* const ABKSdkAuthenticationDelegateKey;
@@ -53,27 +53,27 @@ namespace AppboyPlatformXamariniOSBinding
 		NSString ABKSdkAuthenticationDelegateKey { get; }
 
 		// extern NSString *const _Nonnull ABKInAppMessageControllerDelegateKey;
-		[Field ("ABKInAppMessageControllerDelegateKey", "__Internal")]
+		[Field("ABKInAppMessageControllerDelegateKey", "__Internal")]
 		NSString ABKInAppMessageControllerDelegateKey { get; }
 
 		// extern NSString *const _Nonnull ABKSessionTimeoutKey;
-		[Field ("ABKSessionTimeoutKey", "__Internal")]
+		[Field("ABKSessionTimeoutKey", "__Internal")]
 		NSString ABKSessionTimeoutKey { get; }
 
 		// extern NSString *const _Nonnull ABKMinimumTriggerTimeIntervalKey;
-		[Field ("ABKMinimumTriggerTimeIntervalKey", "__Internal")]
+		[Field("ABKMinimumTriggerTimeIntervalKey", "__Internal")]
 		NSString ABKMinimumTriggerTimeIntervalKey { get; }
 
 		// extern NSString *const _Nonnull ABKSDKFlavorKey;
-		[Field ("ABKSDKFlavorKey", "__Internal")]
+		[Field("ABKSDKFlavorKey", "__Internal")]
 		NSString ABKSDKFlavorKey { get; }
 
 		// extern NSString *const _Nonnull ABKDeviceWhitelistKey;
-		[Field ("ABKDeviceWhitelistKey", "__Internal")]
+		[Field("ABKDeviceWhitelistKey", "__Internal")]
 		NSString ABKDeviceWhitelistKey { get; }
 
 		// extern NSString *const _Nonnull ABKPushStoryAppGroupKey;
-		[Field ("ABKPushStoryAppGroupKey", "__Internal")]
+		[Field("ABKPushStoryAppGroupKey", "__Internal")]
 		NSString ABKPushStoryAppGroupKey { get; }
 
 		// extern NSString *const _Nonnull ABKContentCardsProcessedNotification;
@@ -87,6 +87,18 @@ namespace AppboyPlatformXamariniOSBinding
 		// extern const NSInteger DefaultNumberOfFriends;
 		[Field("DefaultNumberOfFriends", "__Internal")]
 		nint DefaultNumberOfFriends { get; }
+	}
+
+	[Static]
+	interface ABKSdkMetadata
+	{
+		// const NSString ABKSdkMetadataNuGet
+		[Field("ABKSdkMetadataNuGet", "__Internal")]
+		NSString ABKSdkMetadataNuGet { get; }
+
+		// const NSString ABKSdkMetadataXamarin;
+		[Field("ABKSdkMetadataXamarin", "__Internal")]
+		NSString ABKSdkMetadataXamarin { get; }
 	}
 
 	// @interface Appboy : NSObject
@@ -280,6 +292,10 @@ namespace AppboyPlatformXamariniOSBinding
 		[Export ("pushAuthorizationFromUserNotificationCenter:")]
 		void PushAuthorizationFromUserNotificationCenter (bool pushAuthGranted);
 
+		//- (void)addSdkMetadata:(NSArray<ABKSdkMetadata>*) metadata;
+		[Export ("addSdkMetadata:")]
+		void AddSdkMetadata (NSObject[] metadata);
+
 		// +(void)wipeDataAndDisableForAppRun;
 		[Static]
 		[Export ("wipeDataAndDisableForAppRun")]
@@ -367,6 +383,14 @@ namespace AppboyPlatformXamariniOSBinding
 		// -(BOOL)setPushNotificationSubscriptionType:(ABKNotificationSubscriptionType)pushNotificationSubscriptionType;
 		[Export ("setPushNotificationSubscriptionType:")]
 		bool SetPushNotificationSubscriptionType (ABKNotificationSubscriptionType pushNotificationSubscriptionType);
+
+		// -(BOOL)addToSubscriptionGroupWithGroupId:(NSString*)groupId;
+		[Export("addToSubscriptionGroupWithGroupId:")]
+		bool AddToSubscriptionGroupWithGroupId (string groupId);
+
+		// -(BOOL)removeFromSubscriptionGroupWithGroupId:(NSString*)groupId;
+		[Export("removeFromSubscriptionGroupWithGroupId:")]
+		bool RemoveFromSubscriptionGroupWithGroupId (string groupId);
 
 		// -(BOOL)setCustomAttributeWithKey:(NSString * _Nonnull)key andBOOLValue:(BOOL)value;
 		[Export ("setCustomAttributeWithKey:andBOOLValue:")]

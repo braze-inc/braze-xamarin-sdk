@@ -62,6 +62,8 @@ namespace TestApp.XamariniOS
         Appboy.SharedInstance.User.Phone = "5555555555";
         Appboy.SharedInstance.User.SetCustomAttributeWithKey("customAttributeKey", true);
         Appboy.SharedInstance.User.SetEmailNotificationSubscriptionType(ABKNotificationSubscriptionType.ABKOptedIn);
+        Appboy.SharedInstance.User.AddToSubscriptionGroupWithGroupId("sampleGroup1");
+        Appboy.SharedInstance.User.RemoveFromSubscriptionGroupWithGroupId("sampleGroup2");
         Appboy.SharedInstance.User.SetGender(ABKUserGenderType.Male);
         Appboy.SharedInstance.User.AttributionData = new ABKAttributionData("n1", "c1", "a1", "cr1");
       }

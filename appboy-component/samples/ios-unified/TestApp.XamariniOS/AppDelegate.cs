@@ -49,6 +49,7 @@ namespace TestApp.XamariniOS
         ));
       if (Appboy.SharedInstance != null) {
         Appboy.SharedInstance.SdkFlavor = ABKSDKFlavor.Xamarin;
+        Appboy.SharedInstance.AddSdkMetadata(new []{ ABKSdkMetadata.ABKSdkMetadataXamarin });
         Appboy.SharedInstance.SdkAuthenticationDelegate = new SampleSDKAuthenticationDelegate();
       }
 

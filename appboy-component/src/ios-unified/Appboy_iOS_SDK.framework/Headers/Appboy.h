@@ -12,8 +12,10 @@
 #import <UIKit/UIKit.h>
 #import <UserNotifications/UserNotifications.h>
 
+#import "ABKSdkMetadata.h"
+
 #ifndef APPBOY_SDK_VERSION
-#define APPBOY_SDK_VERSION @"4.3.2"
+#define APPBOY_SDK_VERSION @"4.4.1"
 #endif
 
 #if !TARGET_OS_TV
@@ -158,6 +160,15 @@ extern NSString *const ABKDeviceWhitelistKey __deprecated_msg("ABKDeviceWhitelis
  * with the Push Story app extension.
  */
 extern NSString *const ABKPushStoryAppGroupKey;
+
+/*!
+ * This key can be set to an integer value to specify the level of the log statements output by the Braze SDK.
+ *
+ * The default log level is 8 and will minimally log info. To enable verbose logging for debugging, use log level 0.
+ *
+ * This selection will override any LogLevel value set in the Info.plist.
+ */
+extern NSString *const ABKLogLevelKey;
 
 /* ------------------------------------------------------------------------------------------------------
  * Enums
@@ -378,7 +389,8 @@ typedef NS_ENUM(NSInteger, ABKChannel) {
 * @param userId The new user's ID (from the host application).
 *
 * @discussion
-* This method changes the user's ID.
+* This method changes the user's ID. These user IDs should be private and not easily obtained (e.g. not a plain
+* email address or username).
 *
 * When you first start using Braze on a device, the user is considered "anonymous". You can use this method to
 * optionally identify a user with a unique ID, which enables the following:
@@ -629,6 +641,15 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
 - (void)pushAuthorizationFromUserNotificationCenter:(BOOL)pushAuthGranted;
 
 #endif
+
+/*!
+ * Adds SDK Metadata values to those automatically collected by the SDK.
+ *
+ * Metadata tell Braze how the SDK is integrated (e.g. wrapper, package manager, etc.)
+ *
+ * @param metadata The metadata values reflecting the current SDK integration.
+ */
+- (void)addSdkMetadata:(NSArray<ABKSdkMetadata> *)metadata;
 
 /* ------------------------------------------------------------------------------------------------------
  * Data processing configuration methods.

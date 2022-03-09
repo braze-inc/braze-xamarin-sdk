@@ -49,6 +49,8 @@ namespace com.appboy.xamarinsample
         Braze.GetInstance(Activity).CurrentUser.SetEmailNotificationSubscriptionType(NotificationSubscriptionType.OptedIn);
         Braze.GetInstance(Activity).CurrentUser.SetGender(Gender.Male);
         Braze.GetInstance(Activity).CurrentUser.SetAttributionData(new AttributionData("a", "b", "c", "d"));
+        Braze.GetInstance(Activity).CurrentUser.AddToSubscriptionGroup("group-id-here");
+        Braze.GetInstance(Activity).CurrentUser.RemoveFromSubscriptionGroup("another-group-id");
       };
 
       // Events and purchases
@@ -94,7 +96,7 @@ namespace com.appboy.xamarinsample
           String profileImageUrl
         )
         **/
-        TwitterUser twitterUser = new TwitterUser(new Java.Lang.Integer(6253282), "Test", "User", "Tester",  new Java.Lang.Integer(100), new Java.Lang.Integer(100), 
+        TwitterUser twitterUser = new TwitterUser(99, "Test", "User", "Tester",  new Java.Lang.Integer(100), new Java.Lang.Integer(100), 
           new Java.Lang.Integer(100), "https://si0.twimg.com/profile_images/2685532587/fa47382ad67a0135acc62d4c6b49dbdc_bigger.jpeg");
         Braze.GetInstance(Activity).CurrentUser.SetTwitterData(twitterUser);
       };

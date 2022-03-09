@@ -31,6 +31,7 @@ namespace TestAppXamarinForms.iOS
           Constants.ABKMinimumTriggerTimeIntervalKey, 4
         ));
       Appboy.SharedInstance.SdkFlavor = ABKSDKFlavor.Xamarin;
+      Appboy.SharedInstance?.AddSdkMetadata(new[] { ABKSdkMetadata.ABKSdkMetadataXamarin });
 
       // Subscribe to notification 
       NSNotificationCenter.DefaultCenter.AddObserver(ABKFeedController.ABKFeedUpdatedNotification, OnFeedUpdated);

@@ -1,5 +1,15 @@
+## 1.23.0
+
+##### Breaking
+- Updated the iOS binding to use [Braze iOS SDK 4.4.1](https://github.com/Appboy/appboy-ios-sdk/blob/master/CHANGELOG.md#441).
+  - Added `AddToSubscriptionGroupWithGroupId` and `RemoveFromSubscriptionGroupWithGroupId` to `ABKUser`.
+- Updated the Android binding to use [Braze Android SDK 18.0.1](https://github.com/Appboy/appboy-android-sdk/blob/master/CHANGELOG.md#1801).
+  - This introduces a hard dependency on `Xamarin.Kotlin.StdLib` in your package references.
+  - This introduces a hard dependency on `Xamarin.KotlinX.Coroutines.Android` in your package references.
+
 ## 1.21.1
 
+##### Changed
 - Updated the iOS binding to use [Braze iOS SDK 4.3.2](https://github.com/Appboy/appboy-ios-sdk/blob/master/CHANGELOG.md#432).
 
 ## 1.21.0
