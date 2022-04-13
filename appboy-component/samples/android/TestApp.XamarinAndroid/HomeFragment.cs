@@ -123,7 +123,7 @@ namespace com.appboy.xamarinsample
       view.FindViewById<Button> (Resource.Id.addInAppMessageButton).Click += delegate {
         InAppMessageSlideup slideup = new InAppMessageSlideup();
         slideup.Message = "This is the message";
-        slideup.SetClickAction(ClickAction.Uri, Android.Net.Uri.Parse("http://braze.com"));
+        slideup.SetClickBehavior(ClickAction.Uri, Android.Net.Uri.Parse("http://braze.com"));
         BrazeInAppMessageManager.Instance.AddInAppMessage(slideup);
       };
 
