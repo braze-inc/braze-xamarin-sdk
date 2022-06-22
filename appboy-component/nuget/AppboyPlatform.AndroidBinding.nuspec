@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>AppboyPlatform.AndroidBinding</id>
-    <version>1.24.0</version>
+    <version>1.25.0</version>
     <authors>Braze</authors>
     <owners>Braze</owners>
     <projectUrl>https://github.com/Appboy/appboy-xamarin-bindings</projectUrl>
@@ -23,14 +23,14 @@
       <dependency id="Xamarin.AndroidX.SavedState" version="1.0.0.2" />
       <dependency id="Xamarin.Firebase.Messaging" version="120.1.7" />
       <dependency id="Xamarin.AndroidX.AppCompat" version="1.2.0.7" />
-      <dependency id="Xamarin.Kotlin.StdLib" version="1.5.31.2" />
-      <dependency id="Xamarin.Kotlin.StdLib.Common" version="1.5.31.2" />
-      <dependency id="Xamarin.KotlinX.Coroutines.Android" version="1.5.2.2" />
+      <dependency id="Xamarin.Kotlin.StdLib" version="1.6.21.1" />
+      <dependency id="Xamarin.Kotlin.StdLib.Common" version="1.6.21.1" />
+      <dependency id="Xamarin.KotlinX.Coroutines.Android" version="1.6.2.1" />
     </dependencies>
   </metadata>
   <files>
-    <file src="../lib/android/AppboyPlatform.AndroidBinding.dll" target="lib/MonoAndroid10.0" />
-    <file src="../lib/android/AppboyPlatform.AndroidCore.dll" target="lib/MonoAndroid10.0" />
+    <file src="../lib/android/AppboyPlatform.AndroidBinding.dll" target="lib/MonoAndroid12.0" />
+    <file src="../lib/android/AppboyPlatform.AndroidCore.dll" target="lib/MonoAndroid12.0" />
     <file src="../../Public/braze-logo.png" target="images/" />
     <file src="../../Public/LICENSE.txt" target="" />
   </files>

@@ -1,3 +1,8 @@
+## 1.25.0
+
+##### Breaking
+- Updated the Android binding to use [Braze Android SDK 21.0.0](https://github.com/Appboy/appboy-android-sdk/blob/master/CHANGELOG.md#2100).
+
 ## 1.24.0
 
 ##### Breaking

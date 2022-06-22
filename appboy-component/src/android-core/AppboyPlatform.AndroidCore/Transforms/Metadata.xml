@@ -12,6 +12,6 @@
     path="/api/package[@name='com.braze.models.inappmessage']/class[@name='InAppMessageImmersiveBase']/method[@name='forJsonPut']"
     name="managedReturn">Java.Lang.Object
   </attr>
-  <!-- The mapping was throwing errors in each of the following, so we just remove them.  They are not needed for a fully featured integration -->
+  <!-- The mapping was throwing errors in each of the following, so we just remove them. They are not needed for a fully featured integration -->
   <remove-node path="/api/package[@name='com.braze.models']/class[@name='BrazeGeofence']" />
 </metadata>
