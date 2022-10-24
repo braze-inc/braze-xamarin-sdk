@@ -6,7 +6,7 @@ Successful marketing automation is essential to the future of your mobile app. B
 
 - [Braze User Guide](https://www.braze.com/docs/user_guide/introduction/ "Braze User Guide")
 - [Braze Developer Guide](https://www.braze.com/docs/developer_guide/home/ "Braze Developer Guide")
-- [Android JavaDocs](http://appboy.github.io/appboy-android-sdk/javadocs/ "Braze Android SDK Class Documentation")
+- [Android Class Documentation](https://appboy.github.io/appboy-android-sdk/kdoc "Braze Android SDK Class Documentation")
 - [iOS Full Class Documentation](http://appboy.github.io/appboy-ios-sdk/docs/annotated.html "Braze iOS SDK Class Documentation")
 - [iOS Xamarin Bindings Nuget Package](https://www.nuget.org/packages/AppboyPlatformXamariniOSBinding/ "iOS Xamarin Bindings Nuget Package")
 - [Android Xamarin Bindings Nuget Package](https://www.nuget.org/packages/AppboyPlatform.AndroidBinding/ "Android Xamarin Bindings Nuget Package")

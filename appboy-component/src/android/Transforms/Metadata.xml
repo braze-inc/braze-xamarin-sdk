@@ -9,4 +9,5 @@
   <remove-node path="/api/package[@name='com.braze.ui.inappmessage.views']/class[@name='InAppMessageSlideupView']" />
   <remove-node path="/api/package[@name='com.braze.ui.inappmessage.views']/class[@name='InAppMessageFullView']" />
   <remove-node path="/api/package[@name='com.braze.ui.inappmessage']/class[@name='InAppMessageManagerBase']/method[@name='setCustomControlInAppMessageManagerListener']" />
+  <remove-node path="/api/package[@name='com.braze.ui.inappmessage.views']/class[@name='InAppMessageImageView']" />
 </metadata>

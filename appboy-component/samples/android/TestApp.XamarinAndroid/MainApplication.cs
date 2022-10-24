@@ -28,7 +28,7 @@ namespace com.appboy.xamarinsample
     void RegisterFirebasePush() {
       try {
         var token = FirebaseInstanceId.Instance.GetToken("901477453852", "FCM");
-        Braze.GetInstance(this).RegisterAppboyPushMessages (token);
+        Braze.GetInstance(this).RegisteredPushToken = token;
         Console.WriteLine("Registered Firebase push token with Braze: " + token);
       } catch (Exception e) {
         Console.WriteLine("Caught exception registering for Firebase push: " + e);
