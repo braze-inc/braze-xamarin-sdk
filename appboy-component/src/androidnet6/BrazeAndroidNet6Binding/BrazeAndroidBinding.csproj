@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0-android33.0</TargetFramework>
+    <SupportedOSPlatformVersion>21</SupportedOSPlatformVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Xamarin.AndroidX.SwipeRefreshLayout" />
+    <None Remove="Xamarin.AndroidX.Fragment" />
+    <None Remove="Xamarin.Firebase.Messaging" />
+    <None Remove="Xamarin.KotlinX.Coroutines.Android" />
+    <None Remove="Xamarin.Kotlin.StdLib" />
+    <None Remove="Xamarin.AndroidX.WebKit" />
+    <None Remove="Xamarin.AndroidX.AppCompat" />
+    <None Remove="Xamarin.AndroidX.RecyclerView" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Xamarin.AndroidX.SwipeRefreshLayout" Version="1.1.0.11" />
+    <PackageReference Include="Xamarin.AndroidX.Fragment" Version="1.5.5.1" />
+    <PackageReference Include="Xamarin.KotlinX.Coroutines.Android" Version="1.6.4.2" />
+    <PackageReference Include="Xamarin.Kotlin.StdLib" Version="1.8.0.1" />
+    <PackageReference Include="Xamarin.AndroidX.WebKit" Version="1.5.0.2" />
+    <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.6.0.1" />
+    <PackageReference Include="Xamarin.AndroidX.RecyclerView" Version="1.2.1.9" />
+    <PackageReference Include="Xamarin.Firebase.Messaging" Version="123.1.1" />
+  </ItemGroup>
+</Project>

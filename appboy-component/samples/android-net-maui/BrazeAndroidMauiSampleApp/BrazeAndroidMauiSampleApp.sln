@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 25.0.1704.4
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrazeAndroidMauiSampleApp", "BrazeAndroidMauiSampleApp\BrazeAndroidMauiSampleApp.csproj", "{1FD2A5D8-6857-4C08-971C-A61617837906}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrazeAndroidBinding", "..\..\..\src\androidnet6\BrazeAndroidNet6Binding\BrazeAndroidBinding.csproj", "{B30F7AA0-BB3D-4BE1-ACC4-548F7B678E50}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1FD2A5D8-6857-4C08-971C-A61617837906}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FD2A5D8-6857-4C08-971C-A61617837906}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FD2A5D8-6857-4C08-971C-A61617837906}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FD2A5D8-6857-4C08-971C-A61617837906}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B30F7AA0-BB3D-4BE1-ACC4-548F7B678E50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B30F7AA0-BB3D-4BE1-ACC4-548F7B678E50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B30F7AA0-BB3D-4BE1-ACC4-548F7B678E50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B30F7AA0-BB3D-4BE1-ACC4-548F7B678E50}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5B5D1CCE-E83B-4408-B961-DAFFDFE0E4E2}
+	EndGlobalSection
+EndGlobal

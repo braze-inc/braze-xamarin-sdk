@@ -1,0 +1,33 @@
+﻿<metadata>
+  <attr 
+    path="/api/package[@name='com.braze.models.inappmessage']/class[@name='InAppMessageBase']/method[@name='forJsonPut']"
+    name="managedReturn">Java.Lang.Object
+  </attr>
+  <attr 
+    path="/api/package[@name='com.braze.models.inappmessage']/class[@name='InAppMessageSlideup']/method[@name='forJsonPut']"
+    name="managedReturn">Java.Lang.Object
+  </attr>
+  <attr 
+    path="/api/package[@name='com.braze.models.inappmessage']/class[@name='InAppMessageImmersiveBase']/method[@name='forJsonPut']"
+    name="managedReturn">Java.Lang.Object
+  </attr>
+  <attr 
+    path="/api/package[@name='com.braze.models.outgoing']/class[@name='BrazeLocation']/method[@name='forJsonPut']"
+    name="managedReturn">Java.Lang.Object
+  </attr>
+  <!-- The mapping was throwing errors in each of the following, so we just remove them. They are not needed for a fully featured integration -->
+  <remove-node path="/api/package[@name='com.braze.models']/class[@name='BrazeGeofence']" />
+  
+  <!-- The mapping was throwing errors in each of the following, so we just remove them. They are not needed for a fully featured integration -->
+  <remove-node path="/api/package[@name='com.braze.ui.widget']" />
+  <remove-node path="/api/package[@name='com.braze.ui.contentcards.adapters']/class[@name='ContentCardAdapter']" />
+  <remove-node path="/api/package[@name='com.braze.ui.inappmessage.listeners']/interface[@name='TouchAwareSwipeDismissTouchListener.ITouchListener']" />
+  <remove-node path="/api/package[@name='com.braze.ui.inappmessage.factories']" />
+    <remove-node path="/api/package[@name='com.braze.ui.inappmessage.listeners']" />
+  <remove-node path="/api/package[@name='com.braze.ui.inappmessage.listeners']/interface[@name='IInAppMessageWebViewClientListener']" />
+  <remove-node path="/api/package[@name='com.braze.ui.inappmessage.views']/class[@name='InAppMessageModalView']" />
+  <remove-node path="/api/package[@name='com.braze.ui.inappmessage.views']/class[@name='InAppMessageSlideupView']" />
+  <remove-node path="/api/package[@name='com.braze.ui.inappmessage.views']/class[@name='InAppMessageFullView']" />
+  <remove-node path="/api/package[@name='com.braze.ui.inappmessage']/class[@name='InAppMessageManagerBase']/method[@name='setCustomControlInAppMessageManagerListener']" />
+  <remove-node path="/api/package[@name='com.braze.ui.inappmessage.views']/class[@name='InAppMessageImageView']" />
+</metadata>

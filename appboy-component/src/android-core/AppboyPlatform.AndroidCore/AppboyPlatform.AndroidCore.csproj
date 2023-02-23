@@ -41,29 +41,29 @@
     <Reference Include="System.Core" />
     <Reference Include="Mono.Android" />
     <Reference Include="Xamarin.Jetbrains.Annotations">
-      <HintPath>..\..\..\samples\android\packages\Xamarin.Jetbrains.Annotations.23.0.0.4\lib\monoandroid12.0\Xamarin.Jetbrains.Annotations.dll</HintPath>
+      <HintPath>..\..\..\samples\android\packages\Xamarin.Jetbrains.Annotations.24.0.0.1\lib\monoandroid12.0\Xamarin.Jetbrains.Annotations.dll</HintPath>
     </Reference>
     <Reference Include="Java.Interop" />
     <Reference Include="mscorlib" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Numerics.Vectors" />
     <Reference Include="Xamarin.Kotlin.StdLib.Common">
-      <HintPath>..\..\..\samples\android\packages\Xamarin.Kotlin.StdLib.Common.1.6.21.1\lib\monoandroid12.0\Xamarin.Kotlin.StdLib.Common.dll</HintPath>
+      <HintPath>..\..\..\samples\android\packages\Xamarin.Kotlin.StdLib.Common.1.8.0.1\lib\monoandroid12.0\Xamarin.Kotlin.StdLib.Common.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Kotlin.StdLib">
-      <HintPath>..\..\..\samples\android\packages\Xamarin.Kotlin.StdLib.1.6.21.1\lib\monoandroid12.0\Xamarin.Kotlin.StdLib.dll</HintPath>
+      <HintPath>..\..\..\samples\android\packages\Xamarin.Kotlin.StdLib.1.8.0.1\lib\monoandroid12.0\Xamarin.Kotlin.StdLib.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Kotlin.StdLib.Jdk7">
-      <HintPath>..\..\..\samples\android\packages\Xamarin.Kotlin.StdLib.Jdk7.1.6.21.1\lib\monoandroid12.0\Xamarin.Kotlin.StdLib.Jdk7.dll</HintPath>
+      <HintPath>..\..\..\samples\android\packages\Xamarin.Kotlin.StdLib.Jdk7.1.8.0.1\lib\monoandroid12.0\Xamarin.Kotlin.StdLib.Jdk7.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Kotlin.StdLib.Jdk8">
-      <HintPath>..\..\..\samples\android\packages\Xamarin.Kotlin.StdLib.Jdk8.1.6.21.1\lib\monoandroid12.0\Xamarin.Kotlin.StdLib.Jdk8.dll</HintPath>
+      <HintPath>..\..\..\samples\android\packages\Xamarin.Kotlin.StdLib.Jdk8.1.8.0.1\lib\monoandroid12.0\Xamarin.Kotlin.StdLib.Jdk8.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.KotlinX.Coroutines.Core.Jvm">
-      <HintPath>..\..\..\samples\android\packages\Xamarin.KotlinX.Coroutines.Core.Jvm.1.6.2.1\lib\monoandroid12.0\Xamarin.KotlinX.Coroutines.Core.Jvm.dll</HintPath>
+      <HintPath>..\..\..\samples\android\packages\Xamarin.KotlinX.Coroutines.Core.Jvm.1.6.4.2\lib\monoandroid12.0\Xamarin.KotlinX.Coroutines.Core.Jvm.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.KotlinX.Coroutines.Android">
-      <HintPath>..\..\..\samples\android\packages\Xamarin.KotlinX.Coroutines.Android.1.6.2.1\lib\monoandroid12.0\Xamarin.KotlinX.Coroutines.Android.dll</HintPath>
+      <HintPath>..\..\..\samples\android\packages\Xamarin.KotlinX.Coroutines.Android.1.6.4.2\lib\monoandroid12.0\Xamarin.KotlinX.Coroutines.Android.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -79,14 +79,14 @@
     <TransformFile Include="Transforms\Metadata.xml" />
   </ItemGroup>
   <ItemGroup>
-    <LibraryProjectZip Include="Jars\android-sdk-base-23.3.0.aar" />
+    <LibraryProjectZip Include="Jars\android-sdk-base-24.2.0.aar" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.Bindings.targets" />
-  <Import Project="..\..\..\samples\android\packages\Xamarin.Jetbrains.Annotations.23.0.0.4\build\monoandroid12.0\Xamarin.Jetbrains.Annotations.targets" Condition="Exists('..\..\..\samples\android\packages\Xamarin.Jetbrains.Annotations.23.0.0.4\build\monoandroid12.0\Xamarin.Jetbrains.Annotations.targets')" />
-  <Import Project="..\..\..\samples\android\packages\Xamarin.Kotlin.StdLib.Common.1.6.21.1\build\monoandroid12.0\Xamarin.Kotlin.StdLib.Common.targets" Condition="Exists('..\..\..\samples\android\packages\Xamarin.Kotlin.StdLib.Common.1.6.21.1\build\monoandroid12.0\Xamarin.Kotlin.StdLib.Common.targets')" />
-  <Import Project="..\..\..\samples\android\packages\Xamarin.Kotlin.StdLib.1.6.21.1\build\monoandroid12.0\Xamarin.Kotlin.StdLib.targets" Condition="Exists('..\..\..\samples\android\packages\Xamarin.Kotlin.StdLib.1.6.21.1\build\monoandroid12.0\Xamarin.Kotlin.StdLib.targets')" />
-  <Import Project="..\..\..\samples\android\packages\Xamarin.Kotlin.StdLib.Jdk7.1.6.21.1\build\monoandroid12.0\Xamarin.Kotlin.StdLib.Jdk7.targets" Condition="Exists('..\..\..\samples\android\packages\Xamarin.Kotlin.StdLib.Jdk7.1.6.21.1\build\monoandroid12.0\Xamarin.Kotlin.StdLib.Jdk7.targets')" />
-  <Import Project="..\..\..\samples\android\packages\Xamarin.Kotlin.StdLib.Jdk8.1.6.21.1\build\monoandroid12.0\Xamarin.Kotlin.StdLib.Jdk8.targets" Condition="Exists('..\..\..\samples\android\packages\Xamarin.Kotlin.StdLib.Jdk8.1.6.21.1\build\monoandroid12.0\Xamarin.Kotlin.StdLib.Jdk8.targets')" />
-  <Import Project="..\..\..\samples\android\packages\Xamarin.KotlinX.Coroutines.Core.Jvm.1.6.2.1\build\monoandroid12.0\Xamarin.KotlinX.Coroutines.Core.Jvm.targets" Condition="Exists('..\..\..\samples\android\packages\Xamarin.KotlinX.Coroutines.Core.Jvm.1.6.2.1\build\monoandroid12.0\Xamarin.KotlinX.Coroutines.Core.Jvm.targets')" />
-  <Import Project="..\..\..\samples\android\packages\Xamarin.KotlinX.Coroutines.Android.1.6.2.1\build\monoandroid12.0\Xamarin.KotlinX.Coroutines.Android.targets" Condition="Exists('..\..\..\samples\android\packages\Xamarin.KotlinX.Coroutines.Android.1.6.2.1\build\monoandroid12.0\Xamarin.KotlinX.Coroutines.Android.targets')" />
+  <Import Project="..\..\..\samples\android\packages\Xamarin.Jetbrains.Annotations.24.0.0.1\build\monoandroid12.0\Xamarin.Jetbrains.Annotations.targets" Condition="Exists('..\..\..\samples\android\packages\Xamarin.Jetbrains.Annotations.24.0.0.1\build\monoandroid12.0\Xamarin.Jetbrains.Annotations.targets')" />
+  <Import Project="..\..\..\samples\android\packages\Xamarin.Kotlin.StdLib.Common.1.8.0.1\build\monoandroid12.0\Xamarin.Kotlin.StdLib.Common.targets" Condition="Exists('..\..\..\samples\android\packages\Xamarin.Kotlin.StdLib.Common.1.8.0.1\build\monoandroid12.0\Xamarin.Kotlin.StdLib.Common.targets')" />
+  <Import Project="..\..\..\samples\android\packages\Xamarin.Kotlin.StdLib.1.8.0.1\build\monoandroid12.0\Xamarin.Kotlin.StdLib.targets" Condition="Exists('..\..\..\samples\android\packages\Xamarin.Kotlin.StdLib.1.8.0.1\build\monoandroid12.0\Xamarin.Kotlin.StdLib.targets')" />
+  <Import Project="..\..\..\samples\android\packages\Xamarin.Kotlin.StdLib.Jdk7.1.8.0.1\build\monoandroid12.0\Xamarin.Kotlin.StdLib.Jdk7.targets" Condition="Exists('..\..\..\samples\android\packages\Xamarin.Kotlin.StdLib.Jdk7.1.8.0.1\build\monoandroid12.0\Xamarin.Kotlin.StdLib.Jdk7.targets')" />
+  <Import Project="..\..\..\samples\android\packages\Xamarin.Kotlin.StdLib.Jdk8.1.8.0.1\build\monoandroid12.0\Xamarin.Kotlin.StdLib.Jdk8.targets" Condition="Exists('..\..\..\samples\android\packages\Xamarin.Kotlin.StdLib.Jdk8.1.8.0.1\build\monoandroid12.0\Xamarin.Kotlin.StdLib.Jdk8.targets')" />
+  <Import Project="..\..\..\samples\android\packages\Xamarin.KotlinX.Coroutines.Core.Jvm.1.6.4.2\build\monoandroid12.0\Xamarin.KotlinX.Coroutines.Core.Jvm.targets" Condition="Exists('..\..\..\samples\android\packages\Xamarin.KotlinX.Coroutines.Core.Jvm.1.6.4.2\build\monoandroid12.0\Xamarin.KotlinX.Coroutines.Core.Jvm.targets')" />
+  <Import Project="..\..\..\samples\android\packages\Xamarin.KotlinX.Coroutines.Android.1.6.4.2\build\monoandroid12.0\Xamarin.KotlinX.Coroutines.Android.targets" Condition="Exists('..\..\..\samples\android\packages\Xamarin.KotlinX.Coroutines.Android.1.6.4.2\build\monoandroid12.0\Xamarin.KotlinX.Coroutines.Android.targets')" />
 </Project>

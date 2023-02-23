@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:minWidth="25px"
+    android:minHeight="25px">
+    <TextView
+        android:id="@+id/userId"
+        android:text="@string/userId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/changeUserButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/changeUser" />
+    <Button
+        android:text="@string/setUserProperties"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/userPropertyButton" />
+    <Button
+        android:text="@string/eventsAndPurchases"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/eventsAndPurchasesButton" />
+    <Button
+        android:text="@string/trackSocialData"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/trackSocialDataButton" />
+    <Button
+        android:text="@string/launchContentCards"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/launchContentCardsButton" />
+    <Button
+        android:text="@string/addNewInAppMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/addInAppMessageButton" />
+    <Button
+        android:text="@string/dataFlush"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/dataFlushButton" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/wipeDataButton"
+        android:text="Wipe Data" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/enableSDKButton"
+        android:text="Enable SDK" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/disableSDKButton"
+        android:text="Disable SDK" />
+</LinearLayout>

@@ -5,15 +5,17 @@ using Android.OS;
 using Android.Views;
 using Android.Widget;
 
-using Com.Appboy.UI;
-using Com.Appboy.Enums;
-using Com.Appboy.Models.Outgoing;
+using Com.Braze.UI;
+using Com.Braze.Enums;
+using Com.Braze.Models.Outgoing;
 using Com.Braze;
 using Com.Braze.Enums.Inappmessage;
 using Com.Braze.Push;
 using Com.Braze.Models.Inappmessage;
 using Com.Braze.UI.Contentcards;
 using Com.Braze.UI.Inappmessage;
+using Com.Braze.Models;
+using Com.Braze.Support;
 
 namespace com.appboy.xamarinsample
 {
@@ -26,6 +28,8 @@ namespace com.appboy.xamarinsample
         return null;
       }
       BrazeFirebaseMessagingService brazeFirebaseMessagingService = new BrazeFirebaseMessagingService();
+      System.Collections.Generic.IList<FeatureFlag> allFeatureFlags = Braze.GetInstance (Activity).AllFeatureFlags;
+      BrazeLogger.D ("HomeFragment num feature flags", allFeatureFlags.Count.ToString());
 
       View view = inflater.Inflate (Resource.Layout.HomeFragment, container, false);
 
@@ -59,48 +63,6 @@ namespace com.appboy.xamarinsample
         Braze.GetInstance(Activity).LogPurchase("myProduct", "USD", new Java.Math.BigDecimal(3.50));
       };
 
-      // Social
-      view.FindViewById<Button> (Resource.Id.trackSocialDataButton).Click += delegate {
-
-        /*
-           FacebookUser(
-            String facebookId,
-            String firstName,
-            String lastName,
-            String email,
-            String bio,
-            String cityName,
-            // Gender is an Appboy enum.
-            // Specify either Gender.MALE or Gender.FEMALE.
-            Gender gender,
-            Integer numberOfFriends,
-            // Names of pages the user likes.
-            Collection<String> likes,
-            // mm/dd/yyyy format.
-            String birthday
-          )
-        **/
-        FacebookUser facebookUser = new FacebookUser("708379", "Test", "User", "test@appboy.com", "Test",
-          "Testtown", Gender.Male, new Java.Lang.Integer(100), new String[]{"Cats", "Dogs"}, "06/17/1987");
-        Braze.GetInstance(Activity).CurrentUser.SetFacebookData(facebookUser);
-
-        /*
-        TwitterUser(
-          Integer twitterUserId,
-          String twitterHandle,
-          String name,
-          String description,
-          Integer followerCount,
-          Integer followingCount,
-          Integer tweetCount,
-          String profileImageUrl
-        )
-        **/
-        TwitterUser twitterUser = new TwitterUser(99, "Test", "User", "Tester",  new Java.Lang.Integer(100), new Java.Lang.Integer(100), 
-          new Java.Lang.Integer(100), "https://si0.twimg.com/profile_images/2685532587/fa47382ad67a0135acc62d4c6b49dbdc_bigger.jpeg");
-        Braze.GetInstance(Activity).CurrentUser.SetTwitterData(twitterUser);
-      };
-
       // Content Cards
       view.FindViewById<Button> (Resource.Id.launchContentCardsButton).Click += delegate {
         FragmentTransaction fragmentTransaction = Activity.SupportFragmentManager.BeginTransaction ();
@@ -113,7 +75,7 @@ namespace com.appboy.xamarinsample
       // Feed
       view.FindViewById<Button> (Resource.Id.launchNewsFeedButton).Click += delegate {
         FragmentTransaction fragmentTransaction = Activity.SupportFragmentManager.BeginTransaction();
-        AppboyFeedFragment feedFragment = new AppboyFeedFragment();
+        BrazeFeedFragment feedFragment = new BrazeFeedFragment();
         fragmentTransaction.Replace(Resource.Id.root, feedFragment, feedFragment.Class.ToString());
         fragmentTransaction.AddToBackStack(feedFragment.Class.ToString());
         fragmentTransaction.Commit();   

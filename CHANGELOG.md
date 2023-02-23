@@ -1,3 +1,10 @@
+## 1.27.0
+
+##### Added
+- Added `BrazePlatform.BrazeAndroidBinding` which introduces .NET-6 framework support for MAUI.
+- Updated the Android binding to use [Braze Android SDK 24.2.0](https://github.com/Appboy/appboy-android-sdk/blob/master/CHANGELOG.md#2420).
+- Added support for the upcoming Braze Feature Flags product.
+
 ## 1.26.0
 
 ##### Breaking

@@ -2,8 +2,8 @@
 using Android.App;
 using Android.Runtime;
 
-using Com.Appboy;
-using Com.Appboy.Support;
+using Com.Braze;
+using Com.Braze.Support;
 
 namespace TestAppXamarinForms.Droid
 {
@@ -16,8 +16,8 @@ namespace TestAppXamarinForms.Droid
 
     public override void OnCreate ()
     {
-      AppboyLogger.LogLevel = 2;
-      RegisterActivityLifecycleCallbacks (new AppboyLifecycleCallbackListener ());
+      BrazeLoggger.LogLevel = 2;
+      RegisterActivityLifecycleCallbacks (new BrazeLifecycleCallbackListener ());
     }
   }
 }

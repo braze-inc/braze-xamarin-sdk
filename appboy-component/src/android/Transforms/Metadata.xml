@@ -1,6 +1,6 @@
 ﻿<metadata>
   <!-- The mapping was throwing errors in each of the following, so we just remove them. They are not needed for a fully featured integration -->
-  <remove-node path="/api/package[@name='com.appboy.ui.widget']" />
+  <remove-node path="/api/package[@name='com.braze.ui.widget']" />
   <remove-node path="/api/package[@name='com.braze.ui.contentcards.adapters']/class[@name='ContentCardAdapter']" />
   <remove-node path="/api/package[@name='com.braze.ui.inappmessage.listeners']/interface[@name='TouchAwareSwipeDismissTouchListener.ITouchListener']" />
   <remove-node path="/api/package[@name='com.braze.ui.inappmessage.factories']" />

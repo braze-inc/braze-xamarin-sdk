@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0-android33.0</TargetFramework>
+    <SupportedOSPlatformVersion>21</SupportedOSPlatformVersion>
+    <OutputType>Exe</OutputType>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationId>com.braze.xamarinnet6</ApplicationId>
+    <ApplicationVersion>1</ApplicationVersion>
+    <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+<WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' " />
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Kotlin.StdLib" Version="1.8.0.1" />
+    <PackageReference Include="Xamarin.KotlinX.Coroutines.Android" Version="1.6.4.2" />
+    <PackageReference Include="Xamarin.Firebase.Messaging" Version="123.1.1" />
+    <PackageReference Include="Xamarin.AndroidX.SwipeRefreshLayout" Version="1.1.0.11" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Xamarin.Firebase.Messaging" />
+    <None Remove="Xamarin.AndroidX.Fragment" />
+    <None Remove="Xamarin.AndroidX.SwipeRefreshLayout" />
+    <None Remove="BrazeAndroidBinding" />
+    <None Remove="Xamarin.AndroidX.AppCompat" />
+    <None Remove="BrazePlatform.BrazeAndroidBinding" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\src\androidnet6\BrazeAndroidNet6Binding\BrazeAndroidBinding.csproj" />
+  </ItemGroup>
+</Project>
