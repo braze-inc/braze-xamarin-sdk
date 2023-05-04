@@ -42,3 +42,5 @@ build
 # Visual Studio
 **/.vs
 *.code-workspace
+appboy-component/src/BrazeBinding.ios/BrazeBinding.ios/.idea
+appboy-component/lib/ios-unified
