@@ -133,7 +133,7 @@ namespace TestApp.XamariniOS
         {
           Message = "This is a full",
           Duration = 10,
-          ImageURI = new NSUrl("https://raw.githubusercontent.com/Appboy/appboy-xamarin-bindings/master/braze-logo.png")
+          ImageURI = new NSUrl("https://raw.githubusercontent.com/braze-inc/braze-xamarin-sdk/master/braze-logo.png")
         };
         Appboy.SharedInstance.InAppMessageController.AddInAppMessage(full);
       }

@@ -1,3 +1,10 @@
+## 2.0.0
+
+> Starting with this release, this SDK will use [Semantic Versioning](https://semver.org/).
+
+##### Breaking
+- Updated the Android binding to use [Braze Android SDK 26.3.0](https://github.com/braze-inc/braze-android-sdk/blob/master/CHANGELOG.md#2630).
+
 ## 1.27.0
 
 ##### Added

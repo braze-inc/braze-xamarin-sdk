@@ -1,6 +1,6 @@
-![Braze Logo](https://github.com/Appboy/appboy-xamarin-bindings/blob/master/braze-logo.png)
+![Braze Logo](https://github.com/braze-inc/braze-xamarin-sdk/blob/master/braze-logo.png)
 
-# Xamarin Bindings SDK
+# Xamarin SDK
 
 Successful marketing automation is essential to the future of your mobile app. Braze helps you engage your users beyond the download. Visit the following links for details and we'll have you up and running in no time!
 

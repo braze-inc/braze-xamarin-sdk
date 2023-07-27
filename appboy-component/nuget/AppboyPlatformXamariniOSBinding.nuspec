@@ -2,15 +2,15 @@
 <package >
   <metadata>
     <id>AppboyPlatformXamariniOSBinding</id>
-    <version>1.27.0</version>
+    <version>2.0.0</version>
     <authors>Braze</authors>
     <owners>Braze</owners>
-    <projectUrl>https://github.com/Appboy/appboy-xamarin-bindings</projectUrl>
+    <projectUrl>https://github.com/braze-inc/braze-xamarin-sdk</projectUrl>
     <license type="file">LICENSE.txt</license>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Braze Xamarin iOS Binding</description>
     <releaseNotes></releaseNotes>
-    <copyright>Copyright 2022</copyright>
+    <copyright>Copyright 2023</copyright>
     <tags>Braze Appboy</tags>
   </metadata>
   <files>
