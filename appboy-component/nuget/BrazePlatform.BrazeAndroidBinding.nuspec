@@ -27,8 +27,8 @@
   <files>
     <file src="../src/androidnet6/BrazeAndroidNet6Binding/bin/Debug/net6.0-android33.0/BrazeAndroidBinding.dll" target="lib/net6.0-android33.0/BrazeAndroidBinding.dll" />
     <file src="../src/androidnet6/BrazeAndroidNet6Binding/bin/Debug/net6.0-android33.0/BrazeAndroidBinding.xml" target="lib/net6.0-android33.0/BrazeAndroidBinding.xml" />
-    <file src="../src/androidnet6/BrazeAndroidNet6Binding/android-sdk-base-26.3.0.aar" target="lib/net6.0-android33.0/android-sdk-base-26.3.0.aar" />
-    <file src="../src/androidnet6/BrazeAndroidNet6Binding/android-sdk-ui-26.3.0.aar" target="lib/net6.0-android33.0/android-sdk-ui-26.3.0.aar" />
+    <file src="../src/androidnet6/BrazeAndroidNet6Binding/android-sdk-base-26.3.2.aar" target="lib/net6.0-android33.0/android-sdk-base-26.3.2.aar" />
+    <file src="../src/androidnet6/BrazeAndroidNet6Binding/android-sdk-ui-26.3.2.aar" target="lib/net6.0-android33.0/android-sdk-ui-26.3.2.aar" />
     <file src="../../Public/braze-logo.png" target="images/" />
     <file src="../../Public/LICENSE.txt" target="" />
   </files>
