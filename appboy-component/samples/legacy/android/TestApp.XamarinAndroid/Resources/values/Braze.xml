@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <!-- General configuration -->
+  <!-- The API key is not shown to the user and thus we don't require that it be translated. -->
+  <string translatable="false" name="com_braze_api_key">94589301-2ebd-4cb4-91ed-aa8dbc0472ed</string>
+  <string translatable="false" name="com_braze_server_target">STAGING</string>
+  <!-- To disable automatic flushing in any of these network conditions, simply set the value to -1. To turn off
+      all automatic data flushing, set all three intervals to -1. When automatic flushing is disabled, you can use
+      IAppboy.RequestImmediateDataFlush to manually flush analytics data to the server. Note, however, that any
+      refreshes of Content Cards, In-App Messages, or the News Feed will automatically flush your analytics data as well. -->
+  <!-- On GPRS and EDGE, allow a flush request up to every 30 seconds. (default is 60)  -->
+  <integer name="com_braze_data_flush_interval_bad_network">30</integer>
+  <!-- With a 3G connection, allow a flush request up to every 15 seconds. (default is 30) -->
+  <integer name="com_braze_data_flush_interval_good_network">15</integer>
+  <!-- If we're on 4G or Wifi, allow a flush request up to every 10 seconds. (default is 10) -->
+  <integer name="com_braze_data_flush_interval_great_network">10</integer>
+
+  <!-- The length of time before a session times out in seconds. The session manager will "re-open"
+  otherwise closed sessions if the call to StartSession comes within this interval. (default is 10) -->
+  <integer name="com_braze_session_timeout">10</integer>
+  
+  <!-- This boolean sets whether the read/unread visual indicator at the top right of newsfeed cards
+      on or off. -->
+  <bool name="com_braze_newsfeed_unread_visual_indicator_on">true</bool>
+
+  <!-- This boolean sets whether Appboy will automatically collect location (if the user permits).  If set to true,
+  location will not be set for the user unless integrating apps manually call setUserLastKnownLocation on the AppboyUser.
+   -->
+  <bool name="com_braze_disable_location_collection">false</bool>
+  <bool name="com_braze_handle_push_deep_links_automatically">true</bool>
+
+  <string-array name="com_braze_internal_sdk_metadata">
+   <item>XAMARIN</item>
+  </string-array>
+</resources>

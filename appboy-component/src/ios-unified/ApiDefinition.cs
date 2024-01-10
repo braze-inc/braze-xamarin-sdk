@@ -256,8 +256,8 @@ namespace AppboyPlatformXamariniOSBinding
 
 		// -(BOOL)userNotificationWasSentFromAppboy:(UNNotificationResponse * _Nonnull)response __attribute__((deprecated("Use [ABKPushUtils isAppboyUserNotification:] instead."))) __attribute__((availability(ios, introduced=10.0)));
 		[iOS (10,0)]
-		[Export ("userNotificationWasSentFromAppboy:")]
-		bool UserNotificationWasSentFromAppboy (UNNotificationResponse response);
+    [Export ("userNotificationWasSentFromAppboy:")]
+        bool UserNotificationWasSentFromAppboy (UNNotificationResponse response);
 
 		// -(BOOL)pushNotificationWasSentFromAppboy:(NSDictionary * _Nonnull)options __attribute__((deprecated("Use [ABKPushUtils isAppboyRemoteNotification:] instead.")));
 		[Export ("pushNotificationWasSentFromAppboy:")]

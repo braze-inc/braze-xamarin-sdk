@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net7.0-ios</TargetFrameworks>
+
+		<OutputType>Exe</OutputType>
+		<UseMaui>true</UseMaui>
+		<SingleProject>true</SingleProject>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>true</ImplicitUsings>
+
+		<!-- App Identifier -->
+		<ApplicationTitle>BrazeiOSMauiSampleApp</ApplicationTitle>
+		<ApplicationId>com.braze.BrazeiOSMauiSampleApp</ApplicationId>
+		<ApplicationIdGuid>38a0e2f7-8154-4ac3-b3eb-0a90679a4fe0</ApplicationIdGuid>
+
+		<!-- Versions -->
+		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+		<ApplicationVersion>1</ApplicationVersion>
+		<SupportedOSPlatformVersion>11.0</SupportedOSPlatformVersion>
+	</PropertyGroup>
+
+	<PropertyGroup>
+	  <CreatePackage>false</CreatePackage>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\..\..\src\iosnet6\BrazeiOSNet6Binding\BrazeiOSBinding.csproj" />
+	</ItemGroup>
+</Project>

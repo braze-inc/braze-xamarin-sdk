@@ -10,4 +10,54 @@
   <remove-node path="/api/package[@name='com.braze.ui.inappmessage.views']/class[@name='InAppMessageFullView']" />
   <remove-node path="/api/package[@name='com.braze.ui.inappmessage']/class[@name='InAppMessageManagerBase']/method[@name='setCustomControlInAppMessageManagerListener']" />
   <remove-node path="/api/package[@name='com.braze.ui.inappmessage.views']/class[@name='InAppMessageImageView']" />
+
+  <!-- If a set function has the rest of the name that's the same as a variable, Xamarin mistakenly hides it, so force it public here. -->
+  <attr
+      path="/api/package[@name='com.braze.ui.inappmessage']/class[@name='InAppMessageManagerBase']/method[@name='setCustomControlInAppMessageManagerListener']"
+      name="visibility">public
+  </attr>
+  <attr
+      path="/api/package[@name='com.braze.ui.inappmessage']/class[@name='InAppMessageManagerBase']/method[@name='setCustomHtmlInAppMessageActionListener']"
+      name="visibility">public
+  </attr>
+  <attr
+      path="/api/package[@name='com.braze.ui.inappmessage']/class[@name='InAppMessageManagerBase']/method[@name='setCustomInAppMessageAnimationFactory']"
+      name="visibility">public
+  </attr>
+  <attr
+      path="/api/package[@name='com.braze.ui.inappmessage']/class[@name='InAppMessageManagerBase']/method[@name='setCustomInAppMessageManagerListener']"
+      name="visibility">public
+  </attr>
+  <attr
+      path="/api/package[@name='com.braze.ui.inappmessage']/class[@name='InAppMessageManagerBase']/method[@name='setCustomInAppMessageViewFactory']"
+      name="visibility">public
+  </attr>
+  <attr
+      path="/api/package[@name='com.braze.ui.inappmessage']/class[@name='InAppMessageManagerBase']/method[@name='setCustomInAppMessageViewWrapperFactory']"
+      name="visibility">public
+  </attr>
+  <attr
+      path="/api/package[@name='com.braze.ui.inappmessage.listeners']/class[@name='TouchAwareSwipeDismissTouchListener']/method[@name='setTouchListener']"
+      name="visibility">public
+  </attr>
+  <attr
+      path="/api/package[@name='com.braze.ui.inappmessage.utils']/class[@name='InAppMessageWebViewClient']/method[@name='setWebViewClientStateListener']"
+      name="visibility">public
+  </attr>
+  <attr
+      path="/api/package[@name='com.braze.ui.inappmessage.views']/class[@name='InAppMessageHtmlBaseView']/method[@name='setInAppMessageWebViewClient']"
+      name="visibility">public
+  </attr>
+  <attr
+      path="/api/package[@name='com.braze.ui.inappmessage.views']/class[@name='InAppMessageImageView']/method[@name='setAspectRatio']"
+      name="visibility">public
+  </attr>
+  <attr
+      path="/api/package[@name='com.braze']/class[@name='BrazeActivityLifecycleCallbackListener']/method[@name='setInAppMessagingRegistrationBlocklist']"
+      name="visibility">public
+  </attr>
+  <attr
+      path="/api/package[@name='com.braze']/class[@name='BrazeActivityLifecycleCallbackListener']/method[@name='setSessionHandlingBlocklist']"
+      name="visibility">public
+  </attr>
 </metadata>

@@ -1,3 +1,24 @@
+## 3.0.0
+
+#### Breaking
+- The NuGet package has been renamed from `AppboyPlatformXamariniOSBinding` to [`BrazePlatform.BrazeiOSBinding`](https://www.nuget.org/packages/BrazePlatform.BrazeiOSBinding/).
+  - To use the updated package, replace any instances of `using AppboyPlatformXamariniOSBinding;` with:
+  ```
+  using Braze;
+  ```
+- Updated the Android binding from [Braze Android SDK 26.3.2 to 29.0.1](https://github.com/braze-inc/braze-android-sdk/compare/v26.3.1...v29.0.1#diff-06572a96a58dc510037d5efa622f9bec8519bc1beab13c9f251e97e657a9d4ed).
+
+##### Fixed
+- Fixed an issue where some Android `set` methods were being hidden by the Xamarin framework.
+
+##### Added
+- Added support for .NET 6 (or newer) and support for projects using [.NET MAUI](https://learn.microsoft.com/en-us/dotnet/maui/what-is-maui?view=net-maui-8.0).
+  - For a reference iOS implementation, see `BrazeiOSMauiSampleApp.sln`.
+- Updated the iOS binding from [Braze iOS SDK 4.4.1 to 4.6.0](https://github.com/Appboy/appboy-ios-sdk/compare/4.4.1...4.6.0#diff-06572a96a58dc510037d5efa622f9bec8519bc1beab13c9f251e97e657a9d4ed).
+  - The underlying iOS assets have been updated to use XCFrameworks:
+    - `Appboy_iOS_SDK.framework` -> `Appboy_iOS_SDK.xcframework`
+    - `SDWebImage.framework` -> `SDWebImage.xcframework`
+
 ## 2.0.1
 
 ##### Fixed
@@ -13,7 +34,8 @@
 ## 1.27.0
 
 ##### Added
-- Added `BrazePlatform.BrazeAndroidBinding` which introduces .NET-6 framework support for MAUI.
+- Added `BrazePlatform.BrazeAndroidBinding` which introduces .NET 6+ framework support for MAUI.
+  - This package is available [here on Nuget](https://www.nuget.org/packages/BrazePlatform.BrazeAndroidBinding/).
 - Updated the Android binding to use [Braze Android SDK 24.2.0](https://github.com/Appboy/appboy-android-sdk/blob/master/CHANGELOG.md#2420).
 
 ## 1.26.0

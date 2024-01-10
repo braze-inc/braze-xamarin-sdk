@@ -1,0 +1,63 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp.XamarinAndroid", "TestApp.XamarinAndroid\TestApp.XamarinAndroid.csproj", "{3C7ED4C3-81AB-4492-8B0A-0DB7777445CB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppboyPlatform.XamarinAndroidBinding", "..\..\..\src\android\AppboyPlatform.XamarinAndroidBinding.csproj", "{9038A212-68E1-4C7A-B029-94F5C8FE76E9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppboyPlatform.AndroidCore", "..\..\..\src\android-core\AppboyPlatform.AndroidCore\AppboyPlatform.AndroidCore.csproj", "{91B92A4E-E8E1-4F4E-B55F-02141C2CB5F4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3C7ED4C3-81AB-4492-8B0A-0DB7777445CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C7ED4C3-81AB-4492-8B0A-0DB7777445CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C7ED4C3-81AB-4492-8B0A-0DB7777445CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C7ED4C3-81AB-4492-8B0A-0DB7777445CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9038A212-68E1-4C7A-B029-94F5C8FE76E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9038A212-68E1-4C7A-B029-94F5C8FE76E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9038A212-68E1-4C7A-B029-94F5C8FE76E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9038A212-68E1-4C7A-B029-94F5C8FE76E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91B92A4E-E8E1-4F4E-B55F-02141C2CB5F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91B92A4E-E8E1-4F4E-B55F-02141C2CB5F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91B92A4E-E8E1-4F4E-B55F-02141C2CB5F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91B92A4E-E8E1-4F4E-B55F-02141C2CB5F4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		Policies = $0
+		$0.TextStylePolicy = $1
+		$1.TabWidth = 2
+		$1.IndentWidth = 2
+		$1.scope = text/x-csharp
+		$1.TabsToSpaces = True
+		$0.CSharpFormattingPolicy = $2
+		$2.AfterDelegateDeclarationParameterComma = True
+		$2.scope = text/x-csharp
+		$2.IndentSwitchSection = False
+		$2.NewLinesForBracesInProperties = False
+		$2.NewLinesForBracesInAccessors = False
+		$2.NewLinesForBracesInAnonymousMethods = False
+		$2.NewLinesForBracesInControlBlocks = False
+		$2.NewLinesForBracesInAnonymousTypes = False
+		$2.NewLinesForBracesInObjectCollectionArrayInitializers = False
+		$2.NewLinesForBracesInLambdaExpressionBody = False
+		$2.NewLineForElse = False
+		$2.NewLineForCatch = False
+		$2.NewLineForFinally = False
+		$2.NewLineForMembersInObjectInit = False
+		$2.NewLineForMembersInAnonymousTypes = False
+		$2.NewLineForClausesInQuery = False
+		$2.SpacingAfterMethodDeclarationName = True
+		$2.SpaceAfterMethodCallName = True
+		$2.SpaceBeforeOpenSquareBracket = True
+		$0.DotNetNamingPolicy = $3
+		$0.TextStylePolicy = $4
+		$4.TabWidth = 2
+		$4.IndentWidth = 2
+		$4.scope = text/plain
+		$4.TabsToSpaces = True
+	EndGlobalSection
+EndGlobal

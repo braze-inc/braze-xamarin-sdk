@@ -1,0 +1,20 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Target Name="BrazeiOSBindingAddXCFrameworks" BeforeTargets="BeforeCompile">
+         <PropertyGroup>
+            <BindingResources>$(MSBuildThisFileDirectory)../../res/ios</BindingResources>
+        </PropertyGroup>
+
+        <ItemGroup>
+            <NativeReference Include="$(BindingResources)/Appboy_iOS_SDK.xcframework">
+                <Kind>Framework</Kind>
+                <ForceLoad>True</ForceLoad>
+                <SmartLink>False</SmartLink>
+            </NativeReference>
+            <NativeReference Include="$(BindingResources)/SDWebImage.xcframework">
+                <Kind>Framework</Kind>
+                <ForceLoad>True</ForceLoad>
+                <SmartLink>False</SmartLink>
+            </NativeReference>
+        </ItemGroup>
+    </Target>
+</Project>

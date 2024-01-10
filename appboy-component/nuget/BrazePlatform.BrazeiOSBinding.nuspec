@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package>
+  <metadata>
+    <id>BrazePlatform.BrazeiOSBinding</id>
+    <version>3.0.0</version>
+    <authors>Braze</authors>
+    <owners>Braze</owners>
+    <projectUrl>https://github.com/braze-inc/braze-xamarin-sdk</projectUrl>
+    <license type="file">LICENSE.txt</license>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Braze Xamarin iOS .NET-6 Binding</description>
+    <releaseNotes></releaseNotes>
+    <copyright>Copyright 2023</copyright>
+    <tags>Braze Appboy</tags>
+    <dependencies>
+      <group targetFramework="net6.0-ios11.0" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="../src/iosnet6/BrazeiOSNet6Binding/bin/Debug/net6.0-ios11.0/BrazeiOSBinding.dll" target="lib/net6.0-ios11.0" />
+    <file src="../src/iosnet6/BrazeiOSNet6Binding/bin/Debug/net6.0-ios11.0/BrazeiOSBinding.pdb" target="lib/net6.0-ios11.0" />
+    <file src="../src/iosnet6/BrazeiOSNet6Binding/bin/Debug/net6.0-ios11.0/BrazeiOSBinding.resources/**/*" target="res/ios" />
+    <file src="../src/iosnet6/BrazePlatform.BrazeiOSBinding.targets" target="build/net6.0-ios11.0/" />
+    <file src="../../Public/braze-logo.png" target="images/" />
+    <file src="../../Public/LICENSE.txt" target="" />
+  </files>
+</package>

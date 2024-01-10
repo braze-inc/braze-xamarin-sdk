@@ -22,6 +22,15 @@ contain:
 - samples: Xamarin applications that show how to use the bindings to access the Braze feature set.
 - nuget: Nuspec files for our Xamarin Nuget packages.
 
+## Versioning
+
+| Binding file name | Supported Xamarin Frameworks | Native Braze framework | Braze Xamarin SDK version|
+|-|-|-|-|
+|`BrazeAndroidBinding.sln`|.NET 6+ |Android SDK 24.2.0+|1.27.0+
+|`AppboyPlatform.XamarinAndroidBinding.sln`|Xamarin.Android,<br/>Xamarin.Forms,<br/>.NET 5 and before| Android SDK 23.3.0 and before| 1.26.0 and before|
+|`BrazeiOSBinding.sln`|.NET 6+|`Appboy_iOS_SDK.xcframework` version 4.6.0+|1.28.0+
+|`AppboyPlatformXamariniOSBinding.sln`|Xamarin.iOS,<br/>Xamarin.Forms,<br/>.NET 5 and before|`Appboy_iOS_SDK.framework` version 4.4.1 and before| 1.27.0 and before
+
 ## Questions?
 
 If you have questions, please contact [support@braze.com](mailto:support@braze.com).

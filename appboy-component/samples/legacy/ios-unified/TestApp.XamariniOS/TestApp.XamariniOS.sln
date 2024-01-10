@@ -1,0 +1,59 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp.XamariniOS", "TestApp.XamariniOS.csproj", "{8A824FB1-35EA-4119-8E01-0382BB264E04}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|iPhoneSimulator = Debug|iPhoneSimulator
+		Release|iPhoneSimulator = Release|iPhoneSimulator
+		Debug|iPhone = Debug|iPhone
+		Release|iPhone = Release|iPhone
+		Ad-Hoc|iPhone = Ad-Hoc|iPhone
+		AppStore|iPhone = AppStore|iPhone
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8A824FB1-35EA-4119-8E01-0382BB264E04}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{8A824FB1-35EA-4119-8E01-0382BB264E04}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{8A824FB1-35EA-4119-8E01-0382BB264E04}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{8A824FB1-35EA-4119-8E01-0382BB264E04}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+		{8A824FB1-35EA-4119-8E01-0382BB264E04}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{8A824FB1-35EA-4119-8E01-0382BB264E04}.Debug|iPhone.Build.0 = Debug|iPhone
+		{8A824FB1-35EA-4119-8E01-0382BB264E04}.Release|iPhone.ActiveCfg = Release|iPhone
+		{8A824FB1-35EA-4119-8E01-0382BB264E04}.Release|iPhone.Build.0 = Release|iPhone
+		{8A824FB1-35EA-4119-8E01-0382BB264E04}.Ad-Hoc|iPhone.ActiveCfg = Ad-Hoc|iPhone
+		{8A824FB1-35EA-4119-8E01-0382BB264E04}.Ad-Hoc|iPhone.Build.0 = Ad-Hoc|iPhone
+		{8A824FB1-35EA-4119-8E01-0382BB264E04}.AppStore|iPhone.ActiveCfg = AppStore|iPhone
+		{8A824FB1-35EA-4119-8E01-0382BB264E04}.AppStore|iPhone.Build.0 = AppStore|iPhone
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		Policies = $0
+		$0.TextStylePolicy = $1
+		$1.TabWidth = 2
+		$1.IndentWidth = 2
+		$1.inheritsSet = VisualStudio
+		$1.inheritsScope = text/plain
+		$1.scope = text/x-csharp
+		$0.CSharpFormattingPolicy = $2
+		$2.IndentSwitchSection = True
+		$2.NewLinesForBracesInProperties = True
+		$2.NewLinesForBracesInAccessors = True
+		$2.NewLinesForBracesInAnonymousMethods = True
+		$2.NewLinesForBracesInControlBlocks = True
+		$2.NewLinesForBracesInAnonymousTypes = True
+		$2.NewLinesForBracesInObjectCollectionArrayInitializers = True
+		$2.NewLinesForBracesInLambdaExpressionBody = True
+		$2.NewLineForElse = True
+		$2.NewLineForCatch = True
+		$2.NewLineForFinally = True
+		$2.NewLineForMembersInObjectInit = True
+		$2.NewLineForMembersInAnonymousTypes = True
+		$2.NewLineForClausesInQuery = True
+		$2.SpacingAfterMethodDeclarationName = False
+		$2.SpaceAfterMethodCallName = False
+		$2.SpaceBeforeOpenSquareBracket = False
+		$2.inheritsSet = Mono
+		$2.inheritsScope = text/x-csharp
+		$2.scope = text/x-csharp
+	EndGlobalSection
+EndGlobal
