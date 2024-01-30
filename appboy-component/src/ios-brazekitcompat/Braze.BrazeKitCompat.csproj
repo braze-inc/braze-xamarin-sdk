@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net7.0-ios11.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>true</ImplicitUsings>
+    <IsBindingProject>true</IsBindingProject>
+    <SupportedOSPlatformVersion>11.0</SupportedOSPlatformVersion>
+  </PropertyGroup>
+
+  <Target Name="Check XCFramework" BeforeTargets="_GenerateBindings">
+    <Exec 
+      Command="[[ ! -d 'BrazeKitCompat.xcframework' ]] &amp;&amp; ../scripts/download-xcframeworks.sh || ../scripts/check-xcframeworks.sh" 
+      Condition=" '$(OS)' != 'Windows_NT' " 
+    />
+    <Exec 
+      Command="if (!(Test-Path 'BrazeKitCompat.xcframework')) { ..\scripts\download-xcframeworks.ps1 } else { ..\scripts\check-xcframeworks.ps1 }" 
+      Condition=" '$(OS)' == 'Windows_NT' " 
+    />
+  </Target>
+
+  <ItemGroup>
+    <NativeReference Include="BrazeKitCompat.xcframework">
+      <Kind>Framework</Kind>
+      <ForceLoad>True</ForceLoad>
+      <SmartLink>False</SmartLink>
+    </NativeReference>
+    <ProjectReference Include="..\ios-brazekit\Braze.BrazeKit.csproj" />
+    <ProjectReference Include="..\ios-brazelocation\Braze.BrazeLocation.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ObjcBindingApiDefinition Include="ApiDefinitions.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
+    <ObjcBindingCoreSource Include="StructsAndEnums.cs" />
+  </ItemGroup>
+</Project>

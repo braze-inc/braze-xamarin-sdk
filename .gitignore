@@ -42,3 +42,19 @@ build
 # Visual Studio
 **/.vs
 *.code-workspace
+
+# iOS XCFrameworks (downloaded on demand)
+appboy-component/src/ios-*/**/BrazeKit.xcframework
+appboy-component/src/ios-*/**/BrazeLocation.xcframework
+appboy-component/src/ios-*/**/BrazeUI.xcframework
+appboy-component/src/ios-*/**/BrazeKitCompat.xcframework
+appboy-component/src/ios-*/**/BrazeUICompat.xcframework
+appboy-component/src/ios-*/**/SDWebImage.xcframework
+
+# iOS libs (used for building / releasing)
+# - We ignore those libs as they contain XCFrameworks that are way too large to be committed to git
+appboy-component/lib/ios-braze*
+appboy-component/lib/ios-sdwebimage
+
+# Current Swift SDK versions
+appboy-component/src/ios-*/.swift-sdk-version

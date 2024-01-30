@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 25.0.1706.8
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrazeiOSMauiCompatSampleApp", "BrazeiOSMauiCompatSampleApp\BrazeiOSMauiCompatSampleApp.csproj", "{D4E1BE48-F5A3-4812-B013-229C9BB8A07F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Braze.BrazeKitCompat", "..\..\..\src\ios-brazekitcompat\Braze.BrazeKitCompat.csproj", "{5509DFCC-AAF2-45E8-A301-C1A62A8D8729}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Braze.BrazeUICompat", "..\..\..\src\ios-brazeuicompat\Braze.BrazeUICompat.csproj", "{C190E563-1D68-4D7C-9C65-E82ACFE611D2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D4E1BE48-F5A3-4812-B013-229C9BB8A07F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4E1BE48-F5A3-4812-B013-229C9BB8A07F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4E1BE48-F5A3-4812-B013-229C9BB8A07F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4E1BE48-F5A3-4812-B013-229C9BB8A07F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5509DFCC-AAF2-45E8-A301-C1A62A8D8729}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5509DFCC-AAF2-45E8-A301-C1A62A8D8729}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5509DFCC-AAF2-45E8-A301-C1A62A8D8729}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5509DFCC-AAF2-45E8-A301-C1A62A8D8729}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C190E563-1D68-4D7C-9C65-E82ACFE611D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C190E563-1D68-4D7C-9C65-E82ACFE611D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C190E563-1D68-4D7C-9C65-E82ACFE611D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C190E563-1D68-4D7C-9C65-E82ACFE611D2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {22971D23-2904-4438-B033-3B9D01D03403}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 25.0.1706.8
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Braze.BrazeKit", "ios-brazekit\Braze.BrazeKit.csproj", "{E0DE84EC-84C4-4C25-821A-1900ED3DE72E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Braze.BrazeLocation", "ios-brazelocation\Braze.BrazeLocation.csproj", "{B6E46C4F-71F1-43E9-B497-CD8D0E601351}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Braze.BrazeUI", "ios-brazeui\Braze.BrazeUI.csproj", "{A7296603-F872-4114-9841-49EFD705ECB1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Braze.BrazeKitCompat", "ios-brazekitcompat\Braze.BrazeKitCompat.csproj", "{45CAFB6A-8FDA-45D0-BC0F-5D5CEC853361}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Braze.BrazeUICompat", "ios-brazeuicompat\Braze.BrazeUICompat.csproj", "{BEB7D890-14C7-43B4-A78E-EB26DB676227}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Braze.SDWebImage", "ios-sdwebimage\Braze.SDWebImage.csproj", "{5BF51139-1367-4AB0-916E-9AA531E235A1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E0DE84EC-84C4-4C25-821A-1900ED3DE72E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0DE84EC-84C4-4C25-821A-1900ED3DE72E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0DE84EC-84C4-4C25-821A-1900ED3DE72E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0DE84EC-84C4-4C25-821A-1900ED3DE72E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6E46C4F-71F1-43E9-B497-CD8D0E601351}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6E46C4F-71F1-43E9-B497-CD8D0E601351}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6E46C4F-71F1-43E9-B497-CD8D0E601351}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6E46C4F-71F1-43E9-B497-CD8D0E601351}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7296603-F872-4114-9841-49EFD705ECB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7296603-F872-4114-9841-49EFD705ECB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7296603-F872-4114-9841-49EFD705ECB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7296603-F872-4114-9841-49EFD705ECB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45CAFB6A-8FDA-45D0-BC0F-5D5CEC853361}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45CAFB6A-8FDA-45D0-BC0F-5D5CEC853361}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45CAFB6A-8FDA-45D0-BC0F-5D5CEC853361}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45CAFB6A-8FDA-45D0-BC0F-5D5CEC853361}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEB7D890-14C7-43B4-A78E-EB26DB676227}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEB7D890-14C7-43B4-A78E-EB26DB676227}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEB7D890-14C7-43B4-A78E-EB26DB676227}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEB7D890-14C7-43B4-A78E-EB26DB676227}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BF51139-1367-4AB0-916E-9AA531E235A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BF51139-1367-4AB0-916E-9AA531E235A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BF51139-1367-4AB0-916E-9AA531E235A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BF51139-1367-4AB0-916E-9AA531E235A1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E0CD31BB-2913-41B0-B7E5-F3E7C63AF413}
+	EndGlobalSection
+EndGlobal

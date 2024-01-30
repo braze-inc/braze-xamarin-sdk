@@ -24,7 +24,32 @@
 	  <CreatePackage>false</CreatePackage>
 	</PropertyGroup>
 
+	<PropertyGroup>
+	  <CodesignProvision>Automatic</CodesignProvision>
+	  <CodesignKey>iPhone Developer</CodesignKey>
+	  <CodesignEntitlements>Platforms\iOS\Entitlements.plist</CodesignEntitlements>
+	</PropertyGroup>
+
 	<ItemGroup>
-		<ProjectReference Include="..\..\..\..\src\iosnet6\BrazeiOSNet6Binding\BrazeiOSBinding.csproj" />
+		<ProjectReference Include="..\..\..\..\src\ios-brazekit\Braze.BrazeKit.csproj" />
+		<ProjectReference Include="..\..\..\..\src\ios-brazelocation\Braze.BrazeLocation.csproj" />
+		<ProjectReference Include="..\..\..\..\src\ios-brazeui\Braze.BrazeUI.csproj" />
+		<ProjectReference Include="..\..\..\..\src\ios-sdwebimage\Braze.SDWebImage.csproj" />
 	</ItemGroup>
+	<!-- <ItemGroup>
+		<PackageReference Include="Braze.iOS.BrazeKit" Version="*" />
+		<PackageReference Include="Braze.iOS.BrazeLocation" Version="*" />
+		<PackageReference Include="Braze.iOS.BrazeUI" Version="*" />
+		<PackageReference Include="Braze.iOS.SDWebImage" Version="*" />
+	</ItemGroup> -->
+
+	<ItemGroup>
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+		<MauiImage Include="Resources\Images\*" />
+		<MauiImage Update="Resources\Images\dotnet_bot.svg" BaseSize="168,208" />
+		<MauiFont Include="Resources\Fonts\*" />
+		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+	</ItemGroup>
+
 </Project>
