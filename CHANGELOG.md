@@ -1,3 +1,8 @@
+## 4.0.1
+
+##### Fixed
+- Corrected the incorrect dependency versions in the nuspecs of recent iOS libraries.
+
 ## 4.0.0
 
 ##### Breaking
