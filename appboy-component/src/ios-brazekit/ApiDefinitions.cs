@@ -1506,10 +1506,6 @@ namespace BrazeKit
 		[NullAllowed, Export ("brazeLocationProvider", ArgumentSemantic.Strong)]
 		NSObject BrazeLocationProvider { get; set; }
 
-		//  (nonatomic, strong) SWIFT_DEPRECATED_MSG("", "brazeLocationProvider") id brazeLocation __attribute__((deprecated("", "brazeLocationProvider")));
-		[Obsolete("renamed: 'brazeLocationProvider'")]
-		[Export ("brazeLocation", ArgumentSemantic.Strong)]
-		NSObject BrazeLocation { get; set; }
 	}
 
 	// @interface BRZDeviceProperty : NSObject

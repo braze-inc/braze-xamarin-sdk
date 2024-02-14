@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>Braze.iOS.SDWebImage</id>
-    <version>4.0.1</version>
+    <version>4.0.2</version>
     <authors>Braze</authors>
     <owners>Braze</owners>
     <projectUrl>https://github.com/braze-inc/braze-xamarin-sdk</projectUrl>
