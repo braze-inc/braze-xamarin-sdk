@@ -143,6 +143,13 @@ namespace BrazeKit
 	}
 
 	[Native]
+	public enum BRZSessionState : long
+	{
+		Started = 0,
+		Ended = 1
+	}
+
+	[Native]
 	public enum BRZTriggerEvent : long
 	{
 		SessionStart = 0,

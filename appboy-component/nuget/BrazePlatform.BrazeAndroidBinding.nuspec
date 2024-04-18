@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>BrazePlatform.BrazeAndroidBinding</id>
-    <version>4.0.2</version>
+    <version>4.0.3</version>
     <authors>Braze</authors>
     <owners>Braze</owners>
     <projectUrl>https://github.com/braze-inc/braze-xamarin-sdk</projectUrl>
@@ -27,8 +27,8 @@
   <files>
     <file src="../src/androidnet6/BrazeAndroidNet6Binding/bin/Debug/net6.0-android33.0/BrazeAndroidBinding.dll" target="lib/net6.0-android33.0/BrazeAndroidBinding.dll" />
     <file src="../src/androidnet6/BrazeAndroidNet6Binding/bin/Debug/net6.0-android33.0/BrazeAndroidBinding.xml" target="lib/net6.0-android33.0/BrazeAndroidBinding.xml" />
-    <file src="../src/androidnet6/BrazeAndroidNet6Binding/android-sdk-base-30.1.0.aar" target="lib/net6.0-android33.0/android-sdk-base-30.1.0.aar" />
-    <file src="../src/androidnet6/BrazeAndroidNet6Binding/android-sdk-ui-30.1.0.aar" target="lib/net6.0-android33.0/android-sdk-ui-30.1.0.aar" />
+    <file src="../src/androidnet6/BrazeAndroidNet6Binding/android-sdk-base-30.4.0.aar" target="lib/net6.0-android33.0/android-sdk-base-30.4.0.aar" />
+    <file src="../src/androidnet6/BrazeAndroidNet6Binding/android-sdk-ui-30.4.0.aar" target="lib/net6.0-android33.0/android-sdk-ui-30.4.0.aar" />
     <file src="../../Public/braze-logo.png" target="images/" />
     <file src="../../Public/LICENSE.txt" target="" />
   </files>

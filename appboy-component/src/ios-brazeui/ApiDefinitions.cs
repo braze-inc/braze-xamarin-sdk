@@ -60,6 +60,22 @@ namespace BrazeUI
 		[Export ("dismiss")]
 		void Dismiss ();
 	}
+
+	// @interface BRZUIResources : NSObject
+	[BaseType (typeof(NSObject))]
+	interface BRZUIResources
+	{
+		// @property (readonly, nonatomic, strong, class) NSBundle * _Nullable bundle;
+		[Static]
+		[NullAllowed, Export ("bundle", ArgumentSemantic.Strong)]
+		NSBundle Bundle { get; }
+
+		// @property (readonly, copy, nonatomic, class) NSDictionary<NSString *,NSURL *> * _Nonnull acknowledgments;
+		[Static]
+		[Export ("acknowledgments", ArgumentSemantic.Copy)]
+		NSDictionary<NSString, NSUrl> Acknowledgments { get; }
+
+	}
 	// @interface BRZContentCardUIModalViewController : UINavigationController
 	[BaseType (typeof(UINavigationController))]
 	[DisableDefaultCtor]

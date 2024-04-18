@@ -1,3 +1,9 @@
+## 4.0.3
+
+##### Added
+- Updated the Android binding from [Braze Android 30.1.0 to 30.4.0](https://github.com/braze-inc/braze-android-sdk/compare/v30.1.0...v30.4.0#diff-06572a96a58dc510037d5efa622f9bec8519bc1beab13c9f251e97e657a9d4ed).
+- Updated the iOS binding from [Braze Swift SDK 8.0.1 to 8.4.0](https://github.com/braze-inc/braze-swift-sdk/compare/8.0.1...8.4.0#diff-06572a96a58dc510037d5efa622f9bec8519bc1beab13c9f251e97e657a9d4ed).
+
 ## 4.0.2
 
 ##### Added
