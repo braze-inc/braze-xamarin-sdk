@@ -1,3 +1,5 @@
+⚠️ In version 4.0.0, we changed the iOS bridge from AppboyKit, which is written in Objective-C, to the new [Swift SDK](https://github.com/braze-inc/braze-swift-sdk). If you are upgrading from a version below 4.0.0 to a version above 4.0.0, please read [the instructions](https://github.com/braze-inc/braze-xamarin-sdk/blob/master/CHANGELOG.md#400) to ensure a smooth transition and backward compatibility.
+
 ## 4.0.3
 
 ##### Added
@@ -25,6 +27,7 @@
     - **BrazeLocation**: Location library providing support for location analytics and geofence monitoring (nuget: [Braze.iOS.BrazeLocation](https://www.nuget.org/packages/Braze.iOS.BrazeLocation)).
     - **BrazeKitCompat**: Compatibility library with support for pre-4.0.0 APIs (nuget: [Braze.iOS.BrazeKitCompat](https://www.nuget.org/packages/Braze.iOS.BrazeKitCompat)).
     - **BrazeUICompat**: Compatibility library with support for pre-4.0.0 UI APIs (nuget: [Braze.iOS.BrazeUICompat](https://www.nuget.org/packages/Braze.iOS.BrazeUICompat)).
+  - This migration requires re-identifying users. To do so, you must call the `changeUser` method on the Braze instance for non-anonymous users. You can read more about it [here](https://braze-inc.github.io/braze-swift-sdk/documentation/braze/appboy-migration-guide/#Re-identify-users).
   - Refer to the _BrazeiOSMauiSampleApp_ for the new integration, and to _BrazeiOSMauiCompatSampleApp_ for usage of the compatibility modules.
 - Updated the iOS binding to the [Braze Swift SDK 7.6.0](https://github.com/braze-inc/braze-swift-sdk/releases/tag/7.6.0)
 - The iOS binding requires using .NET 7 for compatibility with Xcode 15.
