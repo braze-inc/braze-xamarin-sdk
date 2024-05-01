@@ -31,6 +31,12 @@ contain:
 | `BrazeiOSBinding.sln`                      | .NET 7+                                                   | Swift SDK 7.5.0+                                    | 4.0.0+                    |
 | `AppboyPlatformXamariniOSBinding.sln`      | Xamarin.iOS,<br/>Xamarin.Forms,<br/>.NET 5 and before     | `Appboy_iOS_SDK.framework` version 4.4.1 and before | 1.27.0 and before         |
 
+### Xamarin & Xamarin.Forms
+
+As of May 1, 2024, [Microsoft announced the end of support for Xamarin & Xamarin.Forms](https://dotnet.microsoft.com/en-us/platform/support/policy/xamarin).
+
+The Braze SDK version dropped support for Xamarin & Xamarin.Forms starting with version `4.0.0` and added support for [.NET MAUI](https://learn.microsoft.com/en-us/dotnet/maui/what-is-maui).
+
 ## Questions?
 
 If you have questions, please contact [support@braze.com](mailto:support@braze.com).

@@ -2363,10 +2363,6 @@ namespace BrazeKit
 		[Export ("braze:noMatchingTriggerForEvent:name:properties:")]
 		void Braze (Braze braze, BRZTriggerEvent @event, [NullAllowed] string name, [NullAllowed] NSDictionary<NSString, NSObject> properties);
 
-		// @optional -(void)braze:(Braze * _Nonnull)braze sdkAuthenticationFailedWithError:(BRZSDKAuthenticationError * _Nonnull)error;
-		[Export ("braze:sdkAuthenticationFailedWithError:")]
-		void Braze (Braze braze, BRZSDKAuthenticationError error);
-
 	}
 
 	// @protocol BrazeInAppMessagePresenter
