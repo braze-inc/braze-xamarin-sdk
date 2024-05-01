@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>Braze.iOS.BrazeUI</id>
-    <version>4.0.3</version>
+    <version>4.0.4</version>
     <authors>Braze</authors>
     <owners>Braze</owners>
     <projectUrl>https://github.com/braze-inc/braze-xamarin-sdk</projectUrl>
