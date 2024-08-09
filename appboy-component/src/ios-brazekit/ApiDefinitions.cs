@@ -108,15 +108,6 @@ namespace BrazeKit
 		// -(BRZCancellable * _Nonnull)subscribeToSessionUpdates:(void (^ _Nonnull)(BRZSessionEvent * _Nonnull))update __attribute__((warn_unused_result("")));
 		[Export ("subscribeToSessionUpdates:")]
 		BRZCancellable SubscribeToSessionUpdates (Action<BRZSessionEvent> update);
-		// -(void)deviceIdOnQueue:(dispatch_queue_t _Nonnull)queue completion:(void (^ _Nonnull)(NSString * _Nonnull))completion __attribute__((deprecated("", "deviceId")));
-		[Obsolete("renamed: 'deviceId'")]
-		[Export ("deviceIdOnQueue:completion:")]
-		void DeviceIdOnQueue (DispatchQueue queue, Action<NSString> completion);
-
-		// -(void)deviceIdWithCompletion:(void (^ _Nonnull)(NSString * _Nonnull))completion __attribute__((deprecated("", "deviceId")));
-		[Obsolete("renamed: 'deviceId'")]
-		[Export ("deviceIdWithCompletion:")]
-		void DeviceIdWithCompletion (Action<NSString> completion);
 		// -(void)_requestEnableSDKOnNextAppRun;
 		[Export ("_requestEnableSDKOnNextAppRun")]
 		void _requestEnableSDKOnNextAppRun ();
@@ -217,6 +208,15 @@ namespace BrazeKit
 		// -(void)setAdTrackingEnabled:(BOOL)adTrackingEnabled;
 		[Export ("setAdTrackingEnabled:")]
 		void SetAdTrackingEnabled (bool adTrackingEnabled);
+		// +(void)_prepareForDelayedInitializationWithPushAutomation:(BRZConfigurationPushAutomation * _Nullable)pushAutomation;
+		[Static]
+		[Export ("_prepareForDelayedInitializationWithPushAutomation:")]
+		void _prepareForDelayedInitializationWithPushAutomation ([NullAllowed] BRZConfigurationPushAutomation pushAutomation);
+
+		// +(void)_prepareForDelayedInitialization;
+		[Static]
+		[Export ("_prepareForDelayedInitialization")]
+		void _prepareForDelayedInitialization ();
 		// +(Braze * _Nullable)sharedInstance __attribute__((warn_unused_result(""))) __attribute__((deprecated("BrazeKit does not provide a singleton instance. You are now expected to keep a reference of the Braze instance yourself after initialization.")));
 		[Obsolete("BrazeKit does not provide a singleton instance. You are now expected to keep a reference of the Braze instance yourself after initialization.")]
 		[Static]
@@ -412,485 +412,6 @@ namespace BrazeKit
 		void RequestEnableSDKOnNextAppRun ();
 	}
 
-	// @interface BRZWebViewController : UIViewController <WKNavigationDelegate>
-	[BaseType (typeof(UIViewController))]
-	interface BRZWebViewController : IWKNavigationDelegate
-	{
-		// @property (copy, nonatomic) NSURL * _Nullable url;
-		[NullAllowed, Export ("url", ArgumentSemantic.Copy)]
-		NSUrl Url { get; set; }
-
-		// @property (nonatomic) BOOL animateDismissal;
-		[Export ("animateDismissal")]
-		bool AnimateDismissal { get; set; }
-
-		// @property (copy, nonatomic) void (^ _Nullable)(NSURL * _Nonnull) systemOpenURL;
-		[NullAllowed, Export ("systemOpenURL", ArgumentSemantic.Copy)]
-		Action<NSUrl> SystemOpenURL { get; set; }
-		// -(void)webView:(WKWebView * _Nonnull)webView decidePolicyForNavigationAction:(WKNavigationAction * _Nonnull)navigationAction decisionHandler:(void (^ _Nonnull)(WKNavigationActionPolicy))decisionHandler __attribute__((swift_async("not_swift_private", 3)));
-		[Export ("webView:decidePolicyForNavigationAction:decisionHandler:")]
-		void WebView (WKWebView webView, WKNavigationAction navigationAction, Action<WKNavigationActionPolicy> decisionHandler);
-
-		// -(void)webView:(WKWebView * _Nonnull)webView didFinishNavigation:(WKNavigation * _Null_unspecified)navigation;
-		[Export ("webView:didFinishNavigation:")]
-		void WebView (WKWebView webView, WKNavigation navigation);
-
-		// -(void)webView:(WKWebView * _Nonnull)webView didFailProvisionalNavigation:(WKNavigation * _Null_unspecified)navigation withError:(NSError * _Nonnull)error;
-		[Export ("webView:didFailProvisionalNavigation:withError:")]
-		void WebView (WKWebView webView, WKNavigation navigation, NSError error);
-
-		// -(instancetype _Nonnull)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil __attribute__((objc_designated_initializer));
-		[Export ("initWithNibName:bundle:")]
-		[DesignatedInitializer]
-		NativeHandle Constructor ([NullAllowed] string nibNameOrNil, [NullAllowed] NSBundle nibBundleOrNil);
-	}
-
-	// @interface BRZNotifications : NSObject
-	[BaseType (typeof(NSObject))]
-	[DisableDefaultCtor]
-	interface BRZNotifications
-	{
-		// @property (readonly, copy, nonatomic) NSData * _Nullable deviceToken;
-		[NullAllowed, Export ("deviceToken", ArgumentSemantic.Copy)]
-		NSData DeviceToken { get; }
-
-		// -(BOOL)handleBackgroundNotificationWithUserInfo:(NSDictionary * _Nonnull)userInfo fetchCompletionHandler:(void (^ _Nonnull)(UIBackgroundFetchResult))completionHandler __attribute__((warn_unused_result("")));
-		[Export ("handleBackgroundNotificationWithUserInfo:fetchCompletionHandler:")]
-		bool HandleBackgroundNotificationWithUserInfo (NSDictionary userInfo, Action<UIBackgroundFetchResult> completionHandler);
-
-		// -(BOOL)handleUserNotificationWithResponse:(UNNotificationResponse * _Nonnull)response withCompletionHandler:(void (^ _Nonnull)(void))completionHandler __attribute__((warn_unused_result("")));
-		[Export ("handleUserNotificationWithResponse:withCompletionHandler:")]
-		bool HandleUserNotificationWithResponse (UNNotificationResponse response, Action completionHandler);
-
-		// -(BRZCancellable * _Nonnull)subscribeToUpdates:(void (^ _Nonnull)(BRZNotificationsPayload * _Nonnull))update __attribute__((warn_unused_result("")));
-		[Export ("subscribeToUpdates:")]
-		BRZCancellable SubscribeToUpdates (Action<BRZNotificationsPayload> update);
-
-		// +(BOOL)isBrazeNotification:(NSDictionary * _Nonnull)userInfo __attribute__((warn_unused_result("")));
-		[Static]
-		[Export ("isBrazeNotification:")]
-		bool IsBrazeNotification (NSDictionary userInfo);
-
-		// +(BOOL)isInternalNotification:(NSDictionary * _Nonnull)userInfo __attribute__((warn_unused_result("")));
-		[Static]
-		[Export ("isInternalNotification:")]
-		bool IsInternalNotification (NSDictionary userInfo);
-
-		// -(void)registerDeviceToken:(NSData * _Nonnull)deviceToken;
-		[Export ("registerDeviceToken:")]
-		void RegisterDeviceToken (NSData deviceToken);
-		//  (copy, nonatomic, class) NSSet<UNNotificationCategory *> * _Nonnull categories;
-		[Static]
-		[Export ("categories", ArgumentSemantic.Copy)]
-		NSSet<UNNotificationCategory> Categories { get; set; }
-	}
-
-	// @interface BRZFeatureFlags : NSObject
-	[BaseType (typeof(NSObject))]
-	[DisableDefaultCtor]
-	interface BRZFeatureFlags
-	{
-		// @property (readonly, copy, nonatomic) NSArray<BRZFeatureFlag *> * _Nonnull featureFlags;
-		[Export ("featureFlags", ArgumentSemantic.Copy)]
-		BRZFeatureFlag[] FeatureFlags { get; }
-
-		// -(BRZFeatureFlag * _Nullable)featureFlagWithId:(NSString * _Nonnull)id __attribute__((warn_unused_result("")));
-		[Export ("featureFlagWithId:")]
-		[return: NullAllowed]
-		BRZFeatureFlag FeatureFlagWithId (string id);
-
-		// -(BRZCancellable * _Nonnull)subscribeToUpdates:(void (^ _Nonnull)(NSArray<BRZFeatureFlag *> * _Nonnull))update __attribute__((warn_unused_result("")));
-		[Export ("subscribeToUpdates:")]
-		BRZCancellable SubscribeToUpdates (Action<NSArray<BRZFeatureFlag>> update);
-
-		// -(void)logFeatureFlagImpressionWithId:(NSString * _Nonnull)id;
-		[Export ("logFeatureFlagImpressionWithId:")]
-		void LogFeatureFlagImpressionWithId (string id);
-
-		// -(void)requestRefresh;
-		[Export ("requestRefresh")]
-		void RequestRefresh ();
-
-		// -(void)requestRefreshWithCompletion:(void (^ _Nonnull)(NSArray<BRZFeatureFlag *> * _Nullable, NSError * _Nullable))completion;
-		[Export ("requestRefreshWithCompletion:")]
-		void RequestRefreshWithCompletion (Action<NSArray<BRZFeatureFlag>, NSError> completion);
-	}
-
-	// @interface BRZFeatureFlag : NSObject
-	[BaseType (typeof(NSObject))]
-	interface BRZFeatureFlag: INativeObject
-	{
-		// @property (copy, nonatomic) NSString * _Nonnull identifier;
-		[Export ("identifier")]
-		string Identifier { get; set; }
-
-		// @property (nonatomic) BOOL enabled;
-		[Export ("enabled")]
-		bool Enabled { get; set; }
-
-		// @property (copy, nonatomic) NSDictionary<NSString *,id> * _Nonnull properties;
-		[Export ("properties", ArgumentSemantic.Copy)]
-		NSDictionary<NSString, NSObject> Properties { get; set; }
-
-		// @property (copy, nonatomic) NSString * _Nullable flagTrackingString;
-		[NullAllowed, Export ("flagTrackingString")]
-		string FlagTrackingString { get; set; }
-
-		// -(NSString * _Nullable)stringPropertyForKey:(NSString * _Nonnull)key __attribute__((warn_unused_result("")));
-		[Export ("stringPropertyForKey:")]
-		[return: NullAllowed]
-		string StringPropertyForKey (string key);
-		// @property (readonly, nonatomic) NSUInteger hash;
-		[Export ("hash")]
-		nuint Hash { get; }
-
-		// -(NSData * _Nullable)json __attribute__((warn_unused_result("")));
-		[NullAllowed, Export ("json")]
-		NSData Json { get; }
-
-		// +(instancetype _Nullable)decodingWithJson:(NSData * _Nonnull)json __attribute__((warn_unused_result("")));
-		[Static]
-		[Export ("decodingWithJson:")]
-		[return: NullAllowed]
-		BRZFeatureFlag DecodingWithJson (NSData json);
-		// -(NSNumber * _Nullable)numberPropertyForKey:(NSString * _Nonnull)key __attribute__((warn_unused_result("")));
-		[Export ("numberPropertyForKey:")]
-		[return: NullAllowed]
-		NSNumber NumberPropertyForKey (string key);
-
-		// -(NSNumber * _Nullable)boolPropertyForKey:(NSString * _Nonnull)key __attribute__((warn_unused_result("")));
-		[Export ("boolPropertyForKey:")]
-		[return: NullAllowed]
-		NSNumber BoolPropertyForKey (string key);
-	}
-
-	// @interface BRZNewsFeedCard : NSObject
-	[BaseType (typeof(NSObject))]
-	interface BRZNewsFeedCard: INativeObject
-	{
-		// @property (copy, nonatomic) NSString * _Nonnull identifier;
-		[Export ("identifier")]
-		string Identifier { get; set; }
-
-		// @property (copy, nonatomic) NSURL * _Nullable image;
-		[NullAllowed, Export ("image", ArgumentSemantic.Copy)]
-		NSUrl Image { get; set; }
-
-		// @property (copy, nonatomic) NSString * _Nullable title;
-		[NullAllowed, Export ("title")]
-		string Title { get; set; }
-
-		// @property (copy, nonatomic) NSString * _Nullable cardDescription;
-		[NullAllowed, Export ("cardDescription")]
-		string CardDescription { get; set; }
-
-		// @property (copy, nonatomic) NSString * _Nullable domain;
-		[NullAllowed, Export ("domain")]
-		string Domain { get; set; }
-
-		// @property (copy, nonatomic) NSURL * _Nullable url;
-		[NullAllowed, Export ("url", ArgumentSemantic.Copy)]
-		NSUrl Url { get; set; }
-
-		// @property (nonatomic) BOOL useWebView;
-		[Export ("useWebView")]
-		bool UseWebView { get; set; }
-
-		// @property (copy, nonatomic) NSDictionary<NSString *,id> * _Nonnull extras;
-		[Export ("extras", ArgumentSemantic.Copy)]
-		NSDictionary<NSString, NSObject> Extras { get; set; }
-
-		// @property (nonatomic) BOOL viewed;
-		[Export ("viewed")]
-		bool Viewed { get; set; }
-
-		// @property (nonatomic) NSTimeInterval created;
-		[Export ("created")]
-		double Created { get; set; }
-
-		// @property (nonatomic) NSTimeInterval updated;
-		[Export ("updated")]
-		double Updated { get; set; }
-
-		// @property (nonatomic) NSTimeInterval expires;
-		[Export ("expires")]
-		double Expires { get; set; }
-
-		// @property (nonatomic, strong) BRZNewsFeedCardContext * _Nullable context;
-		[NullAllowed, Export ("context", ArgumentSemantic.Strong)]
-		BRZNewsFeedCardContext Context { get; set; }
-		// @property (readonly, nonatomic) NSUInteger hash;
-		[Export ("hash")]
-		nuint Hash { get; }
-
-		// -(void)logImpressionUsing:(Braze * _Nonnull)braze;
-		[Export ("logImpressionUsing:")]
-		void LogImpressionUsing (Braze braze);
-
-		// -(void)logClickUsing:(Braze * _Nonnull)braze;
-		[Export ("logClickUsing:")]
-		void LogClickUsing (Braze braze);
-		// -(NSData * _Nullable)json __attribute__((warn_unused_result("")));
-		[NullAllowed, Export ("json")]
-		NSData Json { get; }
-
-		// +(instancetype _Nullable)decodingWithJson:(NSData * _Nonnull)json __attribute__((warn_unused_result("")));
-		[Static]
-		[Export ("decodingWithJson:")]
-		[return: NullAllowed]
-		BRZNewsFeedCard DecodingWithJson (NSData json);
-		//  (nonatomic) enum BRZNewsFeedCardType type;
-		[Export ("type", ArgumentSemantic.Assign)]
-		BRZNewsFeedCardType Type { get; set; }
-
-		//  (copy, nonatomic) NSArray<BRZNewsFeedCardCategory *> * _Nonnull categories;
-		[Export ("categories", ArgumentSemantic.Copy)]
-		BRZNewsFeedCardCategory[] Categories { get; set; }
-
-		//  (nonatomic) double imageAspectRatio;
-		[Export ("imageAspectRatio")]
-		double ImageAspectRatio { get; set; }
-	}
-
-	// @interface BRZInAppMessageRaw : NSObject
-	[BaseType (typeof(NSObject))]
-	interface BRZInAppMessageRaw
-	{
-		// @property (copy, nonatomic) NSURL * _Nullable url;
-		[NullAllowed, Export ("url", ArgumentSemantic.Copy)]
-		NSUrl Url { get; set; }
-
-		// @property (nonatomic) BOOL useWebView;
-		[Export ("useWebView")]
-		bool UseWebView { get; set; }
-
-		// @property (copy, nonatomic) NSString * _Nullable message;
-		[NullAllowed, Export ("message")]
-		string Message { get; set; }
-
-		// @property (copy, nonatomic) NSString * _Nullable header;
-		[NullAllowed, Export ("header")]
-		string Header { get; set; }
-
-		// @property (copy, nonatomic) NSURL * _Nullable imageURL;
-		[NullAllowed, Export ("imageURL", ArgumentSemantic.Copy)]
-		NSUrl ImageURL { get; set; }
-
-		// @property (copy, nonatomic) NSString * _Nullable icon;
-		[NullAllowed, Export ("icon")]
-		string Icon { get; set; }
-
-		// @property (copy, nonatomic) NSDictionary<NSString *,BRZInAppMessageRawTheme *> * _Nullable themes;
-		[NullAllowed, Export ("themes", ArgumentSemantic.Copy)]
-		NSDictionary<NSString, BRZInAppMessageRawTheme> Themes { get; set; }
-
-		// @property (nonatomic, strong) BRZInAppMessageRawColor * _Nullable textColor;
-		[NullAllowed, Export ("textColor", ArgumentSemantic.Strong)]
-		BRZInAppMessageRawColor TextColor { get; set; }
-
-		// @property (nonatomic, strong) BRZInAppMessageRawColor * _Nullable headerTextColor;
-		[NullAllowed, Export ("headerTextColor", ArgumentSemantic.Strong)]
-		BRZInAppMessageRawColor HeaderTextColor { get; set; }
-
-		// @property (nonatomic, strong) BRZInAppMessageRawColor * _Nullable iconColor;
-		[NullAllowed, Export ("iconColor", ArgumentSemantic.Strong)]
-		BRZInAppMessageRawColor IconColor { get; set; }
-
-		// @property (nonatomic, strong) BRZInAppMessageRawColor * _Nullable iconBackgroundColor;
-		[NullAllowed, Export ("iconBackgroundColor", ArgumentSemantic.Strong)]
-		BRZInAppMessageRawColor IconBackgroundColor { get; set; }
-
-		// @property (nonatomic, strong) BRZInAppMessageRawColor * _Nullable backgroundColor;
-		[NullAllowed, Export ("backgroundColor", ArgumentSemantic.Strong)]
-		BRZInAppMessageRawColor BackgroundColor { get; set; }
-
-		// @property (nonatomic, strong) BRZInAppMessageRawColor * _Nullable frameColor;
-		[NullAllowed, Export ("frameColor", ArgumentSemantic.Strong)]
-		BRZInAppMessageRawColor FrameColor { get; set; }
-
-		// @property (nonatomic, strong) BRZInAppMessageRawColor * _Nullable closeButtonColor;
-		[NullAllowed, Export ("closeButtonColor", ArgumentSemantic.Strong)]
-		BRZInAppMessageRawColor CloseButtonColor { get; set; }
-
-		// @property (copy, nonatomic) NSArray<BRZInAppMessageRawButton *> * _Nullable buttons;
-		[NullAllowed, Export ("buttons", ArgumentSemantic.Copy)]
-		BRZInAppMessageRawButton[] Buttons { get; set; }
-
-		// @property (nonatomic) BOOL animateIn;
-		[Export ("animateIn")]
-		bool AnimateIn { get; set; }
-
-		// @property (nonatomic) BOOL animateOut;
-		[Export ("animateOut")]
-		bool AnimateOut { get; set; }
-
-		// @property (copy, nonatomic) NSDictionary<NSString *,id> * _Nonnull extras;
-		[Export ("extras", ArgumentSemantic.Copy)]
-		NSDictionary<NSString, NSObject> Extras { get; set; }
-
-		// @property (copy, nonatomic) NSString * _Nullable messageExtras;
-		[NullAllowed, Export ("messageExtras")]
-		string MessageExtras { get; set; }
-
-		// @property (copy, nonatomic) NSURL * _Nullable baseURL;
-		[NullAllowed, Export ("baseURL", ArgumentSemantic.Copy)]
-		NSUrl BaseURL { get; set; }
-
-		// @property (copy, nonatomic) NSArray<NSURL *> * _Nullable assetURLs;
-		[NullAllowed, Export ("assetURLs", ArgumentSemantic.Copy)]
-		NSUrl[] AssetURLs { get; set; }
-
-		// @property (nonatomic) BOOL isControl;
-		[Export ("isControl")]
-		bool IsControl { get; set; }
-
-		// @property (readonly, nonatomic) BOOL isTestSend;
-		[Export ("isTestSend")]
-		bool IsTestSend { get; }
-
-		// @property (copy, nonatomic) NSDictionary<NSString *,id> * _Nullable messageFields;
-		[NullAllowed, Export ("messageFields", ArgumentSemantic.Copy)]
-		NSDictionary<NSString, NSObject> MessageFields { get; set; }
-
-		// @property (nonatomic, strong) BRZInAppMessageContext * _Nullable context;
-		[NullAllowed, Export ("context", ArgumentSemantic.Strong)]
-		BRZInAppMessageContext Context { get; set; }
-
-		// -(NSData * _Nullable)json __attribute__((warn_unused_result("")));
-		[NullAllowed, Export ("json")]
-		NSData Json { get; }
-
-		// +(instancetype _Nullable)decodingWithJson:(NSData * _Nonnull)json __attribute__((warn_unused_result("")));
-		[Static]
-		[Export ("decodingWithJson:")]
-		[return: NullAllowed]
-		BRZInAppMessageRaw DecodingWithJson (NSData json);
-		// @property (readonly, nonatomic) NSUInteger hash;
-		[Export ("hash")]
-		nuint Hash { get; }
-
-		// -(void)logImpressionUsing:(Braze * _Nonnull)braze;
-		[Export ("logImpressionUsing:")]
-		void LogImpressionUsing (Braze braze);
-
-		// -(void)logClickWithButtonId:(NSString * _Nullable)buttonId using:(Braze * _Nonnull)braze;
-		[Export ("logClickWithButtonId:using:")]
-		void LogClickWithButtonId ([NullAllowed] string buttonId, Braze braze);
-		//  (nonatomic) BOOL _compat_hideChevron;
-		[Export ("_compat_hideChevron")]
-		bool _compat_hideChevron { get; set; }
-
-		//  (nonatomic) NSInteger _compat_overrideUserInterfaceStyle;
-		[Export ("_compat_overrideUserInterfaceStyle")]
-		nint _compat_overrideUserInterfaceStyle { get; set; }
-		//  (nonatomic) enum BRZInAppMessageRawType type;
-		[Export ("type", ArgumentSemantic.Assign)]
-		BRZInAppMessageRawType Type { get; set; }
-
-		//  (nonatomic) enum BRZInAppMessageRawClickAction clickAction;
-		[Export ("clickAction", ArgumentSemantic.Assign)]
-		BRZInAppMessageRawClickAction ClickAction { get; set; }
-
-		//  (nonatomic) enum BRZInAppMessageRawClose messageClose;
-		[Export ("messageClose", ArgumentSemantic.Assign)]
-		BRZInAppMessageRawClose MessageClose { get; set; }
-
-		//  (nonatomic) enum BRZInAppMessageRawOrientation orientation;
-		[Export ("orientation", ArgumentSemantic.Assign)]
-		BRZInAppMessageRawOrientation Orientation { get; set; }
-
-		//  (nonatomic) enum BRZInAppMessageRawTextAlignment messageTextAlignment;
-		[Export ("messageTextAlignment", ArgumentSemantic.Assign)]
-		BRZInAppMessageRawTextAlignment MessageTextAlignment { get; set; }
-
-		//  (nonatomic) enum BRZInAppMessageRawTextAlignment headerTextAlignment;
-		[Export ("headerTextAlignment", ArgumentSemantic.Assign)]
-		BRZInAppMessageRawTextAlignment HeaderTextAlignment { get; set; }
-
-		//  (nonatomic) NSTimeInterval duration;
-		[Export ("duration")]
-		double Duration { get; set; }
-
-		//  (nonatomic) enum BRZInAppMessageRawImageStyle imageStyle;
-		[Export ("imageStyle", ArgumentSemantic.Assign)]
-		BRZInAppMessageRawImageStyle ImageStyle { get; set; }
-
-		//  (nonatomic) enum BRZInAppMessageRawSlideFrom slideFrom;
-		[Export ("slideFrom", ArgumentSemantic.Assign)]
-		BRZInAppMessageRawSlideFrom SlideFrom { get; set; }
-	}
-
-	// @interface BRZNewsFeed : NSObject
-	[BaseType (typeof(NSObject))]
-	[DisableDefaultCtor]
-	interface BRZNewsFeed
-	{
-		// @property (readonly, copy, nonatomic) NSArray<BRZNewsFeedCard *> * _Nonnull cards;
-		[Export ("cards", ArgumentSemantic.Copy)]
-		BRZNewsFeedCard[] Cards { get; }
-
-		// @property (readonly, copy, nonatomic) NSDate * _Nullable lastUpdate;
-		[NullAllowed, Export ("lastUpdate", ArgumentSemantic.Copy)]
-		NSDate LastUpdate { get; }
-
-		// -(BRZCancellable * _Nonnull)subscribeToUpdates:(void (^ _Nonnull)(NSArray<BRZNewsFeedCard *> * _Nonnull))update __attribute__((warn_unused_result("")));
-		[Export ("subscribeToUpdates:")]
-		BRZCancellable SubscribeToUpdates (Action<NSArray<BRZNewsFeedCard>> update);
-
-		// -(void)requestRefresh;
-		[Export ("requestRefresh")]
-		void RequestRefresh ();
-
-		// -(void)requestRefreshWithCompletion:(void (^ _Nonnull)(NSArray<BRZNewsFeedCard *> * _Nullable, NSError * _Nullable))completion;
-		[Export ("requestRefreshWithCompletion:")]
-		void RequestRefreshWithCompletion (Action<NSArray<BRZNewsFeedCard>, NSError> completion);
-	}
-
-	// @interface BRZModalContext : NSObject
-	[BaseType (typeof(NSObject))]
-	[DisableDefaultCtor]
-	interface BRZModalContext
-	{
-		// @property (nonatomic, strong) UIViewController * _Nonnull presentingViewController;
-		[Export ("presentingViewController", ArgumentSemantic.Strong)]
-		UIViewController PresentingViewController { get; set; }
-
-		// @property (nonatomic) BOOL animatePresentation;
-		[Export ("animatePresentation")]
-		bool AnimatePresentation { get; set; }
-
-		// @property (nonatomic) BOOL animateDismissal;
-		[Export ("animateDismissal")]
-		bool AnimateDismissal { get; set; }
-
-		//  (readonly, nonatomic) enum BRZChannel channel;
-		[Export ("channel")]
-		BRZChannel Channel { get; }
-	}
-
-	// @interface BRZSDKAuthenticationError : NSObject
-	[BaseType (typeof(NSObject))]
-	[DisableDefaultCtor]
-	interface BRZSDKAuthenticationError
-	{
-		// @property (readonly, nonatomic) NSInteger code;
-		[Export ("code")]
-		nint Code { get; }
-
-		// @property (readonly, copy, nonatomic) NSString * _Nullable reason;
-		[NullAllowed, Export ("reason")]
-		string Reason { get; }
-
-		// @property (readonly, copy, nonatomic) NSString * _Nullable userId;
-		[NullAllowed, Export ("userId")]
-		string UserId { get; }
-
-		// @property (readonly, copy, nonatomic) NSString * _Nullable signature;
-		[NullAllowed, Export ("signature")]
-		string Signature { get; }
-
-	}
-
 	// @interface BRZUser : NSObject
 	[BaseType (typeof(NSObject))]
 	[DisableDefaultCtor]
@@ -924,15 +445,6 @@ namespace BrazeKit
 		[Export ("setPhoneNumber:")]
 		void SetPhoneNumber ([NullAllowed] string phoneNumber);
 
-		// -(void)addToCustomAttributeArrayWithKey:(NSString * _Nonnull)key value:(NSString * _Nonnull)value __attribute__((deprecated("", "addToCustomAttributeStringArrayWithKey")));
-		[Obsolete("renamed: 'addToCustomAttributeStringArrayWithKey'")]
-		[Export ("addToCustomAttributeArrayWithKey:value:")]
-		void AddToCustomAttributeArrayWithKey (string key, string value);
-
-		// -(void)removeFromCustomAttributeArrayWithKey:(NSString * _Nonnull)key value:(NSString * _Nonnull)value __attribute__((deprecated("", "removeFromCustomAttributeStringArrayWithKey")));
-		[Obsolete("renamed: 'removeFromCustomAttributeStringArrayWithKey'")]
-		[Export ("removeFromCustomAttributeArrayWithKey:value:")]
-		void RemoveFromCustomAttributeArrayWithKey (string key, string value);
 		// -(void)idWithCompletion:(void (^ _Nonnull)(NSString * _Nullable))completion;
 		[Export ("idWithCompletion:")]
 		void IdWithCompletion (Action<NSString> completion);
@@ -1130,22 +642,6 @@ namespace BrazeKit
 		bool RemoveLocationCustomAttributeWithKey (string key);
 	}
 
-	// @interface BRZCancellable : NSObject
-	[BaseType (typeof(NSObject))]
-	[DisableDefaultCtor]
-	interface BRZCancellable
-	{
-		// -(void)cancel;
-		[Export ("cancel")]
-		void Cancel ();
-
-		// @property (readonly, nonatomic, strong, class) BRZCancellable * _Nonnull empty;
-		[Static]
-		[Export ("empty", ArgumentSemantic.Strong)]
-		BRZCancellable Empty { get; }
-
-	}
-
 	// @interface BRZURLContext : NSObject
 	[BaseType (typeof(NSObject))]
 	[DisableDefaultCtor]
@@ -1166,74 +662,44 @@ namespace BrazeKit
 		// @property (readonly, copy, nonatomic) NSDictionary<NSString *,id> * _Nonnull extras;
 		[Export ("extras", ArgumentSemantic.Copy)]
 		NSDictionary<NSString, NSObject> Extras { get; }
+
+		// @property (nonatomic, strong) SWIFT_AVAILABILITY(tvos,introduced=13.0) UIScene * targetScene __attribute__((availability(tvos, introduced=13.0))) __attribute__((availability(ios, introduced=13.0)));
+		[Export ("targetScene", ArgumentSemantic.Strong)]
+		UIScene TargetScene { get; set; }
+
 		// @property (nonatomic, strong) UIViewController * _Nullable targetViewController;
 		[NullAllowed, Export ("targetViewController", ArgumentSemantic.Strong)]
 		UIViewController TargetViewController { get; set; }
+		// @property (readonly, nonatomic) NSUInteger hash;
+		[Export ("hash")]
+		nuint Hash { get; }
 
 		//  (readonly, nonatomic) enum BRZChannel channel;
 		[Export ("channel")]
 		BRZChannel Channel { get; }
-		//  (readonly, nonatomic) NSUInteger hash;
-		[Export ("hash")]
-		nuint Hash { get; }
 	}
 
-	// @interface BRZConfiguration : NSObject
+	// @interface BRZSDKAuthenticationError : NSObject
 	[BaseType (typeof(NSObject))]
-	interface BRZConfiguration
+	[DisableDefaultCtor]
+	interface BRZSDKAuthenticationError
 	{
-		// @property (nonatomic, strong) BRZConfigurationApi * _Nonnull api;
-		[Export ("api", ArgumentSemantic.Strong)]
-		BRZConfigurationApi Api { get; set; }
+		// @property (readonly, nonatomic) NSInteger code;
+		[Export ("code")]
+		nint Code { get; }
 
-		// @property (nonatomic, strong) BRZConfigurationPush * _Nonnull push;
-		[Export ("push", ArgumentSemantic.Strong)]
-		BRZConfigurationPush Push { get; set; }
+		// @property (readonly, copy, nonatomic) NSString * _Nullable reason;
+		[NullAllowed, Export ("reason")]
+		string Reason { get; }
 
-		// @property (nonatomic, strong) BRZConfigurationLocation * _Nonnull location;
-		[Export ("location", ArgumentSemantic.Strong)]
-		BRZConfigurationLocation Location { get; set; }
+		// @property (readonly, copy, nonatomic) NSString * _Nullable userId;
+		[NullAllowed, Export ("userId")]
+		string UserId { get; }
 
-		// @property (nonatomic, strong) BRZConfigurationLogger * _Nonnull logger;
-		[Export ("logger", ArgumentSemantic.Strong)]
-		BRZConfigurationLogger Logger { get; set; }
+		// @property (readonly, copy, nonatomic) NSString * _Nullable signature;
+		[NullAllowed, Export ("signature")]
+		string Signature { get; }
 
-		// @property (nonatomic) NSTimeInterval sessionTimeout;
-		[Export ("sessionTimeout")]
-		double SessionTimeout { get; set; }
-
-		// @property (nonatomic) NSTimeInterval triggerMinimumTimeInterval;
-		[Export ("triggerMinimumTimeInterval")]
-		double TriggerMinimumTimeInterval { get; set; }
-
-		// @property (nonatomic) BOOL useUUIDAsDeviceId;
-		[Export ("useUUIDAsDeviceId")]
-		bool UseUUIDAsDeviceId { get; set; }
-
-		// @property (nonatomic) BOOL forwardUniversalLinks;
-		[Export ("forwardUniversalLinks")]
-		bool ForwardUniversalLinks { get; set; }
-
-		// @property (nonatomic) BOOL optInWhenPushAuthorized;
-		[Export ("optInWhenPushAuthorized")]
-		bool OptInWhenPushAuthorized { get; set; }
-
-		// @property (nonatomic) uint64_t tvOSPersistedSizeLimit;
-		[Export ("tvOSPersistedSizeLimit")]
-		ulong TvOSPersistedSizeLimit { get; set; }
-
-		// @property (copy, nonatomic) NSArray<NSString *> * _Nonnull ephemeralEvents;
-		[Export ("ephemeralEvents", ArgumentSemantic.Copy)]
-		string[] EphemeralEvents { get; set; }
-
-		// -(instancetype _Nonnull)initWithApiKey:(NSString * _Nonnull)apiKey endpoint:(NSString * _Nonnull)endpoint __attribute__((objc_designated_initializer));
-		[Export ("initWithApiKey:endpoint:")]
-		[DesignatedInitializer]
-		NativeHandle Constructor (string apiKey, string endpoint);
-
-		//  (copy, nonatomic) NSArray<BRZDeviceProperty *> * _Nonnull devicePropertyAllowList;
-		[Export ("devicePropertyAllowList", ArgumentSemantic.Copy)]
-		BRZDeviceProperty[] DevicePropertyAllowList { get; set; }
 	}
 
 	// @interface BRZResources : NSObject
@@ -1255,6 +721,491 @@ namespace BrazeKit
 		[NullAllowed, Export ("license", ArgumentSemantic.Copy)]
 		NSUrl License { get; }
 
+	}
+
+	// @interface BRZNotifications : NSObject
+	[BaseType (typeof(NSObject))]
+	[DisableDefaultCtor]
+	interface BRZNotifications
+	{
+		// @property (readonly, copy, nonatomic) NSData * _Nullable deviceToken;
+		[NullAllowed, Export ("deviceToken", ArgumentSemantic.Copy)]
+		NSData DeviceToken { get; }
+
+		// -(BOOL)handleBackgroundNotificationWithUserInfo:(NSDictionary * _Nonnull)userInfo fetchCompletionHandler:(void (^ _Nonnull)(UIBackgroundFetchResult))completionHandler __attribute__((warn_unused_result("")));
+		[Export ("handleBackgroundNotificationWithUserInfo:fetchCompletionHandler:")]
+		bool HandleBackgroundNotificationWithUserInfo (NSDictionary userInfo, Action<UIBackgroundFetchResult> completionHandler);
+
+		// -(void)handleForegroundNotificationWithNotification:(UNNotification * _Nonnull)notification;
+		[Export ("handleForegroundNotificationWithNotification:")]
+		void HandleForegroundNotificationWithNotification (UNNotification notification);
+
+		// -(BOOL)handleUserNotificationWithResponse:(UNNotificationResponse * _Nonnull)response withCompletionHandler:(void (^ _Nonnull)(void))completionHandler __attribute__((warn_unused_result("")));
+		[Export ("handleUserNotificationWithResponse:withCompletionHandler:")]
+		bool HandleUserNotificationWithResponse (UNNotificationResponse response, Action completionHandler);
+
+		// +(BOOL)isBrazeNotification:(NSDictionary * _Nonnull)userInfo __attribute__((warn_unused_result("")));
+		[Static]
+		[Export ("isBrazeNotification:")]
+		bool IsBrazeNotification (NSDictionary userInfo);
+
+		// +(BOOL)isInternalNotification:(NSDictionary * _Nonnull)userInfo __attribute__((warn_unused_result("")));
+		[Static]
+		[Export ("isInternalNotification:")]
+		bool IsInternalNotification (NSDictionary userInfo);
+
+		//  (copy, nonatomic, class) NSSet<UNNotificationCategory *> * _Nonnull categories;
+		[Static]
+		[Export ("categories", ArgumentSemantic.Copy)]
+		NSSet<UNNotificationCategory> Categories { get; set; }
+		// -(void)registerDeviceToken:(NSData * _Nonnull)deviceToken;
+		[Export ("registerDeviceToken:")]
+		void RegisterDeviceToken (NSData deviceToken);
+
+		// -(BRZCancellable * _Nonnull)subscribeToUpdatesWithPayloadTypes:(BRZNotificationsPayloadTypeFilter * _Nonnull)payloadTypes update:(void (^ _Nonnull)(BRZNotificationsPayload * _Nonnull))update __attribute__((warn_unused_result("")));
+		[Export ("subscribeToUpdatesWithPayloadTypes:update:")]
+		BRZCancellable SubscribeToUpdatesWithPayloadTypes (BRZNotificationsPayloadTypeFilter payloadTypes, Action<BRZNotificationsPayload> update);
+
+		// -(BRZCancellable * _Nonnull)subscribeToUpdates:(void (^ _Nonnull)(BRZNotificationsPayload * _Nonnull))update __attribute__((warn_unused_result("")));
+		[Export ("subscribeToUpdates:")]
+		BRZCancellable SubscribeToUpdates (Action<BRZNotificationsPayload> update);
+	}
+
+	// @interface BRZNewsFeedCard : NSObject
+	[BaseType (typeof(NSObject))]
+	interface BRZNewsFeedCard: INativeObject
+	{
+		// @property (copy, nonatomic) NSString * _Nonnull identifier;
+		[Export ("identifier")]
+		string Identifier { get; set; }
+
+		// @property (copy, nonatomic) NSURL * _Nullable image;
+		[NullAllowed, Export ("image", ArgumentSemantic.Copy)]
+		NSUrl Image { get; set; }
+
+		// @property (copy, nonatomic) NSString * _Nullable title;
+		[NullAllowed, Export ("title")]
+		string Title { get; set; }
+
+		// @property (copy, nonatomic) NSString * _Nullable cardDescription;
+		[NullAllowed, Export ("cardDescription")]
+		string CardDescription { get; set; }
+
+		// @property (copy, nonatomic) NSString * _Nullable domain;
+		[NullAllowed, Export ("domain")]
+		string Domain { get; set; }
+
+		// @property (copy, nonatomic) NSURL * _Nullable url;
+		[NullAllowed, Export ("url", ArgumentSemantic.Copy)]
+		NSUrl Url { get; set; }
+
+		// @property (nonatomic) BOOL useWebView;
+		[Export ("useWebView")]
+		bool UseWebView { get; set; }
+
+		// @property (copy, nonatomic) NSDictionary<NSString *,id> * _Nonnull extras;
+		[Export ("extras", ArgumentSemantic.Copy)]
+		NSDictionary<NSString, NSObject> Extras { get; set; }
+
+		// @property (nonatomic) BOOL viewed;
+		[Export ("viewed")]
+		bool Viewed { get; set; }
+
+		// @property (nonatomic) NSTimeInterval created;
+		[Export ("created")]
+		double Created { get; set; }
+
+		// @property (nonatomic) NSTimeInterval updated;
+		[Export ("updated")]
+		double Updated { get; set; }
+
+		// @property (nonatomic) NSTimeInterval expires;
+		[Export ("expires")]
+		double Expires { get; set; }
+
+		// @property (nonatomic, strong) BRZNewsFeedCardContext * _Nullable context;
+		[NullAllowed, Export ("context", ArgumentSemantic.Strong)]
+		BRZNewsFeedCardContext Context { get; set; }
+		// @property (readonly, nonatomic) NSUInteger hash;
+		[Export ("hash")]
+		nuint Hash { get; }
+
+		// -(void)logImpressionUsing:(Braze * _Nonnull)braze;
+		[Export ("logImpressionUsing:")]
+		void LogImpressionUsing (Braze braze);
+
+		// -(void)logClickUsing:(Braze * _Nonnull)braze;
+		[Export ("logClickUsing:")]
+		void LogClickUsing (Braze braze);
+		// -(NSData * _Nullable)json __attribute__((warn_unused_result("")));
+		[NullAllowed, Export ("json")]
+		NSData Json { get; }
+
+		// +(instancetype _Nullable)decodingWithJson:(NSData * _Nonnull)json __attribute__((warn_unused_result("")));
+		[Static]
+		[Export ("decodingWithJson:")]
+		[return: NullAllowed]
+		BRZNewsFeedCard DecodingWithJson (NSData json);
+		//  (nonatomic) enum BRZNewsFeedCardType type;
+		[Export ("type", ArgumentSemantic.Assign)]
+		BRZNewsFeedCardType Type { get; set; }
+
+		//  (copy, nonatomic) NSArray<BRZNewsFeedCardCategory *> * _Nonnull categories;
+		[Export ("categories", ArgumentSemantic.Copy)]
+		BRZNewsFeedCardCategory[] Categories { get; set; }
+
+		//  (nonatomic) double imageAspectRatio;
+		[Export ("imageAspectRatio")]
+		double ImageAspectRatio { get; set; }
+	}
+
+	// @interface BRZNewsFeed : NSObject
+	[BaseType (typeof(NSObject))]
+	[DisableDefaultCtor]
+	interface BRZNewsFeed
+	{
+		// @property (readonly, copy, nonatomic) NSArray<BRZNewsFeedCard *> * _Nonnull cards;
+		[Export ("cards", ArgumentSemantic.Copy)]
+		BRZNewsFeedCard[] Cards { get; }
+
+		// @property (readonly, copy, nonatomic) NSDate * _Nullable lastUpdate;
+		[NullAllowed, Export ("lastUpdate", ArgumentSemantic.Copy)]
+		NSDate LastUpdate { get; }
+
+		// -(BRZCancellable * _Nonnull)subscribeToUpdates:(void (^ _Nonnull)(NSArray<BRZNewsFeedCard *> * _Nonnull))update __attribute__((warn_unused_result("")));
+		[Export ("subscribeToUpdates:")]
+		BRZCancellable SubscribeToUpdates (Action<NSArray<BRZNewsFeedCard>> update);
+
+		// -(void)requestRefresh;
+		[Export ("requestRefresh")]
+		void RequestRefresh ();
+
+		// -(void)requestRefreshWithCompletion:(void (^ _Nonnull)(NSArray<BRZNewsFeedCard *> * _Nullable, NSError * _Nullable))completion;
+		[Export ("requestRefreshWithCompletion:")]
+		void RequestRefreshWithCompletion (Action<NSArray<BRZNewsFeedCard>, NSError> completion);
+	}
+
+	// @interface BRZModalContext : NSObject
+	[BaseType (typeof(NSObject))]
+	[DisableDefaultCtor]
+	interface BRZModalContext
+	{
+		// @property (nonatomic, strong) UIViewController * _Nonnull presentingViewController;
+		[Export ("presentingViewController", ArgumentSemantic.Strong)]
+		UIViewController PresentingViewController { get; set; }
+
+		// @property (nonatomic) BOOL animatePresentation;
+		[Export ("animatePresentation")]
+		bool AnimatePresentation { get; set; }
+
+		// @property (nonatomic) BOOL animateDismissal;
+		[Export ("animateDismissal")]
+		bool AnimateDismissal { get; set; }
+
+		// @property (nonatomic) BOOL openNewWindowLinksInBrowser;
+		[Export ("openNewWindowLinksInBrowser")]
+		bool OpenNewWindowLinksInBrowser { get; set; }
+
+		//  (readonly, nonatomic) enum BRZChannel channel;
+		[Export ("channel")]
+		BRZChannel Channel { get; }
+	}
+
+	// @interface BRZInAppMessageRaw : NSObject
+	[BaseType (typeof(NSObject))]
+	interface BRZInAppMessageRaw
+	{
+		// @property (copy, nonatomic) NSURL * _Nullable url;
+		[NullAllowed, Export ("url", ArgumentSemantic.Copy)]
+		NSUrl Url { get; set; }
+
+		// @property (nonatomic) BOOL useWebView;
+		[Export ("useWebView")]
+		bool UseWebView { get; set; }
+
+		// @property (copy, nonatomic) NSString * _Nullable message;
+		[NullAllowed, Export ("message")]
+		string Message { get; set; }
+
+		// @property (copy, nonatomic) NSString * _Nullable header;
+		[NullAllowed, Export ("header")]
+		string Header { get; set; }
+
+		// @property (copy, nonatomic) NSURL * _Nullable imageURL;
+		[NullAllowed, Export ("imageURL", ArgumentSemantic.Copy)]
+		NSUrl ImageURL { get; set; }
+
+		// @property (copy, nonatomic) NSString * _Nullable icon;
+		[NullAllowed, Export ("icon")]
+		string Icon { get; set; }
+
+		// @property (copy, nonatomic) NSDictionary<NSString *,BRZInAppMessageRawTheme *> * _Nullable themes;
+		[NullAllowed, Export ("themes", ArgumentSemantic.Copy)]
+		NSDictionary<NSString, BRZInAppMessageRawTheme> Themes { get; set; }
+
+		// @property (nonatomic, strong) BRZInAppMessageRawColor * _Nullable textColor;
+		[NullAllowed, Export ("textColor", ArgumentSemantic.Strong)]
+		BRZInAppMessageRawColor TextColor { get; set; }
+
+		// @property (nonatomic, strong) BRZInAppMessageRawColor * _Nullable headerTextColor;
+		[NullAllowed, Export ("headerTextColor", ArgumentSemantic.Strong)]
+		BRZInAppMessageRawColor HeaderTextColor { get; set; }
+
+		// @property (nonatomic, strong) BRZInAppMessageRawColor * _Nullable iconColor;
+		[NullAllowed, Export ("iconColor", ArgumentSemantic.Strong)]
+		BRZInAppMessageRawColor IconColor { get; set; }
+
+		// @property (nonatomic, strong) BRZInAppMessageRawColor * _Nullable iconBackgroundColor;
+		[NullAllowed, Export ("iconBackgroundColor", ArgumentSemantic.Strong)]
+		BRZInAppMessageRawColor IconBackgroundColor { get; set; }
+
+		// @property (nonatomic, strong) BRZInAppMessageRawColor * _Nullable backgroundColor;
+		[NullAllowed, Export ("backgroundColor", ArgumentSemantic.Strong)]
+		BRZInAppMessageRawColor BackgroundColor { get; set; }
+
+		// @property (nonatomic, strong) BRZInAppMessageRawColor * _Nullable frameColor;
+		[NullAllowed, Export ("frameColor", ArgumentSemantic.Strong)]
+		BRZInAppMessageRawColor FrameColor { get; set; }
+
+		// @property (nonatomic, strong) BRZInAppMessageRawColor * _Nullable closeButtonColor;
+		[NullAllowed, Export ("closeButtonColor", ArgumentSemantic.Strong)]
+		BRZInAppMessageRawColor CloseButtonColor { get; set; }
+
+		// @property (copy, nonatomic) NSArray<BRZInAppMessageRawButton *> * _Nullable buttons;
+		[NullAllowed, Export ("buttons", ArgumentSemantic.Copy)]
+		BRZInAppMessageRawButton[] Buttons { get; set; }
+
+		// @property (nonatomic) BOOL animateIn;
+		[Export ("animateIn")]
+		bool AnimateIn { get; set; }
+
+		// @property (nonatomic) BOOL animateOut;
+		[Export ("animateOut")]
+		bool AnimateOut { get; set; }
+
+		// @property (copy, nonatomic) NSDictionary<NSString *,id> * _Nonnull extras;
+		[Export ("extras", ArgumentSemantic.Copy)]
+		NSDictionary<NSString, NSObject> Extras { get; set; }
+
+		// @property (copy, nonatomic) NSString * _Nullable messageExtras;
+		[NullAllowed, Export ("messageExtras")]
+		string MessageExtras { get; set; }
+
+		// @property (copy, nonatomic) NSURL * _Nullable baseURL;
+		[NullAllowed, Export ("baseURL", ArgumentSemantic.Copy)]
+		NSUrl BaseURL { get; set; }
+
+		// @property (copy, nonatomic) NSArray<NSURL *> * _Nullable assetURLs;
+		[NullAllowed, Export ("assetURLs", ArgumentSemantic.Copy)]
+		NSUrl[] AssetURLs { get; set; }
+
+		// @property (nonatomic) BOOL isControl;
+		[Export ("isControl")]
+		bool IsControl { get; set; }
+
+		// @property (readonly, nonatomic) BOOL isTestSend;
+		[Export ("isTestSend")]
+		bool IsTestSend { get; }
+
+		// @property (copy, nonatomic) NSDictionary<NSString *,id> * _Nullable messageFields;
+		[NullAllowed, Export ("messageFields", ArgumentSemantic.Copy)]
+		NSDictionary<NSString, NSObject> MessageFields { get; set; }
+
+		// @property (nonatomic, strong) BRZInAppMessageContext * _Nullable context;
+		[NullAllowed, Export ("context", ArgumentSemantic.Strong)]
+		BRZInAppMessageContext Context { get; set; }
+
+		// -(NSData * _Nullable)json __attribute__((warn_unused_result("")));
+		[NullAllowed, Export ("json")]
+		NSData Json { get; }
+
+		// +(instancetype _Nullable)decodingWithJson:(NSData * _Nonnull)json __attribute__((warn_unused_result("")));
+		[Static]
+		[Export ("decodingWithJson:")]
+		[return: NullAllowed]
+		BRZInAppMessageRaw DecodingWithJson (NSData json);
+		// @property (readonly, nonatomic) NSUInteger hash;
+		[Export ("hash")]
+		nuint Hash { get; }
+
+		// -(void)logImpressionUsing:(Braze * _Nonnull)braze;
+		[Export ("logImpressionUsing:")]
+		void LogImpressionUsing (Braze braze);
+
+		// -(void)logClickWithButtonId:(NSString * _Nullable)buttonId using:(Braze * _Nonnull)braze;
+		[Export ("logClickWithButtonId:using:")]
+		void LogClickWithButtonId ([NullAllowed] string buttonId, Braze braze);
+		//  (nonatomic) BOOL _compat_hideChevron;
+		[Export ("_compat_hideChevron")]
+		bool _compat_hideChevron { get; set; }
+
+		//  (nonatomic) NSInteger _compat_overrideUserInterfaceStyle;
+		[Export ("_compat_overrideUserInterfaceStyle")]
+		nint _compat_overrideUserInterfaceStyle { get; set; }
+		//  (nonatomic) enum BRZInAppMessageRawType type;
+		[Export ("type", ArgumentSemantic.Assign)]
+		BRZInAppMessageRawType Type { get; set; }
+
+		//  (nonatomic) enum BRZInAppMessageRawClickAction clickAction;
+		[Export ("clickAction", ArgumentSemantic.Assign)]
+		BRZInAppMessageRawClickAction ClickAction { get; set; }
+
+		//  (nonatomic) enum BRZInAppMessageRawClose messageClose;
+		[Export ("messageClose", ArgumentSemantic.Assign)]
+		BRZInAppMessageRawClose MessageClose { get; set; }
+
+		//  (nonatomic) enum BRZInAppMessageRawOrientation orientation;
+		[Export ("orientation", ArgumentSemantic.Assign)]
+		BRZInAppMessageRawOrientation Orientation { get; set; }
+
+		//  (nonatomic) enum BRZInAppMessageRawTextAlignment messageTextAlignment;
+		[Export ("messageTextAlignment", ArgumentSemantic.Assign)]
+		BRZInAppMessageRawTextAlignment MessageTextAlignment { get; set; }
+
+		//  (nonatomic) enum BRZInAppMessageRawTextAlignment headerTextAlignment;
+		[Export ("headerTextAlignment", ArgumentSemantic.Assign)]
+		BRZInAppMessageRawTextAlignment HeaderTextAlignment { get; set; }
+
+		//  (nonatomic) NSTimeInterval duration;
+		[Export ("duration")]
+		double Duration { get; set; }
+
+		//  (nonatomic) enum BRZInAppMessageRawImageStyle imageStyle;
+		[Export ("imageStyle", ArgumentSemantic.Assign)]
+		BRZInAppMessageRawImageStyle ImageStyle { get; set; }
+
+		//  (nonatomic) enum BRZInAppMessageRawSlideFrom slideFrom;
+		[Export ("slideFrom", ArgumentSemantic.Assign)]
+		BRZInAppMessageRawSlideFrom SlideFrom { get; set; }
+	}
+
+	// @interface BRZFeatureFlag : NSObject
+	[BaseType (typeof(NSObject))]
+	interface BRZFeatureFlag: INativeObject
+	{
+		// @property (copy, nonatomic) NSString * _Nonnull identifier;
+		[Export ("identifier")]
+		string Identifier { get; set; }
+
+		// @property (nonatomic) BOOL enabled;
+		[Export ("enabled")]
+		bool Enabled { get; set; }
+
+		// @property (copy, nonatomic) NSString * _Nullable flagTrackingString;
+		[NullAllowed, Export ("flagTrackingString")]
+		string FlagTrackingString { get; set; }
+
+		// -(NSString * _Nullable)stringPropertyForKey:(NSString * _Nonnull)key __attribute__((warn_unused_result("")));
+		[Export ("stringPropertyForKey:")]
+		[return: NullAllowed]
+		string StringPropertyForKey (string key);
+
+		// -(NSString * _Nullable)imagePropertyForKey:(NSString * _Nonnull)key __attribute__((warn_unused_result("")));
+		[Export ("imagePropertyForKey:")]
+		[return: NullAllowed]
+		string ImagePropertyForKey (string key);
+		// @property (readonly, nonatomic) NSUInteger hash;
+		[Export ("hash")]
+		nuint Hash { get; }
+
+		// -(NSData * _Nullable)json __attribute__((warn_unused_result("")));
+		[NullAllowed, Export ("json")]
+		NSData Json { get; }
+
+		// +(instancetype _Nullable)decodingWithJson:(NSData * _Nonnull)json __attribute__((warn_unused_result("")));
+		[Static]
+		[Export ("decodingWithJson:")]
+		[return: NullAllowed]
+		BRZFeatureFlag DecodingWithJson (NSData json);
+		// -(NSDictionary * _Nullable)jsonObjectPropertyForKey:(NSString * _Nonnull)key __attribute__((warn_unused_result(""))) __attribute__((deprecated("", "jsonPropertyForKey")));
+		[Obsolete("renamed: 'jsonPropertyForKey'")]
+		[Export ("jsonObjectPropertyForKey:")]
+		[return: NullAllowed]
+		NSDictionary JsonObjectPropertyForKey (string key);
+		//  (copy, nonatomic) NSDictionary<NSString *,id> * _Nonnull properties;
+		[Export ("properties", ArgumentSemantic.Copy)]
+		NSDictionary<NSString, NSObject> Properties { get; set; }
+
+		// -(NSNumber * _Nullable)numberPropertyForKey:(NSString * _Nonnull)key __attribute__((warn_unused_result("")));
+		[Export ("numberPropertyForKey:")]
+		[return: NullAllowed]
+		NSNumber NumberPropertyForKey (string key);
+
+		// -(NSNumber * _Nullable)timestampPropertyForKey:(NSString * _Nonnull)key __attribute__((warn_unused_result("")));
+		[Export ("timestampPropertyForKey:")]
+		[return: NullAllowed]
+		NSNumber TimestampPropertyForKey (string key);
+
+		// -(NSNumber * _Nullable)boolPropertyForKey:(NSString * _Nonnull)key __attribute__((warn_unused_result("")));
+		[Export ("boolPropertyForKey:")]
+		[return: NullAllowed]
+		NSNumber BoolPropertyForKey (string key);
+
+		// -(NSDictionary * _Nullable)jsonPropertyForKey:(NSString * _Nonnull)key __attribute__((warn_unused_result("")));
+		[Export ("jsonPropertyForKey:")]
+		[return: NullAllowed]
+		NSDictionary JsonPropertyForKey (string key);
+	}
+
+	// @interface BRZFeatureFlags : NSObject
+	[BaseType (typeof(NSObject))]
+	[DisableDefaultCtor]
+	interface BRZFeatureFlags
+	{
+		// @property (readonly, copy, nonatomic) NSArray<BRZFeatureFlag *> * _Nonnull featureFlags;
+		[Export ("featureFlags", ArgumentSemantic.Copy)]
+		BRZFeatureFlag[] FeatureFlags { get; }
+
+		// -(BRZFeatureFlag * _Nullable)featureFlagWithId:(NSString * _Nonnull)id __attribute__((warn_unused_result("")));
+		[Export ("featureFlagWithId:")]
+		[return: NullAllowed]
+		BRZFeatureFlag FeatureFlagWithId (string id);
+
+		// -(BRZCancellable * _Nonnull)subscribeToUpdates:(void (^ _Nonnull)(NSArray<BRZFeatureFlag *> * _Nonnull))update __attribute__((warn_unused_result("")));
+		[Export ("subscribeToUpdates:")]
+		BRZCancellable SubscribeToUpdates (Action<NSArray<BRZFeatureFlag>> update);
+
+		// -(void)logFeatureFlagImpressionWithId:(NSString * _Nonnull)id;
+		[Export ("logFeatureFlagImpressionWithId:")]
+		void LogFeatureFlagImpressionWithId (string id);
+
+		// -(void)requestRefresh;
+		[Export ("requestRefresh")]
+		void RequestRefresh ();
+
+		// -(void)requestRefreshWithCompletion:(void (^ _Nonnull)(NSArray<BRZFeatureFlag *> * _Nullable, NSError * _Nullable))completion;
+		[Export ("requestRefreshWithCompletion:")]
+		void RequestRefreshWithCompletion (Action<NSArray<BRZFeatureFlag>, NSError> completion);
+	}
+
+	// @interface BRZContentCards : NSObject
+	[BaseType (typeof(NSObject))]
+	[DisableDefaultCtor]
+	interface BRZContentCards
+	{
+		// @property (readonly, copy, nonatomic) NSDate * _Nullable lastUpdate;
+		[NullAllowed, Export ("lastUpdate", ArgumentSemantic.Copy)]
+		NSDate LastUpdate { get; }
+
+		//  (readonly, copy, nonatomic) NSArray<BRZContentCardRaw *> * _Nonnull cards;
+		[Export ("cards", ArgumentSemantic.Copy)]
+		BRZContentCardRaw[] Cards { get; }
+
+		//  (readonly, copy, nonatomic) NSArray<BRZContentCardRaw *> * _Nonnull unviewedCards;
+		[Export ("unviewedCards", ArgumentSemantic.Copy)]
+		BRZContentCardRaw[] UnviewedCards { get; }
+
+		// -(void)requestRefresh;
+		[Export ("requestRefresh")]
+		void RequestRefresh ();
+
+		// -(void)requestRefreshWithCompletion:(void (^ _Nonnull)(NSArray<BRZContentCardRaw *> * _Nullable, NSError * _Nullable))completion;
+		[Export ("requestRefreshWithCompletion:")]
+		void RequestRefreshWithCompletion (Action<NSArray<BRZContentCardRaw>, NSError> completion);
+
+		// -(BRZCancellable * _Nonnull)subscribeToUpdates:(void (^ _Nonnull)(NSArray<BRZContentCardRaw *> * _Nonnull))update __attribute__((warn_unused_result("")));
+		[Export ("subscribeToUpdates:")]
+		BRZCancellable SubscribeToUpdates (Action<NSArray<BRZContentCardRaw>> update);
 	}
 
 	// @interface BRZContentCardRaw : NSObject
@@ -1368,34 +1319,120 @@ namespace BrazeKit
 		double ImageAspectRatio { get; set; }
 	}
 
-	// @interface BRZContentCards : NSObject
+	// @interface BRZConfiguration : NSObject
+	[BaseType (typeof(NSObject))]
+	interface BRZConfiguration
+	{
+		// @property (nonatomic, strong) BRZConfigurationApi * _Nonnull api;
+		[Export ("api", ArgumentSemantic.Strong)]
+		BRZConfigurationApi Api { get; set; }
+
+		// @property (nonatomic, strong) BRZConfigurationPush * _Nonnull push;
+		[Export ("push", ArgumentSemantic.Strong)]
+		BRZConfigurationPush Push { get; set; }
+
+		// @property (nonatomic, strong) BRZConfigurationLocation * _Nonnull location;
+		[Export ("location", ArgumentSemantic.Strong)]
+		BRZConfigurationLocation Location { get; set; }
+
+		// @property (nonatomic, strong) BRZConfigurationLogger * _Nonnull logger;
+		[Export ("logger", ArgumentSemantic.Strong)]
+		BRZConfigurationLogger Logger { get; set; }
+
+		// @property (nonatomic) NSTimeInterval sessionTimeout;
+		[Export ("sessionTimeout")]
+		double SessionTimeout { get; set; }
+
+		// @property (nonatomic) NSTimeInterval triggerMinimumTimeInterval;
+		[Export ("triggerMinimumTimeInterval")]
+		double TriggerMinimumTimeInterval { get; set; }
+
+		// @property (nonatomic) BOOL useUUIDAsDeviceId;
+		[Export ("useUUIDAsDeviceId")]
+		bool UseUUIDAsDeviceId { get; set; }
+
+		// @property (nonatomic) BOOL forwardUniversalLinks;
+		[Export ("forwardUniversalLinks")]
+		bool ForwardUniversalLinks { get; set; }
+
+		// @property (nonatomic) BOOL optInWhenPushAuthorized;
+		[Export ("optInWhenPushAuthorized")]
+		bool OptInWhenPushAuthorized { get; set; }
+
+		// @property (nonatomic) uint64_t tvOSPersistedSizeLimit;
+		[Export ("tvOSPersistedSizeLimit")]
+		ulong TvOSPersistedSizeLimit { get; set; }
+
+		// @property (copy, nonatomic) NSArray<NSString *> * _Nonnull ephemeralEvents;
+		[Export ("ephemeralEvents", ArgumentSemantic.Copy)]
+		string[] EphemeralEvents { get; set; }
+
+		// -(instancetype _Nonnull)initWithApiKey:(NSString * _Nonnull)apiKey endpoint:(NSString * _Nonnull)endpoint __attribute__((objc_designated_initializer));
+		[Export ("initWithApiKey:endpoint:")]
+		[DesignatedInitializer]
+		NativeHandle Constructor (string apiKey, string endpoint);
+
+		//  (copy, nonatomic) NSArray<BRZDeviceProperty *> * _Nonnull devicePropertyAllowList;
+		[Export ("devicePropertyAllowList", ArgumentSemantic.Copy)]
+		BRZDeviceProperty[] DevicePropertyAllowList { get; set; }
+	}
+
+	// @interface BRZCancellable : NSObject
 	[BaseType (typeof(NSObject))]
 	[DisableDefaultCtor]
-	interface BRZContentCards
+	interface BRZCancellable
 	{
-		// @property (readonly, copy, nonatomic) NSDate * _Nullable lastUpdate;
-		[NullAllowed, Export ("lastUpdate", ArgumentSemantic.Copy)]
-		NSDate LastUpdate { get; }
+		// -(void)cancel;
+		[Export ("cancel")]
+		void Cancel ();
 
-		//  (readonly, copy, nonatomic) NSArray<BRZContentCardRaw *> * _Nonnull cards;
-		[Export ("cards", ArgumentSemantic.Copy)]
-		BRZContentCardRaw[] Cards { get; }
+		// @property (readonly, nonatomic, strong, class) BRZCancellable * _Nonnull empty;
+		[Static]
+		[Export ("empty", ArgumentSemantic.Strong)]
+		BRZCancellable Empty { get; }
 
-		//  (readonly, copy, nonatomic) NSArray<BRZContentCardRaw *> * _Nonnull unviewedCards;
-		[Export ("unviewedCards", ArgumentSemantic.Copy)]
-		BRZContentCardRaw[] UnviewedCards { get; }
+	}
 
-		// -(void)requestRefresh;
-		[Export ("requestRefresh")]
-		void RequestRefresh ();
+	// @interface BRZWebViewController : UIViewController <WKNavigationDelegate, WKUIDelegate>
+	[BaseType (typeof(UIViewController))]
+	interface BRZWebViewController : IWKNavigationDelegate, IWKUIDelegate
+	{
+		// @property (copy, nonatomic) NSURL * _Nullable url;
+		[NullAllowed, Export ("url", ArgumentSemantic.Copy)]
+		NSUrl Url { get; set; }
 
-		// -(void)requestRefreshWithCompletion:(void (^ _Nonnull)(NSArray<BRZContentCardRaw *> * _Nullable, NSError * _Nullable))completion;
-		[Export ("requestRefreshWithCompletion:")]
-		void RequestRefreshWithCompletion (Action<NSArray<BRZContentCardRaw>, NSError> completion);
+		// @property (nonatomic) BOOL animateDismissal;
+		[Export ("animateDismissal")]
+		bool AnimateDismissal { get; set; }
 
-		// -(BRZCancellable * _Nonnull)subscribeToUpdates:(void (^ _Nonnull)(NSArray<BRZContentCardRaw *> * _Nonnull))update __attribute__((warn_unused_result("")));
-		[Export ("subscribeToUpdates:")]
-		BRZCancellable SubscribeToUpdates (Action<NSArray<BRZContentCardRaw>> update);
+		// @property (copy, nonatomic) void (^ _Nullable)(NSURL * _Nonnull) systemOpenURL;
+		[NullAllowed, Export ("systemOpenURL", ArgumentSemantic.Copy)]
+		Action<NSUrl> SystemOpenURL { get; set; }
+
+		// @property (nonatomic) BOOL openNewWindowLinksInBrowser;
+		[Export ("openNewWindowLinksInBrowser")]
+		bool OpenNewWindowLinksInBrowser { get; set; }
+		// -(void)webView:(WKWebView * _Nonnull)webView decidePolicyForNavigationAction:(WKNavigationAction * _Nonnull)navigationAction decisionHandler:(void (^ _Nonnull)(WKNavigationActionPolicy))decisionHandler __attribute__((swift_async("not_swift_private", 3)));
+		[Export ("webView:decidePolicyForNavigationAction:decisionHandler:")]
+		void WebView (WKWebView webView, WKNavigationAction navigationAction, Action<WKNavigationActionPolicy> decisionHandler);
+
+		// -(void)webView:(WKWebView * _Nonnull)webView didFinishNavigation:(WKNavigation * _Null_unspecified)navigation;
+		[Export ("webView:didFinishNavigation:")]
+		void WebView (WKWebView webView, WKNavigation navigation);
+
+		// -(void)webView:(WKWebView * _Nonnull)webView didFailProvisionalNavigation:(WKNavigation * _Null_unspecified)navigation withError:(NSError * _Nonnull)error;
+		[Export ("webView:didFailProvisionalNavigation:withError:")]
+		void WebView (WKWebView webView, WKNavigation navigation, NSError error);
+
+		// -(WKWebView * _Nullable)webView:(WKWebView * _Nonnull)webView createWebViewWithConfiguration:(WKWebViewConfiguration * _Nonnull)configuration forNavigationAction:(WKNavigationAction * _Nonnull)navigationAction windowFeatures:(WKWindowFeatures * _Nonnull)windowFeatures __attribute__((warn_unused_result("")));
+		[Export ("webView:createWebViewWithConfiguration:forNavigationAction:windowFeatures:")]
+		[return: NullAllowed]
+		WKWebView WebView (WKWebView webView, WKWebViewConfiguration configuration, WKNavigationAction navigationAction, WKWindowFeatures windowFeatures);
+
+		// -(instancetype _Nonnull)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil __attribute__((objc_designated_initializer));
+		[Export ("initWithNibName:bundle:")]
+		[DesignatedInitializer]
+		NativeHandle Constructor ([NullAllowed] string nibNameOrNil, [NullAllowed] NSBundle nibBundleOrNil);
 	}
 
 	// @protocol BrazeInAppMessageWindowType
@@ -1484,6 +1521,20 @@ namespace BrazeKit
 		NativeHandle Constructor (UIColor color);
 	}
 
+	// @interface BRZConfigurationPush : NSObject
+	[BaseType (typeof(NSObject))]
+	interface BRZConfigurationPush
+	{
+		// @property (copy, nonatomic) NSString * _Nullable appGroup;
+		[NullAllowed, Export ("appGroup")]
+		string AppGroup { get; set; }
+
+		// @property (nonatomic, strong) BRZConfigurationPushAutomation * _Nonnull automation;
+		[Export ("automation", ArgumentSemantic.Strong)]
+		BRZConfigurationPushAutomation Automation { get; set; }
+
+	}
+
 	// @interface BRZConfigurationLogger : NSObject
 	[BaseType (typeof(NSObject))]
 	interface BRZConfigurationLogger
@@ -1532,20 +1583,6 @@ namespace BrazeKit
 
 	}
 
-	// @interface BRZConfigurationPush : NSObject
-	[BaseType (typeof(NSObject))]
-	interface BRZConfigurationPush
-	{
-		// @property (copy, nonatomic) NSString * _Nullable appGroup;
-		[NullAllowed, Export ("appGroup")]
-		string AppGroup { get; set; }
-
-		// @property (nonatomic, strong) BRZConfigurationPushAutomation * _Nonnull automation;
-		[Export ("automation", ArgumentSemantic.Strong)]
-		BRZConfigurationPushAutomation Automation { get; set; }
-
-	}
-
 	// @interface BRZDeviceProperty : NSObject
 	[BaseType (typeof(NSObject))]
 	[DisableDefaultCtor]
@@ -1590,12 +1627,6 @@ namespace BrazeKit
 		[Static]
 		[Export ("pushAuthStatus", ArgumentSemantic.Strong)]
 		BRZDeviceProperty PushAuthStatus { get; }
-
-		// @property (readonly, nonatomic, strong, class) BRZDeviceProperty * _Nonnull pushDisplayOptions __attribute__((deprecated("Push display options are no longer supported. Providing this value will have no effect.")));
-		[Obsolete("Push display options are no longer supported. Providing this value will have no effect.")]
-		[Static]
-		[Export ("pushDisplayOptions", ArgumentSemantic.Strong)]
-		BRZDeviceProperty PushDisplayOptions { get; }
 		// @property (readonly, nonatomic) NSUInteger hash;
 		[Export ("hash")]
 		nuint Hash { get; }
@@ -1693,6 +1724,37 @@ namespace BrazeKit
 		BRZCancellable WithLocalAssets (BRZInAppMessageRaw message, NSUrl destinationURL, Action<BRZInAppMessageRaw, NSError> completionHandler);
 	}
 
+	// @interface BRZInAppMessageRawButtonTheme : NSObject
+	[BaseType (typeof(NSObject))]
+	interface BRZInAppMessageRawButtonTheme
+	{
+		// @property (readonly, nonatomic, strong, class) BRZInAppMessageRawButtonTheme * _Nonnull defaultLight;
+		[Static]
+		[Export ("defaultLight", ArgumentSemantic.Strong)]
+		BRZInAppMessageRawButtonTheme DefaultLight { get; }
+
+		// @property (readonly, nonatomic, strong, class) BRZInAppMessageRawButtonTheme * _Nonnull defaultDark;
+		[Static]
+		[Export ("defaultDark", ArgumentSemantic.Strong)]
+		BRZInAppMessageRawButtonTheme DefaultDark { get; }
+
+		// @property (nonatomic, strong) BRZInAppMessageRawColor * _Nonnull textColor;
+		[Export ("textColor", ArgumentSemantic.Strong)]
+		BRZInAppMessageRawColor TextColor { get; set; }
+
+		// @property (nonatomic, strong) BRZInAppMessageRawColor * _Nonnull borderColor;
+		[Export ("borderColor", ArgumentSemantic.Strong)]
+		BRZInAppMessageRawColor BorderColor { get; set; }
+
+		// @property (nonatomic, strong) BRZInAppMessageRawColor * _Nonnull backgroundColor;
+		[Export ("backgroundColor", ArgumentSemantic.Strong)]
+		BRZInAppMessageRawColor BackgroundColor { get; set; }
+		// @property (readonly, nonatomic) NSUInteger hash;
+		[Export ("hash")]
+		nuint Hash { get; }
+
+	}
+
 	// @interface BRZInAppMessageRawTheme : NSObject
 	[BaseType (typeof(NSObject))]
 	interface BRZInAppMessageRawTheme: INativeObject
@@ -1738,37 +1800,6 @@ namespace BrazeKit
 		// @property (copy, nonatomic) NSArray<BRZInAppMessageRawButtonTheme *> * _Nonnull buttons;
 		[Export ("buttons", ArgumentSemantic.Copy)]
 		BRZInAppMessageRawButtonTheme[] Buttons { get; set; }
-		// @property (readonly, nonatomic) NSUInteger hash;
-		[Export ("hash")]
-		nuint Hash { get; }
-
-	}
-
-	// @interface BRZInAppMessageRawButtonTheme : NSObject
-	[BaseType (typeof(NSObject))]
-	interface BRZInAppMessageRawButtonTheme
-	{
-		// @property (readonly, nonatomic, strong, class) BRZInAppMessageRawButtonTheme * _Nonnull defaultLight;
-		[Static]
-		[Export ("defaultLight", ArgumentSemantic.Strong)]
-		BRZInAppMessageRawButtonTheme DefaultLight { get; }
-
-		// @property (readonly, nonatomic, strong, class) BRZInAppMessageRawButtonTheme * _Nonnull defaultDark;
-		[Static]
-		[Export ("defaultDark", ArgumentSemantic.Strong)]
-		BRZInAppMessageRawButtonTheme DefaultDark { get; }
-
-		// @property (nonatomic, strong) BRZInAppMessageRawColor * _Nonnull textColor;
-		[Export ("textColor", ArgumentSemantic.Strong)]
-		BRZInAppMessageRawColor TextColor { get; set; }
-
-		// @property (nonatomic, strong) BRZInAppMessageRawColor * _Nonnull borderColor;
-		[Export ("borderColor", ArgumentSemantic.Strong)]
-		BRZInAppMessageRawColor BorderColor { get; set; }
-
-		// @property (nonatomic, strong) BRZInAppMessageRawColor * _Nonnull backgroundColor;
-		[Export ("backgroundColor", ArgumentSemantic.Strong)]
-		BRZInAppMessageRawColor BackgroundColor { get; set; }
 		// @property (readonly, nonatomic) NSUInteger hash;
 		[Export ("hash")]
 		nuint Hash { get; }
@@ -1889,9 +1920,42 @@ namespace BrazeKit
 		[Export ("hash")]
 		nuint Hash { get; }
 
+		//  (readonly, nonatomic) enum BRZNotificationsPayloadType type;
+		[Export ("type")]
+		BRZNotificationsPayloadType Type { get; }
+
 		//  (readonly, nonatomic, strong) NSNumber * _Nullable badge;
 		[NullAllowed, Export ("badge", ArgumentSemantic.Strong)]
 		NSNumber Badge { get; }
+	}
+
+	// @interface BRZNotificationsPayloadTypeFilter : NSObject
+	[BaseType (typeof(NSObject))]
+	[DisableDefaultCtor]
+	interface BRZNotificationsPayloadTypeFilter
+	{
+		// @property (readonly, nonatomic) NSInteger rawValue;
+		[Export ("rawValue")]
+		nint RawValue { get; }
+
+		// @property (readonly, nonatomic, strong, class) BRZNotificationsPayloadTypeFilter * _Nonnull received;
+		[Static]
+		[Export ("received", ArgumentSemantic.Strong)]
+		BRZNotificationsPayloadTypeFilter Received { get; }
+
+		// @property (readonly, nonatomic, strong, class) BRZNotificationsPayloadTypeFilter * _Nonnull opened;
+		[Static]
+		[Export ("opened", ArgumentSemantic.Strong)]
+		BRZNotificationsPayloadTypeFilter Opened { get; }
+
+		// -(instancetype _Nonnull)initWithRawValue:(NSInteger)rawValue __attribute__((objc_designated_initializer));
+		[Export ("initWithRawValue:")]
+		[DesignatedInitializer]
+		NativeHandle Constructor (nint rawValue);
+
+		// @property (readonly, nonatomic) NSUInteger hash;
+		[Export ("hash")]
+		nuint Hash { get; }
 	}
 
 	// @interface BRZConfigurationPushAutomation : NSObject
@@ -1985,6 +2049,11 @@ namespace BrazeKit
 		[Static]
 		[Export ("airbridge", ArgumentSemantic.Strong)]
 		BRZSDKMetadata Airbridge { get; }
+
+		// @property (readonly, nonatomic, strong, class) BRZSDKMetadata * _Nonnull applevisionpro;
+		[Static]
+		[Export ("applevisionpro", ArgumentSemantic.Strong)]
+		BRZSDKMetadata Applevisionpro { get; }
 
 		// @property (readonly, nonatomic, strong, class) BRZSDKMetadata * _Nonnull appsflyer;
 		[Static]

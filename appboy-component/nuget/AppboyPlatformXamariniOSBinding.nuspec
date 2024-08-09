@@ -15,7 +15,6 @@
   </metadata>
   <files>
     <file src="../lib/ios-unified/AppboyPlatformXamariniOSBinding.dll" target="lib/Xamarin.iOS" />
-    <file src="../../Public/braze-logo.png" target="images/" />
     <file src="../../Public/LICENSE.txt" target="" />
   </files>
 </package>

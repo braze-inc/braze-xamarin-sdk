@@ -31,7 +31,6 @@
   <files>
     <file src="../lib/android/AppboyPlatform.AndroidBinding.dll" target="lib/MonoAndroid12.0" />
     <file src="../lib/android/AppboyPlatform.AndroidCore.dll" target="lib/MonoAndroid12.0" />
-    <file src="../../Public/braze-logo.png" target="images/" />
     <file src="../../Public/LICENSE.txt" target="" />
   </files>
 </package>

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net7.0-ios</TargetFrameworks>
+		<TargetFrameworks>net8.0-ios</TargetFrameworks>
 		
 		<OutputType>Exe</OutputType>
 		<UseMaui>true</UseMaui>
@@ -16,22 +16,36 @@
 		<!-- Versions -->
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
 		<ApplicationVersion>1</ApplicationVersion>
-		<SupportedOSPlatformVersion>11.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion>12.0</SupportedOSPlatformVersion>
 	</PropertyGroup>
 
 	<PropertyGroup>
 	  <CreatePackage>false</CreatePackage>
 	</PropertyGroup>
 
+	<!-- Code Signing -->
 	<PropertyGroup>
 		<CodesignProvision>Automatic</CodesignProvision>
-		<CodesignKey>iPhone Developer</CodesignKey>
 		<CodesignEntitlements>Platforms\iOS\Entitlements.plist</CodesignEntitlements>
 	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+		<CodesignKey>iPhone Developer</CodesignKey>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)' == 'Release'">
+		<CodesignKey>iPhone Distribution</CodesignKey>
+	</PropertyGroup>
+
+	<!-- Maui Packages -->
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.60" />
+	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\..\..\src\ios-brazekit\Braze.BrazeKit.csproj" />
+		<ProjectReference Include="..\..\..\..\src\ios-brazelocation\Braze.BrazeLocation.csproj" />
 		<ProjectReference Include="..\..\..\..\src\ios-brazekitcompat\Braze.BrazeKitCompat.csproj" />
 		<ProjectReference Include="..\..\..\..\src\ios-brazeuicompat\Braze.BrazeUICompat.csproj" />
+		<ProjectReference Include="..\..\..\..\src\ios-sdwebimage\Braze.SDWebImage.csproj" />
 	</ItemGroup>
 	<!-- <ItemGroup>
 		<PackageReference Include="Braze.iOS.BrazeKitCompat" Version="*" />

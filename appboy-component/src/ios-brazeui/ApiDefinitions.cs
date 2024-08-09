@@ -61,6 +61,40 @@ namespace BrazeUI
 		void Dismiss ();
 	}
 
+	// @interface BrazeInAppMessageUIPresentationContextRaw : NSObject
+	[BaseType (typeof(NSObject))]
+	[DisableDefaultCtor]
+	interface BrazeInAppMessageUIPresentationContextRaw
+	{
+		// @property (nonatomic, strong) BRZInAppMessageRaw * _Nonnull message;
+		[Export ("message", ArgumentSemantic.Strong)]
+		BRZInAppMessageRaw Message { get; set; }
+
+		// @property (nonatomic) UIInterfaceOrientation preferredOrientation;
+		[Export ("preferredOrientation", ArgumentSemantic.Assign)]
+		UIInterfaceOrientation PreferredOrientation { get; set; }
+
+		// @property (nonatomic) UIWindowLevel windowLevel;
+		[Export ("windowLevel")]
+		double WindowLevel { get; set; }
+
+		// @property (nonatomic, strong) SWIFT_AVAILABILITY(tvos,introduced=13.0) UIWindowScene * windowScene __attribute__((availability(tvos, introduced=13.0))) __attribute__((availability(ios, introduced=13.0)));
+		[Export ("windowScene", ArgumentSemantic.Strong)]
+		UIWindowScene WindowScene { get; set; }
+
+		// @property (nonatomic, strong) UIViewController * _Nullable preferencesProxy;
+		[NullAllowed, Export ("preferencesProxy", ArgumentSemantic.Strong)]
+		UIViewController PreferencesProxy { get; set; }
+
+		//  (nonatomic, strong) UIView * _Nullable customView;
+		[NullAllowed, Export ("customView", ArgumentSemantic.Strong)]
+		UIView CustomView { get; set; }
+
+		//  (nonatomic) enum BRZInAppMessageUIStatusBarHideBehavior statusBarHideBehavior;
+		[Export ("statusBarHideBehavior", ArgumentSemantic.Assign)]
+		BRZInAppMessageUIStatusBarHideBehavior StatusBarHideBehavior { get; set; }
+	}
+
 	// @interface BRZUIResources : NSObject
 	[BaseType (typeof(NSObject))]
 	interface BRZUIResources
@@ -204,6 +238,10 @@ namespace BrazeUI
 		// @optional -(BOOL)inAppMessage:(BrazeInAppMessageUI * _Nonnull)ui shouldProcess:(enum BRZInAppMessageRawClickAction)clickAction url:(NSURL * _Nullable)url buttonId:(NSString * _Nullable)buttonId message:(BRZInAppMessageRaw * _Nonnull)message view:(UIView * _Nonnull)view __attribute__((warn_unused_result("")));
 		[Export ("inAppMessage:shouldProcess:url:buttonId:message:view:")]
 		bool ShouldProcess (BrazeInAppMessageUI ui, BRZInAppMessageRawClickAction clickAction, [NullAllowed] NSUrl url, [NullAllowed] string buttonId, BRZInAppMessageRaw message, UIView view);
+
+		// @optional -(void)inAppMessage:(BrazeInAppMessageUI * _Nonnull)ui prepareWith:(BrazeInAppMessageUIPresentationContextRaw * _Nonnull)context;
+		[Export ("inAppMessage:prepareWith:")]
+		void PrepareWith (BrazeInAppMessageUI ui, BrazeInAppMessageUIPresentationContextRaw context);
 
 	}
 }

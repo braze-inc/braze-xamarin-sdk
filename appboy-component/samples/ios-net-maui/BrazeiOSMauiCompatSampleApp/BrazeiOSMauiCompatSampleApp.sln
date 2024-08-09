@@ -9,6 +9,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Braze.BrazeKitCompat", "..\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Braze.BrazeUICompat", "..\..\..\src\ios-brazeuicompat\Braze.BrazeUICompat.csproj", "{C190E563-1D68-4D7C-9C65-E82ACFE611D2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Braze.BrazeKit", "..\..\..\src\ios-brazekit\Braze.BrazeKit.csproj", "{D2014CD7-7B00-4ECB-BC4E-19D55C1B8C6D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Braze.BrazeLocation", "..\..\..\src\ios-brazelocation\Braze.BrazeLocation.csproj", "{FFDE1154-03FB-4F98-B66E-8DDBE16DFE6E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Braze.SDWebImage", "..\..\..\src\ios-sdwebimage\Braze.SDWebImage.csproj", "{57386FE4-3DED-4D91-A263-EFF6FF4FA23D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +33,18 @@ Global
 		{C190E563-1D68-4D7C-9C65-E82ACFE611D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C190E563-1D68-4D7C-9C65-E82ACFE611D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C190E563-1D68-4D7C-9C65-E82ACFE611D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2014CD7-7B00-4ECB-BC4E-19D55C1B8C6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2014CD7-7B00-4ECB-BC4E-19D55C1B8C6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2014CD7-7B00-4ECB-BC4E-19D55C1B8C6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2014CD7-7B00-4ECB-BC4E-19D55C1B8C6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFDE1154-03FB-4F98-B66E-8DDBE16DFE6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFDE1154-03FB-4F98-B66E-8DDBE16DFE6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFDE1154-03FB-4F98-B66E-8DDBE16DFE6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFDE1154-03FB-4F98-B66E-8DDBE16DFE6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57386FE4-3DED-4D91-A263-EFF6FF4FA23D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57386FE4-3DED-4D91-A263-EFF6FF4FA23D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57386FE4-3DED-4D91-A263-EFF6FF4FA23D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57386FE4-3DED-4D91-A263-EFF6FF4FA23D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net6.0-android33.0</TargetFramework>
+    <TargetFramework>net8.0-android34.0</TargetFramework>
     <SupportedOSPlatformVersion>21</SupportedOSPlatformVersion>
     <OutputType>Exe</OutputType>
     <Nullable>enable</Nullable>
@@ -15,10 +15,10 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' " />
   <ItemGroup>
-    <PackageReference Include="Xamarin.Kotlin.StdLib" Version="1.8.0.1" />
-    <PackageReference Include="Xamarin.KotlinX.Coroutines.Android" Version="1.6.4.2" />
-    <PackageReference Include="Xamarin.Firebase.Messaging" Version="123.1.1" />
-    <PackageReference Include="Xamarin.AndroidX.SwipeRefreshLayout" Version="1.1.0.11" />
+    <PackageReference Include="Xamarin.Kotlin.StdLib" Version="2.0.0.1" />
+    <PackageReference Include="Xamarin.KotlinX.Coroutines.Android" Version="1.8.1.1" />
+    <PackageReference Include="Xamarin.Firebase.Messaging" Version="124.0.0.1" />
+    <PackageReference Include="Xamarin.AndroidX.SwipeRefreshLayout" Version="1.1.0.22" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Xamarin.Firebase.Messaging" />

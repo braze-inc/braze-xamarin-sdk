@@ -84,6 +84,13 @@ namespace BrazeKit
 	}
 
 	[Native]
+	public enum BRZNotificationsPayloadType : long
+	{
+		Received = 0,
+		Opened = 1
+	}
+
+	[Native]
 	public enum _COMPAT_ABKRequestProcessingPolicy : long
 	{
 		ManualRequestProcessing = 0,

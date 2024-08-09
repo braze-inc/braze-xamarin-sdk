@@ -1,5 +1,17 @@
 ⚠️ In version 4.0.0, we changed the iOS bridge from AppboyKit, which is written in Objective-C, to the new [Swift SDK](https://github.com/braze-inc/braze-swift-sdk). If you are upgrading from a version below 4.0.0 to a version above 4.0.0, please read [the instructions](https://github.com/braze-inc/braze-xamarin-sdk/blob/master/CHANGELOG.md#400) to ensure a smooth transition and backward compatibility.
 
+## 6.0.0
+
+##### Breaking
+- Added support for .NET 8.0 for the iOS and Android bindings as .NET 7.0 has reached end of life support.
+  - This removes support for .NET 7.0.
+- Updated the Android binding from [Braze Android 30.4.0 to 32.0.0](https://github.com/braze-inc/braze-android-sdk/compare/v30.4.0...v32.0.0#diff-06572a96a58dc510037d5efa622f9bec8519bc1beab13c9f251e97e657a9d4ed).
+- Updated the iOS binding from [Braze Swift SDK 9.0.0 to 10.0.0](https://github.com/braze-inc/braze-swift-sdk/compare/9.0.0...10.0.0#diff-06572a96a58dc510037d5efa622f9bec8519bc1beab13c9f251e97e657a9d4ed).
+  - When subscribing to push notification events, the subscription will be triggered on iOS for both "Push Received" and "Push Opened", instead of only for "Push Opened" events.
+
+##### Fixed
+- Removed the files under the `Modules` directories in the XCFrameworks to reduce the final size of the distributed application.
+
 ## 5.0.0
 
 ##### Breaking

@@ -50,6 +50,25 @@ for module in "${MODULES[@]}"; do
   copy_dynamic_xcframework "$module"
 done
 
+remove_swift_compiler_generated_files() {
+  local module="$1"
+  local lowercaseModule
+  lowercaseModule=$(echo "$module" | tr '[:upper:]' '[:lower:]')
+  local moduleDir="$SCRIPT_DIR/../ios-$lowercaseModule"
+  # Find all <Module>.swiftmodule directories in the xcframework
+  local swiftModuleDirs
+  swiftModuleDirs=$(find "$moduleDir/$module.xcframework" -type d -name "$module.swiftmodule")
+  # Delete all <Module>.swiftmodule directories
+  for swiftModuleDir in $swiftModuleDirs; do
+    echo "  · $swiftModuleDir"
+    rm -rf "$swiftModuleDir"
+  done
+}
+for module in "${MODULES[@]}"; do
+  echo "→ Removing Swift compiler generated files for $module"
+  remove_swift_compiler_generated_files "$module"
+done
+
 # - Cleanup run
 echo "→ Cleaning up"
 rm -rf artifacts
