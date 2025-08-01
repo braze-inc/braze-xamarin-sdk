@@ -1,20 +1,20 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net8.0-ios17.2</TargetFramework>
+    <TargetFramework>net9.0-ios18.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>true</ImplicitUsings>
     <IsBindingProject>true</IsBindingProject>
-    <SupportedOSPlatformVersion>12.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion>12.2</SupportedOSPlatformVersion>
   </PropertyGroup>
 
   <Target Name="Check XCFramework" BeforeTargets="_GenerateBindings">
-    <Exec 
-      Command="[[ ! -d 'BrazeUICompat.xcframework' ]] &amp;&amp; ../scripts/download-xcframeworks.sh || ../scripts/check-xcframeworks.sh" 
-      Condition=" '$(OS)' != 'Windows_NT' " 
+    <Exec
+      Command="[[ ! -d 'BrazeUICompat.xcframework' ]] &amp;&amp; ../scripts/download-xcframeworks.sh || ../scripts/check-xcframeworks.sh"
+      Condition=" '$(OS)' != 'Windows_NT' "
     />
-    <Exec 
-      Command="if (!(Test-Path 'BrazeUICompat.xcframework')) { ..\scripts\download-xcframeworks.ps1 } else { ..\scripts\check-xcframeworks.ps1 }" 
-      Condition=" '$(OS)' == 'Windows_NT' " 
+    <Exec
+      Command="if (!(Test-Path 'BrazeUICompat.xcframework')) { ..\scripts\download-xcframeworks.ps1 } else { ..\scripts\check-xcframeworks.ps1 }"
+      Condition=" '$(OS)' == 'Windows_NT' "
     />
   </Target>
 
@@ -27,7 +27,7 @@
     <ProjectReference Include="..\ios-brazekitcompat\Braze.BrazeKitCompat.csproj" />
     <ProjectReference Include="..\ios-sdwebimage\Braze.SDWebImage.csproj" />
   </ItemGroup>
-  
+
   <ItemGroup>
     <ObjcBindingApiDefinition Include="ApiDefinitions.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
   </ItemGroup>

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net8.0-ios</TargetFrameworks>
+		<TargetFrameworks>net9.0-ios18.0</TargetFrameworks>
 
 		<OutputType>Exe</OutputType>
 		<UseMaui>true</UseMaui>
@@ -17,7 +17,7 @@
 		<!-- Versions -->
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
 		<ApplicationVersion>1</ApplicationVersion>
-		<SupportedOSPlatformVersion>12.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion>12.2</SupportedOSPlatformVersion>
 	</PropertyGroup>
 
 	<PropertyGroup>
@@ -28,6 +28,7 @@
 	<PropertyGroup>
 		<CodesignProvision>Automatic</CodesignProvision>
 		<CodesignEntitlements>Platforms\iOS\Entitlements.plist</CodesignEntitlements>
+		<ValidateEntitlements>disable</ValidateEntitlements>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)' == 'Debug'">
 		<CodesignKey>iPhone Developer</CodesignKey>
@@ -38,7 +39,7 @@
 
 	<!-- Maui Packages -->
 	<ItemGroup>
-		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.60" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.70" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -47,6 +48,8 @@
 		<ProjectReference Include="..\..\..\..\src\ios-brazeui\Braze.BrazeUI.csproj" />
 		<ProjectReference Include="..\..\..\..\src\ios-sdwebimage\Braze.SDWebImage.csproj" />
 	</ItemGroup>
+
+	<!-- Uncomment this section to use the latest published versions of the `.nupkg` references. -->
 	<!-- <ItemGroup>
 		<PackageReference Include="Braze.iOS.BrazeKit" Version="*" />
 		<PackageReference Include="Braze.iOS.BrazeLocation" Version="*" />

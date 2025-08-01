@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>BrazePlatform.BrazeAndroidBinding</id>
-    <version>6.0.0</version>
+    <version>7.0.0</version>
     <authors>Braze</authors>
     <owners>Braze</owners>
     <projectUrl>https://github.com/braze-inc/braze-xamarin-sdk</projectUrl>
@@ -13,22 +13,22 @@
     <copyright>Copyright 2023</copyright>
     <tags>Braze Appboy</tags>
     <dependencies>
-      <group targetFramework="net8.0-android34.0">
+      <group targetFramework="net9.0-android35.0">
         <dependency id="Xamarin.AndroidX.Fragment" version="1.5.5.1" />
         <dependency id="Xamarin.AndroidX.SwipeRefreshLayout" version="1.1.0.11" />
         <dependency id="Xamarin.Firebase.Messaging" version="123.1.1" />
-        <dependency id="Xamarin.Kotlin.StdLib" version="1.8.0.1" />
-        <dependency id="Xamarin.KotlinX.Coroutines.Android" version="1.6.4.2" />
+        <dependency id="Xamarin.Kotlin.StdLib" version="2.0.21.3" />
+        <dependency id="Xamarin.KotlinX.Coroutines.Android" version="1.9.0.3" />
         <dependency id="Xamarin.AndroidX.WebKit" version="1.5.0.2" />
         <dependency id="Xamarin.AndroidX.RecyclerView" version="1.2.1.9" />
       </group>
     </dependencies>
   </metadata>
   <files>
-    <file src="../src/androidnet6/BrazeAndroidNet6Binding/bin/Debug/net8.0-android34.0/BrazeAndroidBinding.dll" target="lib/net8.0-android34.0/BrazeAndroidBinding.dll" />
-    <file src="../src/androidnet6/BrazeAndroidNet6Binding/bin/Debug/net8.0-android34.0/BrazeAndroidBinding.xml" target="lib/net8.0-android34.0/BrazeAndroidBinding.xml" />
-    <file src="../src/androidnet6/BrazeAndroidNet6Binding/android-sdk-base-32.0.0.aar" target="lib/net8.0-android34.0/android-sdk-base-32.0.0.aar" />
-    <file src="../src/androidnet6/BrazeAndroidNet6Binding/android-sdk-ui-32.0.0.aar" target="lib/net8.0-android34.0/android-sdk-ui-32.0.0.aar" />
+    <file src="../src/androidnet6/BrazeAndroidNet6Binding/bin/Debug/net9.0-android35.0/BrazeAndroidBinding.dll" target="lib/net9.0-android35.0/BrazeAndroidBinding.dll" />
+    <file src="../src/androidnet6/BrazeAndroidNet6Binding/bin/Debug/net9.0-android35.0/BrazeAndroidBinding.xml" target="lib/net9.0-android35.0/BrazeAndroidBinding.xml" />
+    <file src="../src/androidnet6/BrazeAndroidNet6Binding/android-sdk-base-37.0.0.aar" target="lib/net9.0-android35.0/android-sdk-base-37.0.0.aar" />
+    <file src="../src/androidnet6/BrazeAndroidNet6Binding/android-sdk-ui-37.0.0.aar" target="lib/net9.0-android35.0/android-sdk-ui-37.0.0.aar" />
     <file src="../../Public/LICENSE.txt" target="" />
   </files>
 </package>

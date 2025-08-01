@@ -26,6 +26,24 @@ public partial class MainPage : ContentPage
             TextColor = Colors.Black,
             HorizontalTextAlignment = TextAlignment.Center,
         };
+        var userIdEntry = new Entry
+        {
+            Placeholder = "User ID",
+            HorizontalTextAlignment = TextAlignment.Center,
+            TextColor = Colors.Black,
+            Keyboard = Keyboard.Create(KeyboardFlags.None),
+            IsTextPredictionEnabled = false,
+            TextTransform = TextTransform.None
+        };
+        var customEventEntry = new Entry
+        {
+            Placeholder = "Custom event",
+            HorizontalTextAlignment = TextAlignment.Center,
+            TextColor = Colors.Black,
+            Keyboard = Keyboard.Create(KeyboardFlags.None),
+            IsTextPredictionEnabled = false,
+            TextTransform = TextTransform.None
+        };
 
         StackLayout stackLayout = new StackLayout
         {
@@ -41,10 +59,17 @@ public partial class MainPage : ContentPage
                 },
                 SDKEnabledStateLabel,
                 UserIDLabel,
+                userIdEntry,
                 new Button
                 {
                     Text = "Change user",
                     Command = new Command(ChangeUser),
+                },
+                customEventEntry,
+                new Button
+                {
+                    Text = "Log custom event",
+                    Command = new Command(LogCustomEvent),
                 },
                 new Button
                 {
@@ -53,18 +78,13 @@ public partial class MainPage : ContentPage
                 },
                 new Button
                 {
-                    Text = "Log events and purchases",
+                    Text = "Log preset events and purchases",
                     Command = new Command(LogEventsAndPurchases),
                 },
                 new Button
                 {
                     Text = "Content Cards",
                     Command = new Command(ShowContentCards),
-                },
-                new Button
-                {
-                    Text = "In-App Message",
-                    Command = new Command(ShowInAppMessage),
                 },
                 new Button
                 {
@@ -97,12 +117,27 @@ public partial class MainPage : ContentPage
         UpdateSDKEnabledStateLabel();
         UpdateUserIDLabel();
 
+        // - Button actions
+
         void ChangeUser()
         {
-            string userId = "xam-" + (new Random().Next() % 1001);
-            App.braze?.ChangeUser(userId);
-            Console.WriteLine("→ Change user to: " + userId);
-            UpdateUserIDLabel();
+            var userId = userIdEntry.Text?.Trim();
+            if (!string.IsNullOrEmpty(userId))
+            {
+                App.braze?.ChangeUser(userId);
+                Console.WriteLine("→ Change user to: " + userId);
+                UpdateUserIDLabel();
+            }
+        }
+
+        void LogCustomEvent()
+        {
+            var eventName = customEventEntry.Text?.Trim();
+            if (!string.IsNullOrEmpty(eventName))
+            {
+                App.braze?.LogCustomEvent(eventName);
+                Console.WriteLine($"→ Logged custom event: {eventName}");
+            }
         }
 
         void SetUserProperties()
@@ -136,17 +171,6 @@ public partial class MainPage : ContentPage
                 BRZContentCardUIModalViewController contentCards = new BRZContentCardUIModalViewController(App.braze);
                 PresentViewController(contentCards);
             }
-        }
-
-        void ShowInAppMessage()
-        {
-            Console.WriteLine("→ Show In-App Message");
-            BRZInAppMessageRaw slideup = new BRZInAppMessageRaw();
-            slideup.Type = BRZInAppMessageRawType.Slideup;
-            slideup.Message = "This is the message";
-            slideup.ClickAction = BRZInAppMessageRawClickAction.Url;
-            slideup.Url = new NSUrl("http://braze.com");
-            App.inAppMessageUI?.PresentMessage(slideup);
         }
 
         void FlushData()
@@ -209,21 +233,12 @@ public partial class MainPage : ContentPage
 
         void UpdateUserIDLabel(bool reset = false)
         {
-            if (reset)
+            var userId = App.braze?.User.Identifier;
+            if (userId == null || reset)
             {
-                UserIDLabel.Text = "User ID: <none>";
-                return;
+                userId = "<none>";
             }
-            App.braze?.User.IdOnQueue(DispatchQueue.MainQueue, (userID) => {
-                if (userID != null)
-                {
-                    UserIDLabel.Text = "User ID: " + userID;
-                } else
-                {
-                    UserIDLabel.Text = "User ID: <none>";
-                }
-                
-            });
+            UserIDLabel.Text = "User ID: " + userId;
         }
 
     }

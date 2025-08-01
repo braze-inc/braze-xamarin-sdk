@@ -1,5 +1,16 @@
 ⚠️ In version 4.0.0, we changed the iOS bridge from AppboyKit, which is written in Objective-C, to the new [Swift SDK](https://github.com/braze-inc/braze-swift-sdk). If you are upgrading from a version below 4.0.0 to a version above 4.0.0, please read [the instructions](https://github.com/braze-inc/braze-xamarin-sdk/blob/master/CHANGELOG.md#400) to ensure a smooth transition and backward compatibility.
 
+## 7.0.0
+
+##### Breaking
+- Added support for .NET 9.0 for the iOS and Android bindings.
+  - This removes support for .NET 8.0.
+  - This requires a [minimum version of iOS 12.2](https://learn.microsoft.com/en-us/dotnet/maui/whats-new/dotnet-9?view=net-maui-9.0).
+- Updated the Android binding from [Braze Android 32.0.0 to 37.0.0](https://github.com/braze-inc/braze-android-sdk/compare/v32.0.0...v37.0.0#diff-06572a96a58dc510037d5efa622f9bec8519bc1beab13c9f251e97e657a9d4ed).
+- Updated the iOS binding from [Braze Swift SDK 10.0.0 to 12.1.0](https://github.com/braze-inc/braze-swift-sdk/compare/10.0.0...12.1.0#diff-06572a96a58dc510037d5efa622f9bec8519bc1beab13c9f251e97e657a9d4ed).
+
+> **_NOTE:_**  This release contains APIs for the Banners feature but is not currently fully supported by this SDK. If you wish to use Banners in your .NET MAUI app, please contact your Customer Support Manager before integrating into your application.
+
 ## 6.0.0
 
 ##### Breaking

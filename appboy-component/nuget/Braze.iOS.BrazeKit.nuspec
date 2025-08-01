@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>Braze.iOS.BrazeKit</id>
-    <version>6.0.0</version>
+    <version>7.0.0</version>
     <authors>Braze</authors>
     <owners>Braze</owners>
     <projectUrl>https://github.com/braze-inc/braze-xamarin-sdk</projectUrl>
@@ -13,14 +13,14 @@
     <copyright>Copyright 2024</copyright>
     <tags>Braze Appboy</tags>
     <dependencies>
-      <group targetFramework="net8.0-ios17.2" />
+      <group targetFramework="net9.0-ios18.0" />
     </dependencies>
   </metadata>
   <files>
-    <file src="../lib/ios-brazekit/Braze.BrazeKit.dll" target="lib/net8.0-ios17.2" />
-    <file src="../lib/ios-brazekit/Braze.BrazeKit.pdb" target="lib/net8.0-ios17.2" />
+    <file src="../lib/ios-brazekit/Braze.BrazeKit.dll" target="lib/net9.0-ios18.0" />
+    <file src="../lib/ios-brazekit/Braze.BrazeKit.pdb" target="lib/net9.0-ios18.0" />
     <file src="../lib/ios-brazekit/Braze.BrazeKit.resources/**/*" target="res/ios" />
-    <file src="../lib/ios-brazekit/Braze.iOS.BrazeKit.targets" target="build/net8.0-ios17.2" />
+    <file src="../lib/ios-brazekit/Braze.iOS.BrazeKit.targets" target="build/net9.0-ios18.0" />
     <file src="../../Public/LICENSE.txt" target="" />
   </files>
 </package>

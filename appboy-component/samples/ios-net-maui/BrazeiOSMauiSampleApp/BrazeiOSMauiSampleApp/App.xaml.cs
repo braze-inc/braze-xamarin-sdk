@@ -16,11 +16,14 @@ public partial class App : Application
     private BrazeSDKAuthDelegate? sdkAuthDelegate = null;
 
     public App()
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
         SetupBraze();
+    }
 
-        MainPage = new NavigationPage(new MainPage());
+    protected override Window CreateWindow(IActivationState? activationState)
+    {
+        return new Window(new NavigationPage(new MainPage()));
     }
 
     void SetupBraze()
@@ -38,7 +41,7 @@ public partial class App : Application
 
         // - Automatic push notifications support
         configuration.Push.Automation = new BRZConfigurationPushAutomation(true);
-        configuration.Push.Automation.RequestAuthorizationAtLaunch = false;
+        configuration.Push.Automation.RequestAuthorizationAtLaunch = true;
 
         // - Universal link forwarding
         configuration.ForwardUniversalLinks = true;
@@ -72,10 +75,8 @@ class SDKAuthenticationDelegate : BrazeSDKAuthDelegate
     public override void SdkAuthenticationFailedWithError(Braze braze, BRZSDKAuthenticationError error)
     {
         Console.WriteLine("Invalid SDK Authentication signature.");
-        braze.User.IdOnQueue(DispatchQueue.MainQueue, (userId) => {
-            string newSignature = "NEW_SDK_AUTH_SIGNATURE_FOR_USER_" + userId;
-            braze.SetSDKAuthenticationSignature(newSignature);
-        });
+        string newSignature = "NEW_SDK_AUTH_SIGNATURE_FOR_USER_" + braze.User.Identifier;
+        braze.SetSDKAuthenticationSignature(newSignature);
     }
 }
 

@@ -3,6 +3,13 @@ using ObjCRuntime;
 namespace BrazeKit
 {
 	[Native]
+	public enum BRZPushEnqueueBehavior : long
+	{
+		Queue = 0,
+		Drop = 1
+	}
+
+	[Native]
 	public enum BRZContentCardRawType : long
 	{
 		Classic = 0,
@@ -117,7 +124,8 @@ namespace BrazeKit
 		Notification = 0,
 		InAppMessage = 1,
 		NewsFeed = 2,
-		ContentCard = 3
+		ContentCard = 3,
+		Banner = 4
 	}
 
 	[Native]
@@ -150,6 +158,12 @@ namespace BrazeKit
 	}
 
 	[Native]
+	public enum BRZInAppMessageDismissalReason : long
+	{
+		BRZInAppMessageDismissalReasonWipeData = 0
+	}
+
+	[Native]
 	public enum BRZSessionState : long
 	{
 		Started = 0,
@@ -163,5 +177,12 @@ namespace BrazeKit
 		CustomEvent = 1,
 		Purchase = 2,
 		Other = 3
+	}
+
+	[Native]
+	public enum BRZInAppMessageUserIDMatchBehavior : long
+	{
+		Ignore = 0,
+		Enforce = 1
 	}
 }

@@ -20,6 +20,52 @@ namespace BrazeUI
 
 	}
 
+	// @interface BRZBannerUIView : UIView <BrazeBannerPlacement>
+	[BaseType (typeof(UIView))]
+	interface BRZBannerUIView
+	{
+		// @property (readonly, copy, nonatomic) NSString * _Nonnull placementId;
+		[Export ("placementId")]
+		string PlacementId { get; }
+		// -(void)renderWithBanner:(BRZBanner * _Nonnull)banner;
+		[Export ("renderWithBanner:")]
+		void RenderWithBanner (BRZBanner banner);
+
+		// -(void)notifyError:(NSError * _Nonnull)error;
+		[Export ("notifyError:")]
+		void NotifyError (NSError error);
+
+		// -(void)removeBannerContent;
+		[Export ("removeBannerContent")]
+		void RemoveBannerContent ();
+
+		// -(instancetype _Nonnull)initWithPlacementId:(NSString * _Nonnull)placementId braze:(Braze * _Nonnull)braze processContentUpdates:(void (^ _Nullable)(BrazeBannerUIContentUpdates * _Nullable, NSError * _Nullable))processContentUpdates;
+		[Export ("initWithPlacementId:braze:processContentUpdates:")]
+		NativeHandle Constructor (string placementId, Braze braze, [NullAllowed] Action<BrazeBannerUIContentUpdates, NSError> processContentUpdates);
+		// -(void)logImpression;
+		[Export ("logImpression")]
+		void LogImpression ();
+
+		// -(void)logClickWithButtonId:(NSString * _Nullable)buttonId;
+		[Export ("logClickWithButtonId:")]
+		void LogClickWithButtonId ([NullAllowed] string buttonId);
+
+		// -(BOOL)isCurrentlyVisible __attribute__((warn_unused_result("")));
+		[Export ("isCurrentlyVisible")]
+		bool IsCurrentlyVisible { get; }
+		// -(void)webView:(WKWebView * _Nonnull)webView didFinishNavigation:(WKNavigation * _Null_unspecified)navigation;
+		[Export ("webView:didFinishNavigation:")]
+		void WebView (WKWebView webView, WKNavigation navigation);
+
+		// -(void)webView:(WKWebView * _Nonnull)webView decidePolicyForNavigationAction:(WKNavigationAction * _Nonnull)navigationAction decisionHandler:(void (^ _Nonnull)(WKNavigationActionPolicy))decisionHandler __attribute__((swift_async("not_swift_private", 3)));
+		[Export ("webView:decidePolicyForNavigationAction:decisionHandler:")]
+		void WebView (WKWebView webView, WKNavigationAction navigationAction, Action<WKNavigationActionPolicy> decisionHandler);
+
+		// -(void)webView:(WKWebView * _Nonnull)webView didFailNavigation:(WKNavigation * _Null_unspecified)navigation withError:(NSError * _Nonnull)error;
+		[Export ("webView:didFailNavigation:withError:")]
+		void WebView (WKWebView webView, WKNavigation navigation, NSError error);
+	}
+
 	// @interface BrazeInAppMessageUI : NSObject <BrazeInAppMessagePresenter>
 	[BaseType (typeof(NSObject))]
 	interface BrazeInAppMessageUI
@@ -27,6 +73,10 @@ namespace BrazeUI
 		// -(void)presentMessage:(BRZInAppMessageRaw * _Nonnull)message;
 		[Export ("presentMessage:")]
 		void PresentMessage (BRZInAppMessageRaw message);
+
+		// -(void)dismissWithReason:(enum BRZInAppMessageDismissalReason)reason;
+		[Export ("dismissWithReason:")]
+		void DismissWithReason (BRZInAppMessageDismissalReason reason);
 
 		// -(void)presentNext;
 		[Export ("presentNext")]
@@ -109,6 +159,17 @@ namespace BrazeUI
 		[Export ("acknowledgments", ArgumentSemantic.Copy)]
 		NSDictionary<NSString, NSUrl> Acknowledgments { get; }
 
+	}
+
+	// @interface BrazeBannerUIContentUpdates : NSObject
+	[BaseType (typeof(NSObject))]
+	[DisableDefaultCtor]
+	interface BrazeBannerUIContentUpdates
+	{
+
+		//  (readonly, nonatomic, strong) NSNumber * _Nullable height;
+		[NullAllowed, Export ("height", ArgumentSemantic.Strong)]
+		NSNumber Height { get; }
 	}
 	// @interface BRZContentCardUIModalViewController : UINavigationController
 	[BaseType (typeof(UINavigationController))]

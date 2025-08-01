@@ -23,11 +23,19 @@
   <remove-node path="/api/package[@name='com.braze.ui.contentcards.adapters']/class[@name='ContentCardAdapter']" />
   <remove-node path="/api/package[@name='com.braze.ui.inappmessage.listeners']/interface[@name='TouchAwareSwipeDismissTouchListener.ITouchListener']" />
   <remove-node path="/api/package[@name='com.braze.ui.inappmessage.factories']" />
-    <remove-node path="/api/package[@name='com.braze.ui.inappmessage.listeners']" />
+  <remove-node path="/api/package[@name='com.braze.ui.inappmessage.listeners']" />
   <remove-node path="/api/package[@name='com.braze.ui.inappmessage.listeners']/interface[@name='IInAppMessageWebViewClientListener']" />
   <remove-node path="/api/package[@name='com.braze.ui.inappmessage.views']/class[@name='InAppMessageModalView']" />
   <remove-node path="/api/package[@name='com.braze.ui.inappmessage.views']/class[@name='InAppMessageSlideupView']" />
   <remove-node path="/api/package[@name='com.braze.ui.inappmessage.views']/class[@name='InAppMessageFullView']" />
   <remove-node path="/api/package[@name='com.braze.ui.inappmessage']/class[@name='InAppMessageManagerBase']/method[@name='setCustomControlInAppMessageManagerListener']" />
   <remove-node path="/api/package[@name='com.braze.ui.inappmessage.views']/class[@name='InAppMessageImageView']" />
+  <remove-node path="/api/package[@name='com.braze.storage']" />
+
+  <!-- Adds back specific classes so we can access them in the C# layer -->
+  <add-node path="/api">
+    <package name="com.braze.storage">
+      <interface name="ICardStorageProvider" visibility="public" abstract="true" static="false" final="false" deprecated="not deprecated" />
+    </package>
+  </add-node>
 </metadata>

@@ -21,6 +21,24 @@ public partial class MainPage : ContentPage
             TextColor = Colors.Black,
             HorizontalTextAlignment = TextAlignment.Center,
         };
+        var userIdEntry = new Entry
+        {
+            Placeholder = "User ID",
+            HorizontalTextAlignment = TextAlignment.Center,
+            TextColor = Colors.Black,
+            Keyboard = Keyboard.Create(KeyboardFlags.None),
+            IsTextPredictionEnabled = false,
+            TextTransform = TextTransform.None
+        };
+        var customEventEntry = new Entry
+        {
+            Placeholder = "Custom event",
+            HorizontalTextAlignment = TextAlignment.Center,
+            TextColor = Colors.Black,
+            Keyboard = Keyboard.Create(KeyboardFlags.None),
+            IsTextPredictionEnabled = false,
+            TextTransform = TextTransform.None
+        };
 
         StackLayout stackLayout = new StackLayout
         {
@@ -30,15 +48,22 @@ public partial class MainPage : ContentPage
             Children = {
                 new Label
                 {
-                    Text = "Braze .NET MAUI sample app!",
+                    Text = "Braze .NET MAUI Compat sample app!",
                     TextColor = Colors.Black,
                     HorizontalTextAlignment = TextAlignment.Center,
                 },
                 UserIDLabel,
+                userIdEntry,
                 new Button
                 {
                     Text = "Change user",
                     Command = new Command(ChangeUser),
+                },
+                customEventEntry,
+                new Button
+                {
+                    Text = "Log custom event",
+                    Command = new Command(LogCustomEvent),
                 },
                 new Button
                 {
@@ -47,7 +72,7 @@ public partial class MainPage : ContentPage
                 },
                 new Button
                 {
-                    Text = "Log events and purchases",
+                    Text = "Log preset events and purchases",
                     Command = new Command(LogEventsAndPurchases),
                 },
                 new Button
@@ -87,10 +112,23 @@ public partial class MainPage : ContentPage
 
         void ChangeUser()
         {
-            string userId = "xam-" + (new Random().Next() % 1001);
-            Appboy.SharedInstance.ChangeUser(userId);
+            var userId = userIdEntry.Text?.Trim();
+            if (!string.IsNullOrEmpty(userId))
+            {
+                Console.WriteLine("→ Change user to: " + userId);
+                Appboy.SharedInstance.ChangeUser(userId);
+                UpdateUserIDLabel();
+            }
+        }
 
-            UpdateUserIDLabel();
+        void LogCustomEvent()
+        {
+            var eventName = customEventEntry.Text?.Trim();
+            if (!string.IsNullOrEmpty(eventName))
+            {
+                Appboy.SharedInstance.LogCustomEvent(eventName);
+                Console.WriteLine($"→ Logged custom event: {eventName}");
+            }
         }
 
         void SetUserProperties()
