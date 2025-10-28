@@ -32,7 +32,7 @@ curl -L -o artifacts.zip https://github.com/braze-inc/braze-swift-sdk/releases/d
 
 # - Unzip prebuilt artifacts
 echo "→ Unzipping prebuilt artifacts"
-unzip -q artifacts.zip -d artifacts
+unzip -o -q artifacts.zip -d artifacts
 rm artifacts.zip
 
 # - Copy dynamic xcframeworks to corresponding module directories
