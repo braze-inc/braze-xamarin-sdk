@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
   <!-- General configuration -->
   <!-- The API key is not shown to the user and thus we don't require that it be translated. -->
@@ -15,11 +15,9 @@
   otherwise closed sessions if the call to StartSession comes within this interval. (default is 10) -->
   <integer name="com_braze_session_timeout">10</integer>
   
-  <!-- This boolean sets whether the read/unread visual indicator at the top right of newsfeed cards
-      on or off. -->
-  <bool name="com_braze_newsfeed_unread_visual_indicator_on">true</bool>
-
   <bool name="com_braze_disable_location_collection">false</bool>
+  <bool name="com_braze_enable_location_collection">true</bool>
+  <bool name="com_braze_geofences_enabled">true</bool>
   <bool name="com_braze_handle_push_deep_links_automatically">true</bool>
 
   <bool name="com_braze_firebase_cloud_messaging_registration_enabled">true</bool>

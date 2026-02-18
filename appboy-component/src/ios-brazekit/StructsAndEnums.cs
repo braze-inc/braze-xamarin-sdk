@@ -32,8 +32,7 @@ namespace BrazeKit
 	public enum BRZInAppMessageRawClickAction : long
 	{
 		None = 0,
-		NewsFeed = 1,
-		Url = 2
+		Url = 1
 	}
 
 	[Native]
@@ -82,15 +81,6 @@ namespace BrazeKit
 	}
 
 	[Native]
-	public enum BRZNewsFeedCardType : long
-	{
-		Classic = 0,
-		Banner = 1,
-		CaptionedImage = 2,
-		TextAnnouncement = 3
-	}
-
-	[Native]
 	public enum BRZNotificationsPayloadType : long
 	{
 		Received = 0,
@@ -123,9 +113,8 @@ namespace BrazeKit
 	{
 		Notification = 0,
 		InAppMessage = 1,
-		NewsFeed = 2,
-		ContentCard = 3,
-		Banner = 4
+		ContentCard = 2,
+		Banner = 3
 	}
 
 	[Native]
@@ -160,7 +149,8 @@ namespace BrazeKit
 	[Native]
 	public enum BRZInAppMessageDismissalReason : long
 	{
-		BRZInAppMessageDismissalReasonWipeData = 0
+		WipeData = 0,
+		ChangeUser = 1
 	}
 
 	[Native]

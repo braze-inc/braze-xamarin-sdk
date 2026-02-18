@@ -15,7 +15,9 @@ Successful marketing automation is essential to the future of your mobile app. B
   - [Braze.iOS.BrazeLocation](https://www.nuget.org/packages/Braze.iOS.BrazeLocation "Braze.iOS.BrazeLocation")
   - [Braze.iOS.BrazeKitCompat](https://www.nuget.org/packages/Braze.iOS.BrazeKitCompat "Braze.iOS.BrazeKitCompat")
   - [Braze.iOS.BrazeUICompat](https://www.nuget.org/packages/Braze.iOS.BrazeUICompat "Braze.iOS.BrazeUICompat")
-- [Android Xamarin Bindings NuGet Package](https://www.nuget.org/packages/BrazePlatform.BrazeAndroidBinding "Android Xamarin Bindings NuGet Package")
+- Android Xamarin Bindings NuGet Packages:
+  - [BrazePlatform.BrazeAndroidBinding](https://www.nuget.org/packages/BrazePlatform.BrazeAndroidBinding "Braze Android Xamarin Binding NuGet Package")
+  - [BrazePlatform.BrazeAndroidLocationBinding](https://www.nuget.org/packages/BrazePlatform.BrazeAndroidLocationBinding "Braze Android Location Xamarin Binding NuGet Package")
 
 ## Components
 
@@ -34,9 +36,9 @@ contain:
 
 | Binding file name                          | Supported Xamarin Frameworks                              | Native Braze framework                              | Braze Xamarin SDK version |
 | ------------------------------------------ | --------------------------------------------------------- | --------------------------------------------------- | ------------------------- |
-| `BrazeAndroidBinding.sln`                  | .NET 9+                                                   | Android SDK 37.0.0+                                 | 7.0.0+                    |
+| `BrazeAndroidBinding.sln`                  | .NET 9+                                                   | Android SDK 41.0.0+                                 | 9.0.0+                    |
 | `AppboyPlatform.XamarinAndroidBinding.sln` | Xamarin.Android,<br/>Xamarin.Forms,<br/>.NET 5 and before | Android SDK 23.3.0 and before                       | 1.26.0 and before         |
-| `BrazeiOSBinding.sln`                      | .NET 9+                                                   | Swift SDK 12.1.0+                                   | 7.0.0+                    |
+| `BrazeiOSBinding.sln`                      | .NET 9+                                                   | Swift SDK 14.0.1+                                   | 9.0.0+                    |
 | `AppboyPlatformXamariniOSBinding.sln`      | Xamarin.iOS,<br/>Xamarin.Forms,<br/>.NET 5 and before     | `Appboy_iOS_SDK.framework` version 4.4.1 and before | 1.27.0 and before         |
 
 ### Xamarin & Xamarin.Forms
