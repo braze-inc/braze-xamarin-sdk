@@ -1,4 +1,4 @@
-﻿using Android.Content.PM;
+using Android.Content.PM;
 using Com.Braze.UI;
 using Com.Braze.Enums;
 using Com.Braze.Models.Outgoing;
@@ -14,12 +14,19 @@ using Com.Braze.UI.Activities;
 using Android.Gms.Common;
 using Android.Content;
 using Java.Lang;
+// Location binding imports
+using Com.Braze.Location;
+using Android.Widget;
+using AndroidX.Core.App;
+using AndroidX.Core.Content;
 
 namespace BrazeAndroidMauiSampleApp;
 
 [Activity(Label = "@string/app_name", MainLauncher = true)]
 public class MainActivity : Activity
 {
+    private const int LOCATION_PERMISSION_REQUEST_CODE = 1001;
+
     protected override void OnCreate(Bundle? savedInstanceState)
     {
         base.OnCreate(savedInstanceState);
@@ -104,5 +111,98 @@ public class MainActivity : Activity
         {
             Braze.EnableSdk(this);
         };
+
+        // Request Location Permission
+        FindViewById<Button>(Resource.Id.requestLocationPermissionButton).Click += delegate
+        {
+            RequestLocationPermission();
+        };
+
+        // Set Last Known Location (NYC)
+        FindViewById<Button>(Resource.Id.setLocationButton).Click += delegate
+        {
+            SetLastKnownLocation();
+        };
+    }
+
+    private void RequestLocationPermission()
+    {
+        const string TAG = "LocationPermission";
+        
+        // Check if permissions are already granted
+        bool fineLocationGranted = ContextCompat.CheckSelfPermission(this, Android.Manifest.Permission.AccessFineLocation) == Permission.Granted;
+        bool coarseLocationGranted = ContextCompat.CheckSelfPermission(this, Android.Manifest.Permission.AccessCoarseLocation) == Permission.Granted;
+
+        if (fineLocationGranted && coarseLocationGranted)
+        {
+            BrazeLogger.D(TAG, "Location permissions already granted");
+            Toast.MakeText(this, "Location permissions already granted!", ToastLength.Short)?.Show();
+            return;
+        }
+
+        BrazeLogger.D(TAG, "Requesting location permissions...");
+        
+        // Request permissions
+        ActivityCompat.RequestPermissions(
+            this,
+            new string[]
+            {
+                Android.Manifest.Permission.AccessFineLocation,
+                Android.Manifest.Permission.AccessCoarseLocation
+            },
+            LOCATION_PERMISSION_REQUEST_CODE
+        );
+    }
+
+    private void SetLastKnownLocation()
+    {
+        const string TAG = "SetLocation";
+        
+        // New York, NY coordinates
+        double latitude = 40.7128;
+        double longitude = -74.0060;
+
+        try
+        {
+            BrazeLogger.D(TAG, $"Setting last known location to NYC: ({latitude}, {longitude})");
+            
+            // Set the user's last known location
+            Braze.GetInstance(this).CurrentUser.SetLastKnownLocation(latitude, longitude);
+            
+            BrazeLogger.D(TAG, "Flushing data to Braze...");
+            
+            // Flush data to Braze
+            Braze.GetInstance(this).RequestImmediateDataFlush();
+
+            Toast.MakeText(this, $"Location set to NYC ({latitude}, {longitude})\nData flush requested!", ToastLength.Long)?.Show();
+            BrazeLogger.D(TAG, "Location set and data flush requested successfully");
+        }
+        catch (System.Exception ex)
+        {
+            Java.Lang.Throwable javaThrowable = Java.Lang.Throwable.FromException(ex);
+            BrazeLogger.E(TAG, $"Error setting location: {ex.Message}",  javaThrowable);
+            Toast.MakeText(this, $"Error setting location: {ex.Message}", ToastLength.Long)?.Show();
+        }
+    }
+
+    public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
+    {
+        base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        const string TAG = "LocationPermission";
+
+        if (requestCode == LOCATION_PERMISSION_REQUEST_CODE)
+        {
+            if (grantResults.Length > 0 && grantResults[0] == Permission.Granted)
+            {
+                BrazeLogger.D(TAG, "Location permission granted");
+                Toast.MakeText(this, "Location permission granted!", ToastLength.Short)?.Show();
+            }
+            else
+            {
+                BrazeLogger.D(TAG, "Location permission denied");
+                Toast.MakeText(this, "Location permission denied. Some features may not work.", ToastLength.Long)?.Show();
+            }
+        }
     }
 }

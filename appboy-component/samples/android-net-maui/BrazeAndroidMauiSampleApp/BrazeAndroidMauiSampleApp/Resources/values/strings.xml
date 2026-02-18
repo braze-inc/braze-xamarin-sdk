@@ -1,4 +1,4 @@
-﻿<resources>
+<resources>
     <string name="app_text">Hello, Android!</string>
     <string name="userId">UserId:</string>
     <string name="changeUser">Change User</string>
@@ -6,7 +6,6 @@
     <string name="eventsAndPurchases">Log Events And Purchases</string>
     <string name="trackSocialData">Track Social Data</string>
     <string name="launchContentCards">Content Cards</string>
-    <string name="launchNewsFeed">News Feed</string>
     <string name="addNewInAppMessage">Add In-App Message</string>
     <string name="dataFlush">Request Data Flush</string>
     <string name="app_name">Braze Xamarin Android</string>

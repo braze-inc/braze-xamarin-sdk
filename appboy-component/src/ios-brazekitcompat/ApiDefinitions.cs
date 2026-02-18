@@ -306,10 +306,6 @@ namespace BrazeKitCompat
 		[Export ("user")]
 		ABKUser User { get; }
 
-		// @property (readonly) ABKFeedController * _Nonnull feedController;
-		[Export ("feedController")]
-		ABKFeedController FeedController { get; }
-
 		// @property (readonly) ABKContentCardsController * _Nonnull contentCardsController;
 		[Export ("contentCardsController")]
 		ABKContentCardsController ContentCardsController { get; }
@@ -411,17 +407,9 @@ namespace BrazeKitCompat
 		[Export ("logPurchase:inCurrency:atPrice:withQuantity:andProperties:")]
 		void LogPurchase (string productIdentifier, string currencyCode, NSDecimalNumber price, nuint quantity, [NullAllowed] NSDictionary properties);
 
-		// -(void)logFeedDisplayed;
-		[Export ("logFeedDisplayed")]
-		void LogFeedDisplayed ();
-
 		// -(void)logContentCardsDisplayed;
 		[Export ("logContentCardsDisplayed")]
 		void LogContentCardsDisplayed ();
-
-		// -(void)requestFeedRefresh;
-		[Export ("requestFeedRefresh")]
-		void RequestFeedRefresh ();
 
 		// -(void)requestContentCardsRefresh;
 		[Export ("requestContentCardsRefresh")]
@@ -704,191 +692,6 @@ namespace BrazeKitCompat
 		// @property (readonly, nonatomic) NSString * _Nullable creative;
 		[NullAllowed, Export ("creative")]
 		string Creative { get; }
-
-	}
-
-	partial interface Constants
-	{
-		// extern NSString *const _Nonnull ABKFeedUpdatedNotification;
-		[Field ("ABKFeedUpdatedNotification", "__Internal")]
-		NSString ABKFeedUpdatedNotification { get; }
-
-		// extern NSString *const _Nonnull ABKFeedUpdatedIsSuccessfulKey;
-		[Field ("ABKFeedUpdatedIsSuccessfulKey", "__Internal")]
-		NSString ABKFeedUpdatedIsSuccessfulKey { get; }
-	}
-
-	// @interface ABKFeedController : NSObject
-	[BaseType (typeof(NSObject))]
-	interface ABKFeedController
-	{
-		// @property (readonly, getter = getNewsFeedCards) NSArray * _Nonnull newsFeedCards;
-		[Export ("newsFeedCards")]
-		NSObject[] NewsFeedCards { [Bind ("getNewsFeedCards")] get; }
-
-		// @property (readonly) NSDate * _Nullable lastUpdate;
-		[NullAllowed, Export ("lastUpdate")]
-		NSDate LastUpdate { get; }
-
-		// -(NSInteger)unreadCardCountForCategories:(ABKCardCategory)categories;
-		[Export ("unreadCardCountForCategories:")]
-		nint UnreadCardCountForCategories (ABKCardCategory categories);
-
-		// -(NSInteger)cardCountForCategories:(ABKCardCategory)categories;
-		[Export ("cardCountForCategories:")]
-		nint CardCountForCategories (ABKCardCategory categories);
-
-		// -(NSArray * _Nonnull)getCardsInCategories:(ABKCardCategory)categories;
-		[Export ("getCardsInCategories:")]
-		NSObject[] GetCardsInCategories (ABKCardCategory categories);
-
-	}
-
-	// @interface ABKCard : NSObject <NSCopying, NSCoding>
-	[BaseType (typeof(NSObject))]
-	interface ABKCard : INSCopying, INSCoding
-	{
-		// @property (readonly) NSString * _Nonnull idString;
-		[Export ("idString")]
-		string IdString { get; }
-
-		// @property (nonatomic) BOOL viewed;
-		[Export ("viewed")]
-		bool Viewed { get; set; }
-
-		// @property (readonly, nonatomic) double created;
-		[Export ("created")]
-		double Created { get; }
-
-		// @property (readonly, nonatomic) double updated;
-		[Export ("updated")]
-		double Updated { get; }
-
-		// @property ABKCardCategory categories;
-		[Export ("categories", ArgumentSemantic.Assign)]
-		ABKCardCategory Categories { get; set; }
-
-		// @property (readonly) double expiresAt;
-		[Export ("expiresAt")]
-		double ExpiresAt { get; }
-
-		// @property (strong) NSDictionary * _Nullable extras;
-		[NullAllowed, Export ("extras", ArgumentSemantic.Strong)]
-		NSDictionary Extras { get; set; }
-
-		// @property (copy) NSString * _Nullable urlString;
-		[NullAllowed, Export ("urlString")]
-		string UrlString { get; set; }
-
-		// @property BOOL openUrlInWebView;
-		[Export ("openUrlInWebView")]
-		bool OpenUrlInWebView { get; set; }
-
-		// +(ABKCard * _Nullable)deserializeCardFromDictionary:(NSDictionary * _Nullable)cardDictionary;
-		[Static]
-		[Export ("deserializeCardFromDictionary:")]
-		[return: NullAllowed]
-		ABKCard DeserializeCardFromDictionary ([NullAllowed] NSDictionary cardDictionary);
-
-		// -(NSData * _Nullable)serializeToData;
-		[NullAllowed, Export ("serializeToData")]
-		NSData SerializeToData { get; }
-
-		// -(void)logCardImpression;
-		[Export ("logCardImpression")]
-		void LogCardImpression ();
-
-		// -(void)logCardClicked;
-		[Export ("logCardClicked")]
-		void LogCardClicked ();
-
-		// -(BOOL)hasSameId:(ABKCard * _Nonnull)card;
-		[Export ("hasSameId:")]
-		bool HasSameId (ABKCard card);
-
-	}
-
-	// @interface ABKBannerCard : ABKCard <NSCoding>
-	[BaseType (typeof(ABKCard))]
-	interface ABKBannerCard : INSCoding
-	{
-		// @property (copy) NSString * _Nonnull image;
-		[Export ("image")]
-		string Image { get; set; }
-
-		// @property (copy) NSString * _Nullable domain;
-		[NullAllowed, Export ("domain")]
-		string Domain { get; set; }
-
-		// @property float imageAspectRatio;
-		[Export ("imageAspectRatio")]
-		float ImageAspectRatio { get; set; }
-
-	}
-
-	// @interface ABKCaptionedImageCard : ABKCard <NSCoding>
-	[BaseType (typeof(ABKCard))]
-	interface ABKCaptionedImageCard : INSCoding
-	{
-		// @property (copy) NSString * _Nonnull image;
-		[Export ("image")]
-		string Image { get; set; }
-
-		// @property float imageAspectRatio;
-		[Export ("imageAspectRatio")]
-		float ImageAspectRatio { get; set; }
-
-		// @property (copy) NSString * _Nonnull title;
-		[Export ("title")]
-		string Title { get; set; }
-
-		// @property (copy) NSString * _Nonnull cardDescription;
-		[Export ("cardDescription")]
-		string CardDescription { get; set; }
-
-		// @property (copy) NSString * _Nullable domain;
-		[NullAllowed, Export ("domain")]
-		string Domain { get; set; }
-
-	}
-
-	// @interface ABKClassicCard : ABKCard <NSCoding>
-	[BaseType (typeof(ABKCard))]
-	interface ABKClassicCard : INSCoding
-	{
-		// @property (copy) NSString * _Nullable image;
-		[NullAllowed, Export ("image")]
-		string Image { get; set; }
-
-		// @property (copy) NSString * _Nonnull cardDescription;
-		[Export ("cardDescription")]
-		string CardDescription { get; set; }
-
-		// @property (copy) NSString * _Nullable title;
-		[NullAllowed, Export ("title")]
-		string Title { get; set; }
-
-		// @property (copy) NSString * _Nullable domain;
-		[NullAllowed, Export ("domain")]
-		string Domain { get; set; }
-
-	}
-
-	// @interface ABKTextAnnouncementCard : ABKCard <NSCoding>
-	[BaseType (typeof(ABKCard))]
-	interface ABKTextAnnouncementCard : INSCoding
-	{
-		// @property (copy) NSString * _Nonnull title;
-		[Export ("title")]
-		string Title { get; set; }
-
-		// @property (copy) NSString * _Nonnull cardDescription;
-		[Export ("cardDescription")]
-		string CardDescription { get; set; }
-
-		// @property (copy) NSString * _Nullable domain;
-		[NullAllowed, Export ("domain")]
-		string Domain { get; set; }
 
 	}
 

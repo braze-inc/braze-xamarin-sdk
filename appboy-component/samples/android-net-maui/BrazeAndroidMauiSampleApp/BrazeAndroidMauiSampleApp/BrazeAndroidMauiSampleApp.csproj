@@ -15,7 +15,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' " />
   <ItemGroup>
-    <PackageReference Include="Xamarin.Kotlin.StdLib" Version="2.0.21.3" />
+    <PackageReference Include="Xamarin.Kotlin.StdLib" Version="2.3.0.1" />
     <PackageReference Include="Xamarin.KotlinX.Coroutines.Android" Version="1.9.0.3" />
     <PackageReference Include="Xamarin.Firebase.Messaging" Version="124.0.0.1" />
     <PackageReference Include="Xamarin.AndroidX.SwipeRefreshLayout" Version="1.1.0.22" />
@@ -30,5 +30,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\src\androidnet6\BrazeAndroidNet6Binding\BrazeAndroidBinding.csproj" />
+    <ProjectReference Include="..\..\..\..\src\androidnet6\BrazeAndroidLocationBinding\BrazeAndroidLocationBinding.csproj" />
   </ItemGroup>
 </Project>

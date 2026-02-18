@@ -1,3 +1,21 @@
+## 9.0.0
+
+##### Breaking
+- Updated the Android binding from [Braze Android SDK 37.0.0 to 41.0.0](https://github.com/braze-inc/braze-android-sdk/compare/v37.0.0...v41.0.0#diff-06572a96a58dc510037d5efa622f9bec8519bc1beab13c9f251e97e657a9d4ed).
+- Updated the iOS binding from [Braze Swift SDK 13.3.0 to 14.0.1](https://github.com/braze-inc/braze-swift-sdk/compare/13.3.0...14.0.1#diff-06572a96a58dc510037d5efa622f9bec8519bc1beab13c9f251e97e657a9d4ed).
+- Added new transitive NuGet dependencies required by the Braze Android SDK:
+  - `Xamarin.AndroidX.DataStore.Preferences` (1.1.7.1)
+  - `Xamarin.KotlinX.Serialization.Json.Jvm` (1.9.0.2)
+  - `Xamarin.Kotlin.StdLib` has been updated from 2.0.21.3 to 2.3.0.1. If your project explicitly pins this package to an older version, you will need to update it to avoid restore errors.
+- Removed the News Feed feature.
+  - This feature was removed from the native Android SDK in version [`38.0.0`](https://github.com/braze-inc/braze-android-sdk/releases/tag/v38.0.0).
+  - This feature was removed from the native Swift SDK in version [`14.0.0`](https://github.com/braze-inc/braze-swift-sdk/releases/tag/14.0.0).
+- The `BRZInAppMessageDismissalReason.BRZInAppMessageDismissalReasonWipeData` enum case has been renamed to `BRZInAppMessageDismissalReason.WipeData`.
+
+##### Added
+- Added `BrazePlatform.BrazeAndroidLocationBinding`, which introduces support for location services and geofences on Android.
+  - This package is available [here on Nuget](https://www.nuget.org/packages/BrazePlatform.BrazeAndroidLocationBinding/).
+
 ## 8.0.0
 
 ##### Breaking

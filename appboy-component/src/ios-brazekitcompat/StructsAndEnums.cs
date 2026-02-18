@@ -49,7 +49,6 @@ namespace BrazeKitCompat
 	{
 		PushNotificationChannel,
 		InAppMessageChannel,
-		NewsFeedChannel,
 		ContentCardChannel,
 		UnknownChannel
 	}
@@ -73,22 +72,9 @@ namespace BrazeKitCompat
 		ABKUnsubscribed
 	}
 
-	[Flags]
-	[Native]
-	public enum ABKCardCategory : ulong
-	{
-		NoCategory = 1uL << 0,
-		News = 1uL << 1,
-		Advertising = 1uL << 2,
-		Announcements = 1uL << 3,
-		Social = 1uL << 4,
-		All = 1uL << 0 | 1uL << 1 | 1uL << 2 | 1uL << 3 | 1uL << 4
-	}
-
 	[Native]
 	public enum ABKInAppMessageClickActionType : long
 	{
-		DisplayNewsFeed,
 		RedirectToURI,
 		NoneClickAction
 	}

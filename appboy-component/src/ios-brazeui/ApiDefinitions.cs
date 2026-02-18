@@ -64,6 +64,10 @@ namespace BrazeUI
 		// -(void)webView:(WKWebView * _Nonnull)webView didFailNavigation:(WKNavigation * _Null_unspecified)navigation withError:(NSError * _Nonnull)error;
 		[Export ("webView:didFailNavigation:withError:")]
 		void WebView (WKWebView webView, WKNavigation navigation, NSError error);
+
+		// -(void)webViewWebContentProcessDidTerminate:(WKWebView * _Nonnull)webView;
+		[Export ("webViewWebContentProcessDidTerminate:")]
+		void WebViewWebContentProcessDidTerminate (WKWebView webView);
 	}
 
 	// @interface BrazeInAppMessageUI : NSObject <BrazeInAppMessagePresenter>
