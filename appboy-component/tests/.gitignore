@@ -1,0 +1,19 @@
+# Test results
+bin/
+obj/
+*.trx
+coverage.cobertura.xml
+
+# Test artifacts
+.vs/
+.vscode/
+*.user
+*.suo
+*.sln.docstates
+
+# NuGet
+packages/
+.nuget/
+
+# Code coverage
+coverage/

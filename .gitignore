@@ -23,6 +23,7 @@ build
 
 # nuget and component packages
 **/packages
+nuget-packages/
 **/Components
 **/*.nupkg
 

@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>Braze.iOS.BrazeKitCompat</id>
-    <version>9.0.0</version>
+    <version>10.0.0</version>
     <authors>Braze</authors>
     <owners>Braze</owners>
     <projectUrl>https://github.com/braze-inc/braze-xamarin-sdk</projectUrl>
@@ -14,8 +14,8 @@
     <tags>Braze Appboy</tags>
     <dependencies>
       <group targetFramework="net9.0-ios26.0">
-        <dependency id="Braze.iOS.BrazeKit" version="9.0.0" />
-        <dependency id="Braze.iOS.BrazeLocation" version="9.0.0" />
+        <dependency id="Braze.iOS.BrazeKit" version="10.0.0" />
+        <dependency id="Braze.iOS.BrazeLocation" version="10.0.0" />
       </group>
     </dependencies>
   </metadata>

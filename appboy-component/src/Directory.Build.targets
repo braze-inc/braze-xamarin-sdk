@@ -1,0 +1,14 @@
+<Project>
+  <!--
+    .NET iOS Compress=auto writes Assembly.resources.zip when the xcframework
+    has symlinks, but leaves any older uncompressed Assembly.resources directory
+    in place. The app linker prefers that leftover directory, so a Swift SDK
+    bump can keep linking the previous native binary. Drop the directory when
+    the zip exists so ProjectReferences pick up the current xcframework.
+  -->
+  <Target Name="RemoveStaleUncompressedBindingResources"
+          AfterTargets="_CreateBindingResourcePackage"
+          Condition="'$(IsBindingProject)' == 'true' And Exists('$(OutputPath)$(AssemblyName).resources.zip')">
+    <RemoveDir Directories="$(OutputPath)$(AssemblyName).resources" />
+  </Target>
+</Project>

@@ -7,26 +7,26 @@ using ObjCRuntime;
 using UIKit;
 using WebKit;
 
-namespace BrazeUI
-{
+namespace BrazeUI {
 	// @interface AsyncImageView : UIView
-	[BaseType (typeof(UIView), Name = "_TtC7BrazeUI14AsyncImageView")]
-	interface AsyncImageView
-	{
+	[BaseType (typeof (UIView), Name = "_TtC7BrazeUI14AsyncImageView")]
+	interface AsyncImageView {
 		// -(instancetype _Nonnull)initWithFrame:(CGRect)frame __attribute__((objc_designated_initializer));
 		[Export ("initWithFrame:")]
 		[DesignatedInitializer]
 		NativeHandle Constructor (CGRect frame);
-
 	}
 
 	// @interface BRZBannerUIView : UIView <BrazeBannerPlacement>
-	[BaseType (typeof(UIView))]
-	interface BRZBannerUIView
-	{
+	[BaseType (typeof (UIView))]
+	interface BRZBannerUIView {
 		// @property (readonly, copy, nonatomic) NSString * _Nonnull placementId;
 		[Export ("placementId")]
 		string PlacementId { get; }
+
+		// @property (copy, nonatomic) void (^ _Nullable)(BRZBannerDismissalEvent * _Nonnull) onDismiss;
+		[NullAllowed, Export ("onDismiss", ArgumentSemantic.Copy)]
+		Action<BRZBannerDismissalEvent> OnDismiss { get; set; }
 		// -(void)renderWithBanner:(BRZBanner * _Nonnull)banner;
 		[Export ("renderWithBanner:")]
 		void RenderWithBanner (BRZBanner banner);
@@ -35,10 +35,9 @@ namespace BrazeUI
 		[Export ("notifyError:")]
 		void NotifyError (NSError error);
 
-		// -(void)removeBannerContent;
-		[Export ("removeBannerContent")]
-		void RemoveBannerContent ();
-
+		// -(void)removeBannerContentWithReason:(enum BRZBannerRemovalReason)reason;
+		[Export ("removeBannerContentWithReason:")]
+		void RemoveBannerContentWithReason (BRZBannerRemovalReason reason);
 		// -(instancetype _Nonnull)initWithPlacementId:(NSString * _Nonnull)placementId braze:(Braze * _Nonnull)braze processContentUpdates:(void (^ _Nullable)(BrazeBannerUIContentUpdates * _Nullable, NSError * _Nullable))processContentUpdates;
 		[Export ("initWithPlacementId:braze:processContentUpdates:")]
 		NativeHandle Constructor (string placementId, Braze braze, [NullAllowed] Action<BrazeBannerUIContentUpdates, NSError> processContentUpdates);
@@ -69,11 +68,9 @@ namespace BrazeUI
 		[Export ("webViewWebContentProcessDidTerminate:")]
 		void WebViewWebContentProcessDidTerminate (WKWebView webView);
 	}
-
 	// @interface BrazeInAppMessageUI : NSObject <BrazeInAppMessagePresenter>
-	[BaseType (typeof(NSObject))]
-	interface BrazeInAppMessageUI
-	{
+	[BaseType (typeof (NSObject))]
+	interface BrazeInAppMessageUI {
 		// -(void)presentMessage:(BRZInAppMessageRaw * _Nonnull)message;
 		[Export ("presentMessage:")]
 		void PresentMessage (BRZInAppMessageRaw message);
@@ -93,20 +90,19 @@ namespace BrazeUI
 		// -(void)_compat_tryPushOnStack:(BRZInAppMessageRaw * _Nonnull)message;
 		[Export ("_compat_tryPushOnStack:")]
 		void _compat_tryPushOnStack (BRZInAppMessageRaw message);
-
-		//  (readonly, nonatomic, strong) UIView * _Nullable messageView;
+		// @property (readonly, nonatomic, strong) UIView * _Nullable messageView;
 		[NullAllowed, Export ("messageView", ArgumentSemantic.Strong)]
 		UIView MessageView { get; }
 
-		//  (readonly, copy, nonatomic) NSArray<BRZInAppMessageRaw *> * _Nonnull stack;
+		// @property (readonly, copy, nonatomic) NSArray<BRZInAppMessageRaw *> * _Nonnull stack;
 		[Export ("stack", ArgumentSemantic.Copy)]
-		BRZInAppMessageRaw[] Stack { get; }
+		BRZInAppMessageRaw [] Stack { get; }
 
 		[Wrap ("WeakDelegate")]
 		[NullAllowed]
 		BrazeInAppMessageUIDelegate Delegate { get; set; }
 
-		//  (nonatomic, weak) id<BrazeInAppMessageUIDelegate> _Nullable delegate;
+		// @property (nonatomic, weak) id<BrazeInAppMessageUIDelegate> _Nullable delegate;
 		[NullAllowed, Export ("delegate", ArgumentSemantic.Weak)]
 		NSObject WeakDelegate { get; set; }
 
@@ -114,12 +110,10 @@ namespace BrazeUI
 		[Export ("dismiss")]
 		void Dismiss ();
 	}
-
 	// @interface BrazeInAppMessageUIPresentationContextRaw : NSObject
-	[BaseType (typeof(NSObject))]
+	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor]
-	interface BrazeInAppMessageUIPresentationContextRaw
-	{
+	interface BrazeInAppMessageUIPresentationContextRaw {
 		// @property (nonatomic, strong) BRZInAppMessageRaw * _Nonnull message;
 		[Export ("message", ArgumentSemantic.Strong)]
 		BRZInAppMessageRaw Message { get; set; }
@@ -139,20 +133,17 @@ namespace BrazeUI
 		// @property (nonatomic, strong) UIViewController * _Nullable preferencesProxy;
 		[NullAllowed, Export ("preferencesProxy", ArgumentSemantic.Strong)]
 		UIViewController PreferencesProxy { get; set; }
-
-		//  (nonatomic, strong) UIView * _Nullable customView;
+		// @property (nonatomic, strong) UIView * _Nullable customView;
 		[NullAllowed, Export ("customView", ArgumentSemantic.Strong)]
 		UIView CustomView { get; set; }
 
-		//  (nonatomic) enum BRZInAppMessageUIStatusBarHideBehavior statusBarHideBehavior;
+		// @property (nonatomic) enum BRZInAppMessageUIStatusBarHideBehavior statusBarHideBehavior;
 		[Export ("statusBarHideBehavior", ArgumentSemantic.Assign)]
 		BRZInAppMessageUIStatusBarHideBehavior StatusBarHideBehavior { get; set; }
 	}
-
 	// @interface BRZUIResources : NSObject
-	[BaseType (typeof(NSObject))]
-	interface BRZUIResources
-	{
+	[BaseType (typeof (NSObject))]
+	interface BRZUIResources {
 		// @property (readonly, nonatomic, strong, class) NSBundle * _Nullable bundle;
 		[Static]
 		[NullAllowed, Export ("bundle", ArgumentSemantic.Strong)]
@@ -162,31 +153,26 @@ namespace BrazeUI
 		[Static]
 		[Export ("acknowledgments", ArgumentSemantic.Copy)]
 		NSDictionary<NSString, NSUrl> Acknowledgments { get; }
-
 	}
 
 	// @interface BrazeBannerUIContentUpdates : NSObject
-	[BaseType (typeof(NSObject))]
+	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor]
-	interface BrazeBannerUIContentUpdates
-	{
-
-		//  (readonly, nonatomic, strong) NSNumber * _Nullable height;
+	interface BrazeBannerUIContentUpdates {
+		// @property (readonly, nonatomic, strong) NSNumber * _Nullable height;
 		[NullAllowed, Export ("height", ArgumentSemantic.Strong)]
 		NSNumber Height { get; }
 	}
 	// @interface BRZContentCardUIModalViewController : UINavigationController
-	[BaseType (typeof(UINavigationController))]
+	[BaseType (typeof (UINavigationController))]
 	[DisableDefaultCtor]
-	interface BRZContentCardUIModalViewController
-	{
+	interface BRZContentCardUIModalViewController {
 		// @property (readonly, nonatomic, strong) BRZContentCardUIViewController * _Nonnull viewController;
 		[Export ("viewController", ArgumentSemantic.Strong)]
 		BRZContentCardUIViewController ViewController { get; }
 		// -(void)dismissModal;
 		[Export ("dismissModal")]
 		void DismissModal ();
-
 		// -(instancetype _Nonnull)initWithBraze:(Braze * _Nonnull)braze;
 		[Export ("initWithBraze:")]
 		NativeHandle Constructor (Braze braze);
@@ -195,32 +181,29 @@ namespace BrazeUI
 		[Export ("initWithBraze:title:")]
 		NativeHandle Constructor (Braze braze, string title);
 	}
-
 	// @interface ShadowView : UIView
-	[BaseType (typeof(UIView), Name = "_TtC7BrazeUI10ShadowView")]
-	interface ShadowView
-	{
+	[BaseType (typeof (UIView), Name = "_TtC7BrazeUI10ShadowView")]
+	interface ShadowView {
+
 	}
 
 	// @interface BRZContentCardUIViewController : UITableViewController <UITableViewDataSourcePrefetching>
-	[BaseType (typeof(UITableViewController))]
+	[BaseType (typeof (UITableViewController))]
 	[DisableDefaultCtor]
-	interface BRZContentCardUIViewController : IUITableViewDataSourcePrefetching
-	{
+	interface BRZContentCardUIViewController : IUITableViewDataSourcePrefetching {
 
 		// -(void)refreshCards;
 		[Export ("refreshCards")]
 		void RefreshCards ();
-
-		//  (copy, nonatomic) NSArray<BRZContentCardRaw *> * _Nonnull cards;
+		// @property (copy, nonatomic) NSArray<BRZContentCardRaw *> * _Nonnull cards;
 		[Export ("cards", ArgumentSemantic.Copy)]
-		BRZContentCardRaw[] Cards { get; set; }
+		BRZContentCardRaw [] Cards { get; set; }
 
 		[Wrap ("WeakDelegate")]
 		[NullAllowed]
 		BrazeContentCardUIViewControllerDelegate Delegate { get; set; }
 
-		//  (nonatomic, weak) id<BrazeContentCardUIViewControllerDelegate> _Nullable delegate;
+		// @property (nonatomic, weak) id<BrazeContentCardUIViewControllerDelegate> _Nullable delegate;
 		[NullAllowed, Export ("delegate", ArgumentSemantic.Weak)]
 		NSObject WeakDelegate { get; set; }
 
@@ -229,12 +212,10 @@ namespace BrazeUI
 		NativeHandle Constructor (Braze braze);
 
 	}
-
 	// @interface BRZGIFViewProvider : NSObject
-	[BaseType (typeof(NSObject))]
+	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor]
-	interface BRZGIFViewProvider
-	{
+	interface BRZGIFViewProvider {
 		// @property (nonatomic, strong, class) BRZGIFViewProvider * _Nonnull shared;
 		[Static]
 		[Export ("shared", ArgumentSemantic.Strong)]
@@ -261,25 +242,21 @@ namespace BrazeUI
 		[Static]
 		[Export ("nonAnimating", ArgumentSemantic.Strong)]
 		BRZGIFViewProvider NonAnimating { get; }
-
 	}
 
 	// @protocol BrazeContentCardUIViewControllerDelegate
 	[BaseType(typeof(NSObject))]
 	[Model][Protocol]
-	interface BrazeContentCardUIViewControllerDelegate
-	{
+	interface BrazeContentCardUIViewControllerDelegate {
 		// @optional -(BOOL)contentCardController:(BRZContentCardUIViewController * _Nonnull)controller shouldProcess:(NSURL * _Nonnull)url card:(BRZContentCardRaw * _Nonnull)card __attribute__((warn_unused_result("")));
 		[Export ("contentCardController:shouldProcess:card:")]
 		bool ShouldProcess (BRZContentCardUIViewController controller, NSUrl url, BRZContentCardRaw card);
-
 	}
 
 	// @protocol BrazeInAppMessageUIDelegate
 	[BaseType(typeof(NSObject))]
 	[Model][Protocol]
-	interface BrazeInAppMessageUIDelegate
-	{
+	interface BrazeInAppMessageUIDelegate {
 		// @optional -(enum BRZInAppMessageUIDisplayChoice)inAppMessage:(BrazeInAppMessageUI * _Nonnull)ui displayChoiceForMessage:(BRZInAppMessageRaw * _Nonnull)message __attribute__((warn_unused_result("")));
 		[Export ("inAppMessage:displayChoiceForMessage:")]
 		BRZInAppMessageUIDisplayChoice DisplayChoiceForMessage (BrazeInAppMessageUI ui, BRZInAppMessageRaw message);
@@ -307,6 +284,5 @@ namespace BrazeUI
 		// @optional -(void)inAppMessage:(BrazeInAppMessageUI * _Nonnull)ui prepareWith:(BrazeInAppMessageUIPresentationContextRaw * _Nonnull)context;
 		[Export ("inAppMessage:prepareWith:")]
 		void PrepareWith (BrazeInAppMessageUI ui, BrazeInAppMessageUIPresentationContextRaw context);
-
 	}
 }

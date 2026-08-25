@@ -7,8 +7,7 @@ using UIKit;
 using UserNotifications;
 using WebKit;
 
-namespace BrazeKitCompat
-{
+namespace BrazeKitCompat {
 	[Static]
 	interface ABKSdkMetadata
 	{
@@ -186,11 +185,11 @@ namespace BrazeKitCompat
 		[Obsolete("renamed to 'Braze.Configuration.Api.SDKMetadata.xamarin'")]
 		[Field ("ABKSdkMetadataXamarin", "__Internal")]
 		NSString ABKSdkMetadataXamarin { get; }
+		
 	}
 
 	[Static]
-	partial interface Constants
-	{
+	partial interface Constants {
 
 		// extern NSString *const _Nonnull ABKRequestProcessingPolicyOptionKey;
 		[Field ("ABKRequestProcessingPolicyOptionKey", "__Internal")]
@@ -279,9 +278,8 @@ namespace BrazeKitCompat
 	}
 
 	// @interface Appboy : NSObject
-	[BaseType (typeof(NSObject))]
-	interface Appboy
-	{
+	[BaseType (typeof (NSObject))]
+	interface Appboy {
 		// +(Appboy * _Nullable)sharedInstance;
 		[Static]
 		[NullAllowed, Export ("sharedInstance")]
@@ -457,13 +455,11 @@ namespace BrazeKitCompat
 		[Static]
 		[Export ("requestEnableSDKOnNextAppRun")]
 		void RequestEnableSDKOnNextAppRun ();
-
 	}
 
 	// @interface ABKUser : NSObject
-	[BaseType (typeof(NSObject))]
-	interface ABKUser
-	{
+	[BaseType (typeof (NSObject))]
+	interface ABKUser {
 		// @property (copy, nonatomic) NSString * _Nullable firstName;
 		[NullAllowed, Export ("firstName")]
 		string FirstName { get; set; }
@@ -582,7 +578,7 @@ namespace BrazeKitCompat
 
 		// -(BOOL)setCustomAttributeArrayWithKey:(NSString * _Nonnull)key array:(NSArray * _Nullable)valueArray;
 		[Export ("setCustomAttributeArrayWithKey:array:")]
-		bool SetCustomAttributeArrayWithKey (string key, [NullAllowed] NSObject[] valueArray);
+		bool SetCustomAttributeArrayWithKey (string key, [NullAllowed] NSObject [] valueArray);
 
 		// -(BOOL)setLastKnownLocationWithLatitude:(double)latitude longitude:(double)longitude horizontalAccuracy:(double)horizontalAccuracy;
 		[Export ("setLastKnownLocationWithLatitude:longitude:horizontalAccuracy:")]
@@ -599,23 +595,20 @@ namespace BrazeKitCompat
 		// -(BOOL)removeLocationCustomAttributeWithKey:(NSString * _Nonnull)key;
 		[Export ("removeLocationCustomAttributeWithKey:")]
 		bool RemoveLocationCustomAttributeWithKey (string key);
-
 	}
 
-	partial interface Constants
-	{
+	partial interface Constants {
 		// extern const NSInteger DefaultNumberOfFriends;
 		[Field ("DefaultNumberOfFriends", "__Internal")]
 		nint DefaultNumberOfFriends { get; }
 	}
 
 	// @interface ABKFacebookUser : NSObject
-	[BaseType (typeof(NSObject))]
-	interface ABKFacebookUser
-	{
+	[BaseType (typeof (NSObject))]
+	interface ABKFacebookUser {
 		// -(instancetype _Nonnull)initWithFacebookUserDictionary:(NSDictionary * _Nullable)facebookUserDictionary numberOfFriends:(NSInteger)numberOfFriends likes:(NSArray * _Nullable)likes;
 		[Export ("initWithFacebookUserDictionary:numberOfFriends:likes:")]
-		NativeHandle Constructor ([NullAllowed] NSDictionary facebookUserDictionary, nint numberOfFriends, [NullAllowed] NSObject[] likes);
+		NativeHandle Constructor ([NullAllowed] NSDictionary facebookUserDictionary, nint numberOfFriends, [NullAllowed] NSObject [] likes);
 
 		// @property (readonly) NSDictionary * _Nullable facebookUserDictionary;
 		[NullAllowed, Export ("facebookUserDictionary")]
@@ -627,14 +620,12 @@ namespace BrazeKitCompat
 
 		// @property (readonly) NSArray * _Nullable likes;
 		[NullAllowed, Export ("likes")]
-		NSObject[] Likes { get; }
-
+		NSObject [] Likes { get; }
 	}
 
 	// @interface ABKTwitterUser : NSObject
-	[BaseType (typeof(NSObject))]
-	interface ABKTwitterUser
-	{
+	[BaseType (typeof (NSObject))]
+	interface ABKTwitterUser {
 		// @property (copy) NSString * _Nullable userDescription;
 		[NullAllowed, Export ("userDescription")]
 		string UserDescription { get; set; }
@@ -666,13 +657,11 @@ namespace BrazeKitCompat
 		// @property NSInteger twitterID;
 		[Export ("twitterID")]
 		nint TwitterID { get; set; }
-
 	}
 
 	// @interface ABKAttributionData : NSObject
-	[BaseType (typeof(NSObject))]
-	interface ABKAttributionData
-	{
+	[BaseType (typeof (NSObject))]
+	interface ABKAttributionData {
 		// -(instancetype _Nonnull)initWithNetwork:(NSString * _Nullable)network campaign:(NSString * _Nullable)campaign adGroup:(NSString * _Nullable)adGroup creative:(NSString * _Nullable)creative;
 		[Export ("initWithNetwork:campaign:adGroup:creative:")]
 		NativeHandle Constructor ([NullAllowed] string network, [NullAllowed] string campaign, [NullAllowed] string adGroup, [NullAllowed] string creative);
@@ -692,13 +681,11 @@ namespace BrazeKitCompat
 		// @property (readonly, nonatomic) NSString * _Nullable creative;
 		[NullAllowed, Export ("creative")]
 		string Creative { get; }
-
 	}
 
 	// @interface ABKContentCard : NSObject <NSCopying, NSCoding>
-	[BaseType (typeof(NSObject))]
-	interface ABKContentCard : INSCopying, INSCoding
-	{
+	[BaseType (typeof (NSObject))]
+	interface ABKContentCard : INSCopying, INSCoding {
 		// @property (readonly) NSString * _Nonnull idString;
 		[Export ("idString")]
 		string IdString { get; }
@@ -776,13 +763,11 @@ namespace BrazeKitCompat
 		// -(BOOL)hasSameId:(ABKContentCard * _Nonnull)card;
 		[Export ("hasSameId:")]
 		bool HasSameId (ABKContentCard card);
-
 	}
 
 	// @interface ABKBannerContentCard : ABKContentCard <NSCoding>
-	[BaseType (typeof(ABKContentCard))]
-	interface ABKBannerContentCard : INSCoding
-	{
+	[BaseType (typeof (ABKContentCard))]
+	interface ABKBannerContentCard : INSCoding {
 		// @property (copy) NSString * image;
 		[Export ("image")]
 		string Image { get; set; }
@@ -790,13 +775,11 @@ namespace BrazeKitCompat
 		// @property float imageAspectRatio;
 		[Export ("imageAspectRatio")]
 		float ImageAspectRatio { get; set; }
-
 	}
 
 	// @interface ABKCaptionedImageContentCard : ABKContentCard <NSCoding>
-	[BaseType (typeof(ABKContentCard))]
-	interface ABKCaptionedImageContentCard : INSCoding
-	{
+	[BaseType (typeof (ABKContentCard))]
+	interface ABKCaptionedImageContentCard : INSCoding {
 		// @property (copy) NSString * _Nonnull image;
 		[Export ("image")]
 		string Image { get; set; }
@@ -816,13 +799,11 @@ namespace BrazeKitCompat
 		// @property (copy) NSString * _Nullable domain;
 		[NullAllowed, Export ("domain")]
 		string Domain { get; set; }
-
 	}
 
 	// @interface ABKClassicContentCard : ABKContentCard <NSCoding>
-	[BaseType (typeof(ABKContentCard))]
-	interface ABKClassicContentCard : INSCoding
-	{
+	[BaseType (typeof (ABKContentCard))]
+	interface ABKClassicContentCard : INSCoding {
 		// @property (copy) NSString * _Nullable image;
 		[NullAllowed, Export ("image")]
 		string Image { get; set; }
@@ -838,13 +819,11 @@ namespace BrazeKitCompat
 		// @property (copy) NSString * _Nullable domain;
 		[NullAllowed, Export ("domain")]
 		string Domain { get; set; }
-
 	}
 
 	// @interface ABKSdkAuthenticationError : NSObject
-	[BaseType (typeof(NSObject))]
-	interface ABKSdkAuthenticationError
-	{
+	[BaseType (typeof (NSObject))]
+	interface ABKSdkAuthenticationError {
 		// @property (readonly) NSInteger code;
 		[Export ("code")]
 		nint Code { get; }
@@ -860,25 +839,20 @@ namespace BrazeKitCompat
 		// @property (readonly) NSString * _Nonnull signature;
 		[Export ("signature")]
 		string Signature { get; }
-
 	}
 
 	// @protocol ABKSdkAuthenticationDelegate <NSObject>
 	[Protocol, Model]
-	[BaseType (typeof(NSObject))]
-	interface ABKSdkAuthenticationDelegate
-	{
+	[BaseType (typeof (NSObject))]
+	interface ABKSdkAuthenticationDelegate {
 		// @required -(void)handleSdkAuthenticationError:(ABKSdkAuthenticationError * _Nonnull)authError;
 		[Abstract]
 		[Export ("handleSdkAuthenticationError:")]
 		void HandleSdkAuthenticationError (ABKSdkAuthenticationError authError);
-
 	}
-
 	// @interface ABKInAppMessage : NSObject
-	[BaseType (typeof(NSObject))]
-	interface ABKInAppMessage
-	{
+	[BaseType (typeof (NSObject))]
+	interface ABKInAppMessage {
 		// @property (copy) NSString * _Nonnull message;
 		[Export ("message")]
 		string Message { get; set; }
@@ -982,13 +956,11 @@ namespace BrazeKitCompat
 		// -(NSData * _Nullable)serializeToData;
 		[NullAllowed, Export ("serializeToData")]
 		NSData SerializeToData { get; }
-
 	}
 
 	// @interface ABKInAppMessageSlideup : ABKInAppMessage
-	[BaseType (typeof(ABKInAppMessage))]
-	interface ABKInAppMessageSlideup
-	{
+	[BaseType (typeof (ABKInAppMessage))]
+	interface ABKInAppMessageSlideup {
 		// @property BOOL hideChevron;
 		[Export ("hideChevron")]
 		bool HideChevron { get; set; }
@@ -1000,13 +972,11 @@ namespace BrazeKitCompat
 		// @property (strong) UIColor * _Nullable chevronColor;
 		[NullAllowed, Export ("chevronColor", ArgumentSemantic.Strong)]
 		UIColor ChevronColor { get; set; }
-
 	}
 
 	// @interface ABKInAppMessageImmersive : ABKInAppMessage
-	[BaseType (typeof(ABKInAppMessage))]
-	interface ABKInAppMessageImmersive
-	{
+	[BaseType (typeof (ABKInAppMessage))]
+	interface ABKInAppMessageImmersive {
 		// @property (copy) NSString * _Nullable header;
 		[NullAllowed, Export ("header")]
 		string Header { get; set; }
@@ -1021,7 +991,7 @@ namespace BrazeKitCompat
 
 		// @property (readonly, copy) NSArray<ABKInAppMessageButton *> * _Nullable buttons;
 		[NullAllowed, Export ("buttons", ArgumentSemantic.Copy)]
-		ABKInAppMessageButton[] Buttons { get; }
+		ABKInAppMessageButton [] Buttons { get; }
 
 		// @property (nonatomic, strong) UIColor * _Nullable frameColor;
 		[NullAllowed, Export ("frameColor", ArgumentSemantic.Strong)]
@@ -1041,28 +1011,22 @@ namespace BrazeKitCompat
 
 		// -(void)setInAppMessageButtons:(NSArray * _Nonnull)buttonArray;
 		[Export ("setInAppMessageButtons:")]
-		void SetInAppMessageButtons (NSObject[] buttonArray);
-
+		void SetInAppMessageButtons (NSObject [] buttonArray);
 	}
 
 	// @interface ABKInAppMessageModal : ABKInAppMessageImmersive
-	[BaseType (typeof(ABKInAppMessageImmersive))]
-	interface ABKInAppMessageModal
-	{
-
+	[BaseType (typeof (ABKInAppMessageImmersive))]
+	interface ABKInAppMessageModal {
 	}
 
 	// @interface ABKInAppMessageFull : ABKInAppMessageImmersive
-	[BaseType (typeof(ABKInAppMessageImmersive))]
-	interface ABKInAppMessageFull
-	{
-
+	[BaseType (typeof (ABKInAppMessageImmersive))]
+	interface ABKInAppMessageFull {
 	}
 
 	// @interface ABKInAppMessageHTMLBase : ABKInAppMessage
-	[BaseType (typeof(ABKInAppMessage))]
-	interface ABKInAppMessageHTMLBase
-	{
+	[BaseType (typeof (ABKInAppMessage))]
+	interface ABKInAppMessageHTMLBase {
 		// @property (nonatomic, strong) NSURL * _Nonnull assetsLocalDirectoryPath;
 		[Export ("assetsLocalDirectoryPath", ArgumentSemantic.Strong)]
 		NSUrl AssetsLocalDirectoryPath { get; set; }
@@ -1070,49 +1034,41 @@ namespace BrazeKitCompat
 		// -(void)logInAppMessageHTMLClickWithButtonID:(NSString * _Nonnull)buttonId;
 		[Export ("logInAppMessageHTMLClickWithButtonID:")]
 		void LogInAppMessageHTMLClickWithButtonID (string buttonId);
-
 	}
 
 	// @interface ABKInAppMessageHTML : ABKInAppMessageHTMLBase
-	[BaseType (typeof(ABKInAppMessageHTMLBase))]
-	interface ABKInAppMessageHTML
-	{
+	[BaseType (typeof (ABKInAppMessageHTMLBase))]
+	interface ABKInAppMessageHTML {
 		// @property (nonatomic) BOOL trusted;
 		[Export ("trusted")]
 		bool Trusted { get; set; }
 
 		// @property (nonatomic, strong) NSArray * _Nullable assetUrls;
 		[NullAllowed, Export ("assetUrls", ArgumentSemantic.Strong)]
-		NSObject[] AssetUrls { get; set; }
+		NSObject [] AssetUrls { get; set; }
 
 		// @property (nonatomic, strong) NSDictionary * _Nullable messageFields;
 		[NullAllowed, Export ("messageFields", ArgumentSemantic.Strong)]
 		NSDictionary MessageFields { get; set; }
-
 	}
 
 	// @interface ABKInAppMessageHTMLFull : ABKInAppMessageHTMLBase
-	[BaseType (typeof(ABKInAppMessageHTMLBase))]
-	interface ABKInAppMessageHTMLFull
-	{
+	[BaseType (typeof (ABKInAppMessageHTMLBase))]
+	interface ABKInAppMessageHTMLFull {
 		// @property (nonatomic, strong) NSURL * _Nullable assetsZipRemoteUrl;
 		[NullAllowed, Export ("assetsZipRemoteUrl", ArgumentSemantic.Strong)]
 		NSUrl AssetsZipRemoteUrl { get; set; }
-
 	}
 
 	// @interface ABKInAppMessageControl : ABKInAppMessage
-	[BaseType (typeof(ABKInAppMessage))]
-	interface ABKInAppMessageControl
-	{
-
+	[BaseType (typeof (ABKInAppMessage))]
+	interface ABKInAppMessageControl {
 	}
 
 	// @protocol ABKInAppMessageControllerDelegate <NSObject>
 	[Protocol, Model]
-	[BaseType (typeof(NSObject))]
-	interface ABKInAppMessageControllerDelegate
-	{
+	[BaseType (typeof (NSObject))]
+	interface ABKInAppMessageControllerDelegate {
 		// @optional -(ABKInAppMessageDisplayChoice)beforeInAppMessageDisplayed:(ABKInAppMessage * _Nonnull)inAppMessage;
 		[Export ("beforeInAppMessageDisplayed:")]
 		ABKInAppMessageDisplayChoice BeforeInAppMessageDisplayed (ABKInAppMessage inAppMessage);
@@ -1124,7 +1080,6 @@ namespace BrazeKitCompat
 		// @optional -(void)noMatchingTriggerForEvent:(ABKTriggerEventType)eventType name:(NSString * _Nullable)name;
 		[Export ("noMatchingTriggerForEvent:name:")]
 		void NoMatchingTriggerForEvent (ABKTriggerEventType eventType, [NullAllowed] string name);
-
 	}
 
 	// @protocol ABKInAppMessageUIControlling <NSObject>
@@ -1136,10 +1091,10 @@ namespace BrazeKitCompat
   the generated interface. If consumers are not supposed to implement this
   protocol, then [Model] is redundant and will generate code that will never
   be used.
-*/[Protocol]
-	[BaseType (typeof(NSObject))]
-	interface ABKInAppMessageUIControlling
-	{
+*/
+	[Protocol]
+	[BaseType (typeof (NSObject))]
+	interface ABKInAppMessageUIControlling {
 		// @optional -(void)setInAppMessageUIDelegate:(id)uiDelegate;
 		[Export ("setInAppMessageUIDelegate:")]
 		void SetInAppMessageUIDelegate (NSObject uiDelegate);
@@ -1163,13 +1118,11 @@ namespace BrazeKitCompat
 		// @optional -(BOOL)inAppMessageCurrentlyVisible;
 		[Export ("inAppMessageCurrentlyVisible")]
 		bool InAppMessageCurrentlyVisible { get; }
-
 	}
 
 	// @interface ABKInAppMessageController : NSObject
-	[BaseType (typeof(NSObject))]
-	interface ABKInAppMessageController
-	{
+	[BaseType (typeof (NSObject))]
+	interface ABKInAppMessageController {
 		[Wrap ("WeakDelegate")]
 		[NullAllowed]
 		ABKInAppMessageControllerDelegate Delegate { get; set; }
@@ -1202,13 +1155,11 @@ namespace BrazeKitCompat
 		// -(void)addInAppMessage:(ABKInAppMessage * _Nonnull)newInAppMessage;
 		[Export ("addInAppMessage:")]
 		void AddInAppMessage (ABKInAppMessage newInAppMessage);
-
 	}
 
 	// @interface ABKInAppMessageButton : NSObject
-	[BaseType (typeof(NSObject))]
-	interface ABKInAppMessageButton
-	{
+	[BaseType (typeof (NSObject))]
+	interface ABKInAppMessageButton {
 		// @property (copy) NSString * _Nullable buttonText;
 		[NullAllowed, Export ("buttonText")]
 		string ButtonText { get; set; }
@@ -1248,13 +1199,11 @@ namespace BrazeKitCompat
 		// -(void)setButtonClickAction:(ABKInAppMessageClickActionType)clickActionType withURI:(NSURL * _Nullable)uri;
 		[Export ("setButtonClickAction:withURI:")]
 		void SetButtonClickAction (ABKInAppMessageClickActionType clickActionType, [NullAllowed] NSUrl uri);
-
 	}
 
 	// @interface ABKInAppMessageWebViewBridge : NSObject <WKScriptMessageHandler>
-	[BaseType (typeof(NSObject))]
-	interface ABKInAppMessageWebViewBridge : IWKScriptMessageHandler
-	{
+	[BaseType (typeof (NSObject))]
+	interface ABKInAppMessageWebViewBridge : IWKScriptMessageHandler {
 		[Wrap ("WeakDelegate")]
 		[NullAllowed]
 		ABKInAppMessageWebViewBridgeDelegate Delegate { get; set; }
@@ -1266,14 +1215,12 @@ namespace BrazeKitCompat
 		// -(instancetype _Nonnull)initWithWebView:(WKWebView * _Nonnull)webView inAppMessage:(ABKInAppMessageHTML * _Nonnull)inAppMessage appboyInstance:(Appboy * _Nonnull)appboy;
 		[Export ("initWithWebView:inAppMessage:appboyInstance:")]
 		NativeHandle Constructor (WKWebView webView, ABKInAppMessageHTML inAppMessage, Appboy appboy);
-
 	}
 
 	// @protocol ABKInAppMessageWebViewBridgeDelegate <NSObject>
 	[Protocol, Model]
-	[BaseType (typeof(NSObject))]
-	interface ABKInAppMessageWebViewBridgeDelegate
-	{
+	[BaseType (typeof (NSObject))]
+	interface ABKInAppMessageWebViewBridgeDelegate {
 		// @required -(void)webViewBridge:(ABKInAppMessageWebViewBridge * _Nonnull)webViewBridge receivedClickAction:(ABKInAppMessageClickActionType)clickAction;
 		[Abstract]
 		[Export ("webViewBridge:receivedClickAction:")]
@@ -1283,13 +1230,11 @@ namespace BrazeKitCompat
 		[Abstract]
 		[Export ("closeMessageWithWebViewBridge:")]
 		void CloseMessageWithWebViewBridge (ABKInAppMessageWebViewBridge webViewBridge);
-
 	}
 
 	// @interface ABKInAppMessageDarkTheme : NSObject
-	[BaseType (typeof(NSObject))]
-	interface ABKInAppMessageDarkTheme
-	{
+	[BaseType (typeof (NSObject))]
+	interface ABKInAppMessageDarkTheme {
 		// @property (nonatomic, strong) UIColor * _Nullable backgroundColor;
 		[NullAllowed, Export ("backgroundColor", ArgumentSemantic.Strong)]
 		UIColor BackgroundColor { get; set; }
@@ -1320,7 +1265,7 @@ namespace BrazeKitCompat
 
 		// @property (nonatomic, strong) NSArray<ABKInAppMessageDarkButtonTheme *> * _Nullable buttons;
 		[NullAllowed, Export ("buttons", ArgumentSemantic.Strong)]
-		ABKInAppMessageDarkButtonTheme[] Buttons { get; set; }
+		ABKInAppMessageDarkButtonTheme [] Buttons { get; set; }
 
 		// -(instancetype _Nonnull)initWithFields:(NSDictionary<NSString *,NSString *> * _Nonnull)darkThemeFields;
 		[Export ("initWithFields:")]
@@ -1329,13 +1274,11 @@ namespace BrazeKitCompat
 		// -(UIColor * _Nonnull)getColorForKey:(NSString * _Nonnull)key;
 		[Export ("getColorForKey:")]
 		UIColor GetColorForKey (string key);
-
 	}
 
 	// @interface ABKInAppMessageDarkButtonTheme : NSObject
-	[BaseType (typeof(NSObject))]
-	interface ABKInAppMessageDarkButtonTheme
-	{
+	[BaseType (typeof (NSObject))]
+	interface ABKInAppMessageDarkButtonTheme {
 		// @property (strong) UIColor * _Nonnull buttonBackgroundColor;
 		[Export ("buttonBackgroundColor", ArgumentSemantic.Strong)]
 		UIColor ButtonBackgroundColor { get; set; }
@@ -1351,11 +1294,9 @@ namespace BrazeKitCompat
 		// -(instancetype _Nonnull)initWithFields:(NSDictionary * _Nonnull)darkButtonFields;
 		[Export ("initWithFields:")]
 		NativeHandle Constructor (NSDictionary darkButtonFields);
-
 	}
 
-	partial interface Constants
-	{
+	partial interface Constants {
 		// extern NSString *const _Nonnull ABKContentCardsProcessedNotification;
 		[Field ("ABKContentCardsProcessedNotification", "__Internal")]
 		NSString ABKContentCardsProcessedNotification { get; }
@@ -1366,12 +1307,11 @@ namespace BrazeKitCompat
 	}
 
 	// @interface ABKContentCardsController : NSObject
-	[BaseType (typeof(NSObject))]
-	interface ABKContentCardsController
-	{
+	[BaseType (typeof (NSObject))]
+	interface ABKContentCardsController {
 		// @property (readonly, getter = getContentCards) NSArray * _Nonnull contentCards;
 		[Export ("contentCards")]
-		NSObject[] ContentCards { [Bind ("getContentCards")] get; }
+		NSObject [] ContentCards { [Bind ("getContentCards")] get; }
 
 		// @property (readonly) NSDate * _Nullable lastUpdate;
 		[NullAllowed, Export ("lastUpdate")]
@@ -1384,14 +1324,12 @@ namespace BrazeKitCompat
 		// -(NSInteger)contentCardCount;
 		[Export ("contentCardCount")]
 		nint ContentCardCount { get; }
-
 	}
 
 	// @protocol ABKIDFADelegate <NSObject>
 	[Protocol, Model]
-	[BaseType (typeof(NSObject))]
-	interface ABKIDFADelegate
-	{
+	[BaseType (typeof (NSObject))]
+	interface ABKIDFADelegate {
 		// @required -(NSString * _Nonnull)advertisingIdentifierString;
 		[Abstract]
 		[Export ("advertisingIdentifierString")]
@@ -1401,13 +1339,10 @@ namespace BrazeKitCompat
 		[Abstract]
 		[Export ("isAdvertisingTrackingEnabledOrATTAuthorized")]
 		bool IsAdvertisingTrackingEnabledOrATTAuthorized { get; }
-
 	}
-
 	// @interface ABKSDWebImageProxy : NSObject
-	[BaseType (typeof(NSObject))]
-	interface ABKSDWebImageProxy
-	{
+	[BaseType (typeof (NSObject))]
+	interface ABKSDWebImageProxy {
 		// +(void)setImageForView:(UIImageView * _Nonnull)imageView showActivityIndicator:(BOOL)showActivityIndicator withURL:(NSURL * _Nullable)imageURL imagePlaceHolder:(UIImage * _Nullable)placeHolder completed:(void (^ _Nullable)(UIImage * _Nullable, NSError * _Nullable, NSInteger, NSURL * _Nullable))completion;
 		[Static]
 		[Export ("setImageForView:showActivityIndicator:withURL:imagePlaceHolder:completed:")]
@@ -1449,14 +1384,12 @@ namespace BrazeKitCompat
 		[Static]
 		[Export ("isSupportedSDWebImageVersion")]
 		bool IsSupportedSDWebImageVersion { get; }
-
 	}
 
 	// @protocol ABKImageDelegate
 	[BaseType(typeof(NSObject))]
 	[Model][Protocol]
-	interface ABKImageDelegate
-	{
+	interface ABKImageDelegate {
 		// @required -(void)setImageForView:(UIImageView * _Nonnull)imageView showActivityIndicator:(BOOL)showActivityIndicator withURL:(NSURL * _Nullable)imageURL imagePlaceHolder:(UIImage * _Nullable)placeHolder completed:(void (^ _Nullable)(UIImage * _Nullable, NSError * _Nullable, NSInteger, NSURL * _Nullable))completion;
 		[Abstract]
 		[Export ("setImageForView:showActivityIndicator:withURL:imagePlaceHolder:completed:")]
@@ -1482,13 +1415,11 @@ namespace BrazeKitCompat
 		[Abstract]
 		[Export ("imageViewClass")]
 		Class ImageViewClass { get; }
-
 	}
 
 	// @interface ABKLocationManager : NSObject <CLLocationManagerDelegate>
-	[BaseType (typeof(NSObject))]
-	interface ABKLocationManager : ICLLocationManagerDelegate
-	{
+	[BaseType (typeof (NSObject))]
+	interface ABKLocationManager : ICLLocationManagerDelegate {
 		// @property (readonly) BOOL enableLocationTracking;
 		[Export ("enableLocationTracking")]
 		bool EnableLocationTracking { get; }
@@ -1504,36 +1435,30 @@ namespace BrazeKitCompat
 		// -(void)logSingleLocation;
 		[Export ("logSingleLocation")]
 		void LogSingleLocation ();
-
 	}
 
 	// @interface ABKLocationManagerProvider : NSObject
-	[BaseType (typeof(NSObject))]
-	interface ABKLocationManagerProvider
-	{
+	[BaseType (typeof (NSObject))]
+	interface ABKLocationManagerProvider {
 		// +(BOOL)locationServicesEnabled;
 		[Static]
 		[Export ("locationServicesEnabled")]
 		bool LocationServicesEnabled { get; }
-
 	}
 
 	// @protocol ABKURLDelegate <NSObject>
 	[Protocol, Model]
-	[BaseType (typeof(NSObject))]
-	interface ABKURLDelegate
-	{
+	[BaseType (typeof (NSObject))]
+	interface ABKURLDelegate {
 		// @required -(BOOL)handleAppboyURL:(NSURL * _Nullable)url fromChannel:(ABKChannel)channel withExtras:(NSDictionary * _Nullable)extras;
 		[Abstract]
 		[Export ("handleAppboyURL:fromChannel:withExtras:")]
 		bool FromChannel ([NullAllowed] NSUrl url, ABKChannel channel, [NullAllowed] NSDictionary extras);
-
 	}
 
 	// @interface ABKPushUtils : NSObject
-	[BaseType (typeof(NSObject))]
-	interface ABKPushUtils
-	{
+	[BaseType (typeof (NSObject))]
+	interface ABKPushUtils {
 		// +(BOOL)isAppboyUserNotification:(UNNotificationResponse * _Nonnull)response __attribute__((availability(ios, introduced=10.0))) __attribute__((availability(maccatalyst, introduced=14.0)));
 		[Static]
 		[Export ("isAppboyUserNotification:")]
@@ -1559,16 +1484,6 @@ namespace BrazeKitCompat
 		[Static]
 		[Export ("isUninstallTrackingRemoteNotification:")]
 		bool IsUninstallTrackingRemoteNotification (NSDictionary userInfo);
-
-		// +(BOOL)isGeofencesSyncUserNotification:(UNNotificationResponse * _Nonnull)response __attribute__((availability(ios, introduced=10.0))) __attribute__((availability(maccatalyst, introduced=14.0)));
-		[Static]
-		[Export ("isGeofencesSyncUserNotification:")]
-		bool IsGeofencesSyncUserNotification (UNNotificationResponse response);
-
-		// +(BOOL)isGeofencesSyncRemoteNotification:(NSDictionary * _Nonnull)userInfo;
-		[Static]
-		[Export ("isGeofencesSyncRemoteNotification:")]
-		bool IsGeofencesSyncRemoteNotification (NSDictionary userInfo);
 
 		// +(BOOL)isAppboySilentRemoteNotification:(NSDictionary * _Nonnull)userInfo;
 		[Static]
@@ -1601,13 +1516,11 @@ namespace BrazeKitCompat
 		[Static]
 		[Export ("getAppboyUIUserNotificationCategorySet")]
 		NSSet<UIUserNotificationCategory> AppboyUIUserNotificationCategorySet { get; }
-
 	}
 
 	// @interface ABKModalWebViewController : UINavigationController <WKNavigationDelegate>
-	[BaseType (typeof(UINavigationController))]
-	interface ABKModalWebViewController : IWKNavigationDelegate
-	{
+	[BaseType (typeof (UINavigationController))]
+	interface ABKModalWebViewController : IWKNavigationDelegate {
 		// @property NSURL * url;
 		[Export ("url", ArgumentSemantic.Assign)]
 		NSUrl Url { get; set; }
@@ -1619,18 +1532,15 @@ namespace BrazeKitCompat
 		// @property (nonatomic) UIProgressView * progressBar __attribute__((iboutlet));
 		[Export ("progressBar", ArgumentSemantic.Assign)]
 		UIProgressView ProgressBar { get; set; }
-
 	}
 
 	// @interface ABKNoConnectionLocalization : NSObject
-	[BaseType (typeof(NSObject))]
-	interface ABKNoConnectionLocalization
-	{
+	[BaseType (typeof (NSObject))]
+	interface ABKNoConnectionLocalization {
 		// +(NSString *)getNoConnectionLocalizedString;
 		[Static]
 		[Export ("getNoConnectionLocalizedString")]
 		string NoConnectionLocalizedString { get; }
-
 	}
 
 }

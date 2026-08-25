@@ -1,19 +1,16 @@
 using System;
 using ObjCRuntime;
 
-namespace BrazeKitCompat
-{
+namespace BrazeKitCompat {
 	[Native]
-	public enum ABKRequestProcessingPolicy : long
-	{
+	public enum ABKRequestProcessingPolicy : long {
 		AutomaticRequestProcessing,
 		ManualRequestProcessing,
 		AutomaticRequestProcessingExceptForDataFlush = ManualRequestProcessing
 	}
 
 	[Native]
-	public enum ABKSDKFlavor : long
-	{
+	public enum ABKSDKFlavor : long {
 		Unity = 1,
 		React,
 		Cordova,
@@ -26,8 +23,7 @@ namespace BrazeKitCompat
 
 	[Flags]
 	[Native]
-	public enum ABKDeviceOptions : ulong
-	{
+	public enum ABKDeviceOptions : ulong {
 		None = 0x0,
 		Resolution = (1uL << 0),
 		Carrier = (1uL << 1),
@@ -45,8 +41,7 @@ namespace BrazeKitCompat
 	}
 
 	[Native]
-	public enum ABKChannel : long
-	{
+	public enum ABKChannel : long {
 		PushNotificationChannel,
 		InAppMessageChannel,
 		ContentCardChannel,
@@ -54,8 +49,7 @@ namespace BrazeKitCompat
 	}
 
 	[Native]
-	public enum ABKUserGenderType : long
-	{
+	public enum ABKUserGenderType : long {
 		Male,
 		Female,
 		Other,
@@ -65,52 +59,45 @@ namespace BrazeKitCompat
 	}
 
 	[Native]
-	public enum ABKNotificationSubscriptionType : long
-	{
+	public enum ABKNotificationSubscriptionType : long {
 		ABKOptedIn,
 		ABKSubscribed,
 		ABKUnsubscribed
 	}
 
 	[Native]
-	public enum ABKInAppMessageClickActionType : long
-	{
+	public enum ABKInAppMessageClickActionType : long {
 		RedirectToURI,
 		NoneClickAction
 	}
 
 	[Native]
-	public enum ABKInAppMessageDismissType : long
-	{
+	public enum ABKInAppMessageDismissType : long {
 		Automatically,
 		Manually
 	}
 
 	[Native]
-	public enum ABKInAppMessageOrientation : long
-	{
+	public enum ABKInAppMessageOrientation : long {
 		Any,
 		Portrait,
 		Landscape
 	}
 
 	[Native]
-	public enum ABKInAppMessageSlideupAnchor : long
-	{
+	public enum ABKInAppMessageSlideupAnchor : long {
 		Top,
 		Bottom
 	}
 
 	[Native]
-	public enum ABKInAppMessageImmersiveImageStyle : long
-	{
+	public enum ABKInAppMessageImmersiveImageStyle : long {
 		Graphic,
 		TopImage
 	}
 
 	[Native]
-	public enum ABKInAppMessageDisplayChoice : long
-	{
+	public enum ABKInAppMessageDisplayChoice : long {
 		DisplayInAppMessageNow,
 		ReenqueueInAppMessage,
 		DisplayInAppMessageLater = ReenqueueInAppMessage,
@@ -118,8 +105,7 @@ namespace BrazeKitCompat
 	}
 
 	[Native]
-	public enum ABKTriggerEventType : long
-	{
+	public enum ABKTriggerEventType : long {
 		SessionStart,
 		CustomEvent,
 		Purchase,
@@ -128,8 +114,7 @@ namespace BrazeKitCompat
 
 	[Flags]
 	[Native]
-	public enum ABKImageOptions : ulong
-	{
+	public enum ABKImageOptions : ulong {
 		RetryFailed = 1uL << 0,
 		LowPriority = 1uL << 1,
 		CacheMemoryOnly = 1uL << 2,

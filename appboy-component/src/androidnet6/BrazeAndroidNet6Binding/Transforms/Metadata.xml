@@ -18,6 +18,17 @@
   <!-- Fix BrazeGeofence IComparable binding error by removing the Comparable interface -->
   <remove-node path="/api/package[@name='com.braze.models']/class[@name='BrazeGeofence']/implements[@name='java.lang.Comparable']" />
 
+  <!--
+    Card.getExtras() returns a Kotlin Map (emptyMap()/LinkedHashMap).
+    Remove the auto-bound getter/field so Additions/Card.Extras.cs can own Extras
+    as IDictionary<string,string> via JNI (avoids JavaDictionary cast and CS0266
+    from a generated IMap getter wired to an Addition Extras property).
+  -->
+  <remove-node
+    path="/api/package[@name='com.braze.models.cards']/class[@name='Card']/field[@name='extras']" />
+  <remove-node
+    path="/api/package[@name='com.braze.models.cards']/class[@name='Card']/method[@name='getExtras']" />
+
   <!-- The mapping was throwing errors in each of the following, so we just remove them. They are not needed for a fully featured integration -->
   <remove-node path="/api/package[@name='com.braze.ui.widget']" />
   <remove-node path="/api/package[@name='com.braze.ui.contentcards.adapters']/class[@name='ContentCardAdapter']" />

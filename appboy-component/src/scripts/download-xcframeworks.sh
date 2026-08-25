@@ -64,9 +64,29 @@ remove_swift_compiler_generated_files() {
     rm -rf "$swiftModuleDir"
   done
 }
+
+# Stripping .swiftmodule files invalidates the vendor ad-hoc signature (sealed
+# resources). Re-sign so the simulator does not SIGKILL with Code Signature Invalid.
+# Skip Mac Catalyst / tvOS slices: this binding targets iOS only, and Catalyst
+# versioned frameworks fail codesign with "bundle format is ambiguous".
+resign_xcframework_slices() {
+  local module="$1"
+  local lowercaseModule
+  lowercaseModule=$(echo "$module" | tr '[:upper:]' '[:lower:]')
+  local moduleDir="$SCRIPT_DIR/../ios-$lowercaseModule"
+  local framework
+  while IFS= read -r -d '' framework; do
+    echo "  · $framework"
+    codesign --force --sign - --timestamp=none "$framework"
+  done < <(find "$moduleDir/$module.xcframework" -type d -name '*.framework' \
+    ! -path '*-maccatalyst/*' ! -path '*/tvos-*/*' -print0)
+}
+
 for module in "${MODULES[@]}"; do
   echo "→ Removing Swift compiler generated files for $module"
   remove_swift_compiler_generated_files "$module"
+  echo "→ Re-signing $module xcframework slices"
+  resign_xcframework_slices "$module"
 done
 
 # - Cleanup run

@@ -1,17 +1,22 @@
 using ObjCRuntime;
 
-namespace BrazeKit
-{
+namespace BrazeKit {
 	[Native]
-	public enum BRZPushEnqueueBehavior : long
-	{
+	public enum BRZBannerRemovalReason : long {
+		NoBannerFound = 0,
+		UserContextChange = 1,
+		Dismissal = 2,
+		Expired = 3
+	}
+
+	[Native]
+	public enum BRZPushEnqueueBehavior : long {
 		Queue = 0,
 		Drop = 1
 	}
 
 	[Native]
-	public enum BRZContentCardRawType : long
-	{
+	public enum BRZContentCardRawType : long {
 		Classic = 0,
 		ImageOnly = 1,
 		CaptionedImage = 2,
@@ -19,8 +24,7 @@ namespace BrazeKit
 	}
 
 	[Native]
-	public enum BRZInAppMessageRawType : long
-	{
+	public enum BRZInAppMessageRawType : long {
 		Slideup = 0,
 		Modal = 1,
 		Full = 2,
@@ -29,51 +33,44 @@ namespace BrazeKit
 	}
 
 	[Native]
-	public enum BRZInAppMessageRawClickAction : long
-	{
+	public enum BRZInAppMessageRawClickAction : long {
 		None = 0,
 		Url = 1
 	}
 
 	[Native]
-	public enum BRZInAppMessageRawClose : long
-	{
+	public enum BRZInAppMessageRawClose : long {
 		AutoDismiss = 0,
 		Swipe = 1
 	}
 
 	[Native]
-	public enum BRZInAppMessageRawOrientation : long
-	{
+	public enum BRZInAppMessageRawOrientation : long {
 		Any = 0,
 		Portrait = 1,
 		Landscape = 2
 	}
 
 	[Native]
-	public enum BRZInAppMessageRawTextAlignment : long
-	{
+	public enum BRZInAppMessageRawTextAlignment : long {
 		Start = 0,
 		Center = 1,
 		End = 2
 	}
 
 	[Native]
-	public enum BRZInAppMessageRawImageStyle : long
-	{
+	public enum BRZInAppMessageRawImageStyle : long {
 		Graphic = 0,
 		Top = 1
 	}
 
 	[Native]
-	public enum BRZInAppMessageRawSlideFrom : long
-	{
+	public enum BRZInAppMessageRawSlideFrom : long {
 		Top = 0,
 		Bottom = 1
 	}
 
-	public enum BRZLoggerLevel : byte
-	{
+	public enum BRZLoggerLevel : byte {
 		Debug = 0,
 		Info = 1,
 		Error = 2,
@@ -81,22 +78,19 @@ namespace BrazeKit
 	}
 
 	[Native]
-	public enum BRZNotificationsPayloadType : long
-	{
+	public enum BRZNotificationsPayloadType : long {
 		Received = 0,
 		Opened = 1
 	}
 
 	[Native]
-	public enum _COMPAT_ABKRequestProcessingPolicy : long
-	{
+	public enum _COMPAT_ABKRequestProcessingPolicy : long {
 		ManualRequestProcessing = 0,
 		AutomaticRequestProcessing = 1
 	}
 
 	[Native]
-	public enum _COMPAT_ABKSDKFlavor : long
-	{
+	public enum _COMPAT_ABKSDKFlavor : long {
 		Vanilla = 0,
 		Unity = 1,
 		React = 2,
@@ -109,8 +103,7 @@ namespace BrazeKit
 	}
 
 	[Native]
-	public enum BRZChannel : long
-	{
+	public enum BRZChannel : long {
 		Notification = 0,
 		InAppMessage = 1,
 		ContentCard = 2,
@@ -118,15 +111,13 @@ namespace BrazeKit
 	}
 
 	[Native]
-	public enum BRZRequestPolicy : long
-	{
+	public enum BRZRequestPolicy : long {
 		Automatic = 0,
 		Manual = 1
 	}
 
 	[Native]
-	public enum BRZSDKFlavor : long
-	{
+	public enum BRZSDKFlavor : long {
 		Vanilla = 0,
 		Unity = 1,
 		React = 2,
@@ -139,30 +130,26 @@ namespace BrazeKit
 	}
 
 	[Native]
-	public enum BRZUserSubscriptionState : long
-	{
+	public enum BRZUserSubscriptionState : long {
 		OptedIn = 0,
 		Subscribed = 1,
 		Unsubscribed = 2
 	}
 
 	[Native]
-	public enum BRZInAppMessageDismissalReason : long
-	{
+	public enum BRZInAppMessageDismissalReason : long {
 		WipeData = 0,
 		ChangeUser = 1
 	}
 
 	[Native]
-	public enum BRZSessionState : long
-	{
+	public enum BRZSessionState : long {
 		Started = 0,
 		Ended = 1
 	}
 
 	[Native]
-	public enum BRZTriggerEvent : long
-	{
+	public enum BRZTriggerEvent : long {
 		SessionStart = 0,
 		CustomEvent = 1,
 		Purchase = 2,
@@ -170,8 +157,7 @@ namespace BrazeKit
 	}
 
 	[Native]
-	public enum BRZInAppMessageUserIDMatchBehavior : long
-	{
+	public enum BRZInAppMessageUserIDMatchBehavior : long {
 		Ignore = 0,
 		Enforce = 1
 	}
