@@ -35,6 +35,10 @@
 	<PropertyGroup Condition="'$(Configuration)' == 'Release'">
 		<CodesignKey>iPhone Distribution</CodesignKey>
 	</PropertyGroup>
+	<!-- Simulator on macOS 15+ rejects linker-signed / EnableCodeSigning=false binaries. -->
+	<PropertyGroup Condition="'$(RuntimeIdentifier)' != '' AND $(RuntimeIdentifier.Contains('simulator'))">
+		<CodesignKey>-</CodesignKey>
+	</PropertyGroup>
 
 	<!-- Maui Packages -->
 	<ItemGroup>

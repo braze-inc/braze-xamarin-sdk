@@ -7,24 +7,20 @@ using ObjCRuntime;
 using UIKit;
 using WebKit;
 
-namespace BrazeUICompat
-{
+namespace BrazeUICompat {
 	// @protocol ABKBaseContentCardCellDelegate <NSObject>
 	[Protocol, Model]
-	[BaseType (typeof(NSObject))]
-	interface ABKBaseContentCardCellDelegate
-	{
+	[BaseType (typeof (NSObject))]
+	interface ABKBaseContentCardCellDelegate {
 		// @required -(void)cellRequestSizeUpdate:(UITableViewCell *)cell;
 		[Abstract]
 		[Export ("cellRequestSizeUpdate:")]
 		void CellRequestSizeUpdate (UITableViewCell cell);
-
 	}
 
 	// @interface ABKBaseContentCardCell : UITableViewCell
-	[BaseType (typeof(UITableViewCell))]
-	interface ABKBaseContentCardCell
-	{
+	[BaseType (typeof (UITableViewCell))]
+	interface ABKBaseContentCardCell {
 		// @property (nonatomic) UIView * rootView __attribute__((iboutlet));
 		[Export ("rootView", ArgumentSemantic.Assign)]
 		UIView RootView { get; set; }
@@ -103,13 +99,10 @@ namespace BrazeUICompat
 		// -(void)applyAppboyAttributedTextStyleFrom:(NSString *)text forLabel:(UILabel *)label;
 		[Export ("applyAppboyAttributedTextStyleFrom:forLabel:")]
 		void ApplyAppboyAttributedTextStyleFrom (string text, UILabel label);
-
 	}
-
 	// @interface ABKContentCardsTableViewController : UITableViewController
-	[BaseType (typeof(UITableViewController))]
-	interface ABKContentCardsTableViewController
-	{
+	[BaseType (typeof (UITableViewController))]
+	interface ABKContentCardsTableViewController {
 		// @property (nonatomic, strong) UIView * emptyFeedView __attribute__((iboutlet));
 		[Export ("emptyFeedView", ArgumentSemantic.Strong)]
 		UIView EmptyFeedView { get; set; }
@@ -193,14 +186,12 @@ namespace BrazeUICompat
 		// -(void)populateContentCards;
 		[Export ("populateContentCards")]
 		void PopulateContentCards ();
-
 	}
 
 	// @protocol ABKContentCardsTableViewControllerDelegate <NSObject>
 	[Protocol, Model]
-	[BaseType (typeof(NSObject))]
-	interface ABKContentCardsTableViewControllerDelegate
-	{
+	[BaseType (typeof (NSObject))]
+	interface ABKContentCardsTableViewControllerDelegate {
 		// @optional -(BOOL)contentCardTableViewController:(ABKContentCardsTableViewController *)viewController shouldHandleCardClick:(NSURL *)url;
 		[Export ("contentCardTableViewController:shouldHandleCardClick:")]
 		bool ShouldHandleCardClick (ABKContentCardsTableViewController viewController, NSUrl url);
@@ -208,23 +199,19 @@ namespace BrazeUICompat
 		// @optional -(void)contentCardTableViewController:(ABKContentCardsTableViewController *)viewController didHandleCardClick:(NSURL *)url;
 		[Export ("contentCardTableViewController:didHandleCardClick:")]
 		void DidHandleCardClick (ABKContentCardsTableViewController viewController, NSUrl url);
-
 	}
 
 	// @interface ABKContentCardsViewController : UINavigationController
-	[BaseType (typeof(UINavigationController))]
-	interface ABKContentCardsViewController
-	{
+	[BaseType (typeof (UINavigationController))]
+	interface ABKContentCardsViewController {
 		// @property (nonatomic, strong) ABKContentCardsTableViewController * contentCardsViewController;
 		[Export ("contentCardsViewController", ArgumentSemantic.Strong)]
 		ABKContentCardsTableViewController ContentCardsViewController { get; set; }
-
 	}
 
 	// @interface ABKBannerContentCardCell : ABKBaseContentCardCell
-	[BaseType (typeof(ABKBaseContentCardCell))]
-	interface ABKBannerContentCardCell
-	{
+	[BaseType (typeof (ABKBaseContentCardCell))]
+	interface ABKBannerContentCardCell {
 		// @property (nonatomic, strong) UIImageView * bannerImageView __attribute__((iboutlet));
 		[Export ("bannerImageView", ArgumentSemantic.Strong)]
 		UIImageView BannerImageView { get; set; }
@@ -236,13 +223,11 @@ namespace BrazeUICompat
 		// -(void)applyCard:(ABKBannerContentCard *)bannerCard;
 		[Export ("applyCard:")]
 		void ApplyCard (ABKBannerContentCard bannerCard);
-
 	}
 
 	// @interface ABKCaptionedImageContentCardCell : ABKBaseContentCardCell
-	[BaseType (typeof(ABKBaseContentCardCell))]
-	interface ABKCaptionedImageContentCardCell
-	{
+	[BaseType (typeof (ABKBaseContentCardCell))]
+	interface ABKCaptionedImageContentCardCell {
 		// @property (nonatomic, class) UIColor * titleLabelColor;
 		[Static]
 		[Export ("titleLabelColor", ArgumentSemantic.Assign)]
@@ -285,13 +270,11 @@ namespace BrazeUICompat
 		// -(void)applyCard:(ABKCaptionedImageContentCard *)captionedImageCard;
 		[Export ("applyCard:")]
 		void ApplyCard (ABKCaptionedImageContentCard captionedImageCard);
-
 	}
 
 	// @interface ABKClassicContentCardCell : ABKBaseContentCardCell
-	[BaseType (typeof(ABKBaseContentCardCell))]
-	interface ABKClassicContentCardCell
-	{
+	[BaseType (typeof (ABKBaseContentCardCell))]
+	interface ABKClassicContentCardCell {
 		// @property (nonatomic, class) UIColor * titleLabelColor;
 		[Static]
 		[Export ("titleLabelColor", ArgumentSemantic.Assign)]
@@ -321,11 +304,11 @@ namespace BrazeUICompat
 
 		// @property (nonatomic, strong) NSArray * descriptionConstraints;
 		[Export ("descriptionConstraints", ArgumentSemantic.Strong)]
-		NSObject[] DescriptionConstraints { get; set; }
+		NSObject [] DescriptionConstraints { get; set; }
 
 		// @property (nonatomic, strong) NSArray * linkConstraints;
 		[Export ("linkConstraints", ArgumentSemantic.Strong)]
-		NSObject[] LinkConstraints { get; set; }
+		NSObject [] LinkConstraints { get; set; }
 
 		// @property (assign, nonatomic) CGFloat padding;
 		[Export ("padding")]
@@ -334,13 +317,11 @@ namespace BrazeUICompat
 		// -(void)applyCard:(ABKClassicContentCard *)classicCard;
 		[Export ("applyCard:")]
 		void ApplyCard (ABKClassicContentCard classicCard);
-
 	}
 
 	// @interface ABKClassicImageContentCardCell : ABKClassicContentCardCell
-	[BaseType (typeof(ABKClassicContentCardCell))]
-	interface ABKClassicImageContentCardCell
-	{
+	[BaseType (typeof (ABKClassicContentCardCell))]
+	interface ABKClassicImageContentCardCell {
 		// @property (nonatomic, strong) UIImageView * classicImageView __attribute__((iboutlet));
 		[Export ("classicImageView", ArgumentSemantic.Strong)]
 		UIImageView ClassicImageView { get; set; }
@@ -348,30 +329,23 @@ namespace BrazeUICompat
 		// -(void)applyCard:(ABKClassicContentCard *)classicCard;
 		[Export ("applyCard:")]
 		void ApplyCard (ABKClassicContentCard classicCard);
-
 	}
 
 	// @interface ABKControlTableViewCell : ABKBaseContentCardCell
-	[BaseType (typeof(ABKBaseContentCardCell))]
-	interface ABKControlTableViewCell
-	{
-
+	[BaseType (typeof (ABKBaseContentCardCell))]
+	interface ABKControlTableViewCell {
 	}
 
 	// @interface ABKInAppMessageUIButton : UIButton
-	[BaseType (typeof(UIButton))]
-	interface ABKInAppMessageUIButton
-	{
+	[BaseType (typeof (UIButton))]
+	interface ABKInAppMessageUIButton {
 		// @property ABKInAppMessageButton * _Nonnull inAppButtonModel;
 		[Export ("inAppButtonModel", ArgumentSemantic.Assign)]
 		ABKInAppMessageButton InAppButtonModel { get; set; }
-
 	}
-
 	// @interface ABKInAppMessageViewController : UIViewController
-	[BaseType (typeof(UIViewController))]
-	interface ABKInAppMessageViewController
-	{
+	[BaseType (typeof (UIViewController))]
+	interface ABKInAppMessageViewController {
 		// @property (strong) ABKInAppMessage * _Nonnull inAppMessage;
 		[Export ("inAppMessage", ArgumentSemantic.Strong)]
 		ABKInAppMessage InAppMessage { get; set; }
@@ -423,14 +397,12 @@ namespace BrazeUICompat
 		// -(BOOL)applyIconToLabelView:(UILabel * _Nonnull)iconLabelView;
 		[Export ("applyIconToLabelView:")]
 		bool ApplyIconToLabelView (UILabel iconLabelView);
-
 	}
 
 	// @protocol ABKInAppMessageUIDelegate <NSObject>
 	[Protocol, Model]
-	[BaseType (typeof(NSObject))]
-	interface ABKInAppMessageUIDelegate
-	{
+	[BaseType (typeof (NSObject))]
+	interface ABKInAppMessageUIDelegate {
 		// @optional -(ABKInAppMessageDisplayChoice)beforeInAppMessageDisplayed:(ABKInAppMessage * _Nonnull)inAppMessage withKeyboardIsUp:(BOOL)keyboardIsUp __attribute__((deprecated("")));
 		[Export ("beforeInAppMessageDisplayed:withKeyboardIsUp:")]
 		ABKInAppMessageDisplayChoice BeforeInAppMessageDisplayed (ABKInAppMessage inAppMessage, bool keyboardIsUp);
@@ -459,23 +431,18 @@ namespace BrazeUICompat
 		// @optional -(WKWebViewConfiguration * _Nonnull)setCustomWKWebViewConfiguration;
 		[Export ("setCustomWKWebViewConfiguration")]
 		WKWebViewConfiguration SetCustomWKWebViewConfiguration { get; }
-
 	}
 
 	// @interface ABKInAppMessageWindow : UIWindow
-	[BaseType (typeof(UIWindow))]
-	interface ABKInAppMessageWindow
-	{
+	[BaseType (typeof (UIWindow))]
+	interface ABKInAppMessageWindow {
 		// @property (nonatomic) BOOL handleAllTouchEvents;
 		[Export ("handleAllTouchEvents")]
 		bool HandleAllTouchEvents { get; set; }
-
 	}
-
 	// @interface ABKInAppMessageWindowController : UIViewController <UIGestureRecognizerDelegate>
-	[BaseType (typeof(UIViewController))]
-	interface ABKInAppMessageWindowController : IUIGestureRecognizerDelegate
-	{
+	[BaseType (typeof (UIViewController))]
+	interface ABKInAppMessageWindowController : IUIGestureRecognizerDelegate {
 		// @property (nonatomic) ABKInAppMessageWindow * _Nullable inAppMessageWindow __attribute__((iboutlet));
 		[NullAllowed, Export ("inAppMessageWindow", ArgumentSemantic.Assign)]
 		ABKInAppMessageWindow InAppMessageWindow { get; set; }
@@ -555,13 +522,11 @@ namespace BrazeUICompat
 		// -(void)inAppMessageClickedWithActionType:(ABKInAppMessageClickActionType)actionType URL:(NSURL * _Nullable)url openURLInWebView:(BOOL)openUrlInWebView;
 		[Export ("inAppMessageClickedWithActionType:URL:openURLInWebView:")]
 		void InAppMessageClickedWithActionType (ABKInAppMessageClickActionType actionType, [NullAllowed] NSUrl url, bool openUrlInWebView);
-
 	}
 
 	// @interface ABKInAppMessageUIController : NSObject <ABKInAppMessageUIControlling, BrazeInAppMessagePresenter>
-	[BaseType (typeof(NSObject))]
-	interface ABKInAppMessageUIController : IABKInAppMessageUIControlling
-	{
+	[BaseType (typeof (NSObject))]
+	interface ABKInAppMessageUIController : IABKInAppMessageUIControlling {
 		// @property UIInterfaceOrientationMask supportedOrientationMask;
 		[Export ("supportedOrientationMask", ArgumentSemantic.Assign)]
 		UIInterfaceOrientationMask SupportedOrientationMask { get; set; }
@@ -585,20 +550,16 @@ namespace BrazeUICompat
 		// @property (weak) id<ABKInAppMessageUIDelegate> _Nullable uiDelegate;
 		[NullAllowed, Export ("uiDelegate", ArgumentSemantic.Weak)]
 		NSObject WeakUiDelegate { get; set; }
-
 	}
 
 	// @interface ABKInAppMessageView : UIView
-	[BaseType (typeof(UIView))]
-	interface ABKInAppMessageView
-	{
-
+	[BaseType (typeof (UIView))]
+	interface ABKInAppMessageView {
 	}
 
 	// @interface ABKInAppMessageImmersiveViewController : ABKInAppMessageViewController
-	[BaseType (typeof(ABKInAppMessageViewController))]
-	interface ABKInAppMessageImmersiveViewController
-	{
+	[BaseType (typeof (ABKInAppMessageViewController))]
+	interface ABKInAppMessageImmersiveViewController {
 		// @property (nonatomic, weak) UILabel * _Nullable inAppMessageHeaderLabel __attribute__((iboutlet));
 		[NullAllowed, Export ("inAppMessageHeaderLabel", ArgumentSemantic.Weak)]
 		UILabel InAppMessageHeaderLabel { get; set; }
@@ -642,23 +603,18 @@ namespace BrazeUICompat
 		// -(void)buttonClicked:(ABKInAppMessageUIButton * _Nonnull)button __attribute__((ibaction));
 		[Export ("buttonClicked:")]
 		void ButtonClicked (ABKInAppMessageUIButton button);
-
 	}
 
 	// @interface ABKInAppMessageFullViewController : ABKInAppMessageImmersiveViewController
-	[BaseType (typeof(ABKInAppMessageImmersiveViewController))]
-	interface ABKInAppMessageFullViewController
-	{
+	[BaseType (typeof (ABKInAppMessageImmersiveViewController))]
+	interface ABKInAppMessageFullViewController {
 		// @property (nonatomic, weak) NSLayoutConstraint * _Nullable closeXButtonTopConstraint __attribute__((iboutlet));
 		[NullAllowed, Export ("closeXButtonTopConstraint", ArgumentSemantic.Weak)]
 		NSLayoutConstraint CloseXButtonTopConstraint { get; set; }
-
 	}
-
 	// @interface ABKInAppMessageHTMLBaseViewController : ABKInAppMessageViewController <WKNavigationDelegate, WKUIDelegate>
-	[BaseType (typeof(ABKInAppMessageViewController))]
-	interface ABKInAppMessageHTMLBaseViewController : IWKNavigationDelegate, IWKUIDelegate
-	{
+	[BaseType (typeof (ABKInAppMessageViewController))]
+	interface ABKInAppMessageHTMLBaseViewController : IWKNavigationDelegate, IWKUIDelegate {
 		// @property (nonatomic) WKWebView * _Nonnull webView;
 		[Export ("webView", ArgumentSemantic.Assign)]
 		WKWebView WebView { get; set; }
@@ -674,27 +630,21 @@ namespace BrazeUICompat
 		// @property (readonly, assign, nonatomic) BOOL automaticBodyClicksEnabled;
 		[Export ("automaticBodyClicksEnabled")]
 		bool AutomaticBodyClicksEnabled { get; }
-
 	}
 
 	// @interface ABKInAppMessageHTMLFullViewController : ABKInAppMessageHTMLBaseViewController
-	[BaseType (typeof(ABKInAppMessageHTMLBaseViewController))]
-	interface ABKInAppMessageHTMLFullViewController
-	{
-
+	[BaseType (typeof (ABKInAppMessageHTMLBaseViewController))]
+	interface ABKInAppMessageHTMLFullViewController {
 	}
 
 	// @interface ABKInAppMessageHTMLViewController : ABKInAppMessageHTMLBaseViewController
-	[BaseType (typeof(ABKInAppMessageHTMLBaseViewController))]
-	interface ABKInAppMessageHTMLViewController
-	{
-
+	[BaseType (typeof (ABKInAppMessageHTMLBaseViewController))]
+	interface ABKInAppMessageHTMLViewController {
 	}
 
 	// @interface ABKInAppMessageModalViewController : ABKInAppMessageImmersiveViewController
-	[BaseType (typeof(ABKInAppMessageImmersiveViewController))]
-	interface ABKInAppMessageModalViewController
-	{
+	[BaseType (typeof (ABKInAppMessageImmersiveViewController))]
+	interface ABKInAppMessageModalViewController {
 		// @property (assign, nonatomic) BOOL enableDismissOnOutsideTap;
 		[Export ("enableDismissOnOutsideTap")]
 		bool EnableDismissOnOutsideTap { get; set; }
@@ -714,13 +664,11 @@ namespace BrazeUICompat
 		// @property (nonatomic, strong) UIView * _Nonnull graphicImageContainerView __attribute__((iboutlet));
 		[Export ("graphicImageContainerView", ArgumentSemantic.Strong)]
 		UIView GraphicImageContainerView { get; set; }
-
 	}
 
 	// @interface ABKInAppMessageSlideupViewController : ABKInAppMessageViewController
-	[BaseType (typeof(ABKInAppMessageViewController))]
-	interface ABKInAppMessageSlideupViewController
-	{
+	[BaseType (typeof (ABKInAppMessageViewController))]
+	interface ABKInAppMessageSlideupViewController {
 		// @property (nonatomic, weak) UIImageView * _Nullable arrowImage __attribute__((iboutlet));
 		[NullAllowed, Export ("arrowImage", ArgumentSemantic.Weak)]
 		UIImageView ArrowImage { get; set; }
@@ -728,13 +676,11 @@ namespace BrazeUICompat
 		// @property (assign, nonatomic) CGFloat offset;
 		[Export ("offset")]
 		nfloat Offset { get; set; }
-
 	}
 
 	// @interface ABKUIURLUtils : NSObject
-	[BaseType (typeof(NSObject))]
-	interface ABKUIURLUtils
-	{
+	[BaseType (typeof (NSObject))]
+	interface ABKUIURLUtils {
 		// +(BOOL)URLDelegate:(id<ABKURLDelegate>)urlDelegate handlesURL:(NSURL *)url fromChannel:(ABKChannel)channel withExtras:(NSDictionary *)extras;
 		[Static]
 		[Export ("URLDelegate:handlesURL:fromChannel:withExtras:")]
@@ -769,13 +715,11 @@ namespace BrazeUICompat
 		[Static]
 		[Export ("getEncodedURIFromString:")]
 		NSUrl GetEncodedURIFromString (string uriString);
-
 	}
 
 	// @interface ABKUIUtils : NSObject
-	[BaseType (typeof(NSObject))]
-	interface ABKUIUtils
-	{
+	[BaseType (typeof (NSObject))]
+	interface ABKUIUtils {
 		// @property (readonly, nonatomic, class) UIWindowScene * activeWindowScene __attribute__((availability(ios, introduced=13.0)));
 		[Static]
 		[Export ("activeWindowScene")]
@@ -865,6 +809,6 @@ namespace BrazeUICompat
 		[Static]
 		[Export ("enableAdjustsFontForContentSizeCategory:")]
 		void EnableAdjustsFontForContentSizeCategory (NSObject label);
-
 	}
+
 }

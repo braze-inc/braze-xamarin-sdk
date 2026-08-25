@@ -1,3 +1,16 @@
+## 10.0.0
+
+##### Breaking
+- Updated the Android binding from [Braze Android SDK 41.0.0 to 43.1.1](https://github.com/braze-inc/braze-android-sdk/compare/v41.0.0...v43.1.1#diff-06572a96a58dc510037d5efa622f9bec8519bc1beab13c9f251e97e657a9d4ed).
+  - `Xamarin.KotlinX.Coroutines.Android` has been updated from 1.9.0.3 to 1.11.0.1.
+  - `Xamarin.Kotlin.StdLib` has been updated from 2.3.0.1 to 2.4.0.1. If your project explicitly pins this package to an older version, you will need to update it to avoid restore errors.
+- Updated the iOS binding from [Braze Swift SDK 14.0.1 to 18.2.0](https://github.com/braze-inc/braze-swift-sdk/compare/14.0.1...18.2.0#diff-06572a96a58dc510037d5efa622f9bec8519bc1beab13c9f251e97e657a9d4ed).
+  - `Braze` initialization and `ChangeUser` no longer block the calling thread. Prefer the asynchronous identifier getters (`GetIdWithCompletion`, `GetDeviceIdWithCompletion`) on the main thread.
+  - All public symbols in `BrazeKitCompat` and `BrazeUICompat` are deprecated in the native Swift SDK and will be removed in a future major release. Use `BrazeKit` and `BrazeUI` instead.
+
+##### Fixed
+- Fixed `System.InvalidCastException` when reading `Card.Extras` on Android.
+
 ## 9.0.0
 
 ##### Breaking
@@ -359,4 +372,4 @@ Appboy.SharedInstance?.RegisterDeviceToken(deviceToken);
 ##### Added
 - Added support for all standard API and UI functionality in the Android SDK and iOS SDKs.
 - iOS functionality not included in this release: IDFA collection, custom Slideup viewControllers, social data collection.
-- Please contact support@braze.com for more information about these features and the timeline for their inclusion.
+- Please contact Braze Technical Support for assistance for more information about these features and the timeline for their inclusion.

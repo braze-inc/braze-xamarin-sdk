@@ -5,7 +5,7 @@
 
 # Braze Xamarin SDK
 
-Successful marketing automation is essential to the future of your mobile app. Braze helps you engage your users beyond the download. Visit the following links for details and we'll have you up and running in no time!
+Successful marketing automation is essential to the future of your mobile app. Braze helps you engage your users beyond the download. To learn more, see the following resources:
 
 - [Braze User Guide](https://www.braze.com/docs/user_guide/introduction/ "Braze User Guide")
 - [Braze Developer Guide](https://www.braze.com/docs/developer_guide/home/ "Braze Developer Guide")
@@ -25,8 +25,8 @@ The format of this repository is that of a Xamarin component: under `appboy-comp
 `libs`, `component`, `nuget`, and `samples`. `libs`, `src`, and `samples` each contain two directories, one for Android and one for iOS. The directories
 contain:
 
-- `libs`: the compiled DLL bindings for the Braze SDKs.
-- `src`: the Xamarin bindings projects that generated the DLLs found in the libs folder.
+- `libs`: The compiled DLL bindings for the Braze SDKs.
+- `src`: The Xamarin bindings projects that generated the DLLs found in the `libs` folder.
 - `samples`: Xamarin applications that show how to use the bindings to access the Braze feature set.
 - `nuget`: Nuspec files for our Xamarin NuGet packages.
 
@@ -34,19 +34,21 @@ contain:
 
 ### Native Bindings
 
+The following table lists the supported frameworks and native Braze framework versions for each Xamarin binding.
+
 | Binding file name                          | Supported Xamarin Frameworks                              | Native Braze framework                              | Braze Xamarin SDK version |
 | ------------------------------------------ | --------------------------------------------------------- | --------------------------------------------------- | ------------------------- |
-| `BrazeAndroidBinding.sln`                  | .NET 9+                                                   | Android SDK 41.0.0+                                 | 9.0.0+                    |
+| `BrazeAndroidBinding.sln`                  | .NET 9+                                                   | Android SDK 43.1.1+                                 | 10.0.0+                   |
 | `AppboyPlatform.XamarinAndroidBinding.sln` | Xamarin.Android,<br/>Xamarin.Forms,<br/>.NET 5 and before | Android SDK 23.3.0 and before                       | 1.26.0 and before         |
-| `BrazeiOSBinding.sln`                      | .NET 9+                                                   | Swift SDK 14.0.1+                                   | 9.0.0+                    |
+| `BrazeiOSBinding.sln`                      | .NET 9+                                                   | Swift SDK 18.2.0+                                   | 10.0.0+                   |
 | `AppboyPlatformXamariniOSBinding.sln`      | Xamarin.iOS,<br/>Xamarin.Forms,<br/>.NET 5 and before     | `Appboy_iOS_SDK.framework` version 4.4.1 and before | 1.27.0 and before         |
 
 ### Xamarin & Xamarin.Forms
 
-As of May 1, 2024, [Microsoft announced the end of support for Xamarin & Xamarin.Forms](https://dotnet.microsoft.com/en-us/platform/support/policy/xamarin).
+As of May 1, 2024, [Microsoft announced the end of support for Xamarin and Xamarin.Forms](https://dotnet.microsoft.com/en-us/platform/support/policy/xamarin).
 
 The Braze SDK version dropped support for Xamarin & Xamarin.Forms starting with version `4.0.0` and added support for [.NET MAUI](https://learn.microsoft.com/en-us/dotnet/maui/what-is-maui).
 
 ## Questions?
 
-If you have questions, please contact [support@braze.com](mailto:support@braze.com).
+For questions, contact Braze Technical Support for assistance.

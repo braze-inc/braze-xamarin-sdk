@@ -22,8 +22,8 @@
     <PackageReference Include="Xamarin.AndroidX.Fragment" Version="1.5.5.1" />
     <PackageReference Include="Xamarin.AndroidX.DataStore.Preferences" Version="1.1.7.1" />
     <PackageReference Include="Xamarin.KotlinX.Serialization.Json.Jvm" Version="1.9.0.2" />
-    <PackageReference Include="Xamarin.KotlinX.Coroutines.Android" Version="1.9.0.3" />
-    <PackageReference Include="Xamarin.Kotlin.StdLib" Version="2.3.0.1" />
+    <PackageReference Include="Xamarin.KotlinX.Coroutines.Android" Version="1.11.0.1" />
+    <PackageReference Include="Xamarin.Kotlin.StdLib" Version="2.4.0.1" />
     <PackageReference Include="Xamarin.AndroidX.WebKit" Version="1.5.0.2" />
     <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.6.0.1" />
     <PackageReference Include="Xamarin.AndroidX.RecyclerView" Version="1.2.1.9" />
