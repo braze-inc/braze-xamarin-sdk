@@ -44,7 +44,7 @@
 - Updated the Android binding from [Braze Android 32.0.0 to 37.0.0](https://github.com/braze-inc/braze-android-sdk/compare/v32.0.0...v37.0.0#diff-06572a96a58dc510037d5efa622f9bec8519bc1beab13c9f251e97e657a9d4ed).
 - Updated the iOS binding from [Braze Swift SDK 10.0.0 to 12.1.0](https://github.com/braze-inc/braze-swift-sdk/compare/10.0.0...12.1.0#diff-06572a96a58dc510037d5efa622f9bec8519bc1beab13c9f251e97e657a9d4ed).
 
-> **_NOTE:_**  This release contains APIs for the Banners feature but is not currently fully supported by this SDK. If you wish to use Banners in your .NET MAUI app, please contact your Customer Support Manager before integrating into your application.
+> **_NOTE:_** Banners are not supported on this SDK, including in later releases. This release binds Banner data types and the native Banner views from the Android and Swift SDKs. Braze does not test or support those APIs. Rendering a Banner in your own UI is not supported either. See [SDK limitations](https://www.braze.com/docs/developer_guide/banners/migrating_from_content_cards#sdk-limitations).
 
 ## 6.0.0
 
