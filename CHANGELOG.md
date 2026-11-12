@@ -1,3 +1,19 @@
+## 11.0.0
+
+##### Breaking
+- Added support for .NET 10.0 for the iOS and Android bindings.
+  - This removes support for .NET 9.0. [.NET MAUI 9 reached end of support on May 12, 2026](https://dotnet.microsoft.com/en-us/platform/support/policy/maui), and .NET 9 reaches end of support on November 10, 2026.
+  - The NuGet packages now target `net10.0-ios26.0` and `net10.0-android36.0`. Your app must target .NET 10 and at least those platform versions, otherwise NuGet restore fails with `NU1202`.
+  - Building requires the .NET 10 SDK with the .NET MAUI 10 workloads, Xcode 26 for iOS, and the Android API 36 SDK platform. See the [.NET MAUI supported versions](https://github.com/dotnet/maui/wiki/Release-Versions) for the matching tool versions.
+  - If your app still targets .NET 9, stay on Braze Xamarin SDK 10.0.0 until you have upgraded.
+- Updated Android binding dependencies. Android minSdk remains 21.
+  - `Xamarin.Firebase.Messaging` has been updated from 123.1.1 to 124.1.2. `Xamarin.Firebase.Messaging` 125.x requires Android API 23.
+  - `Xamarin.AndroidX.Fragment` has been updated from 1.5.5.1 to 1.8.8.1.
+  - `Xamarin.AndroidX.RecyclerView` has been updated from 1.2.1.9 to 1.4.0.3.
+  - `Xamarin.AndroidX.SwipeRefreshLayout` has been updated from 1.1.0.11 to 1.1.0.29.
+  - `Xamarin.AndroidX.WebKit` has been updated from 1.5.0.2 to 1.14.0.1.
+  - `Xamarin.GooglePlayServices.Location` has been updated from 121.0.1.3 to 121.3.0.7. If your project explicitly pins one of these packages to an older version, you will need to update it to avoid restore errors.
+
 ## 10.0.0
 
 ##### Breaking
