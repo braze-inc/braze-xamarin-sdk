@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>BrazePlatform.BrazeAndroidLocationBinding</id>
-    <version>10.0.0</version>
+    <version>11.0.0</version>
     <authors>Braze</authors>
     <owners>Braze</owners>
     <projectUrl>https://github.com/braze-inc/braze-xamarin-sdk</projectUrl>
@@ -12,18 +12,18 @@
     <releaseNotes></releaseNotes>
     <tags>Braze Appboy Location Geofence</tags>
     <dependencies>
-      <group targetFramework="net9.0-android35.0">
-        <dependency id="BrazePlatform.BrazeAndroidBinding" version="10.0.0" />
-        <dependency id="Xamarin.GooglePlayServices.Location" version="121.0.1.3" />
+      <group targetFramework="net10.0-android36.0">
+        <dependency id="BrazePlatform.BrazeAndroidBinding" version="11.0.0" />
+        <dependency id="Xamarin.GooglePlayServices.Location" version="121.3.0.7" />
         <dependency id="Xamarin.Kotlin.StdLib" version="2.4.0.1" />
         <dependency id="Xamarin.KotlinX.Coroutines.Android" version="1.11.0.1" />
       </group>
     </dependencies>
   </metadata>
   <files>
-    <file src="../src/androidnet6/BrazeAndroidLocationBinding/bin/Debug/net9.0-android35.0/BrazeAndroidLocationBinding.dll" target="lib/net9.0-android35.0/BrazeAndroidLocationBinding.dll" />
-    <file src="../src/androidnet6/BrazeAndroidLocationBinding/bin/Debug/net9.0-android35.0/BrazeAndroidLocationBinding.xml" target="lib/net9.0-android35.0/BrazeAndroidLocationBinding.xml" />
-    <file src="../src/androidnet6/BrazeAndroidLocationBinding/android-sdk-location-43.1.1.aar" target="lib/net9.0-android35.0/android-sdk-location-43.1.1.aar" />
+    <file src="../src/androidnet6/BrazeAndroidLocationBinding/bin/Debug/net10.0-android36.0/BrazeAndroidLocationBinding.dll" target="lib/net10.0-android36.0/BrazeAndroidLocationBinding.dll" />
+    <file src="../src/androidnet6/BrazeAndroidLocationBinding/bin/Debug/net10.0-android36.0/BrazeAndroidLocationBinding.xml" target="lib/net10.0-android36.0/BrazeAndroidLocationBinding.xml" />
+    <file src="../src/androidnet6/BrazeAndroidLocationBinding/android-sdk-location-43.1.1.aar" target="lib/net10.0-android36.0/android-sdk-location-43.1.1.aar" />
     <file src="../../Public/LICENSE.txt" target="" />
   </files>
 </package>

@@ -6,7 +6,7 @@ namespace Braze.Android.Tests;
 /// <summary>
 /// Verifies each Android binding project file exists in the repository.
 ///
-/// This is a cross-platform (net9.0) sanity check, not a substitute for building the
+/// This is a cross-platform (net10.0) sanity check, not a substitute for building the
 /// bindings themselves: appboy-component/src contains only auto-generated Java/Kotlin
 /// interop declarations (no executable C# logic), so there is nothing to unit test until
 /// bespoke code is added under an Additions/ folder on top of the generated bindings
